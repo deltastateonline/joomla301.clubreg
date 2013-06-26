@@ -71,6 +71,7 @@ cli/
 images/banners/
 images/headers/
 images/sampledata/
+images/joomla_*.*
 includes/
 layouts/
 libraries/
@@ -383,4 +384,5 @@ en-GB.xml
 index.html
 
 en-GB.com_learnstyle.*
-en-GB.com_tag.*
+en-GB.com_tags.*
+

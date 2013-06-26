@@ -1,5 +1,7 @@
 .activity-item{
 	cursor:pointer;
+	text-decoration:underline;
+	color: #3a87ad;	
 }
 
 .activity-label{

@@ -12,7 +12,9 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 global $clubreg_Itemid;
 
-$d_url = sprintf("index.php?option=com_clubreg&view=eoi&layout=loadeoi&c=eoi&task=loadeoi&Itemid=%s&playertype=",
+
+
+$d_url = sprintf("index.php?option=com_clubreg&view=eois&layout=rendereoi&Itemid=%s&playertype=",
 		$clubreg_Itemid	);
 ?>
 <ul>
