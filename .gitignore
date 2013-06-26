@@ -68,7 +68,9 @@ configuration.php
 bin/
 cache/
 cli/
-images/
+images/banners/
+images/headers/
+images/sampledata/
 includes/
 layouts/
 libraries/
@@ -379,3 +381,6 @@ en-GB.tpl_isis.ini
 en-GB.tpl_isis.sys.ini
 en-GB.xml
 index.html
+
+en-GB.com_learnstyle.*
+en-GB.com_tag.*
