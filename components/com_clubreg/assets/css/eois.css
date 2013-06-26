@@ -1,0 +1,48 @@
+@CHARSET "ISO-8859-1";
+.eois div{
+	padding:0px;
+	margin:0px;
+	font-size:0.9em
+}
+.eoi div input{
+	padding:1px;
+	margin:0px;
+}
+
+.eoi div select{
+	margin:0px;
+	padding:1px;
+	height:22px;
+}
+.h21{
+	font-size:1.2em;
+	font-weight:bold;
+	line-height:20px;
+	padding-top:4px;
+	pading-left:5px;
+	padding-bottom:4px;
+	border-bottom:1px solid #A5A5A5;
+	width:95%;
+}
+
+.reg-well{
+	padding : 5px 0px 0px 20px;
+}
+.reg-label, .reg-value,.reg-colon {
+	padding-top :5px;
+	font-size:95%;
+}
+.reg-label{
+	width:150px;
+	font-size:0.9em;
+	color: #3a87ad;
+	font-weight:bold;	
+	border-bottom:dashed 1px #999999;
+}
+.reg-value{
+	min-width:150px;	
+}
+.reg-filters{
+	overflow:auto;
+	height:40px;	
+}

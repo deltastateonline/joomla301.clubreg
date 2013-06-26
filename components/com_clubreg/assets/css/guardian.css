@@ -1,0 +1,9 @@
+@CHARSET "ISO-8859-1";
+
+#guardianFormDiv {	
+	overflow:auto;	
+}
+#profile-guardian{		
+	margin-left:10px;	
+	overflow:auto;
+}

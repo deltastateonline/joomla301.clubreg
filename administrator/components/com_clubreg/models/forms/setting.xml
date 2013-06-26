@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="details"
+		addfieldpath="/administrator/components/com_clubreg/models/fields"
+	>
+		<field name="config_id" type="hidden" default="0"
+			readonly="true" class="readonly"
+			label="Setting Id" description ="Setting Id"/>
+			
+		<field name="config_name" type="text" label="Setting Name"
+			description="Setting Name" class="inputbox input-xlarge" size="30"
+			required="true" />
+		<field name="config_short" type="text" label="Setting Tag"
+			description="Setting Tag" class="inputbox input-xlarge" size="30" />
+			
+		<field name="which_config" type="whichcontrol" label="Parent Config Setting"
+			description="Config Setting" class="inputbox input-xlarge" 	required="true"  />	
+			
+		<field name="published" type="list"
+			label="JSTATUS" description="JFIELD_PUBLISHED_DESC"
+			class="inputbox input-xlarge" size="1" default="1"
+		>
+			<option value="1">
+				JPUBLISHED</option>
+			<option value="0">
+				JUNPUBLISHED</option>
+			<option value="2">
+				JARCHIVED</option>
+			<option value="-2">
+				JTRASHED</option>
+		</field>
+		<field name="ordering"
+			type="ordering"
+			class="inputbox input-xlarge"
+			label="JFIELD_ORDERING_LABEL"
+			description="JFIELD_ORDERING_DESC"
+		/>
+				
+		<field name="config_text" type="textarea"
+			label="Values or Descriptions" description="Setting Values or Descriptions"
+			class="inputbox input-xxlarge" rows="10" cols="80"  />
+		
+	</fieldset>
+	
+	<fields name="params">
+	
+		<fieldset name="configItems"
+			label="Default Parameters"
+			description="Determines what the sub items of this setting are."
+			>
+			<field name="config_type"
+				type="list"
+				label="Setting Type"
+				description="Setting Type"
+				default = ""
+			>
+				<option value="">Setting Type</option>
+				<option value="list">List</option>
+				<option value="text">Text</option>
+				<option value="inputfields">Input Fields</option>
+				<option value="paymentitems">Payment Items</option>
+				<option value="object">Serialized Object</option>
+			</field>
+			<field name="sort_list_by"
+				type="list"
+				label="Order Setting List By"
+				description="Order This Setting List By"
+				default = ""
+			>
+				<option value="">Order this List By</option>
+				<option value="ordering">ordering</option>
+				<option value="config_id">config_id</option>
+				<option value="config_short">config_short</option>
+			</field>			
+		</fieldset>
+		
+		<fieldset name="generic"
+			label="Generic Parameters"
+			description="Generic Parameters for SubItems"> 
+			<field name="assign_to"
+				type="list"
+				label="Applies To"
+				description="Group Type this setting should be applied to"
+				default = "both"
+			>
+				<option value="">Apply To</option>
+				<option value="junior">Junior</option>
+				<option value="senior">Senior</option>	
+				<option value="both">Junior and Senior</option>			
+			</field>
+			
+		</fieldset>
+		<fieldset name="inputfields"
+			label="Input Field Parameters"
+			description="Parameters for Input Fields">			
+			<field name="control_type"
+				type="list"
+				label="Control (Field) Type"
+				description="Field Type"
+				default = ""
+			>
+				<option value="">Field Type</option>	
+				<option value="checkboxes">Checkboxes</option>			
+				<option value="date">Date Control</option>
+				<option value="list">Drop Down List</option>			
+				<option value="email">Email</option>
+				<option value="monthyear">Month Year</option>
+				<option value="textarea">Text Area</option>
+				<option value="text">Text Box</option>			
+				<option value="file">Upload Document</option>
+			</field>
+			<field name="default_value"
+				type="text"
+				label="Default Value"
+				description="Default Value for this Field"
+				default = ""
+			/>
+			
+			<field name="control_width"
+				type="text"
+				label="Inline Style"
+				description="Inline Style"
+				default = ""
+			/>	
+			<field name="control_class"
+				type="text"
+				label="CSS Classes"
+				description="Css Classes"
+				default = ""
+			/>				
+		</fieldset>
+		<fieldset name="paymentitems"
+			label="Parameters for Payments"
+			description="Parameters for Payment"> 	
+			<field name="default_value"
+				type="text"
+				label="Default Value"
+				description="Default Value"
+				default = ""
+			/>
+			<field name="taxrate"
+				type="list"
+				label="Tax Rate"
+				description="Apply Tax Rate"
+				default = "0"
+			>
+				<option value="">Tax Rate</option>
+				<option value="0">No Tax</option>
+				<option value="10">10 Percent</option>	
+				<option value="12.5">12.5 Percent</option>			
+			</field>					
+		</fieldset>
+			
+	</fields>
+</form>

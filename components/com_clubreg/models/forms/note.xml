@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="memberNotes"	>			
+		<field name="notes" type="textarea"
+			label="COM_CLUBREG_PROFILE_NOTES" description="COM_CLUBREG_PROFILE_NOTES_DESC"
+			class="inputbox input-xxlarge" rows="5" cols="80"  />
+		<field name="note_status" type="checkbox" label="COM_CLUBREG_PROFILE_PRIVATE" description="COM_CLUBREG_PROFILE_PRIVATE_DESC" class="inputbox span5 small" size="1" default="0" value="1" />
+	</fieldset>
+	
+	<fieldset name="hiddenControls"	>			
+		<field name="note_id" type="hidden" default="0" readonly="true" class="readonly" label="PK" description ="PK"/>
+		<field name="member_key" type="hidden" default="0" readonly="true" class="readonly" label="Member key" description ="Member key"/>
+		<field name="note_type" type="hidden" default="" readonly="true" class="readonly" label="Note type" description ="Note type"/>	
+	</fieldset>
+	
+</form>

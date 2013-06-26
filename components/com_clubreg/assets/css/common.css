@@ -1,0 +1,29 @@
+@CHARSET "ISO-8859-1";
+
+.loading1{
+	background: transparent url(../images/bigrotation2.gif ) no-repeat;
+	background-repeat:no-repeat;
+ 	background-position:center center; 
+ 	min-height:200px;
+}
+.loading-small{
+	background: transparent url(../images/bigrotation2.gif ) no-repeat;
+	background-repeat:no-repeat;
+	background-position:center center; 
+ 	min-height:34px;
+ 	height:40px;
+}
+
+ol.activity li{
+	
+}
+ol.activity li p{
+	margin:0px;
+	padding:5px;
+	border-bottom: 1px dashed #999999;
+}
+
+ol.activity li p span.activity_label{
+	font-weight:bold;
+	font-size:0.9em;
+}

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.0" method="upgrade">
+	<name>com_clubreg</name>
+	<author>Joomla! Project</author>
+	<creationDate>Oct 2012</creationDate>
+	<copyright>(C) 2005 - 2012 Open Source Matters. All rights reserved.
+	</copyright>
+	<license>GNU General Public License version 2 or later; see
+		LICENSE.txt</license>
+	<authorEmail>joomla@deltastateonline.com</authorEmail>
+	<authorUrl>applications.deltastateonline.com</authorUrl>
+	<version>3.0.0</version>
+	<description>Club Registration Component</description>
+
+	<install> <!-- Runs on install -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+		</sql>
+	</install>
+	<uninstall> <!-- Runs on uninstall -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+		</sql>
+	</uninstall>
+
+	<files folder="site">
+		<filename>clubreg.php</filename>
+		<filename>controller.php</filename>
+		<filename>index.html</filename>
+		<filename>metadata.xml</filename>
+		<filename>router.php</filename>
+		<folder>controllers</folder>
+		<folder>helpers</folder>
+		<folder>models</folder>
+		<folder>tables</folder>
+		<folder>views</folder>
+	</files>
+	<languages folder="site">
+		<language tag="en-GB">language/en-GB.com_clubreg.ini</language>
+	</languages>
+
+	<administration>
+		<menu img="class:clubreg">COM_CLUBREG</menu>
+		<submenu>
+			<!--
+				Note that all & must be escaped to &amp; for the file to be valid
+				XML and be parsed by the installer
+			-->
+			<menu link="option=com_clubreg&amp;view=settings" img="class:clubreg-settings"
+				alt="Clubreg/settings">CLUBREG_SETTINGS</menu>
+				<menu link="option=com_clubreg&amp;view=payments" img="class:clubreg-payments"
+				alt="Clubreg/payments">CLUBREG_PAYMENTS</menu>
+			<menu link="option=com_clubreg&amp;view=officials" img="class:clubreg-officials"
+				alt="Clubreg/Officials">CLUBREG_OFFICIALS</menu>
+			<menu link="option=com_clubreg&amp;view=clubgroups" img="class:clubreg-groups"
+				alt="Clubreg/groups">CLUBREG_GROUPS</menu>
+			<menu link="option=com_clubreg&amp;view=templates" img="class:clubreg-templates" 
+				alt="Clubreg/Templates">CLUBREG_TEMPLATES</menu>
+				
+			<menu link="option=com_clubreg&amp;view=reports" img="class:clubreg-reports" 
+				alt="Clubreg/Reports">CLUBREG_REPORTS</menu>
+				
+		</submenu>
+		<files folder="admin">
+			<filename>access.xml</filename>
+			<filename>config.xml</filename>
+			<filename>clubreg.php</filename>
+			<filename>controller.php</filename>
+			<filename>constants.php</filename>
+			<filename>index.html</filename>
+			<folder>controllers</folder>			
+			<folder>helpers</folder>
+			<folder>models</folder>
+			<folder>sql</folder>
+			<folder>tables</folder>
+			<folder>views</folder>
+		</files>
+		<languages folder="admin">
+			<language tag="en-GB">language/en-GB.com_clubreg.ini</language>
+			<language tag="en-GB">language/en-GB.com_clubreg.sys.ini</language>
+		</languages>
+	</administration>
+</extension>
+

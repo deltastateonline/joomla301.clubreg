@@ -1,0 +1,40 @@
+.activity-item{
+	cursor:pointer;
+}
+
+.activity-label{
+	font-weight:bold;
+	margin:0px;
+	padding:0px;	
+}
+.h21{
+	font-size:1.1em;
+	font-weight:bold;
+	line-height:20px;
+	padding-top:4px;
+	pading-left:0px;
+	padding-bottom:4px;
+}
+.reg-well{
+	padding : 5px 0px 0px 20px;
+	
+}
+.reg-label, .reg-value,.reg-colon, .reg-label1 {
+	padding-top :5px;
+	font-size:90%;
+	
+}
+.reg-label{
+	min-width:145px;
+	font-size:1.0em;
+	color: #3a87ad;	
+	font-weight:bold;
+}
+.reg-value{
+	min-width:145px;	
+}
+.reg-label1{	
+	color: #3a87ad;	
+	font-weight:bold;
+	min-width:125px;
+}

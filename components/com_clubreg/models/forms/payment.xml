@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="paymentDetails"	addfieldpath="/administrator/components/com_clubreg/models/fields">			
+			
+			<field name="payment_desc" type="configcontrol" 
+			label="COM_CLUBREG_PAYMENT_DESCRIPTION" description="COM_CLUBREG_PAYMENT_DESCRIPTION_DESC"
+			class="inputbox input-large"  required="true" />	
+		
+			<field name="payment_method" type="configcontrol" 
+			label="COM_CLUBREG_PAYMENT_METHOD" description="COM_CLUBREG_PAYMENT_METHOD_DESC"
+			class="inputbox input-large" required="true" />
+			
+			<field name="payment_amount" type="text" 
+			label="COM_CLUBREG_PAYMENT_AMOUNT" description="COM_CLUBREG_PAYMENT_AMOUNT_DESC"
+			class="inputbox input"  size="10" required="true" default=''/>	
+			
+			<field name="payment_transact_no" type="text" 
+			label="COM_CLUBREG_PAYMENT_TRANSACT" description="COM_CLUBREG_PAYMENT_TRANSACT_DESC"
+			class="inputbox input-large"  />
+			
+			<field name="payment_status" type="configcontrol" 
+			label="COM_CLUBREG_PAYMENT_STATUS" description="COM_CLUBREG_PAYMENT_STATUS_DESC"
+			class="inputbox input-large"  />
+			
+			<field name="payment_date" type="calendar" 
+			label="COM_CLUBREG_PAYMENT_DATE" description="COM_CLUBREG_PAYMENT_DATE_DESC"
+			class="inputbox input-small"   size="10" format="%Y-%m-%d" />
+			
+			<field name="payment_season" type="clubyears" 
+			label="COM_CLUBREG_PAYMENT_SEASON" description="COM_CLUBREG_PAYMENT_SEASON_DESC"
+			class="inputbox input-medium"  />				
+			
+			<field name="payment_notes" type="textarea" 
+			label="COM_CLUBREG_PAYMENT_NOTES" description="COM_CLUBREG_PAYMENT_NOTES_DESC"
+			class="inputbox input-xlarge"  rows="3" cols="80" />		
+	</fieldset>
+	
+	<fieldset name="hiddenControls"	>			
+		<field name="payment_id" type="hidden" default="0" readonly="true" class="readonly" label="PK" description ="PK"/>
+		<field name="member_key" type="hidden" default="0" readonly="true" class="readonly" label="Member key" description ="Member key"/>	
+		<field name="payment_key" type="hidden" default="0" readonly="true" class="readonly" label="Payment key" description ="Payment key"/>	
+	</fieldset>
+	
+</form>

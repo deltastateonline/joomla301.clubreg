@@ -1,0 +1,1 @@
+ALTER TABLE  `#__clubreg_payments` ADD  `payment_key` VARCHAR( 30 ) NOT NULL AFTER  `payment_id`;

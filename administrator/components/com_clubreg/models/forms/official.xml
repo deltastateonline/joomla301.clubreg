@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="details"
+		addfieldpath="/administrator/components/com_clubreg/models/fields"
+	>
+		<field name="joomla_id" type="text" default="0"
+			readonly="true" class="readonly"
+			label="Joomla Id" description ="Joomla Id"/>
+			
+		<field name="official_username" type="text" label="Username"
+			description="Username" class="inputbox input-xlarge readonly" size="30" readonly="true"
+			 />	
+			
+		<field name="official_name" type="text" label="Official's Name"
+			description="Official's Name" class="inputbox input-xlarge readonly" size="30" readonly="true"
+			 />
+			
+		<field name="official_email" type="text" label="Email Address"
+			description="Email Address" class="inputbox input-xlarge readonly" size="30" readonly="true"
+			 />		
+	</fieldset>	
+	
+	<fieldset name="groupdetails" label="CLUBREG_GROUPN_LABEL Details" description="CLUBREG_GROUPN_LABEL Details." >		
+		<field name="group_leader" type="clubgroups" size="10" label="COM_CLUBREG_GROUPLEADER_LABEL"
+				description="COM_CLUBREG_GROUPLEADER_DESC" class="inputbox input-xlarge" multiple="multiple" />	
+				
+		<field name="group_member" type="clubgroups" size="10" label="COM_CLUBREG_GROUPMEMBER_LABEL"
+				description="COM_CLUBREG_GROUPMEMBER_DESC" class="inputbox input-xlarge" multiple="multiple"  />	
+		
+	</fieldset>	
+	
+	
+	<fields name="params">	
+		<fieldset name="configItems" label="Default Parameters" description="Default Parameters." >			
+
+			<field name="manageeoi" type="list" default="no" label="Manage EOI" description="Manage EOI">
+				<option value="0">-Selete Choice-</option>	
+				<option value="yes">Allowed</option>	
+				<option value="no">Not Allowed</option>					
+			</field> 	
+			
+			<field name="manageusers" type="list" default="no" label="Manage Registered Users" description="Manage Registered Users">
+				<option value="0">-Selete Choice-</option>	
+				<option value="yes">Allowed</option>	
+				<option value="no">Not Allowed</option>				
+			</field> 
+			
+			<field name="sendcommunication" type="list" default="no" label="Manage Communications" description="Manage Communications">
+				<option value="0">-Selete Choice-</option>	
+				<option value="yes">Allowed</option>	
+				<option value="no">Not Allowed</option>				
+			</field> 
+			<field name="deletereg" type="list" default="no" label="Delete A Registered Member" description="Delete A Registered Member">
+				<option value="0">-Selete Choice-</option>	
+				<option value="yes">Allowed</option>	
+				<option value="no">Not Allowed</option>					
+			</field>
+			<field name="managestats" type="list" default="no" label="Manage Stats" description="Manage Stats">
+				<option value="0">-Selete Choice-</option>	
+				<option value="yes">Allowed</option>	
+				<option value="no">Not Allowed</option>					
+			</field> 		
+		</fieldset>			
+	</fields>
+</form>

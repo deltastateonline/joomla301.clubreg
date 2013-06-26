@@ -1,0 +1,9 @@
+@CHARSET "ISO-8859-1";
+
+#paymentFormDiv {	
+	overflow:auto;	
+}
+#profile-payments{		
+	margin-left:10px;	
+	overflow:auto;
+}

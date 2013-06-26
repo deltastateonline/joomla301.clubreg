@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="details"
+		addfieldpath="/administrator/components/com_clubreg/models/fields"
+	>
+		<field name="product_id" type="hidden" default="0"
+			readonly="true" class="readonly"
+			label="Product Id" description ="Product Id"/>
+			
+		<field name="product_name" type="text" label="Payment Name"
+			description="Payment Name" class="inputbox input-xlarge" size="50"
+			required="true" />
+			
+		<field name="product_amount" type="text" label="Payment Amount"
+			description="Payment Amount" class="inputbox" size="50"
+			required="true" default="0.00"/>
+			
+		<field name="validfrom" type="calendar" label="Valid From"
+			description="Valid From" class="inputbox" size="10" format="%Y-%m-%d %H:%M:%S"
+			filter="user_utc"/>
+			
+		<field name="validto" type="calendar" label="Valid Until"
+			description="Valid Until" class="inputbox" size="10" format="%Y-%m-%d %H:%M:%S"
+			filter="user_utc" />
+			
+		<field name="published" type="list"
+			label="JSTATUS" description="JFIELD_PUBLISHED_DESC"
+			class="inputbox input-xlarge" size="1" default="1"
+		>
+			<option value="1">
+				JPUBLISHED</option>
+			<option value="0">
+				JUNPUBLISHED</option>
+			<option value="2">
+				JARCHIVED</option>
+			<option value="-2">
+				JTRASHED</option>
+		</field>				
+		<field name="product_desc" type="textarea"
+			label="Payment Descriptions" description="Payment Descriptions"
+			class="inputbox input-xxlarge" rows="10" cols="80"  />
+		
+	</fieldset>
+	
+	<fields name="params">
+	
+		<fieldset name="configItems"
+			label="Default Parameters"
+			description="Determines what the sub items of this setting are."
+			>
+			<field name="assign_to"
+				type="list"
+				label="Applies To"
+				description="Group Type this payment should be applied to"
+				default = "both"
+			>
+				<option value="">Apply To</option>
+				<option value="junior">Junior</option>
+				<option value="senior">Senior</option>	
+				<option value="both">Junior and Senior</option>			
+			</field>						
+		</fieldset>
+		
+	</fields>
+</form>

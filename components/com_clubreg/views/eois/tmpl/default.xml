@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+  <layout title="Manage Expression of Interest-">
+    <message>
+      <![CDATA[MANAGE EXPRESSION OF INTEREST]]>
+    </message>
+  </layout>
+  <fields name="request">
+		<fieldset name="request">			
+			<field name="layout" type="hidden" default="rendereoi"  value="rendereoi" label="Render List" description="Render EOI List"></field>
+      		<field name="resetpage" type="hidden" value="reset" label="Reset Filters" description="Reset Filters"></field>
+		</fieldset>
+	</fields>
+	
+	
+	<!-- Add fields to the parameters object for the layout. -->
+	<fields name="params">
+
+		<!-- Basic options. -->
+		<fieldset name="basic" label="COM_MENUS_BASIC_FIELDSET_LABEL">
+
+		<field
+		name="login_redirect_url"
+		type="text"
+		label="JFIELD_LOGIN_REDIRECT_URL_LABEL"
+		description="JFIELD_LOGIN_REDIRECT_URL_DESC"
+		class="inputbox"/>
+
+		 <field
+			name="logindescription_show"
+			type="list"
+			label="JFIELD_BASIS_LOGIN_DESCRIPTION_SHOW_LABEL"
+			description="JFIELD_BASIS_LOGIN_DESCRIPTION_SHOW_DESC"
+			default="1">
+			<option
+				value="0">JHIDE</option>
+			<option
+				value="1">JSHOW</option>
+				</field>
+		<field
+		name="login_description"
+		type="textarea"
+		label="JFIELD_BASIS_LOGIN_DESCRIPTION_LABEL"
+		description="JFIELD_BASIS_LOGIN_DESCRIPTION_DESC"
+		rows="3"
+		cols="40"/>
+
+		<field
+		name="login_image"
+		type="media"
+		label="JFIELD_LOGIN_IMAGE_LABEL"
+		description="JFIELD_LOGIN_IMAGE_DESC"/>
+
+		<field name="spacer1" type="spacer"
+				hr="true"
+			/>
+		<field
+		name="logout_redirect_url"
+		type="text"
+		label="JFIELD_LOGOUT_REDIRECT_URL_LABEL"
+		description="JFIELD_LOGOUT_REDIRECT_URL_DESC"
+		class="inputbox"/>
+         <field
+			name="logoutdescription_show"
+			type="list"
+			label="JFIELD_BASIS_LOGOUT_DESCRIPTION_SHOW_LABEL"
+			description="JFIELD_BASIS_LOGOUT_DESCRIPTION_SHOW_DESC"
+			default="1">
+			<option
+				value="0">JHIDE</option>
+			<option
+				value="1">JSHOW</option>
+				</field>
+		<field
+		name="logout_description"
+		type="textarea"
+		label="JFIELD_BASIS_LOGOUT_DESCRIPTION_LABEL"
+		description="JFIELD_BASIS_LOGOUT_DESCRIPTION_DESC"
+		rows="3"
+		cols="40"/>
+
+		<field
+		name="logout_image"
+		type="media"
+		label="JFIELD_LOGOUT_IMAGE_LABEL"
+		description="JFIELD_LOGOUT_IMAGE_DESC"/>
+
+
+
+		</fieldset>
+	</fields>
+	
+	
+</metadata>

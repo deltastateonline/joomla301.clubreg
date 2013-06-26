@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="senior"	addfieldpath="/administrator/components/com_clubreg/models/fields">	
+	<field name="surname" type="text" label="COM_CLUBREG_SURNAME_LABEL"
+			description="COM_CLUBREG_SURNAME_LABEL" class="inputbox input-xlarge" size="30" required="true"/>
+	<field name="givenname" type="text" label="COM_CLUBREG_GIVENNAME_LABEL"
+			description="COM_CLUBREG_GIVENNAME_LABEL" class="inputbox input-xlarge" size="30" required="true"/>	
+	
+	<field name="emailaddress" type="email" label="JGLOBAL_EMAIL"
+			description="JGLOBAL_EMAIL" class="inputbox input-xlarge" required="true"/>
+	
+	<field name="group" type="clubgroups"  label="COM_CLUBREG_GROUPSN_LABEL"
+				description="COM_CLUBREG_GROUPSN_LABEL" class="inputbox input-xlarge"  layouttype="senior" />	
+				
+	<field name="subgroup" type="subclubgroups" label="COM_CLUBREG_SUBGROUPSN_LABEL"
+				description="COM_CLUBREG_SUBGROUPSN_LABEL" class="inputbox input-xlarge"  />
+				
+	<field name="gender" type="radio" class="inputbox inline" default="" label="COM_CLUBREG_GENDER_LABEL" description="COM_CLUBREG_GENDER_LABEL">
+				<option value="male">COM_CLUBREG_MALE</option>
+				<option value="female">COM_CLUBREG_FEMALE</option>
+	</field>
+	
+	<field name="mobile" type="text" label="COM_CLUBREG_MOBILE"
+			description="COM_CLUBREG_MOBILE" class="inputbox input-xlarge"/>
+			
+	<field name="phoneno" type="text" label="COM_CLUBREG_OTHERMOBILE"
+			description="COM_CLUBREG_OTHERMOBILE" class="inputbox input-xlarge"/>
+			
+	<field name="address" type="text" label="COM_CLUBREG_ADDRESS"
+			description="COM_CLUBREG_ADDRESS" class="inputbox input-xlarge"/>
+			
+	<field name="suburb" type="text" label="COM_CLUBREG_SUBURB"
+			description="COM_CLUBREG_SUBURB" class="inputbox input-xlarge"/>
+			
+	<field name="postcode" type="text" label="COM_CLUBREG_POSTCODE"
+			description="COM_CLUBREG_POSTCODE" class="inputbox input-small"/>
+			
+	<field name="send_news" type="checkbox" label="COM_CLUBREG_SENDNEWS"
+			description="COM_CLUBREG_SENDNEWS" class="checkbox inline"/>
+	
+	</fieldset>
+	
+	<fieldset name="guardian" addfieldpath="/administrator/components/com_clubreg/models/fields">
+	
+	<field name="surname" type="text" label="COM_CLUBREG_SURNAME_LABEL"
+			description="COM_CLUBREG_SURNAME_LABEL" class="inputbox input-xlarge" size="30" required="true"/>
+	<field name="givenname" type="text" label="COM_CLUBREG_GIVENNAME_LABEL"
+			description="COM_CLUBREG_GIVENNAME_LABEL" class="inputbox input-xlarge" size="30" required="true"/>	
+	
+	<field name="emailaddress" type="email" label="JGLOBAL_EMAIL"
+			description="JGLOBAL_EMAIL" class="inputbox input-xlarge" required="true"/>
+	
+	<field name="mobile" type="text" label="COM_CLUBREG_MOBILE"
+			description="COM_CLUBREG_MOBILE" class="inputbox input-xlarge"/>
+			
+	<field name="phoneno" type="text" label="COM_CLUBREG_OTHERMOBILE"
+			description="COM_CLUBREG_OTHERMOBILE" class="inputbox input-xlarge"/>
+			
+	<field name="address" type="text" label="COM_CLUBREG_ADDRESS"
+			description="COM_CLUBREG_ADDRESS" class="inputbox input-xlarge"/>
+			
+	<field name="suburb" type="text" label="COM_CLUBREG_SUBURB"
+			description="COM_CLUBREG_SUBURB" class="inputbox input-xlarge"/>
+			
+	<field name="postcode" type="text" label="COM_CLUBREG_POSTCODE"
+			description="COM_CLUBREG_POSTCODE" class="inputbox input-small"/>
+			
+	<field name="send_news" type="checkbox" label="COM_CLUBREG_SENDNEWS"
+			description="COM_CLUBREG_SENDNEWS" class="checkbox inline"/>
+	</fieldset>
+	
+	<fieldset name="junior"	addfieldpath="/administrator/components/com_clubreg/models/fields">
+	<field name="surname_counter" type="text" label="COM_CLUBREG_SURNAME_LABEL"	description="COM_CLUBREG_SURNAME_LABEL" class="inputbox " size="30"/>
+			
+	<field name="givenname_counter" type="text" label="COM_CLUBREG_GIVENNAME_LABEL"	description="COM_CLUBREG_GIVENNAME_LABEL" class="inputbox" size="30"/>	
+			
+	<field name="dob_counter" type="calendar" label="COM_CLUBREG_DOB_LABEL"	description="COM_CLUBREG_DOB_LABEL" class="inputbox input-mini" size="10"/>	
+			
+	<field name="group_counter" type="clubgroups"  label="COM_CLUBREG_GROUPSN_LABEL" description="COM_CLUBREG_GROUPSN_LABEL" class="inputbox input-large"  layouttype="junior" />	
+	
+	<field name="gender_counter" type="list" class="inputbox" default="0" label="COM_CLUBREG_GENDER_LABEL" description="COM_CLUBREG_GENDER_LABEL">
+		<option value="0">COM_CLUBREG_GENDER_LABEL</option>
+		<option value="male">COM_CLUBREG_MALE</option>
+		<option value="female">COM_CLUBREG_FEMALE</option>
+	</field>
+	</fieldset>
+</form>

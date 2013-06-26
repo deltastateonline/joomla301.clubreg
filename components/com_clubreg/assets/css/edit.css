@@ -1,0 +1,39 @@
+div.tab-divs{
+	border-color:#ddd;
+    -moz-border-radius: 5px;
+  	border-radius: 5px;
+    border-style:solid;
+    border-width:0px;
+    padding:0px 5px 0px 5px;
+    box-shadow: 10px 10px 5px #DDEDED;
+    -webkit-box-shadow: 10px 10px 5px #DDEDED;
+    -moz-box-shadow: 10px 10px 5px #DDEDED;
+    
+}
+
+.clugreg-div{
+	width:99%;
+	border-radius: 5px;
+    border-style:solid;
+    border-width:0px;
+    border-color:#DDEDED;
+    padding:1px;
+}
+div.fieldSetDiv{
+	
+	font-size:1.1em;
+	color: #3a87ad;
+	font-weight:bold;	
+	padding-bottom:5px;	
+	padding-top:5px;
+	padding-left:3px;	
+	background-color:#DDEDDD;	
+	
+	border-color:#ddd;
+    -moz-border-radius: 5px;
+  	border-radius: 5px;
+    border-style:solid;
+    border-width:1px;  
+    border-bottom:1px
+   
+}

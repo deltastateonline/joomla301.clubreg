@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>	
+	<fieldset name="playerDetails"	addfieldpath="/administrator/components/com_clubreg/models/fields" description="COM_CLUBREG_PLAYERDETAILS">			
+			<field name="surname" type="text" label="COM_CLUBREG_SURNAME_LABEL"
+			description="COM_CLUBREG_SURNAME_LABEL" class="inputbox input-large" size="30" required="true"/>
+			
+			<field name="givenname" type="text" label="COM_CLUBREG_GIVENNAME_LABEL"
+					description="COM_CLUBREG_GIVENNAME_LABEL" class="inputbox input-large" size="30" required="true"/>					
+	</fieldset>
+	<fieldset name="contactDetails"	addfieldpath="/administrator/components/com_clubreg/models/fields" description="COM_CLUBREG_CONTACTDETAILS" showonly="senior-guardian">			
+			<field name="emailaddress" type="email" label="JGLOBAL_EMAIL"
+			description="JGLOBAL_EMAIL" class="inputbox input-large" required="true"/>
+			
+			<field name="mobile" type="text" label="COM_CLUBREG_MOBILE"
+			description="COM_CLUBREG_MOBILE" class="inputbox input-large"/>
+			
+			<field name="phoneno" type="text" label="COM_CLUBREG_OTHERMOBILE"
+					description="COM_CLUBREG_OTHERMOBILE" class="inputbox input-large"/>
+					
+			<field name="address" type="text" label="COM_CLUBREG_ADDRESS"
+					description="COM_CLUBREG_ADDRESS" class="inputbox input-large"/>
+					
+			<field name="suburb" type="text" label="COM_CLUBREG_SUBURB"
+					description="COM_CLUBREG_SUBURB" class="inputbox input-large"/>
+					
+			<field name="postcode" type="text" label="COM_CLUBREG_POSTCODE"
+					description="COM_CLUBREG_POSTCODE" class="inputbox input-small"/>
+			
+			<field name="send_news" type="checkbox" label="COM_CLUBREG_SENDNEWS" 
+			description="COM_CLUBREG_SENDNEWS" class="checkbox inline"/>
+				
+	</fieldset>
+	<fieldset name="divisionDetails"	addfieldpath="/administrator/components/com_clubreg/models/fields" description="COM_CLUBREG_DIVISIONDETAILS" showonly="senior-junior">	
+		<field name="memberid" type="text" label="COM_CLUBREG_MEMBERNO"
+			description="COM_CLUBREG_MEMBERNO_DESC" class="inputbox input-large" size="30"/>
+		
+		<field name="group" type="clubgroups"  label="COM_CLUBREG_GROUPSN_LABEL"
+					description="COM_CLUBREG_GROUPSN_LABEL" class="inputbox input-large"  />	
+					
+		<field name="subgroup" type="subclubgroups" label="COM_CLUBREG_SUBGROUPSN_LABEL"
+					description="COM_CLUBREG_SUBGROUPSN_LABEL" class="inputbox input-large"  />	
+					
+		<field name="memberlevel" type="configcontrol" label="COM_CLUBREG_SKILLLEVEL_LABEL"
+					description="COM_CLUBREG_SKILLLEVEL_LABEL" class="inputbox input-large" configwhich="club_player_level" />
+						
+		<field name="year_registered" type="clubyears" label="COM_CLUBREG_SEASON_LABEL"
+					description="COM_CLUBREG_SEASON_LABEL" class="inputbox input-small"  />		
+	
+	</fieldset>
+	<fieldset name="personalDetails"	addfieldpath="/administrator/components/com_clubreg/models/fields" description="COM_CLUBREG_PERSONALDETAILS" showonly="junior-senior">		
+		<field name="gender" type="list" class="inputbox" default="0" label="COM_CLUBREG_GENDER_LABEL" description="COM_CLUBREG_GENDER_LABEL">
+			<option value="0">COM_CLUBREG_GENDER_LABEL</option>
+			<option value="male">COM_CLUBREG_MALE</option>
+			<option value="female">COM_CLUBREG_FEMALE</option>
+		</field>		
+		<field name="dob" type="calendar" label="COM_CLUBREG_DOB_LABEL"	
+				description="COM_CLUBREG_DOB_LABEL" class="inputbox input-small" size="10"/>	
+		
+	
+	</fieldset>	
+	<fieldset name="guardianDetails"	addfieldpath="/administrator/components/com_clubreg/models/fields">		
+	
+	</fieldset>		
+	<fieldset name="hiddenControls"	>			
+		<field name="playertype" type="hidden" default="" readonly="true" class="readonly" label="Player Type" description ="Player Type"/>
+		<field name="member_id" type="hidden" default="0" readonly="true" class="readonly" label="PK" description ="PK"/>
+		<field name="member_key" type="hidden" default="0" readonly="true" class="readonly" label="Member key" description ="Member key"/>
+		<field name="parent_id" type="hidden" default="0" readonly="true" class="readonly" label="Parent id" description ="Parent id"/>
+			
+	</fieldset>
+	
+</form>

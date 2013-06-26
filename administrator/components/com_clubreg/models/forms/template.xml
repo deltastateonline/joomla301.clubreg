@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="details"
+		addfieldpath="/administrator/components/com_clubreg/models/fields"
+	>
+		<field name="template_id" type="hidden" default="0"
+			readonly="true" class="readonly"
+			label="Template Id" description ="Template Id"/>
+			
+		<field name="template_name" type="text" label="COM_CLUBREG_TEMPLATENAME"
+			description="COM_CLUBREG_TEMPLATENAME_DESC" class="inputbox input-xlarge" size="30"
+			required="true" />
+		<field name="template_subject" type="text" label="COM_CLUBREG_TEMPLATESUBJECT"
+			description="COM_CLUBREG_TEMPLATESUBJECT_DESC" class="inputbox input-xlarge" size="30"
+			required="true" />
+			
+		
+		<field name="template_text" type="editor" class="inputbox"
+			label="COM_CLUBREG_TEMPLATETEXT" description="COM_CLUBREG_TEMPLATETEXT_DESC"
+			filter="JComponentHelper::filterText" buttons="true" />
+			
+		<field name="template_ptext" type="textarea"
+			label="COM_CLUBREG_TEMPLATEPTEXT" description="COM_CLUBREG_TEMPLATEPTEXT_DESC"
+			class="inputbox input-xxlarge" rows="10" cols="80"  />
+		
+	</fieldset>
+	
+	<fieldset name="configs"
+		addfieldpath="/administrator/components/com_clubreg/models/fields"
+	>
+		<field name="template_status" type="configcontrol" label="COM_CLUBREG_TEMPLATESTATUS"
+			description="COM_CLUBREG_TEMPLATESTATUS_DESC" class="inputbox" 	required="true" configwhich="template_status"/>
+		
+		<field name="COM_CLUBREG_TEMPLATETYPE" type="configcontrol" label="Template type"
+			description="COM_CLUBREG_TEMPLATETYPE_DESC" class="inputbox"  configwhich="template_type"/>
+		
+		<field name="template_access" type="configcontrol" label="COM_CLUBREG_TEMPLATEACCESS"
+			description="COM_CLUBREG_TEMPLATEACCESS_DESC" class="inputbox" configwhich="template_access"/>
+			
+		<field name="published" type="list"
+			label="JSTATUS" description="JFIELD_PUBLISHED_DESC"
+			class="inputbox span5 small" size="1" default="1"
+		>
+			<option value="1">
+				JPUBLISHED</option>
+			<option value="0">
+				JUNPUBLISHED</option>
+			<option value="2">
+				JARCHIVED</option>
+			<option value="-2">
+				JTRASHED</option>
+		</field>
+	</fieldset>
+</form>

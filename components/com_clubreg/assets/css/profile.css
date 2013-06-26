@@ -1,0 +1,144 @@
+@CHARSET "ISO-8859-1";
+.eois div{
+	padding:0px;
+	margin:0px;
+	font-size:0.9em
+}
+.h21{
+	font-size:1.1em;
+	font-weight:bold;
+	line-height:20px;
+	padding-top:4px;
+	pading-left:0px;
+	padding-bottom:4px;
+}
+
+.reg-well{
+	padding : 5px 0px 0px 20px;
+}
+.profile-label, .profile-value,.profile-colon {
+	/*padding-top :5px;*/
+	font-size:90%;
+	
+}
+.profile-label{	
+	width:150px;
+	font-size:0.9em;
+	color: #3a87ad;
+	font-weight:bold;	
+	/*border-bottom:dashed 1px #999999;*/
+}
+.profile-value{
+	min-width:150px;	
+}
+.profile-img{
+	min-height:128px;
+}
+
+.subprofile-label, .subprofile-value,.subprofile-colon {	
+	font-size:90%;
+	line-height:20px;
+	
+}
+.subprofile-label{	
+	color: #3a87ad;
+	padding-right:2px;	
+	/*border-bottom:dashed 1px #999999;*/
+}
+.subprofile-value{
+	padding-left:1px;
+	padding-right:5px;
+}
+	
+
+div.tab-divs{
+	border-color:#ddd;
+    -moz-border-radius: 5px;
+  	border-radius: 5px;
+    border-style:solid;
+    border-width:0px;
+    padding:5px;
+    box-shadow: 10px 10px 5px #DDEDED;
+    -webkit-box-shadow: 10px 10px 5px #DDEDED;
+    -moz-box-shadow: 10px 10px 5px #DDEDED;
+    
+}
+.profile-bold{
+	font-weight:bold;
+	color: #3a87ad;	
+}
+#noteFormDiv, 
+#paymentFormDiv,#profile-payments,
+#emergencyFormDiv,#profile-emergency,
+#otherFormDiv,#profile-other,
+#statsFormDiv,#profile-stats,
+#childrenFormDiv,#profile-children
+{
+	margin-top:4px;
+}
+#profile-notes{
+	max-height:300px;
+	overflow:auto;
+}
+.clugreg-div{
+	height: 95%; 	
+	width: 95%;
+	border-radius: 5px;
+    border-style:solid;
+    border-width:0px;
+    border-color:#DDEDED;
+    top:10px;
+    position: absolute;
+    float:left;
+
+}
+.clugreg-div-wrapper{
+	position: relative;
+	margin: 3px 0 1px;
+	width: 98%;
+	height: 550px;
+	overflow: hidden;	
+	whitespace:nowrap;
+}
+.form-horizontal .control-group {
+    margin-bottom: 5px;
+}
+.fieldSetDiv{
+
+	font-size:1.1em;
+	color: #3a87ad;
+	font-weight:bold;
+	
+	padding-bottom:3px;	
+	padding-top:3px;
+	padding-left:2px;	
+	background-color:#DDEDDD;	
+	
+	border-color:#ddd;
+    -moz-border-radius: 5px;
+  	border-radius: 5px;
+    border-style:solid;
+    border-width:1px;  
+    border-bottom:1px	
+	
+}
+.profile-hr{
+	display:none;
+}
+.reg-label, .reg-value,.reg-colon, .reg-label1 {
+	padding-top :5px;
+	font-size:90%;
+	
+}
+.reg-label{
+	min-width:145px;
+	font-size:0.9em;
+	color: #3a87ad;	
+}
+.reg-value{
+	min-width:145px;
+	
+}
+.reg-label1{	
+	color: #3a87ad;	
+}

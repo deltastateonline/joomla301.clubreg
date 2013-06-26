@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<fieldset name="dropbox"
+		label="Drop Box configuation"
+		description="Configuration for Drop Box"
+	>
+		
+		<field name="appkey"
+			type="text"
+			size="30"
+			label="COM_CLUBREG_APPKEY_LABEL"
+			description="COM_CLUBREG_APPKEY_DESC" class="inputbox input-large"/>
+			
+		<field name="appsecret"
+			type="text"
+			size="30"
+			label="COM_CLUBREG_APPSECRET_LABEL"
+			description="COM_CLUBREG_APPSECRET_DESC" class="inputbox input-large"/>
+			
+		<field name="appfolder"
+			type="text"
+			size="30"
+			label="COM_CLUBREG_APPFOLDER_LABEL"
+			description="COM_CLUBREG_APPFOLDER_DESC" class="inputbox input-large"/>
+			
+		<field name="access_type"
+			type="text"
+			size="30"
+			label="COM_CLUBREG_APPACCESSTYPE_LABEL"
+			description="COM_CLUBREG_APPACCESSTYPE_DESC" class="inputbox input-large"/>
+
+	</fieldset>
+
+	
+
+</config>

@@ -1,0 +1,1 @@
+ALTER TABLE  `#__clubreg_groups` CHANGE  `createdby`  `created_by` INT( 11 ) NOT NULL;
