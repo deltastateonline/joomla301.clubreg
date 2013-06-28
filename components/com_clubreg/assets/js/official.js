@@ -55,6 +55,28 @@ window.addEvent('domready', function () {
 		});
 		
 	}
+	
+	if($('profileBirthday')){
+		
+		$('profileBirthday').addClass('well well-large');	
+		
+		var json_data = JSON.decode($('profileBirthday').get('rel'));
+		
+		var durl = "index.php";	
+		
+		var params = "option=com_clubreg&view=ajax&layout=bday&tmpl=component&format=raw";
+		
+		if(json_data["Itemid"]){
+			params = params + "&Itemid="+json_data["Itemid"];
+		}
+		var a = new Request.HTML({ 
+			url : durl, 
+			method: 'get',	
+			update: $('profileBirthday'),
+			onSuccess: function(responseText){ $('profileBirthday').removeClass('loading1');	}
+			}).send(params);
+		
+	}
 });
 
 function renderActivity(dObject){

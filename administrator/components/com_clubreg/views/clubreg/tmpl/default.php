@@ -11,6 +11,13 @@
 
 defined('_JEXEC') or die;
 ?>
+<style>
+<!--
+div.row-fluid{
+line-height:24px;
+}
+-->
+</style>
 	<div id="j-sidebar-container" class="span2">
 		<?php echo $this->sidebar; ?>
 	</div>
@@ -29,13 +36,31 @@ defined('_JEXEC') or die;
 		</div>
 		</div>
 		<div class="row-fluid">
-		<div class="span6">
-			<p>The Club Registration Component is an extension for Joomla 3.0. it can be used to manage almost any social/sporting club or group 
-				which has team leaders(Coaches, Officials) , Team members (assistants) and club members (players).</p>
-			<p>ClubReg also allows the details of Coaches , Assistants and Club Officials to be published.</p>		
-			<p>ClubReg allows the club to take expression of interest from the public regarding joining the various groups or divisions within the club.</p>
-			<p>Groups can be classified as been senior and junior groups. The major difference between the junior and senior groups is that junior players require their guardian details to be inputted</p>
-			<p>The Team Leader and Team members are  made up of registered users of the joomla installation.<br />These users have to be linked to this component for them to manage players within Clubreg</p>
+		<div class="span8 row-striped">		
+			<div class="row-fluid">The Club Registration Component is an extension for Joomla 3.0. it can be used to manage almost any social/sporting club or group 
+				which has team leaders(Coaches, Officials) , Team members (assistants) and club members (players, swimmers, driver, paying members etc).</div>
+			<div class="row-fluid">The Team Leader and Team members are  made up of registered users of the joomla installation. These users have to be linked to this component for them to manage players within Clubreg</div>
+			<div class="row-fluid">ClubReg uses a configurable list of form controls, to collect and render the details about <strong>Coaches , Assistants and Club Officials</strong>. These details can be updated by either the site administrator or the Club officials themselves</div>		
+			<div class="row-fluid">ClubReg allows the club to take expression of interest from the public regarding joining the various groups or divisions within the club. These EOIs can then be converted into registered members or discarded.</div>
+			<div class="row-fluid">Key Features
+					<ul>
+						<li>Accept Expression of interest for Junior or Senior Players</li>
+						<li>Convert or Register EOIs to registered Players</li>
+						<li><strong>Manage Registerd Players inlucding</strong>
+						<ol>
+							<li>Export a list of players</li>
+							<li>Delete players</li>
+							<li>Add New Players, Edit Player details</li>
+							<li>Attach a guardian to a junior player</li>
+							<li>Add notes to players</li>
+							<li>Add Details about next of kin or emergency contacts</li>
+							<li>Add extra configurable details</li>
+							<li>Add simple payment details</li>
+						</ol>
+						</li>
+					</ul>
+			
+			</div>
 		</div>
 		</div>
 </div>

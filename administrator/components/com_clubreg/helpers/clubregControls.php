@@ -74,9 +74,13 @@ class ClubRegControlsHelper extends JObject
 		}else{
 			$query->where(sprintf('which_config = %s', $db->quote($whichConfig)));
 		}
-		$query->order($db->quote($ordering));
+		
+		$query->where('published = 1');
+		$query->order($ordering);
 	
 		$db->setQuery($query);
+		
+		//echo $query->__toString();
 	
 		$options = array();
 	

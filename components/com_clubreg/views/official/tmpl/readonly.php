@@ -13,8 +13,6 @@ JHtml::_('behavior.framework');
 
 global $clubreg_Itemid;
 $rel_string = array("Itemid"=>$clubreg_Itemid);
-
-
 ?>
 <div class="profile <?php echo $this->pageclass_sfx?>">
 <?php 
@@ -31,7 +29,6 @@ if($this->canedit){
 		<li><a href="<?php echo JRoute::_('index.php?option=com_clubreg&task=official.edit&user_id='.(int) $this->member_id);?>">
 				<span class="icon-user"></span><?php echo JText::_('CLUBREG_EDIT_PROFILE'); ?></a>
 		</li>
-		<?php //ClubRegButtonsHelper::writeButtons($this->member_id) ?>
 	</ul>
 </div>
 <div class="clearfix"></div>
@@ -62,6 +59,7 @@ if($this->canedit){
 		
 		
 		$joomla_details = $this->official_details->extraDetails;
+		
 	if(count($this->extradetails) > 0){	?>
 		<div class="tab-pane active" id="tabDetails">
 			<dl class="dl-horizontal">
@@ -118,6 +116,10 @@ if($this->canedit){
 			<div class="tab-pane" id="tabDashboard">
 				<div class="alert alert-info"><img alt="" src="components/com_clubreg/assets/images/groups.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_EOI'); ?></strong></div>
 				<div class="loading1" id="profileEoi" rel=<?php echo json_encode($rel_string)?>></div>				
+				
+				<div class="alert alert-info"><img alt="" src="components/com_clubreg/assets/images/groups.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_BDAY'); ?></strong></div>
+				<div class="loading1" id="profileBirthday" rel=<?php echo json_encode($rel_string)?>></div>				
+			
 				
 				<div class="alert alert-info"><img alt="" src="components/com_clubreg/assets/images/groups.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_ACTIVITY'); ?></strong></div>
 				<div class="loading1" id="profileActivity" rel=<?php echo json_encode($rel_string)?>></div>

@@ -109,4 +109,36 @@ class ClubRegModelActivity extends JModelLegacy
 		
 		return $activity;
 	}
+	public function getBirthdays(){
+		
+		$db		= JFactory::getDbo();
+		$query	= $db->getQuery(true);
+		
+		$activity = $where_ = array();
+		
+		$where_[] = "date_format(dob,'%m-%d') >= date_format(CURDATE(),'%m-%d')";
+		$where_[] = "date_format(dob,'%m-%d') <= date_format(DATE_ADD(CURDATE(), INTERVAL 7 DAY), '%m-%d')";
+		
+		$where_[] = "dob IS  NOT NULL";
+		$where_[] = "date_format(dob,'%Y') != '0000'";
+		
+		$where_str = "where ".implode(" and ", $where_);
+		
+		$all_string[] = " member_id, member_key, date_format(dob,'%m-%d') as bdays, surname, givenname ";
+		
+		$d_var =implode(",", $all_string);
+		
+		$query->select($d_var);
+		$query->from($db->quoteName(CLUB_REGISTEREDMEMBERS_TABLE).' AS a');
+		
+		foreach($where_ as $a_where){
+			$query->where($a_where);
+		}		
+		
+		$query->order('dob asc');
+		
+		$db->setQuery($query);
+		return $db->loadObjectList();
+		
+	}
 }

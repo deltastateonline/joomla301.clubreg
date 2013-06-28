@@ -80,7 +80,7 @@ class ClubRegRegmembersConfig extends JObject
 		if($this->allowed_groups){
 			$group_where["groups"] = $this->allowed_groups;
 		}
-		if($this->allowed_subgroups){
+		if(isset($this->allowed_subgroups)){
 			$group_where["subgroups"] = $this->allowed_subgroups;
 		}
 		

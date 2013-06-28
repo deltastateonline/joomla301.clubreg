@@ -306,4 +306,13 @@ class ClubRegViewAjax extends JViewLegacy
 		return $proceed;
 		
 	}
+	private function bday(){
+		
+		$proceed = FALSE;
+		
+		$current_model = JModelLegacy::getInstance('activity', 'ClubregModel', array('ignore_request' => true));
+		$this->birthdays = $current_model->getBirthdays();
+		$proceed = TRUE;
+		return $proceed;
+	}
 }

@@ -297,7 +297,8 @@ class ClubregModelRegmembers extends JModelList
 		}
 		
 		$query->order($db->escape($orderCol.' '.$orderDirn));
-		$db->setQuery($query);
+		
+		$db->setQuery($query, 0,20);
 		$all_data = $db->loadObjectList();	
 		return 	$all_data;
 		
