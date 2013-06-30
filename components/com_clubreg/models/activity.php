@@ -37,7 +37,7 @@ class ClubRegModelActivity extends JModelLegacy
 		
 		$where_[] = sprintf(" createdby = %d", $user_id);
 		
-		$where_[] = sprintf(" a.short_desc in ('updated junior', 'updated senior','updated guardian') ");
+		$where_[] = sprintf(" a.short_desc in ('updated juniorx', 'updated seniorx','updated guardianx') ");
 		$where_str = "where ".implode(" and ", $where_);
 		
 		$join_[] = sprintf("  left join %s as b on

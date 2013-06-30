@@ -87,7 +87,12 @@ class ClubregModelPayment extends JModelForm
 			$old_rec->load($tb_keys);
 			
 			if($old_rec->payment_id == $data["payment_id"] && $old_rec->payment_key == $data["payment_key"]){
-				$update_me = TRUE;
+				$update_me = TRUE;			
+					
+				$other_details["short_desc"] = "updated payment";
+				$other_details["primary_id"] = $data["payment_id"];
+				ClubRegAuditHelper::saveData($old_rec, $other_details);
+				
 			}else{
 				$this->setError(JText::_("COM_CLUBREG_NOUPDATE"));
 			}		
