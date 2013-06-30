@@ -20,9 +20,12 @@ if(count($activity) > 0){ ?>
 					$activity_class = "activity-item";
 				}else
 					$rel_string_edit = $activity_class = "";
+				
+				$fkey = $this->uKeyObject->constructKey($an_activity->member_id,$an_activity->member_key);
 				?>
 				<div class="row-fluid">
-					<div class='span8 activity-label' ><?php echo ucwords(str_replace("_", " ", $an_activity->activity_label)); ?></div><div class='span4'><small class='text-info pull-right'><?php echo $an_activity->activity_created; ?></small></div>
+					<div class='span8 activity-label' ><?php echo $an_activity->which_label;?> <a href="javascript:void(0);" onclick="Joomla.sbutton('<?php echo $fkey;?>')"><?php echo ucwords(str_replace("_", " ", $an_activity->activity_label)); ?></a></div>
+					<div class='span4'><small class='text-info pull-right'><?php echo $an_activity->activity_created; ?></small></div>
 					<div class="clearfix"></div>
 					<div class='<?php echo $activity_class; ?>' <?php echo $rel_string_edit; ?>><?php echo ucwords($an_activity->activity_item); ?></div>
 				</div>

@@ -53,10 +53,12 @@ class ClubRegModelActivity extends JModelLegacy
 		$join_string = implode(" ",$join_);
 		
 		$d_qry = sprintf("select 'contacts' as which,
-				a.short_desc as activity_label, 
+				a.short_desc as which_label, a.short_desc as activity_label, 
 				concat( date_format(a.created_date,'%%d/%%m/%%Y'),' ', a.created_time) as activity_created,
 				concat(a.created_date,' ',a.created_time) as acreated				
-				%s ,concat('-') as item_key	 from
+				%s ,concat('-') as item_key,
+				b.member_id, b.member_key
+				from
 				%s as a
 				%s
 				%s 		
@@ -64,11 +66,12 @@ class ClubRegModelActivity extends JModelLegacy
 				 union 
 				
 				select 'payments' as which, 
-				concat('Payment Added To ',cd.givenname,' ',cd.surname) as 'activity_label', 
+				concat('Payment Added To ') as which_label , concat(cd.givenname,' ',cd.surname) as 'activity_label', 
 				date_format(c.created, '%%d/%%m/%%Y %%H:%%i:%%s') as activity_created,
 				c.created as acreated,
 				concat('Ref No :',c.payment_transact_no) as activity_item,
-				concat(c.payment_id,payment_key,'-',length(c.payment_id)) as item_key	
+				concat(c.payment_id,payment_key,'-',length(c.payment_id)) as item_key,
+				cd.member_id, cd.member_key	
 				from %s as c 
 				left join %s as cd on (c.member_id = cd.member_id)	
 				where c.created_by = %d 
@@ -76,11 +79,12 @@ class ClubRegModelActivity extends JModelLegacy
 				union
 				
 				select 'notes' as which, 
-				concat('Notes Added To ',e.givenname,' ',e.surname) as 'activity_label', 
+				concat('Notes Added To ') as which_label, concat(e.givenname,' ',e.surname) as 'activity_label', 
 				date_format(d.created, '%%d/%%m/%%Y %%H:%%i:%%s') as activity_created,
 				d.created as acreated,
 				concat(SUBSTRING(d.notes,1,50),'...') as activity_item,
-				concat(note_id,note_key,'-',length(note_id)) as item_key		
+				concat(note_id,note_key,'-',length(note_id)) as item_key,
+				e.member_id, e.member_key		
 				from %s as d 	
 				left join %s as e on (d.primary_id = e.member_id)			
 				where d.created_by = %d 
@@ -124,7 +128,7 @@ class ClubRegModelActivity extends JModelLegacy
 		
 		$where_str = "where ".implode(" and ", $where_);
 		
-		$all_string[] = " member_id, member_key, date_format(dob,'%m-%d') as bdays, surname, givenname ";
+		$all_string[] = " member_id, member_key, date_format(dob,'%a %D %M') as bdays, surname, givenname ";
 		
 		$d_var =implode(",", $all_string);
 		
@@ -135,7 +139,7 @@ class ClubRegModelActivity extends JModelLegacy
 			$query->where($a_where);
 		}		
 		
-		$query->order('dob asc');
+		$query->order("date_format(dob,'%m %d') asc");
 		
 		$db->setQuery($query);
 		return $db->loadObjectList();

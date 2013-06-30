@@ -309,7 +309,8 @@ class ClubRegViewAjax extends JViewLegacy
 	private function bday(){
 		
 		$proceed = FALSE;
-		
+		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
+		$this->uKeyObject = new ClubRegUniqueKeysHelper();
 		$current_model = JModelLegacy::getInstance('activity', 'ClubregModel', array('ignore_request' => true));
 		$this->birthdays = $current_model->getBirthdays();
 		$proceed = TRUE;

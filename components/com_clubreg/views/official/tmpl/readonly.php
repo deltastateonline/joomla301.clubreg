@@ -13,7 +13,22 @@ JHtml::_('behavior.framework');
 
 global $clubreg_Itemid;
 $rel_string = array("Itemid"=>$clubreg_Itemid);
+$in_type = "hidden";
 ?>
+<script type="text/javascript">
+<!--
+Joomla.sbutton = function(pk)
+{
+
+	var form = document.getElementById('adminForm');	
+	document.adminForm.action='<?php echo JRoute::_($this->formaction_edit,false); ?>';		
+	document.adminForm.layout.value= 'viewonly';		
+	document.adminForm.pk.value = pk;
+	form.submit();
+}
+//-->
+</script>
+
 <div class="profile <?php echo $this->pageclass_sfx?>">
 <?php 
 $renderTab["group"] = $renderTab["dashboard"] = FALSE;
@@ -130,6 +145,15 @@ if($this->canedit){
 </div>
 </fieldset>
 </div>
+<form action="<?php echo JRoute::_($this->formaction_edit); ?>" method="post" name="adminForm" id="adminForm" target='_blank'>
+
+	<input type="<?= $in_type; ?>" name="Itemid" value="<?= $clubreg_Itemid; ?>" />	
+	<input type="<?= $in_type; ?>" name="option" value="com_clubreg" />
+	
+	<input type="<?= $in_type; ?>" name="layout" value="viewonly" />	
+	<input type="<?= $in_type; ?>" name="pk" value="" />	
+		<?php echo JHTML::_( 'form.token' ); ?>
+</form>
 <?php 
 $document = JFactory::getDocument();
 //$document->addStyleSheet(CLUBREG_ASSETS.'/css/common.css?'.time());

@@ -353,6 +353,14 @@ class ClubregModelRegmember extends JModelForm
 		$memberTable = $this->getTable();	
 	
 		$memberTable->bind($data);
+		
+		if(intval($data["member_id"]) > 0 ){
+			$oldTable = $this->getTable();
+			$oldTable->load($data["member_id"]);
+			$other_details["short_desc"] = "Update ".$oldTable->playertype;
+			$other_details["primary_id"] = $data["member_id"];
+			ClubRegAuditHelper::saveData($oldTable, $other_details);
+		}
 	
 		if(!$memberTable->store()){
 			$this->setError($memberTable->getError());

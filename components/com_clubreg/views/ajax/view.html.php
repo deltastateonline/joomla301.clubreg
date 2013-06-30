@@ -67,7 +67,9 @@ class ClubRegViewAjax extends JViewLegacy
 			$proceed = TRUE;
 			unset($current_model);
 			$current_model = JModelLegacy::getInstance('activity', 'ClubregModel', array('ignore_request' => true));
-			$this->activity = $current_model->getActivityList($user->get('id'));			
+			$this->activity = $current_model->getActivityList($user->get('id'));	
+			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
+			$this->uKeyObject = new ClubRegUniqueKeysHelper();
 		}		
 		return $proceed;
 	}	

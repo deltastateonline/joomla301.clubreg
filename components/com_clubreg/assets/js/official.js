@@ -77,6 +77,17 @@ window.addEvent('domready', function () {
 			}).send(params);
 		
 	}
+	
+	var container = $('profileBirthday');
+	/*
+	container.addEvent("click:relay($(this))", function(event){	
+		event.stop();				
+		var var_class = $(this).get('class');
+		
+		if(var_class.test('activity-bday')){			
+			Joomla.sbutton('934-93','');
+		}
+	});*/
 });
 
 function renderActivity(dObject){
