@@ -269,7 +269,10 @@ class ClubRegHelper
 		<small><?php echo JText::_("Designed By ")?><a href="http://<?php echo  OUR_WEBSITE; ?>">http://<?phP echo DESIGNED_BY ?></a></small>
 		<?php 
 	}
-	static function writePageHeader($pageTitle){?>
+	static function writePageHeader($pageTitle){
+		$document = JFactory::getDocument();
+		$document->setTitle($pageTitle);
+	?>
 		<h2 style="border-bottom:1px solid #A5A5A5;padding-bottom:4px"><?php echo $pageTitle; ?></h2>
 	<?php }
 	static function writeImage($imagedata){
