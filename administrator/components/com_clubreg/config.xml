@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
+	<fieldset name="Attachments"
+		label="Attachments"
+		description="Configuration for Attachment"
+	>		
+		<field name="attachment_folder"
+			type="text"
+			size="30"
+			label="COM_CLUBREG_FOLDER_LABEL"
+			description="COM_CLUBREG_FOLDER_DESC" class="inputbox input-large" default="clubreg"/>
+
+	</fieldset>
 	<fieldset name="dropbox"
 		label="Drop Box configuation"
 		description="Configuration for Drop Box"
