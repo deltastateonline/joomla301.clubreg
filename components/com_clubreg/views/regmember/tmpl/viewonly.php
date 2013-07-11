@@ -18,7 +18,7 @@ jimport('joomla.html.html.bootstrap');
 JHtml::_('behavior.formvalidation');
 JHTML::_('behavior.calendar');
 JHtml::_('behavior.tooltip');
-JHtml::_('formbehavior.chosen', 'select');
+//JHtml::_('formbehavior.chosen', 'select');
 
 $member_data = $this->all_data["member_data"];
 $this->pageTitle .= " : ". $member_data->surname;

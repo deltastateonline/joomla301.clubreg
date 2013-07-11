@@ -61,7 +61,24 @@ var divListRenderer = new Class({
 			}).send();
 	}
 	
-})
+});
+
+function render_msg(msg_text){
+	$('loading-div').set('html',msg_text);
+	$('loading-div').addClass('alert alert-error');	
+	
+	$('loading-div').set('tween', {duration: 6000,
+		
+	    onComplete: function(){
+	        // Run function on complete
+	    	$('loading-div').set('html','');
+	    	$('loading-div').removeClass('alert alert-error');	 
+	    	$('loading-div').set('tween',{duration:10}).fade('in');
+	    }		
+	}).fade('out');
+	
+	
+}
 
 
 

@@ -28,6 +28,28 @@ window.addEvent('domready', function () {
 			},
 			onComplete: function(response){
 				document.id('profile-attachments').set('html',response);
+				
+				var proceedData = JSON.decode(response);				
+				if(proceedData["proceed"]){
+					//$('profile-attachments').empty();
+					//$('profile-attachments').addClass('loading1');
+					//attachmentsListDiv.renderList();				
+				}else{
+					var msg_text  = "";
+					if(proceedData["msg"]){ //alert(proceedData["msg"]);
+						//console.log(proceedData["msg"].length);
+						var msg_count = proceedData["msg"].length;
+						for(var i = 0; i < msg_count; i++ ){
+							msg_text += proceedData["msg"][i]+"<br />";
+						}						
+						
+						render_msg(msg_text);
+					}else{
+						alert("Unable to complete action");
+					}
+				}
+				
+				
 			}
 		});
 	/*

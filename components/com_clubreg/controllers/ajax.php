@@ -23,9 +23,11 @@ class ClubregControllerAjax extends JControllerLegacy
 		
 		$this->registerTask('savepayment', 'savepayment');
 		$this->registerTask('saveemergency', 'saveemergency');
-		$this->registerTask('saveother', 'saveother');
-		
+		$this->registerTask('saveother', 'saveother');		
 		$this->registerTask('assignguardian', 'assignguardian');
+		
+		$this->registerTask('saveattachment', 'saveattachment');
+		
 		$this->uKeyObject = new ClubRegUniqueKeysHelper(10);
 		
 	}	
@@ -299,5 +301,79 @@ class ClubregControllerAjax extends JControllerLegacy
 		
 	}
 	
+	public function saveattachment(){
+		
+		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		
+		
+		$return_array = array();
+		$return_array["proceed"] = $return_array["upload_error"] = FALSE;
+		
+		$app    = JFactory::getApplication();
+		$user		= JFactory::getUser();
+		
+		$data = $this->input->post->get('jform', array(), 'array');
+		$member_key_data = new stdClass();
+		
+		$member_key_data->full_key = $data["member_key"];
+		$this->uKeyObject->deconstructKey($member_key_data);
+		
+		$file_data =  $this->input->files->get('jform',array(),'array');
+		$attachment = $file_data["attachment"];
+		
+		$return_array["msg"] = array();
+		
+		// If there is no uploaded file, we have a problem...
+		if (!is_array($attachment))
+		{
+			$return_array["msg"][] =  JText::_('COM_INSTALLER_MSG_NO_FILE_SELECTED');
+			$return_array["upload_error"] = TRUE;
+		}
+		
+		// Check if there was a problem uploading the file.
+		if ($attachment['error'] || $attachment['size'] < 1)
+		{
+			$return_array["msg"][] = JText::_('COM_CLUBREG_MSG_WARNINSTALLUPLOADERROR');
+			$return_array["upload_error"] = TRUE;
+		}
+		
+		
+		$params = JComponentHelper::getParams('com_clubreg');
+		$config		= JFactory::getConfig();		
+		
+		$folder_path = $params->get("attachment_folder1");
+		if(!isset($folder_path) || is_null($folder_path)){
+			
+			$return_array["msg"][] = JText::_('COM_CLUBREG_MSG_FOLDERNOT_SET');
+			
+		}
+		//write_debug($folder_path);
+		
+		$params = JComponentHelper::getParams('com_media');
+		//write_debug($params);
+		
+		if(!$return_array["upload_error"]){
+			// Build the appropriate paths
+			
+			
+			$config		= JFactory::getConfig();
+			$tmp_dest	= $config->get('tmp_path') . '/' .time(). JFile::makeSafe($attachment['name']); //$attachment['name'];
+			$tmp_src	= $attachment['tmp_name'];
+			
+			// Move uploaded file
+			jimport('joomla.filesystem.file');
+			$return_array["proceed"] = JFile::upload($tmp_src, $tmp_dest);
+			
+			$return_array["dest"] = $tmp_dest;
+			$return_array["src"] = $tmp_src;
+			
+		}
+		
+		//JRequest::getVar('attachment', null, 'files', 'array');
+		
+		echo json_encode($return_array);
+		
+		$app->close();
+	}
 	
 }
