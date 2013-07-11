@@ -270,6 +270,8 @@ class ClubregControllerAjax extends JControllerLegacy
 		
 		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 		
+		$member_key_data = new stdClass();
+		$parent_key_data = new stdClass();
 		
 		$return_array = array();
 		$return_array["proceed"] = FALSE;
