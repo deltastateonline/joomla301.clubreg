@@ -57,10 +57,10 @@ ehthumbs.db
 ## Joomla Php
 #############
 php_errors.log
-en-GB.plg_*.ini
-en-GB.lib_*.ini
-en-GB.mod_*.ini
-en-GB.tpl_*.ini
+#en-GB.plg_*.ini
+#en-GB.lib_*.ini
+#en-GB.mod_*.ini
+#en-GB.tpl_*.ini
 index2.php
 index.php
 
