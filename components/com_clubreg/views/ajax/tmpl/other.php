@@ -21,14 +21,16 @@ $in_type = "hidden";?>
 }
 -->
 </style>
-<form action="index.php" method="post" name="OtherForm" id="other-form" class="form-validate form-horizontal">	
+<form action="index.php" method="post" name="OtherForm" id="other-form" class="form-validate form-horizontal">
+		<div class="fieldSetDiv"><?php echo JText::_(COM_CLUBREG_OTHERDETAILS);?></div>
+		<div id="otheritems">
 		<?php 
 		$extraDetails = $this->otherValues;
 		foreach($this->extradetails as $d_key => $d_value){
 		$mtyr = "/monthyear/"?>
 				<div class="control-group">						
 					<div class="control-label">
-						<?php echo $d_value->config_name; ?>
+						<label><?php echo $d_value->config_name; ?></label>
 					</div>						
 					<div class="controls<?php echo preg_match($mtyr, $d_value->params)?" controls-row":"";?>">
 						<?php  						
@@ -59,6 +61,7 @@ $in_type = "hidden";?>
 	<input type="<?php echo $in_type;?>" name="task" value="ajax.saveother" />
 	<?php echo JHtml::_('form.token'); ?>		
 	<div class="clearfix" ></div>	
+	</div>
 		<div class="form-actions">			 
 			<button type="submit" class="btn btn-primary validate"><span><?php echo JText::_('JSUBMIT'); ?></span></button>	
 			<button type="button" class="btn" id="toggle-other-div"><?php echo JText::_('JCANCEL'); ?></button>				

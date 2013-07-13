@@ -58,20 +58,20 @@ $headingConfigs = $this->profileConfigs["headings"];
 	var lockMessage ="Are you sure you want to lock this Note?";
 	var token = '<?php echo JSession::getFormToken() ;?>';
 
-	var profilediverightedge = <?php echo isset($profilediverightedge)?$profilediverightedge:700 ;?>;
+	var profilediverightedge = <?php echo isset($this->profile_divrightedge)?$this->profile_divrightedge:700 ;?>;
 	
 </script>
 <style>
 <!--
 .form-div{
-	margin-left:-<?php echo isset($profilediverightedge)?$profilediverightedge:700 ;?>px;	
+	margin-left:-<?php echo isset($this->profile_divrightedge)?$this->profile_divrightedge:700 ;?>px;	
 }
 -->
 </style>
 
 <div class="row-fluid" >
 	<div class="span3"  style="border:0px solid black">
-	<div class="row-fluid">
+	<div class="row-fluid" style="padding-top:3px;">
 		<div class="btn-group">
 			<button class="btn btn-small btn-primary" type="button" onclick="return adminForm_back.submit();"><?php echo JText::_('COM_CLUBREG_BACK_LIST'); ?></button>
 			<button class="btn btn-small" type="button" onclick="return adminForm_edit.submit();">Edit</button>
@@ -96,7 +96,7 @@ $headingConfigs = $this->profileConfigs["headings"];
 			
 		</form>		
 	</div>	
-	<div class='profile-img'><img src="<?php echo CLUBREG_ASSETS; ?>/images/sf.png" width="128" /></div>
+	<div class='profile-img'><img src="<?php echo CLUBREG_ASSETS; ?>/images/clublogo.png" width="128" /></div>
 	
 	<p class="text-info pull-left small"><?php echo JText::_('COM_CLUBREG_REGISTERED_LABEL'), ' :<br />', $member_data->reg_created_by , ' on ', $member_data->reg_created_date ;?></p>
 	</div>
@@ -121,7 +121,7 @@ $headingConfigs = $this->profileConfigs["headings"];
 		<div class="row-fluid">
 			<div class="span3">
 			<div class="h21"><?php echo JText::_('COM_CLUBREG_PROFILE_DIVISION'); ?> :</div>
-				<a class="btn btn-mini profile-div-button" rel='<?php echo $member_data->member_id; ?>' href="javascript:void(0);">+</a><br />
+				<a class="btn btn-mini profile-div-button" rel='<?php echo $member_data->member_id; ?>' href="javascript:void(0);">-</a><br />
 			 </div>	
 			<div class="span9 row-striped">
 			<div id="profile-division">
@@ -142,7 +142,7 @@ $headingConfigs = $this->profileConfigs["headings"];
 </div> <?php  // row-fluid ?>
 <hr />
 <div id='loading-div'></div>
-
+<div class="clearfix">&nbsp;</div>
 	<div class="tabbable tabs-top">
 		<ul class="nav nav-tabs">
 		<?php foreach($headingConfigs["tab"] as $akey => $tvalue) { ?>

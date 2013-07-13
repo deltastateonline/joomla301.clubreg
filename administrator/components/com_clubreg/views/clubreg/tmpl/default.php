@@ -10,6 +10,7 @@
 -------------------------------------------------------------------------*/
 
 defined('_JEXEC') or die;
+
 ?>
 <style>
 <!--
@@ -22,8 +23,9 @@ line-height:24px;
 		<?php echo $this->sidebar; ?>
 	</div>
 	
-	<div id="j-main-container" class="span10">
+	<div id="j-main-container" class="span10">		
 		<div class="well">
+		<img src="<?php echo str_replace("administrator/", "", JURI::base()).CLUBREG_ASSETS; ?>/images/clublogo.png" width=256  class="pull-right"/>
 		<h1>ClubReg Component for Joomla 3.0</h1>
 		<h2>Thank you for choosing to install this component</h2>
 		<div class="">
@@ -33,6 +35,7 @@ line-height:24px;
 		# Website:- <a href="http://applications.deltastateonline.com">http://applications.deltastateonline.com</a><br />
 		# Technical Support:  email - <a mailto="joomla@deltastateonline.com">joomla@deltastateonline.com</a><br />
 		# Demo:  <a href="http://demo3.deltastateonline.com">http://demo3.deltastateonline.com</a><br />
+		
 		</div>
 		</div>
 		<div class="row-fluid">

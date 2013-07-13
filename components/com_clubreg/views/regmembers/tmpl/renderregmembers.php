@@ -118,6 +118,7 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 <?php 
 ClubregHelper::write_footer();
 $document = JFactory::getDocument();
+ClubregHelper::writeTabAssets($document, "common",array("css"));
 ClubregHelper::writeTabAssets($document, "clubreggroups",array("js"));
 ClubregHelper::writeTabAssets($document, "regmembers",array("css","js"));
 ?>

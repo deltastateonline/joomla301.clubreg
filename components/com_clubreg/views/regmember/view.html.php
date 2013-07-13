@@ -41,6 +41,9 @@ class ClubRegViewregmember extends JViewLegacy
 		$app			= JFactory::getApplication();
 		$user			= JFactory::getUser();			
 		
+		$params = JComponentHelper::getParams('com_clubreg');
+		$this->profile_divrightedge =  $params->get("profile_divrightedge");		
+		
 		$this->member_key = $app->input->getString('pk', null);
 			
 		$currentModel = $this->getModel();

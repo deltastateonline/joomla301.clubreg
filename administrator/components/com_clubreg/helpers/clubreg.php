@@ -273,7 +273,7 @@ class ClubRegHelper
 		$document = JFactory::getDocument();
 		$document->setTitle($pageTitle);
 	?>
-		<h2 style="border-bottom:1px solid #A5A5A5;padding-bottom:4px"><?php echo $pageTitle; ?></h2>
+		<div class="row-fluid" style='margin-bottom:3px;'><h2 style="border-bottom:1px solid #A5A5A5;padding-bottom:2px"><?php echo $pageTitle; ?></h2></div>
 	<?php }
 	static function writeImage($imagedata){
 		?><img src='<?php echo CLUBREG_ASSETS?>/images/<?php echo $imagedata["fname"]; ?>' <?php echo isset($imagedata["attr"])?$imagedata["attr"]:"";?>/><?php 	

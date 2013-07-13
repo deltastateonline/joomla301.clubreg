@@ -22,6 +22,7 @@ $in_type = "hidden";?>
 -->
 </style>
 <form action="index.php" method="post" name="EmergencyForm" id="emergency-form" class="form-validate form-horizontal">	
+		<div class="fieldSetDiv"><?php echo JText::_(COM_CLUBREG_EM_DETAILS);?></div>
 		<?php foreach($this->emergencyForm->getFieldset('nextofkin') as $field){ ?>
 			<div class="control-group">					
 				<div class="control-label"><?php echo $field->label; ?></div>

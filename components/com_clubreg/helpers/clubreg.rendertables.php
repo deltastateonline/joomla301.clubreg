@@ -48,7 +48,7 @@ class ClubRegRenderTablesHelper extends JObject
 					</select>
 				</div>			   
 			    <div class="btn-group  pull-right">
-				    <label for="directionTable" class="element-invisible"><?php echo JText::_('JFIELD_ORDERING_DESC');?></label>
+				    <label for="directionTable" class="element-invisible"><?php echo JText::_('COM_CLUBREG_ORDERING_DESC');?></label>
 					<select name="directionTable" id="directionTable" class="input-small" onchange="Joomla.orderTable()">
 						<option value=""><?php echo JText::_('COM_CLUBREG_ORDERING_DESC');?></option>
 						<option value="asc" <?php if (strtoupper($listDirn) == 'ASC') echo 'selected="selected"'; ?>><?php echo JText::_('COM_CLUBREG_ORDER_ASCENDING');?></option>

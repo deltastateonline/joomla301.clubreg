@@ -9,6 +9,14 @@
 			size="30"
 			label="COM_CLUBREG_FOLDER_LABEL"
 			description="COM_CLUBREG_FOLDER_DESC" class="inputbox input-large" default="clubreg"/>
+			
+			<field name="profile_divrightedge"
+			type="text"
+			size="30"
+			label="COM_CLUBREG_DIVRIGHT_LABEL"
+			description="COM_CLUBREG_DIVRIGHT_DESC" class="inputbox input-large" default="750"/>
+			
+			
 
 	</fieldset>
 	<fieldset name="dropbox"

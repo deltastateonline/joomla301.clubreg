@@ -1,7 +1,12 @@
 #otherFormDiv {	
-	overflow:auto;	
+	/*overflow:auto;*/	
 }
 #profile-other{		
 	margin-left:10px;	
 	overflow:auto;
+}
+#otheritems{
+	
+	overflow:auto;	
+	height:400px;
 }
