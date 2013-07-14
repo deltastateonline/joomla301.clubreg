@@ -305,6 +305,9 @@ class ClubregControllerAjax extends JControllerLegacy
 	
 	public function saveattachment(){
 		
+		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.media.php';	
+		
+		
 		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 		
 		
@@ -325,53 +328,41 @@ class ClubregControllerAjax extends JControllerLegacy
 		
 		$return_array["msg"] = array();
 		
-		// If there is no uploaded file, we have a problem...
-		if (!is_array($attachment))
+		if (!ClubRegMediaHelper::canUpload($attachment, $err))
 		{
-			$return_array["msg"][] =  JText::_('COM_INSTALLER_MSG_NO_FILE_SELECTED');
-			$return_array["upload_error"] = TRUE;
-		}
-		
-		// Check if there was a problem uploading the file.
-		if ($attachment['error'] || $attachment['size'] < 1)
-		{
-			$return_array["msg"][] = JText::_('COM_CLUBREG_MSG_WARNINSTALLUPLOADERROR');
+			$return_array["msg"][] = JText::_($err);
 			$return_array["upload_error"] = TRUE;
 		}
 		
 		
 		$params = JComponentHelper::getParams('com_clubreg');
-		$config		= JFactory::getConfig();		
+		$config		= JFactory::getConfig();
 		
-		$folder_path = $params->get("attachment_folder1");
-		if(!isset($folder_path) || is_null($folder_path)){
-			
+		$media_params = JComponentHelper::getParams('com_media');		
+		
+		$folder_path = $params->get("attachment_folder");
+		if(!isset($folder_path) || is_null($folder_path)){			
 			$return_array["msg"][] = JText::_('COM_CLUBREG_MSG_FOLDERNOT_SET');
-			
-		}
-		//write_debug($folder_path);
+			$return_array["upload_error"] = TRUE;			
+		}else{			
+			$media_path = JPATH_ROOT.DS.$media_params->get('file_path').DS.$folder_path.DS;
+			$media_path = sprintf("%s%s%s",$media_path,$member_key_data->full_key,DS);
+		}		
 		
-		$params = JComponentHelper::getParams('com_media');
-		//write_debug($params);
-		
-		if(!$return_array["upload_error"]){
-			// Build the appropriate paths
-			
-			
-			$config		= JFactory::getConfig();
-			$tmp_dest	= $config->get('tmp_path') . '/' .time(). JFile::makeSafe($attachment['name']); //$attachment['name'];
+		if(!$return_array["upload_error"]){			
+			// Build the appropriate paths	
+			$file_name = 	time(). JFile::makeSafe($attachment['name']);
+			$final_dest	= $media_path.$file_name;
 			$tmp_src	= $attachment['tmp_name'];
 			
 			// Move uploaded file
 			jimport('joomla.filesystem.file');
-			$return_array["proceed"] = JFile::upload($tmp_src, $tmp_dest);
+			$return_array["proceed"] = JFile::upload($tmp_src, $final_dest);
 			
-			$return_array["dest"] = $tmp_dest;
+			$return_array["dest"] = $final_dest;
 			$return_array["src"] = $tmp_src;
 			
 		}
-		
-		//JRequest::getVar('attachment', null, 'files', 'array');
 		
 		echo json_encode($return_array);
 		
