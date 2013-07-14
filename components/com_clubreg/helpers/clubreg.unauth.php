@@ -29,9 +29,10 @@ class ClubRegAuditHelper extends JObject{
 	
 	static function saveData($old_data,$other_details){
 	
-		$db		=& JFactory::getDBO();
-		$user		= &JFactory::getUser();
-	
+		$db		= JFactory::getDBO();
+		$user		= JFactory::getUser();
+		
+		$new_data = new stdClass();
 		foreach($old_data as $t_key => $t_value){
 			if($t_key[0] == "_") continue;
 			$new_data->$t_key = $old_data->$t_key;
