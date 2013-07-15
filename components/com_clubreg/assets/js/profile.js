@@ -16,8 +16,3 @@ window.addEvent('domready', function () {
 		
 	}
 });
-	
-function profileFailure(rObject){	
-	$('loading-div').removeClass('loading-small');
-	alert(rObject.getHeader('Status'));	
-}

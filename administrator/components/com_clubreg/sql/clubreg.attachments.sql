@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS `qjogz_clubreg_attachments` (
+  `attachment_id` int(11) NOT NULL auto_increment,
+  `attachment_key` varchar(30) default NULL,
+  `link_id` int(11) NOT NULL,
+  `link_type` varchar(15) default 'member',
+  `attachment_fname` varchar(255) default NULL,
+  `attachment_notes` varchar(255) default NULL,
+  `attachment_type` varchar(30) default NULL,
+  `params` varchar(1024) default NULL,
+  `attachment_savedfname` varchar(255) default NULL,
+  `attachment_location` varchar(1024) default NULL,
+  `created` datetime default NULL,
+  `created_by` int(11) default NULL,
+  `attachment_parameter_type` varchar(50) default NULL,
+  `attachment_file_type` varchar(50) default NULL,
+  `attachment_status` int(11) default NULL,
+  `attachment_access_level` int(11) default NULL,
+  PRIMARY KEY  (`attachment_id`),
+  KEY `link_id` (`link_id`,`link_type`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='store files' AUTO_INCREMENT=1 ;

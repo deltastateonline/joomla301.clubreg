@@ -310,21 +310,22 @@ class ClubregControllerAjax extends JControllerLegacy
 		
 		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 		
-		
-		$return_array = array();
+		$member_key_data = new stdClass();
+		$return_array = $attachment_data = array();
 		$return_array["proceed"] = $return_array["upload_error"] = FALSE;
 		
 		$app    = JFactory::getApplication();
 		$user		= JFactory::getUser();
 		
 		$data = $this->input->post->get('jform', array(), 'array');
-		$member_key_data = new stdClass();
+	
 		
 		$member_key_data->full_key = $data["member_key"];
 		$this->uKeyObject->deconstructKey($member_key_data);
 		
 		$file_data =  $this->input->files->get('jform',array(),'array');
-		$attachment = $file_data["attachment"];
+		$attachment = $file_data["attachment"];		
+		
 		
 		$return_array["msg"] = array();
 		
@@ -345,8 +346,9 @@ class ClubregControllerAjax extends JControllerLegacy
 			$return_array["msg"][] = JText::_('COM_CLUBREG_MSG_FOLDERNOT_SET');
 			$return_array["upload_error"] = TRUE;			
 		}else{			
-			$media_path = JPATH_ROOT.DS.$media_params->get('file_path').DS.$folder_path.DS;
-			$media_path = sprintf("%s%s%s",$media_path,$member_key_data->full_key,DS);
+			$media_path = $media_params->get('file_path').DS.$folder_path.DS;
+			$attachment_data["attachment_location"] = $media_path = sprintf("%smber_%s%s",$media_path,$member_key_data->pk_id,DS);			
+			$media_path = JPATH_ROOT.DS.$media_path;
 		}		
 		
 		if(!$return_array["upload_error"]){			
@@ -358,6 +360,28 @@ class ClubregControllerAjax extends JControllerLegacy
 			// Move uploaded file
 			jimport('joomla.filesystem.file');
 			$return_array["proceed"] = JFile::upload($tmp_src, $final_dest);
+			
+			if($return_array["proceed"]){
+				
+				$current_model = JModelLegacy::getInstance('attachment', 'ClubregModel', array('ignore_request' => true));
+				$attachment_data["attachment_fname"] = $attachment['name'];
+				$attachment_data["attachment_savedfname"] = $file_name;
+				
+				$attachment_data["attachment_key"] = $this->uKeyObject->getUniqueKey();
+				$attachment_data["link_id"] = $member_key_data->pk_id;
+				$attachment_data["createdby"] = $user->get("id");
+				$attachment_data["attachment_status"] = 1;
+				$attachment_data["link_type"] = $data["link_type"];
+				
+				$attachment_data["attachment_type"] = $data["document_type"];
+				$attachment_data["attachment_notes"] = $data["attnotes"];				
+				
+				$return_array["proceed"] = $current_model->save($attachment_data);
+				if(!$return_array["proceed"]){
+					$return_array["msg"][] =  $current_model->getError();
+				}
+				
+			}
 			
 			$return_array["dest"] = $final_dest;
 			$return_array["src"] = $tmp_src;

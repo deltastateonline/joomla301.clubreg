@@ -38,37 +38,15 @@ class ClubregModelAttachment extends JModelForm
 	{
 		$data = (array) JFactory::getApplication()->getUserState('com_clubreg.attachment.data', array());
 		if (empty($data)) {
-			//$data = $this->getItem();			
+				
 		}
 		$data["member_key"] = $this->getState("com_clubreg.attachment.member_key");
-		$data["attachment_type"] = $this->getState("com_clubreg.attachment.attachment_type");
+		$data["link_type"] = $this->getState("com_clubreg.attachment.link_type");
 		return $data;
 	}
 	
 	protected function getItem($pk = null){
-		$data_ = array();		
 		
-		$data_["attachment_id"] = $this->getState("com_clubreg.attachment.attachment_id");
-		$data_["attachment_key"] = $this->getState("com_clubreg.attachment.attachment_key");
-	
-		$db = JFactory::getDBO();
-		$query	= $db->getQuery(true);
-	
-		$d_var = "a.*";
-		$query->select($d_var);
-		$query->from($db->quoteName(CLUB_NOTES_TABLE).' AS a');
-	
-		$query->where(' attachment_id = '.$db->quote($data_["attachment_id"]));
-		$query->where(' attachment_key = '.$db->quote($data_["attachment_key"]));
-	
-		$db->setQuery($query);
-		$row = $db->loadAssoc();
-	
-		if($row["attachment_id"] == $data_["attachment_id"] && $row["attachment_key"] == $data_["attachment_key"]){
-			return $row;
-		}
-	
-		return array();
 	}
 	
 	public function save($data){
@@ -91,10 +69,10 @@ class ClubregModelAttachment extends JModelForm
 		$db = JFactory::getDbo();
 		$error_ = 0;
 		
-		$attachment_id = $this->getState("com_clubreg.attachment.attachment_id");
+		$attachment_id = $this->getState("com_clubreg.attachment..attachment_id");
 		$attachment_key = $this->getState("com_clubreg.attachment.attachment_key");		
 		
-		$d_qry = sprintf("update %s set attachment_status = %s where attachment_id = %s and attachment_key = %s",
+		$d_qry = sprintf("update %s set note_status = %s where attachment_id = %s and attachment_key = %s",
 				$db->quoteName(CLUB_NOTES_TABLE),$db->quote($status), $db->quote($attachment_id),$db->quote($attachment_key));
 		
 		$db->setQuery($d_qry);		

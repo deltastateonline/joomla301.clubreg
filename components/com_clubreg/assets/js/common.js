@@ -63,6 +63,11 @@ var divListRenderer = new Class({
 	
 });
 
+function profileFailure(rObject){	
+	$('loading-div').removeClass('loading-small');	
+	render_msg(rObject.getHeader('Status'));
+}
+
 function render_msg(msg_text){
 	$('loading-div').set('html',msg_text);
 	$('loading-div').addClass('alert alert-error');	

@@ -71,7 +71,7 @@ class ClubRegViewregmember extends JViewLegacy
 		unset($currentModel);
 		$currentModel = JModelLegacy::getInstance('attachment', 'ClubregModel', array('ignore_request' => false));
 		$currentModel->setState('com_clubreg.attachment.member_key',$this->member_key); // use the key in the model
-		$currentModel->setState('com_clubreg.attachment.attachment_type',"member"); // use the note type in the model
+		$currentModel->setState('com_clubreg.attachment.link_type',"member"); // use the note type in the model
 		
 		$this->attachmentForm = $currentModel->getForm();
 		unset($currentModel);

@@ -16,6 +16,9 @@ define('CLUB_GROUPS_TABLE','#__clubreg_groups'); // club groups.
 define('CLUB_MEMBERSGROUPS_TABLE','#__clubreg_teammembers_groups'); // Club Officials grouping table
 define('CLUB_MEMBERSDETAILS_TABLE','#__clubreg_teammembers_details'); // key value pair table for Club Officials
 define('CLUB_TEMPLATE_TABLE','#__clubreg_templates');  // the template table
+define('CLUB_ATTACHMENTS_TABLE','#__clubreg_attachments');  // the template table
+
+
 
 define('CLUB_TEMPLATE_CONFIG_TABLE','#__simple_configs'); // configuration table
 define('CLUB_CONFIG_TABLE','#__clubreg_configs'); // configuration table

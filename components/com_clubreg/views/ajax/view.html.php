@@ -313,4 +313,35 @@ class ClubRegViewAjax extends JViewLegacy
 		return $proceed;
 	}
 	
+	private function attachments(){
+	
+		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
+	
+		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
+	
+		$user		= JFactory::getUser();
+		$app			= JFactory::getApplication();
+		$Itemid			= $app->input->post->get('Itemid');
+	
+		$proceed = FALSE;
+		if($user->get('id') > 0){
+			$proceed = TRUE;
+			$key_data = new stdClass();
+			unset($current_model);
+			$current_model = JModelLegacy::getInstance('regmember', 'ClubregModel', array('ignore_request' => true));
+			$key_data->full_key = $app->input->post->getString('member_key', null);
+			$current_model->processKey($key_data);
+				
+			unset($current_model);
+			$link_type = $app->input->post->getString('link_type', 'member');
+			$current_model = JModelLegacy::getInstance('attachments', 'ClubregModel', array('ignore_request' => true));
+			$this->attachments = $current_model->getAttachments($user->get('id'),$key_data->member_id,$link_type);
+			$this->uKeyObject = new ClubRegUniqueKeysHelper();
+			unset($key_data);
+				
+				
+		}
+		return $proceed;
+	}
+	
 }

@@ -13,7 +13,7 @@ window.addEvent('domready', function () {
 	
 	$$(".profile-attachment-button").addEvent('click',function(event){		
 		
-		$('jform_notes').set('value','');
+		$('jform_attnotes').set('value','');
 		
 		var searchSlider =  new Fx.Slide("attachmentFormDiv");
 		searchSlider.toggle();		
@@ -36,8 +36,7 @@ window.addEvent('domready', function () {
 					//attachmentsListDiv.renderList();				
 				}else{
 					var msg_text  = "";
-					if(proceedData["msg"]){ //alert(proceedData["msg"]);
-						//console.log(proceedData["msg"].length);
+					if(proceedData["msg"]){ 
 						var msg_count = proceedData["msg"].length;
 						for(var i = 0; i < msg_count; i++ ){
 							msg_text += proceedData["msg"][i]+"<br />";
@@ -47,54 +46,20 @@ window.addEvent('domready', function () {
 					}else{
 						alert("Unable to complete action");
 					}
-				}
-				
-				
-			}
+				}			
+			},
+            onFailure:function(){ profileFailure(this); }
 		});
-	/*
-		$('attachment-form').addEvent('submit', function(event) {		
-			event.stop();
-			
-			$('loading-div').addClass('loading-small');		
-			
-			new Request({
-	            url: this.get("action"),
-	            data: this,
-	            onComplete: function() {	            	
-	              
-	               var json_data = JSON.decode(this.response.text);	
-	               if(json_data["proceed"]){
-	            	   
-	            	   $('profile-attachments').empty();
-	            	   $('profile-attachments').addClass('loading1');
-	            	   
-	            	   /*	var searchSlider =  new Fx.Slide("attachmentFormDiv");
-	           			searchSlider.toggle();		           			
-	           			attachmentsListDiv.renderList();
-	           			
-	               }
-	               $('loading-div').removeClass('loading-small');
-	            },
-	            onFailure:function(){ profileFailure(this); }
-	            
-	        }).send();
 	
-		});*/
 		
 	}
 	 var container = $('profile-attachments');
-	 if(container){
-
-		 container.addEvent('click:relay(.profile-private)', function(){
-			 if(confirm(lockMessage)){			 
-				// noteAction($(this),"ajax.locknote");		
-			 }
-		 });
+	 if(container){	
 		 
-		 container.addEvent('click:relay(.profile-delete)', function(){		 
-			 if(confirm(deleteMessage)){			 
-				// noteAction($(this),"ajax.deletenote");
+		 container.addEvent('click:relay(.profile-attach-delete)', function(){		 
+			 if(confirm(deleteMessage)){	
+				 alert(99);
+				// attachmentAction($(this),"ajax.deleteattachment");
 			 }		
 		 });
 	 }
