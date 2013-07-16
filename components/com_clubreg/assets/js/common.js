@@ -69,6 +69,7 @@ function profileFailure(rObject){
 }
 
 function render_msg(msg_text){
+	$('loading-div').removeClass('loading-small');	
 	$('loading-div').set('html',msg_text);
 	$('loading-div').addClass('alert alert-error');	
 	

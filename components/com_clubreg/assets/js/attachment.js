@@ -1,6 +1,6 @@
 window.addEvent('domready', function () {		
 	
-	attachmentsListDiv.params = "option=com_clubreg&view=ajax&layout=attachments&tmpl=component";
+	attachmentsListDiv.params = "option=com_clubreg&view=ajax&layout=attachments&tmpl=component&format=raw";
 	
 	if($('attachmentFormDiv')){
 		$('attachmentFormDiv').slide('hide').setStyle('visibility', 'visible');
@@ -24,18 +24,19 @@ window.addEvent('domready', function () {
 		
 		var iFrame = new iFrameFormRequest('attachment-form',{
 			onRequest: function(){
-				document.id('profile-attachments').set('text','start');
+				 $('loading-div').addClass('loading-small');
 			},
 			onComplete: function(response){
-				document.id('profile-attachments').set('html',response);
+				//document.id('profile-attachments').set('html',response);
 				
 				var proceedData = JSON.decode(response);				
 				if(proceedData["proceed"]){
-					//$('profile-attachments').empty();
-					//$('profile-attachments').addClass('loading1');
-					//attachmentsListDiv.renderList();				
+					$('profile-attachments').empty();
+					$('profile-attachments').addClass('loading1');
+					attachmentsListDiv.renderList();				
 				}else{
 					var msg_text  = "";
+					//$('loading-div').addClass('loading-small');
 					if(proceedData["msg"]){ 
 						var msg_count = proceedData["msg"].length;
 						for(var i = 0; i < msg_count; i++ ){
@@ -44,7 +45,7 @@ window.addEvent('domready', function () {
 						
 						render_msg(msg_text);
 					}else{
-						alert("Unable to complete action");
+						msg_text = "Unable to complete action";
 					}
 				}			
 			},
