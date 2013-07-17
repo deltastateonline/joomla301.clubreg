@@ -21,8 +21,8 @@ $in_type = "hidden";?>
 }
 -->
 </style>
-<form action="index.php" method="post" name="OtherForm" id="other-form" class="form-validate form-horizontal">
-		<div class="fieldSetDiv"><?php echo JText::_(COM_CLUBREG_OTHERDETAILS);?></div>
+<form action="index.php" method="post" name="OtherForm" id="other-form" class="form-validate form-horizontal form-clubreg">
+		<div class="fieldSetDiv"><?php echo JText::_('COM_CLUBREG_OTHERDETAILS');?></div>
 		<div id="otheritems">
 		<?php 
 		$extraDetails = $this->otherValues;

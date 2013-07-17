@@ -14,6 +14,8 @@ window.addEvent('domready', function () {
 	$$(".profile-attachment-button").addEvent('click',function(event){		
 		
 		$('jform_attnotes').set('value','');
+		$('jform_attachment').set('value','');
+		
 		
 		var searchSlider =  new Fx.Slide("attachmentFormDiv");
 		searchSlider.toggle();		

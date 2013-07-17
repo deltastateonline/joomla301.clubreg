@@ -17,11 +17,13 @@ $in_type = "hidden";?>
 <!--
 .form-horizontal .control-group {
     margin-bottom: 10px;
+    padding-left:5px;
+   
 }
 -->
 </style>
-<form action="index.php" method="post" name="PaymentForm" id="payment-form" class="form-validate form-horizontal">	
-		<div class="fieldSetDiv"><?php echo JText::_(COM_CLUBREG_PAYMENT_DETAILS);?></div>
+<form action="index.php" method="post" name="PaymentForm" id="payment-form" class="form-validate form-horizontal form-clubreg">	
+		<div class="fieldSetDiv"><?php echo JText::_('COM_CLUBREG_PAYMENT_DETAILS');?></div>
 		<?php foreach($this->paymentForm->getFieldset('paymentDetails') as $field){ ?>
 			<div class="control-group">					
 				<div class="control-label"><?php echo $field->label; ?></div>

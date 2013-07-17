@@ -62,11 +62,12 @@ select{
 <div class="clugreg-div">
 	<form action="<?php echo JRoute::_($this->formbaction)?> " method="post" name="adminForm_" id="edit-form" class="form-validate">	
 		<div class="row-fluid tab-divs">
+		
 			<div class="row-fluid">
 			<?php			
 				$fieldSets = $this->regmemberForm->getFieldsets();	
 				$current_sets = "playerDetails";				
-				ClubRegHelper::writeFieldText($fieldSets[$current_sets]->description);			
+				ClubRegHelper::writeFieldText($fieldSets[$current_sets]->description,'first-fikkeld-div');			
 			?>
 			<?php foreach($this->regmemberForm->getFieldset($current_sets) as $field): ?>				
 					<div class="control-group span5"> 				
@@ -144,8 +145,9 @@ select{
 			</div>
 		<?php } ?>
 		</div> <?php // 2 ?>
+		
 		<hr  class='profile-hr'/>
-	</div>
+	
 	
 		<?php 
 			foreach($this->regmemberForm->getFieldset('hiddenControls') as $field){
@@ -159,7 +161,7 @@ select{
 			<input type="<?php echo $in_type; ?>" name="pk" value="<?php echo $this->member_key; ?>" />
 			<?php echo JHtml::_('form.token'); ?>	
 		<div id='loading-div'></div>	
-		<div class="form-actions tab-divs" style="padding:10px;">		
+		<div class="form-actions " style="padding:10px;">		
 			<button class="btn btn-primary" type="submit">
 				<?php echo JText::_('JSUBMIT'); ?>
 			</button>
@@ -174,6 +176,7 @@ select{
 			<?php }else{ ?>				
 				<button type="button" class="btn" id="toggle-children-div"><?php echo JText::_('JCANCEL'); ?></button>	
 			<?php } ?>
+		</div>
 		</div>
 	</form>
 	<?php if($this->tmpl == "html"){?>

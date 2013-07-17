@@ -15,7 +15,7 @@ global $clubreg_Itemid;
 $rel_string = array("Itemid"=>$clubreg_Itemid,"member_key"=>$this->member_key,JSession::getFormToken()=>1);?>
 <div><a class="btn profile-note-button" href="javascript:void(0)">Add <?php echo JText::_('COM_CLUBREG_PROFILE_NOTES')?></a></div>
 <div class="well well-small profile-well" id="noteFormDiv">
-<form action="index.php" method="post" name="NoteForm" id="note-form" class="form-validate">	
+<form action="index.php" method="post" name="NoteForm" id="note-form" class="form-validate form-clubreg">	
 		 <div class="control-group">
 		 	<div class="controls">
 		 		<?php $t_string = $this->noteForm->getLabel('note_status');echo str_replace("label", "span", $t_string); ?>

@@ -287,8 +287,8 @@ class ClubRegHelper
 			$document->addScript(CLUBREG_ASSETS.'/js/'.$whichTab.'.js?'.time());
 		}
 	}
-	static function writeFieldText($fieldText){?>	
-		<div class="fieldSetDiv"><?php echo JText::_($fieldText); ?></div>
+	static function writeFieldText($fieldText,$x_class=''){?>	
+		<div class="fieldSetDiv <?php echo $x_class?>"><?php echo JText::_($fieldText); ?></div>
 	<?php 		
 	}
 	
