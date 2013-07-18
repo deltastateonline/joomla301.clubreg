@@ -80,6 +80,8 @@ class ClubRegViewAjax extends JViewLegacy
 		
 		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
 		
+		$this->setLayout("list.notes");
+		
 		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
 		
 		$user		= JFactory::getUser();
@@ -113,6 +115,8 @@ class ClubRegViewAjax extends JViewLegacy
 	private function payment(){
 		
 		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
+		
+		$this->setLayout("form.payment");
 		
 		$user		= JFactory::getUser();
 		$app			= JFactory::getApplication();
@@ -154,6 +158,8 @@ class ClubRegViewAjax extends JViewLegacy
 	private function payments(){
 		
 		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
+		
+		$this->setLayout("list.payments");
 		
 		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
 		require_once CLUBREG_CONFIGS.'config.payments.php';
@@ -208,6 +214,8 @@ class ClubRegViewAjax extends JViewLegacy
 		$user		= JFactory::getUser();
 		$app			= JFactory::getApplication();
 		$Itemid			= $app->input->post->get('Itemid');
+		
+		$this->setLayout("form.emergency");
 	
 		$proceed = FALSE;
 		if($user->get('id') > 0){
@@ -236,6 +244,8 @@ class ClubRegViewAjax extends JViewLegacy
 	private function other(){
 	
 		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
+		
+		$this->setLayout("form.other");
 	
 		$user		= JFactory::getUser();
 		$app			= JFactory::getApplication();

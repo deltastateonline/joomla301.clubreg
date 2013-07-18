@@ -62,11 +62,13 @@ class ClubregModelAttachments extends JModelList
 		$query->order('a.attachment_id desc');
 		
 		$db->setQuery($query);
-		$attachmentsList = $db->loadObjectList();
-		
-		if(count($attachmentsList) > 0){
+		try {
+			$attachmentsList = $db->loadObjectList();
 			return $attachmentsList;
-		}else 
+		} catch (Exception $e) {
+			echo $e->getMessage();
+		}		
+	
 			return array();
 		
 	}

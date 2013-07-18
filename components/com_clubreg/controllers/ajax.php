@@ -369,7 +369,7 @@ class ClubregControllerAjax extends JControllerLegacy
 				
 				$attachment_data["attachment_key"] = $this->uKeyObject->getUniqueKey();
 				$attachment_data["link_id"] = $member_key_data->pk_id;
-				$attachment_data["createdby"] = $user->get("id");
+				$attachment_data["created_by"] = $user->get("id");
 				$attachment_data["attachment_status"] = 1;
 				$attachment_data["link_type"] = $data["link_type"];
 				

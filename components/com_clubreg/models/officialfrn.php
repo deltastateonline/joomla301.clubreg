@@ -166,9 +166,6 @@ class ClubregModelOfficialfrn extends JModelForm
 		$my_groups["sub_groups_ids"] = array_keys($sub_groups);
 		$my_groups["sub_groups"] = $sub_groups;
 		
-		
-	//	write_debug($my_groups);
-		
 		return $my_groups;
 	
 	}

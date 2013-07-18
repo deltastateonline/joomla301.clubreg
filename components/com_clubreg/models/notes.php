@@ -59,11 +59,14 @@ class ClubregModelNotes extends JModelList
 		$query->order('a.note_id desc');
 		
 		$db->setQuery($query);
-		$notesList = $db->loadObjectList();
-		
-		if(count($notesList) > 0){
+			
+		try {
+			$notesList = $db->loadObjectList();
 			return $notesList;
-		}else 
+		} catch (Exception $e) {
+			echo $e->getMessage();
+		}
+	 
 			return array();
 		
 	}

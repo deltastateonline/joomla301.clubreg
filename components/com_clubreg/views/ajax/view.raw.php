@@ -104,6 +104,8 @@ class ClubRegViewAjax extends JViewLegacy
 	private function aemergency(){
 		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
 		
+		$this->setLayout("details.emergency");
+		
 		$user		= JFactory::getUser();
 		$app			= JFactory::getApplication();
 		$Itemid			= $app->input->post->get('Itemid');
@@ -133,6 +135,8 @@ class ClubRegViewAjax extends JViewLegacy
 	private function aother(){
 		
 	JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
+	
+		$this->setLayout("details.other");
 	
 		$user		= JFactory::getUser();
 		$app			= JFactory::getApplication();
@@ -167,9 +171,11 @@ class ClubRegViewAjax extends JViewLegacy
 	
 		return $proceed;
 	}
-	function aguardian(){
+	private function aguardian(){
 		
 		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
+		
+		$this->setLayout("details.guardian");
 		
 		$user		= JFactory::getUser();
 		$app			= JFactory::getApplication();
@@ -319,6 +325,8 @@ class ClubRegViewAjax extends JViewLegacy
 	private function attachments(){
 	
 		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
+		
+		$this->setLayout("list.attachments");
 	
 		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
 	
@@ -338,7 +346,8 @@ class ClubRegViewAjax extends JViewLegacy
 			unset($current_model);
 			$link_type = $app->input->post->getString('link_type', 'member');
 			$current_model = JModelLegacy::getInstance('attachments', 'ClubregModel', array('ignore_request' => true));
-			$this->attachments = $current_model->getAttachments($user->get('id'),$key_data->member_id,$link_type);
+			$this->attachments = $current_model->getAttachments($user->get('id'),$key_data->member_id,$link_type);				
+			
 			$this->uKeyObject = new ClubRegUniqueKeysHelper();
 			unset($key_data);
 	

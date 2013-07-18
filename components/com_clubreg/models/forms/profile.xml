@@ -7,7 +7,7 @@
 			<field name="givenname" type="text" label="COM_CLUBREG_GIVENNAME_LABEL"
 					description="COM_CLUBREG_GIVENNAME_LABEL" class="inputbox input-large" size="30" required="true"/>					
 	</fieldset>
-	<fieldset name="contactDetails"	addfieldpath="/administrator/components/com_clubreg/models/fields" description="COM_CLUBREG_CONTACTDETAILS" showonly="senior-guardian">			
+	<fieldset name="bio"	addfieldpath="/administrator/components/com_clubreg/models/fields" description="COM_CLUBREG_CONTACTDETAILS" showonly="senior-guardian">			
 			<field name="emailaddress" type="email" label="JGLOBAL_EMAIL"
 			description="JGLOBAL_EMAIL" class="inputbox input-large" required="true"/>
 			
@@ -30,12 +30,9 @@
 			description="COM_CLUBREG_SENDNEWS" class="checkbox inline"/>
 				
 	</fieldset>
-	<fieldset name="divisionDetails"	addfieldpath="/administrator/components/com_clubreg/models/fields" description="COM_CLUBREG_DIVISIONDETAILS" showonly="senior-junior">	
+	<fieldset name="division"	addfieldpath="/administrator/components/com_clubreg/models/fields" description="COM_CLUBREG_DIVISIONDETAILS" showonly="senior-junior">	
 		<field name="memberid" type="text" label="COM_CLUBREG_MEMBERNO"
 			description="COM_CLUBREG_MEMBERNO_DESC" class="inputbox input-large" size="30"/>
-			
-		<field name="joining_date" type="calendar" label="COM_CLUBREG_JOINING_LABEL"	
-				description="COM_CLUBREG_JOINING_LABEL" class="inputbox input-small" size="10"/>
 		
 		<field name="group" type="clubgroups"  label="COM_CLUBREG_GROUPSN_LABEL"
 					description="COM_CLUBREG_GROUPSN_LABEL" class="inputbox input-large"  />	

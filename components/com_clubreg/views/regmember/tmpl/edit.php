@@ -49,7 +49,7 @@ select{
  	height: 25px;
     line-height: 25px;
 }
-#jform_dob_img{
+#jform_dob_img, #jform_joining_date_img {
 	padding:1px 10px;
 }
 
