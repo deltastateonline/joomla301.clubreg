@@ -29,4 +29,4 @@ if(count($this->notes)>0){
 	</div>
 <?php 
 	}	
-}else{ 	?><div class="alert alert-error"><h3>Currently There are no Notes.</h3></div><?php }
+}else{ echo ClubRegUnAuthHelper::noResults('COM_CLUBREG_PROFILE_NOTES');  }

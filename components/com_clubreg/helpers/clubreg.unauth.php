@@ -19,8 +19,8 @@ class ClubRegUnAuthHelper extends JObject
 		return;
 	}
 	
-	public static function noResults(){	?>
-			<div class="alert alert-error"><h3><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_NORESULTS'); ?></h3></div>
+	public static function noResults($which = null){	?>
+			<div class="alert alert-error"><h3><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_NORESULTS'),(isset($which)?" - ".JText::_($which):""); ?></h3></div>
 		<?php	
 		return;
 	}

@@ -15,8 +15,5 @@ global $clubreg_Itemid;
 if(count($this->items)>0){
 	$tableRender = new ClubRegRenderTablesPaymentsHelper();
 	$tableRender->render($this);	
-}else{?>
-	<div class="alert alert-error"><h3>Currently There are no Payments.</h3></div>
-<?php 
-}
+}else{ echo ClubRegUnAuthHelper::noResults('COM_CLUBREG_PROFILE_PAYMENTS'); }
 

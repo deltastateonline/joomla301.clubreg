@@ -1,0 +1,1 @@
+ALTER TABLE  `qjogz_clubreg_registeredmembers` ADD  `joining_date` DATE NULL DEFAULT  '0000-00-00' AFTER  `approved_by`;

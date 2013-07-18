@@ -42,3 +42,11 @@ function sendnews($value){
 function applyFactor($value){	
 	return number_format($value/FACTOR,2, '.', ',');
 }
+function clubregdate($value){
+	
+	$zero_pattern = "/0000/";
+	if(!preg_match($zero_pattern, $value) && isset($value)){
+		$dates = preg_split("/-/", $value);
+		echo sprintf("%s/%s/%s", $dates[2],$dates[1],$dates[0]);
+	}
+}

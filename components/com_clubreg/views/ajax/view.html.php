@@ -285,6 +285,8 @@ class ClubRegViewAjax extends JViewLegacy
 	private function children(){
 	
 		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
+		
+		$this->setLayout("list.children");
 		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
 		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.rendertables.children.php';
 		require_once CLUBREG_CONFIGS.'config.profile.php';
