@@ -1,0 +1,1 @@
+ALTER TABLE  `qjogz_clubreg_attachments` CHANGE  `link_id`  `primary_id` INT( 11 ) NOT NULL;

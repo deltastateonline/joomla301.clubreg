@@ -235,13 +235,13 @@ class ClubregModelRegmembers extends JModelList
 		$this->setState($s_key, $states); // set the search column it contains all the meta data about the filter boxes, ie columns, contol type and default value 
 	
 		
-		if (count($allowed_groups["allowed_groups"]) > 0){
+		if (isset($allowed_groups["allowed_groups"]) && count($allowed_groups["allowed_groups"]) > 0){
 			$this->setState("search.allowedgroups", $allowed_groups["allowed_groups"]);
 		}else{
 			$this->setState("search.allowedgroups", array());
 		}
 		
-		if (count($allowed_groups["sub_groups_ids"]) > 0){
+		if (isset($allowed_groups["sub_groups_ids"]) && count($allowed_groups["sub_groups_ids"]) > 0){
 			$this->setState("search.allowedsubgroups", $allowed_groups["sub_groups_ids"]);
 		}else{
 			$this->setState("search.allowedsubgroups", array());

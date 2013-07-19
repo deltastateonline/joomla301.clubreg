@@ -88,7 +88,21 @@ class ClubRegModelActivity extends JModelLegacy
 				from %s as d 	
 				left join %s as e on (d.primary_id = e.member_id)			
 				where d.created_by = %d 
-				and lcase(d.note_type) = 'member'				
+				and lcase(d.note_type) = 'member'
+
+				union
+				
+				select 'Files' as which, 
+				concat('Files Added To ') as which_label, concat(att_m.givenname,' ',att_m.surname) as 'activity_label', 
+				date_format(att.created, '%%d/%%m/%%Y %%H:%%i:%%s') as activity_created,
+				att.created as acreated,
+				concat(SUBSTRING(att.attachment_fname,1,50),'...') as activity_item,
+				concat(attachment_id,attachment_key,'-',length(attachment_id)) as item_key,
+				att_m.member_id, att_m.member_key		
+				from %s as att 	
+				left join %s as att_m on (att.primary_id = att_m.member_id)			
+				where att.created_by = %d 
+				and lcase(att.link_type) = 'member'
 				
 				order by acreated desc
 				",
@@ -100,6 +114,9 @@ class ClubRegModelActivity extends JModelLegacy
 				CLUB_REGISTEREDMEMBERS_TABLE,
 				$user_id,
 				CLUB_NOTES_TABLE,
+				CLUB_REGISTEREDMEMBERS_TABLE,
+				$user_id,
+				CLUB_ATTACHMENTS_TABLE,
 				CLUB_REGISTEREDMEMBERS_TABLE,
 				$user_id
 				);

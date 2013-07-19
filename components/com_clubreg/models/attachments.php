@@ -17,7 +17,7 @@ class ClubregModelAttachments extends JModelList
 		if (empty($config['filter_fields'])) {
 			$config['filter_fields'] = array(
 					'a.attachment_id',
-					'a.link_id','a.created'
+					'a.primary_id','a.created'
 					
 			);
 		}
@@ -34,7 +34,7 @@ class ClubregModelAttachments extends JModelList
 	}
 	public function getAttachments($user_id,$primary_id,$link_type='member'){
 		
-		$where_[] = sprintf(" link_id = %d",$primary_id) ;
+		$where_[] = sprintf(" primary_id = %d",$primary_id) ;
 		$where_[] = sprintf(" ( attachment_status in (1) or a.created_by = %d  )",$user_id) ;
 		$where_[] = sprintf("  attachment_status != 99 ") ;
 		$where_[] = sprintf("  link_type = '%s' ",$link_type) ;
@@ -44,7 +44,7 @@ class ClubregModelAttachments extends JModelList
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);
 		
-		$all_string[] = "`attachment_id`, `attachment_key`, `link_id`, `link_type`, `attachment_fname`, `attachment_notes`, 
+		$all_string[] = "`attachment_id`, `attachment_key`, `primary_id`, `link_type`, `attachment_fname`, `attachment_notes`, 
 		`attachment_type`, a.`params`, `attachment_savedfname`, `attachment_location`, a. `created_by`, 
 		`attachment_parameter_type`, `attachment_file_type`, `attachment_status`, `attachment_access_level`";
 		$all_string[] = "date_format(a.created, '%d/%m/%Y %H:%i:%s') as created, user_reg.name ";
