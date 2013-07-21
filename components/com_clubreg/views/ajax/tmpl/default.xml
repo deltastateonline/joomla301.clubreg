@@ -2,7 +2,7 @@
 <metadata>
   <layout title="CLUBREG AJAX VIEW">
     <message>
-      <![CDATA[Do not assign, Handles all ajax requests]]>
+       <![CDATA[AJAX VIEW]]>
     </message>
   </layout>
 </metadata>

@@ -12,18 +12,11 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 global $clubreg_Itemid;
 if(count($this->attachments)>0){	
-	$all_document_type = $all_document_list = array();
-	
-	
 	foreach($this->attachments as $an_attachment){ 
-		
 		$fkey = $this->uKeyObject->constructKey($an_attachment->attachment_id,$an_attachment->attachment_key);
-		$rel_string = json_encode(array('Itemid'=>$clubreg_Itemid,'attachment_key'=>$fkey));
-		$all_attachment_type[$an_attachment->attachment_type] = $an_attachment->attachment_type_name;
-		ob_start();
-	?>
+		$rel_string = json_encode(array('Itemid'=>$clubreg_Itemid,'attachment_key'=>$fkey));?>
 	<div class="row-fluid" id='attachment_div<?php echo $an_attachment->attachment_id?>'>
-		<div class="pull-left"><a href="index.php?option=com_clubreg&Itemid=<?php echo $clubreg_Itemid  ?>&view=ajax&layout=viewattachment&tmpl=component&format=raw&attachment_key=<?php echo $fkey; ?>" target='_blank'><?php echo $an_attachment->attachment_fname;?></a></div>			
+		<div class="pull-left"><a href=""><?php echo $an_attachment->attachment_fname;?></a></div>			
 		<div class="pull-right" style="padding-left:5px"><a href="javascript:void(0);" class='profile-attach-delete' rel=<?php echo $rel_string; ?> ><img src="<?php echo CLUBREG_ASSETS; ?>/images/delete.png" /></a></div>
 	
 	
@@ -35,18 +28,5 @@ if(count($this->attachments)>0){
 		<div class="clearfix"></div>		
 	</div>
 <?php 
-		$all_document_list[$an_attachment->attachment_type][] = ob_get_contents() ;
-		ob_end_clean(); 
 	}	
-	
-	foreach($all_attachment_type as $att_type => $att_name){
-		?>
-		<div class="profile-sub-head-div"><?php echo $att_name ;?></div>		
-		<?php 	echo implode("\n",$all_document_list[$att_type]); 
-				
-		?>
-		
-		<div class="clearfix"></div>
-	<?php 
-	}
-}else{ 	echo ClubRegUnAuthHelper::noResults('COM_CLUBREG_PROFILE_ATTACHMENTS'); }
+}else{ 	?><div class="alert alert-error"><h3>Currently There are no Attachments.</h3></div><?php }

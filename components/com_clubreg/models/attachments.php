@@ -48,7 +48,6 @@ class ClubregModelAttachments extends JModelList
 		`attachment_type`, a.`params`, `attachment_savedfname`, `attachment_location`, a. `created_by`, 
 		`attachment_parameter_type`, `attachment_file_type`, `attachment_status`, `attachment_access_level`";
 		$all_string[] = "date_format(a.created, '%d/%m/%Y %H:%i:%s') as created, user_reg.name ";
-		$all_string[] = "config_tags.config_name as attachment_type_name";
 		
 		$d_var = implode(",", $all_string);
 		$query->select($d_var);
@@ -60,7 +59,7 @@ class ClubregModelAttachments extends JModelList
 			$query->where($a_where);
 		}		
 		
-		$query->order('config_tags.config_name asc , a.attachment_id desc');
+		$query->order('a.attachment_id desc');
 		
 		$db->setQuery($query);
 		try {

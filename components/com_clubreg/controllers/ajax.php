@@ -27,7 +27,7 @@ class ClubregControllerAjax extends JControllerLegacy
 		$this->registerTask('assignguardian', 'assignguardian');
 		
 		$this->registerTask('saveattachment', 'saveattachment');
-		$this->registerTask('deleteattachment', 'deleteattachment');
+		
 		$this->uKeyObject = new ClubRegUniqueKeysHelper(10);
 		
 	}	
@@ -374,11 +374,9 @@ class ClubregControllerAjax extends JControllerLegacy
 				$attachment_data["link_type"] = $data["link_type"];
 				
 				$attachment_data["attachment_type"] = $data["document_type"];
-				$attachment_data["attachment_notes"] = $data["attnotes"];	
-				$attachment_data["attachment_file_type"] = $attachment["type"];			
+				$attachment_data["attachment_notes"] = $data["attnotes"];				
 				
 				$return_array["proceed"] = $current_model->save($attachment_data);
-				
 				if(!$return_array["proceed"]){
 					$return_array["msg"][] =  $current_model->getError();
 				}
@@ -393,38 +391,6 @@ class ClubregControllerAjax extends JControllerLegacy
 		echo json_encode($return_array);
 		
 		$app->close();
-	}
-	public function deleteattachment(){
-	
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
-		$app    = JFactory::getApplication();
-		$user		= JFactory::getUser();
-		$key_data = new stdClass();
-	
-		$return_array = array();
-		$return_array["proceed"] = FALSE;
-	
-		$key_data->full_key = $app->input->post->getString('attachment_key', NULL);
-		$this->uKeyObject->deconstructKey($key_data);
-	
-		if($key_data->pk_id > 0 && strlen($key_data->string_key) > 0){
-			unset($current_model);
-			$current_model = JModelLegacy::getInstance('attachment', 'ClubregModel', array('ignore_request' => true));
-			$current_model->setState('com_clubreg.attachment.attachment_id',$key_data->pk_id);
-			$current_model->setState('com_clubreg.attachment.attachment_key',$key_data->string_key);
-				
-			$return_array["proceed"] = $current_model->changeStatus(99);
-				
-			if($return_array["proceed"]){
-				$return_array["attachment_id"] = $key_data->pk_id;
-			}else{
-				$return_array["msg"] =  $current_model->getError();
-			}
-		}
-	
-		echo json_encode($return_array);
-		$app->close();
-	
 	}
 	
 }

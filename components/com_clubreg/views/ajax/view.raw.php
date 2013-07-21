@@ -273,13 +273,15 @@ class ClubRegViewAjax extends JViewLegacy
 					$current_model->setState('com_clubreg.payments.payment_key',$key_data->string_key); // use the key in the model
 					$current_model->setState('com_clubreg.payments.payment_id',$key_data->pk_id); // use the key in the model
 					
-					$this->items = $current_model->getPayments($user->get('id'));					
+					$this->items = $current_model->getPayments($user->get('id'));
+					
 					
 					require_once CLUBREG_CONFIGS.'config.payments.php';
 					require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.rendertables.payments.php';
 					
 					$configObj = new ClubRegPaymentsConfig();
-					$paymentsConfigs =  $configObj->getConfig("payments"); // return headings and filters					
+					$paymentsConfigs =  $configObj->getConfig("payments"); // return headings and filters
+					
 					
 					$tmp_filters["filter_heading"] = $paymentsConfigs["filters"];
 					$tmp_filters["group_where"] = $paymentsConfigs["group_where"];
@@ -298,9 +300,6 @@ class ClubRegViewAjax extends JViewLegacy
 					$current_model->setState('com_clubreg.note.note_id',$key_data->pk_id);
 					$current_model->setState('com_clubreg.note.note_key',$key_data->string_key);
 					$this->itemForm =  $current_model->getForm();
-					
-				break;
-				case "attachments":
 					
 				break;
 				
@@ -355,58 +354,5 @@ class ClubRegViewAjax extends JViewLegacy
 	
 		}
 		return $proceed;
-	}
-	private function viewattachment(){
-		
-		//JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
-		$proceed = FALSE;
-		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
-		
-		$key_data = new stdClass();
-		$return_array = array();
-		
-		
-		$app    = JFactory::getApplication();
-		$user		= JFactory::getUser();
-		
-		$this->uKeyObject = new ClubRegUniqueKeysHelper();
-		$key_data->full_key = $app->input->get->getString('attachment_key', 'member');
-		
-		$this->uKeyObject->deconstructKey($key_data);
-		
-		$current_model = JModelLegacy::getInstance('attachment', 'ClubregModel', array('ignore_request' => true));
-		$current_model->setState('com_clubreg.attachment.attachment_id',$key_data->pk_id);
-		$current_model->setState('com_clubreg.attachment.attachment_key',$key_data->string_key);
-		
-		$attachment = $current_model->getAttachment();
-	
-		if(count($attachment) && $attachment["attachment_id"] == $key_data->pk_id){
-			
-			//$proceed = TRUE;
-			$mimetype = isset($attachment["attachment_file_type"])?$attachment["attachment_file_type"]:'application/octet-stream';
-			$filename = $attachment["attachment_location"].$attachment["attachment_savedfname"];
-			
-			
-			$disp_type = preg_match("/image/",$mimetype)?"attachment":"attachment";
-			
-			$fp = fopen($filename, "rb");
-			while(!feof($fp))
-			{
-				//reset time limit for big files
-				set_time_limit(0);
-				print(fread($fp, 1024*8));				
-			}		
-			
-			fclose($fp);
-			
-			$filename = $attachment["attachment_fname"];
-			JResponse::setHeader('Content-Type', $mimetype);
-			JResponse::setHeader('Content-disposition', $disp_type.'; filename="'.$filename.'"; creation-date="'.JFactory::getDate()->toRFC822().'"', true);
-						
-		}
-		
-		
-		return $proceed;
-		
 	}
 }

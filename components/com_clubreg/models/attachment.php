@@ -69,11 +69,11 @@ class ClubregModelAttachment extends JModelForm
 		$db = JFactory::getDbo();
 		$error_ = 0;
 		
-		$attachment_id = $this->getState("com_clubreg.attachment.attachment_id");
+		$attachment_id = $this->getState("com_clubreg.attachment..attachment_id");
 		$attachment_key = $this->getState("com_clubreg.attachment.attachment_key");		
 		
-		$d_qry = sprintf("update %s set attachment_status = %s where attachment_id = %s and attachment_key = %s",
-				$db->quoteName(CLUB_ATTACHMENTS_TABLE),$db->quote($status), $db->quote($attachment_id),$db->quote($attachment_key));
+		$d_qry = sprintf("update %s set note_status = %s where attachment_id = %s and attachment_key = %s",
+				$db->quoteName(CLUB_NOTES_TABLE),$db->quote($status), $db->quote($attachment_id),$db->quote($attachment_key));
 		
 		$db->setQuery($d_qry);		
 		try
@@ -92,29 +92,5 @@ class ClubregModelAttachment extends JModelForm
 			return TRUE;
 		}
 		
-	}
-	public function getAttachment(){
-	
-		$attachment_id = $this->getState("com_clubreg.attachment.attachment_id");
-		$attachment_key = $this->getState("com_clubreg.attachment.attachment_key");
-	
-		
-		$db = JFactory::getDBO();
-		$query	= $db->getQuery(true);
-		
-		$d_var = "a.*";
-		$query->select($d_var);
-		$query->from($db->quoteName(CLUB_ATTACHMENTS_TABLE).' AS a');
-		
-		$query->where(' attachment_id = '.$db->quote($attachment_id));
-		$query->where(' attachment_key = '.$db->quote($attachment_key));
-		$query->where(' attachment_status = 1');
-		$db->setQuery($query);
-		$row = $db->loadAssoc();		
-		return $row;
-		
-		
-		
-	
 	}
 }

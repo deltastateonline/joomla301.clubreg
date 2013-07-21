@@ -48,7 +48,6 @@ window.addEvent('domready', function () {
 						render_msg(msg_text);
 					}else{
 						msg_text = "Unable to complete action";
-						render_msg(msg_text);
 					}
 				}			
 			},
@@ -62,9 +61,8 @@ window.addEvent('domready', function () {
 		 
 		 container.addEvent('click:relay(.profile-attach-delete)', function(){		 
 			 if(confirm(deleteMessage)){	
-				// alert(99);
-				
-				 attachmentAction($(this),"ajax.deleteattachment");
+				 alert(99);
+				// attachmentAction($(this),"ajax.deleteattachment");
 			 }		
 		 });
 	 }
@@ -91,8 +89,8 @@ function attachmentAction(whichObject,whichAction){
 					$('profile-attachments').addClass('loading1');
 					attachmentsListDiv.renderList();				
 				}else{
-					if(proceedData["msg"]){render_msg(proceedData["msg"]);}else{
-						render_msg("Unable to complete action");
+					if(proceedData["msg"]){alert(proceedData["msg"]);}else{
+						alert("Unable to complete action");
 					}
 				}
 				$('loading-div').removeClass('loading-small');

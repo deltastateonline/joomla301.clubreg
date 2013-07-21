@@ -87,7 +87,7 @@ class ClubRegProfileConfig extends JObject
 		$headings["club"]["reg_subgroup"] = array("label"=>JText::_('COM_CLUBREG_SUBGROUPN_LABEL'), "clearfix"=>true);	
 		
 		$headings["club"]["groupleader"] = array("label"=>JText::_('CLUBREG_OFFICIALS_PROFILE_LEADER'), "clearfix"=>true);
-		//$headings["club"]["groupofficial"] = array("label"=>JText::_('CLUBREG_OFFICIALS_PROFILE_MEMBER'), "clearfix"=>true);
+		$headings["club"]["groupofficial"] = array("label"=>JText::_('CLUBREG_OFFICIALS_PROFILE_MEMBER'), "clearfix"=>true);
 		
 		$headings["club"]["year_registered"] = array("label"=>JText::_('COM_CLUBREG_SEASON_LABEL'));		
 		
@@ -110,7 +110,12 @@ class ClubRegProfileConfig extends JObject
 		
 		$headings["bio"]["gender"] = array("label"=>JText::_('COM_CLUBREG_GENDER_LABEL'),'transform'=>"ucfirst");
 		$headings["bio"]["dob"] = array("label"=>JText::_('COM_CLUBREG_DOB_LABEL')); // two per line
-			
+
+	/*	$headings["bio"]["guardian"] = array("label"=>JText::_('COM_CLUBREG_GUARDIAN_LABEL'),'transform'=>"ucwords"); // one line
+		$headings["bio"]["emailaddress"] = array("label"=>JText::_('JGLOBAL_EMAIL'));
+		$headings["bio"]["t_phone"] = array("label"=>JText::_('COM_CLUBREG_MOBILE'),"sep"=>" / ");		
+		$headings["bio"]["t_address"] = array("label"=>JText::_('COM_CLUBREG_ADDRESS'));*/
+				
 		$headings["club"]["memberid"] = array("label"=>JText::_('COM_CLUBREG_MEMBERNO'));
 		$headings["club"]["joining_date"] = array("label"=>JText::_('COM_CLUBREG_JOINING_LABEL'),'transform'=>"clubregdate");
 		$headings["club"]["member_status"] = array("label"=>JText::_('COM_CLUBREG_MEMBERSTATUS_LABEL'),'transform'=>"ucfirst");
@@ -119,7 +124,7 @@ class ClubRegProfileConfig extends JObject
 		$headings["club"]["reg_subgroup"] = array("label"=>JText::_('COM_CLUBREG_SUBGROUPN_LABEL')); // two per line
 
 		$headings["club"]["groupleader"] = array("label"=>JText::_('CLUBREG_OFFICIALS_PROFILE_LEADER'));
-	//	$headings["club"]["groupofficial"] = array("label"=>JText::_('CLUBREG_OFFICIALS_PROFILE_MEMBER'));
+		$headings["club"]["groupofficial"] = array("label"=>JText::_('CLUBREG_OFFICIALS_PROFILE_MEMBER'));
 		
 		$headings["club"]["year_registered"] = array("label"=>JText::_('COM_CLUBREG_SEASON_LABEL'), "clearfix"=>true); // one per line
 		
