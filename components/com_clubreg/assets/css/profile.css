@@ -142,3 +142,20 @@ div.tab-divs{
 .reg-label1{	
 	color: #3a87ad;	
 }
+.profile-sub-head-div{
+	
+	font-size:1.1em;
+	color: #D4D7FE;	
+	/*background-color:#666666; */
+	background-color:#1e8fc6;
+	padding:2px 2px 2px 5px;
+	border-color:#ddd;
+    -moz-border-radius: 5px;
+  	border-radius: 5px;
+    border-style:solid;
+    border-width:1px;  
+    border-bottom:1px ;
+}
+.profile-sub-head-div a{
+	color: #D4D7FE;	
+}

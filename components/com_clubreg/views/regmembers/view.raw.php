@@ -45,15 +45,15 @@ class ClubRegViewregmembers extends JViewLegacy
 		$app		= JFactory::getApplication();
 		$active	= $app->getMenu()->getActive(); // if logged in
 
-		
 		if($current_model->getPermissions('manageusers')){
 			$proceed = TRUE;
 			
 			require_once CLUBREG_CONFIGS.'config.regmembers.php';
 			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.filters.regmembers.php';			
 			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.exporttable.php';		
-		
-			$all_groups = $current_model->getMyGroups();		
+				
+			$group_type			= $app->input->post->get('playertype');	
+			$all_groups = $current_model->getMyGroups($group_type);
 	
 			unset($current_model);
 			$current_model = JModelLegacy::getInstance('regmembers', 'ClubregModel', array('ignore_request' => false));
@@ -62,8 +62,9 @@ class ClubRegViewregmembers extends JViewLegacy
 			
 			$configObj = new ClubRegRegmembersConfig();
 			$configObj->setOfficialGroups($all_groups["allowed_groups"]);
+			$configObj->setOfficialSubGroups($all_groups["sub_groups_ids"]);
 			$regmembersConfigs =  $configObj->getConfig($this->state->get('filter.playertype')); // return headings and filters			
-			$current_model->setMoreStates($regmembersConfigs["filters"],$all_groups["allowed_groups"]); // set more states
+			$current_model->setMoreStates($regmembersConfigs["filters"],$all_groups); // set more states
 			
 			$this->items		= $current_model->getItems();					
 			
