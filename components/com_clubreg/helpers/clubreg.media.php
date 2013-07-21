@@ -14,7 +14,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 class ClubRegMediaHelper extends JObject
 {
 	
-	public static function canUpload($file, &$err)
+	public static function canUpload(&$file, &$err)
 	{
 		// Load the com_media language files, default to the admin file and fall back to site if one isn't found
 		
@@ -77,7 +77,8 @@ class ClubRegMediaHelper extends JObject
 				{
 					// We have fileinfo
 					$finfo = finfo_open(FILEINFO_MIME);
-					$type = finfo_file($finfo, $file['tmp_name']);
+					$file["saved_mime"] = $type = finfo_file($finfo, $file['tmp_name']);
+					
 					if (strlen($type) && !in_array($type, $allowed_mime) && in_array($type, $illegal_mime))
 					{
 						$err = 'COM_MEDIA_ERROR_WARNINVALID_MIME';
@@ -87,7 +88,7 @@ class ClubRegMediaHelper extends JObject
 				} elseif (function_exists('mime_content_type') && $params->get('check_mime', 1))
 				{
 					// we have mime magic
-					$type = mime_content_type($file['tmp_name']);
+					$file["saved_mime"] = $type = mime_content_type($file['tmp_name']);
 					if (strlen($type) && !in_array($type, $allowed_mime) && in_array($type, $illegal_mime))
 					{
 						$err = 'COM_MEDIA_ERROR_WARNINVALID_MIME';
