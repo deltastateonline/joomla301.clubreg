@@ -59,6 +59,7 @@ $canDo	= ClubregHelper::getActions();
 		//$fieldsets = $this->form->getFieldsets("params"); 
 		$parameter_settings = array("generic");
 		$param_settings = NULL;
+		
 		if($this->params_which_config  == TOPMOST){
 			$parameter_settings = array("configItems");
 		}else{		
@@ -72,8 +73,9 @@ $canDo	= ClubregHelper::getActions();
 		
 		if(isset($parameter_settings)){	?>												
 			<fieldset class="form-vertical">
-				<?php 
-					foreach($parameter_settings as $param_settings){
+				<?php $parameter_settings[1] = "";
+					foreach($parameter_settings as $param_settings){ 
+						if(! (strlen($param_settings) > 0)){ continue;}
 						foreach($this->form->getFieldset($param_settings) as $field){ ?>
 					<div class="control-group"> 
 						<?php if (!$field->hidden): ?>

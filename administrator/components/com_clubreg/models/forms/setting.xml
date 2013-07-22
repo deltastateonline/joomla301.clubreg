@@ -52,7 +52,7 @@
 				type="list"
 				label="Setting Type"
 				description="Setting Type"
-				default = ""
+				default = "list"
 			>
 				<option value="">Setting Type</option>
 				<option value="list">List</option>
