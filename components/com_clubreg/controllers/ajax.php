@@ -335,6 +335,15 @@ class ClubregControllerAjax extends JControllerLegacy
 			$return_array["upload_error"] = TRUE;
 		}
 		
+		require_once CLUBREG_ADMINPATH.'/helpers/clubreg.php';
+		
+		ClubRegHelper::setIndex("value");
+		$document_type = ClubRegHelper::configOptions(CLUB_DOCUMENTS_WHICH); // controls
+		
+		if(!strlen(trim($data["document_type"]))> 0 && count($document_type)> 0 && !in_array($data["document_type"], array_keys($document_type))){
+			$return_array["msg"][] = JText::_('COM_CLUBREG_MSG_DOCTYPENOT_SET');
+			$return_array["upload_error"] = TRUE;
+		}
 		
 		$params = JComponentHelper::getParams('com_clubreg');
 		$config		= JFactory::getConfig();
@@ -385,8 +394,8 @@ class ClubregControllerAjax extends JControllerLegacy
 				
 			}
 			
-			$return_array["dest"] = $final_dest;
-			$return_array["src"] = $tmp_src;
+			//$return_array["dest"] = $final_dest;
+			//$return_array["src"] = $tmp_src;
 			
 		}
 		

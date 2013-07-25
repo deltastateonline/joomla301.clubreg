@@ -2,9 +2,9 @@
 <form>
 	<fieldset name="memberAttachment"	addfieldpath="/administrator/components/com_clubreg/models/fields">			
 		<field name="attachment" type="file" label="COM_CLUBREG_PROFILE_ATTACHMENT" description="COM_CLUBREG_PROFILE_ATTACHMENT_DESC"
-			class="inputbox input-xlarge"  />
+			class="inputbox input-xlarge"  required="true"/>
 		<field name="document_type" type="configcontrol" label="COM_CLUBREG_PROFILE_ATTACHMENT_TYPE" description="COM_CLUBREG_PROFILE_ATTACHMENT_TYPE_DESC" 
-			class="inputbox input-xlarge" default="profile_pics"  configwhich = "club_documents" />
+			class="inputbox input-xlarge" default="profile_pics"  configwhich = "club_documents" required="true"/>
 		<field name="attnotes" type="textarea"
 			label="COM_CLUBREG_PROFILE_NOTES" description="COM_CLUBREG_PROFILE_NOTES_DESC"
 			class="inputbox input-xlarge" rows="3" cols="80"  />

@@ -14,6 +14,8 @@ defined('_JEXEC') or die;
 
 class ClubRegHelper
 {
+	private static $config_index = '';
+	
 	public static function addSubmenu($vName){
 		
 		JHtmlSidebar::addEntry(
@@ -84,9 +86,16 @@ class ClubRegHelper
 	
 		return $result;
 	}
+	public static function setIndex($index){
+		self::$config_index = $index;
+	}
+	private static function getIndex(){
+		return self::$config_index;
+	}
 	public static function configOptions($whichConfig, $ordering='ordering asc'){
 			
-		
+			$config_index = self::getIndex();
+			
 			$db		= JFactory::getDbo();
 			$query	= $db->getQuery(true);
 		
@@ -108,7 +117,7 @@ class ClubRegHelper
 		
 			try
 			{
-				$options = $db->loadObjectList();
+				$options = isset($config_index)?$db->loadObjectList($config_index):$db->loadObjectList();
 			}
 			catch (RuntimeException $e)
 			{

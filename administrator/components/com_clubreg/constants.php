@@ -77,6 +77,7 @@ define('CLUB_GUARDIAN_WHICH','club_guardian_details');
 define('CLUB_PLAYER_DETAILS','club_player_details');
 define('CLUB_PLAYER_STATS','club_stats');
 define('CLUB_GROUPTYPE','club_grouptype');
+define('CLUB_DOCUMENTS_WHICH','club_documents');
 
 define('CLUB_JUNIORCOUNT',4);
 
