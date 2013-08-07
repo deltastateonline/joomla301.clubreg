@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS `#__clubreg_attachments`;
+
 DROP TABLE IF EXISTS `#__clubreg_configs`;
 
 DROP TABLE IF EXISTS `#__clubreg_contact_details`;
