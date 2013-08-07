@@ -80,7 +80,6 @@ logs/
 media/
 modules/
 plugins/
-templates/
 tmp/
 dump/
 
