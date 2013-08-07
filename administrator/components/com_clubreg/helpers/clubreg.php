@@ -28,11 +28,11 @@ class ClubRegHelper
 				'index.php?option=com_clubreg&view=settings',
 				$vName == 'settings'
 		);
-		JHtmlSidebar::addEntry(
+		/*JHtmlSidebar::addEntry(
 				JText::_('COM_CLUBREG_SUBMENU_PAYMENTS'),
 				'index.php?option=com_clubreg&view=payments',
 				$vName == 'payments'
-		);
+		);*/
 		JHtmlSidebar::addEntry(
 				JText::_('COM_CLUBREG_SUBMENU_OFFICIALS'),
 				'index.php?option=com_clubreg&view=officials',
@@ -50,11 +50,11 @@ class ClubRegHelper
 				$vName == 'templates'
 		);
 		
-		JHtmlSidebar::addEntry(
+		/*JHtmlSidebar::addEntry(
 				JText::_('COM_CLUBREG_SUBMENU_REPORTS'),
 				'index.php?option=com_clubreg&view=reports',
 				$vName == 'reports'
-		);		
+		);	*/	
 		
 	}
 	/**
