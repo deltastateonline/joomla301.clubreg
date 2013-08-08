@@ -141,7 +141,7 @@ class ClubregModelOfficialfrn extends JModelForm
 		$db->setQuery($query);
 		$my_groups["group_leader"]  = $db->loadObjectList("group_id");		
 		
-		@$allowed_groups = array_merge(array_keys($my_groups["group_member"]),array_keys($my_groups["group_leader"]));
+		@$allowed_groups = array_merge(array_keys($my_groups["group_member"]),array_keys($my_groups["group_leader"]), array(-1));
 	
 		$my_groups["allowed_groups"] = $allowed_groups;
 		

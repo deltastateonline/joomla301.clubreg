@@ -117,6 +117,7 @@ class ClubregModelRegmembers extends JModelList
 		}
 		
 		unset($cfilter);
+	
 		
 		$s_key = "search.columns";
 		$search_columns = $this->getState($s_key);	// get the list of passed columns for filtering
