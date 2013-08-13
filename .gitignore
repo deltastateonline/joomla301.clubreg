@@ -83,6 +83,11 @@ plugins/
 tmp/
 dump/
 
+templates/beez3/
+templates/meet_gavern/
+templates/protostar/
+templates/system/
+
 administrator/cache/
 administrator/help/
 administrator/includes/
@@ -195,6 +200,7 @@ en-GB.tpl_beez3.sys.ini
 en-GB.tpl_protostar.ini
 en-GB.tpl_protostar.sys.ini
 en-GB.xml
+en-GB.lib_idna_convert.sys.ini
 index.html
 
 #Language File Admin
