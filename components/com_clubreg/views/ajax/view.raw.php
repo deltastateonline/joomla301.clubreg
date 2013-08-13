@@ -300,8 +300,14 @@ class ClubRegViewAjax extends JViewLegacy
 					$this->itemForm =  $current_model->getForm();
 					
 				break;
-				case "attachments":
+				case "files":					
+					$app			= JFactory::getApplication();					
+					$d_url = sprintf("index.php?option=com_clubreg&Itemid=%s&view=ajax&layout=viewattachment&tmpl=component&format=raw&attachment_key=%s",
+						$clubreg_Itemid	,$key_data->full_key);
 					
+					$app->redirect($d_url);		
+					
+					return ;
 				break;
 				
 			}

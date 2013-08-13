@@ -22,4 +22,9 @@ switch($this->which){
 		$itemControl = $this->itemForm->getField("notes");		
 		echo nl2br($itemControl->value);		
 	break;
+	case "files":
+		//$itemControl = $this->itemForm->getField("notes");
+		//echo nl2br($itemControl->value);
+	break;
+	
 }

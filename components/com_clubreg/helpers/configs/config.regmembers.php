@@ -54,7 +54,7 @@ class ClubRegRegmembersConfig extends JObject
 		$entity_filters["gaddress"] = array("filter_col"=>array("a.`address`", "a.`suburb`","a.`postcode`"), "class"=>$class_);		
 	//	$entity_filters["year_registered"] = array("filter_col"=>"a.`year_registered`","control"=>"select.genericlist");		
 		
-		$headings["emailaddress"] = array("label"=>JText::_('JGLOBAL_EMAIL'));
+		$headings["emailaddress"] = array("label"=>JText::_('JGLOBAL_EMAIL'), "clearfix"=>true);
 		$headings["t_phone"] = array("label"=>JText::_('COM_CLUBREG_MOBILE'),"sep"=>"/", "clearfix"=>true);
 		$headings["t_address"] = array("label"=>JText::_('COM_CLUBREG_ADDRESS'), "clearfix"=>true);			
 		$headings["my_children"] = array("label"=>JText::_('COM_CLUBREG_JUNIOR_LABEL'));	
@@ -84,7 +84,7 @@ class ClubRegRegmembersConfig extends JObject
 			$group_where["subgroups"] = $this->allowed_subgroups;
 		}
 		
-		$headings["emailaddress"] = array("label"=>JText::_('JGLOBAL_EMAIL'));
+		$headings["emailaddress"] = array("label"=>JText::_('JGLOBAL_EMAIL'), "clearfix"=>true);
 		$headings["t_phone"] = array("label"=>JText::_('COM_CLUBREG_MOBILE'),"sep"=>" / ", "clearfix"=>true);
 		
 		

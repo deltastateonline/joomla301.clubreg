@@ -82,7 +82,7 @@ class ClubRegModelActivity extends JModelLegacy
 				concat('Notes Added To ') as which_label, concat(e.givenname,' ',e.surname) as 'activity_label', 
 				date_format(d.created, '%%d/%%m/%%Y %%H:%%i:%%s') as activity_created,
 				d.created as acreated,
-				concat(SUBSTRING(d.notes,1,50),'...') as activity_item,
+				if(length(d.notes) > 50,concat(SUBSTRING(d.notes,1,50),'...'),d.notes) as activity_item,
 				concat(note_id,note_key,'-',length(note_id)) as item_key,
 				e.member_id, e.member_key		
 				from %s as d 	
@@ -92,11 +92,11 @@ class ClubRegModelActivity extends JModelLegacy
 
 				union
 				
-				select 'Files' as which, 
+				select 'files' as which, 
 				concat('Files Added To ') as which_label, concat(att_m.givenname,' ',att_m.surname) as 'activity_label', 
 				date_format(att.created, '%%d/%%m/%%Y %%H:%%i:%%s') as activity_created,
 				att.created as acreated,
-				concat(SUBSTRING(att.attachment_fname,1,50),'...') as activity_item,
+				if(length(att.attachment_fname) > 50,concat(SUBSTRING(att.attachment_fname,1,50),'...'),att.attachment_fname) as activity_item,
 				concat(attachment_id,attachment_key,'-',length(attachment_id)) as item_key,
 				att_m.member_id, att_m.member_key		
 				from %s as att 	
