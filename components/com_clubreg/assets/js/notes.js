@@ -41,8 +41,9 @@ window.addEvent('domready', function () {
 	            	   	var searchSlider =  new Fx.Slide("noteFormDiv");
 	           			searchSlider.toggle();		           			
 	           			notesListDiv.renderList();
-	           			
-	               }
+	           			s_or_f = 1;
+	               }	               
+	               render_msg(json_data["msg"]);
 	               $('loading-div').removeClass('loading-small');
 	            },
 	            onFailure:function(){ profileFailure(this); }
@@ -88,10 +89,12 @@ function noteAction(whichObject,whichAction){
 				if(proceedData["proceed"]){
 					$('profile-notes').empty();
 					$('profile-notes').addClass('loading1');
-					notesListDiv.renderList();				
+					notesListDiv.renderList();
+					 s_or_f = 1;
+					 render_msg(proceedData["msg"]);
 				}else{
-					if(proceedData["msg"]){alert(proceedData["msg"]);}else{
-						alert("Unable to complete action");
+					if(proceedData["msg"]){render_msg(proceedData["msg"]);}else{
+						render_msg("Unable to complete action");
 					}
 				}
 				$('loading-div').removeClass('loading-small');

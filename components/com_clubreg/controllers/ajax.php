@@ -54,7 +54,7 @@ class ClubregControllerAjax extends JControllerLegacy
 			$return_array["proceed"] = $current_model->changeStatus(99);
 			
 			if($return_array["proceed"]){
-					
+				$return_array["msg"] =  "Note Deleted";
 			}else{
 				$return_array["msg"] =  $current_model->getError();
 			}
@@ -85,7 +85,7 @@ class ClubregControllerAjax extends JControllerLegacy
 			$return_array["proceed"] = $current_model->changeStatus(1);			
 			
 			if($return_array["proceed"]){
-					
+				$return_array["msg"] =  "Note maked as private";
 			}else{
 				$return_array["msg"] =  $current_model->getError();			
 			}			
@@ -120,8 +120,13 @@ class ClubregControllerAjax extends JControllerLegacy
 		unset($current_model);
 		$current_model = JModelLegacy::getInstance('note', 'ClubregModel', array('ignore_request' => true));
 		$proceed = $current_model->save($data);
-		
-		echo json_encode(array("proceed"=>$proceed));
+		if($proceed){
+			$return_array["msg"] = "Notes Added."; 
+		}else{
+			$return_array["msg"] =  $current_model->getError();
+		}
+		$return_array["proceed"] = $proceed;
+		echo json_encode($return_array);
 		
 		$app->close();
 		
@@ -214,7 +219,7 @@ class ClubregControllerAjax extends JControllerLegacy
 		$return_array["proceed"] = $proceed;	
 
 		if($proceed){
-			
+			$return_array["msg"][] =  "Details Saved.";
 		}else{
 			$return_array["msg"] =  $current_model->getError();				
 		}		

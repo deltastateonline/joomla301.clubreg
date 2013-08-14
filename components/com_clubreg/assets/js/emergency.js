@@ -44,12 +44,14 @@ window.addEvent('domready', function () {
 	              
 	               var json_data = JSON.decode(this.response.text);	
 	               if(!json_data["proceed"]){            	
-	           			alert(json_data["msg"]);
+	            	   render_msg(json_data["msg"]);
 	               } else{
 	            	   	$('profile-emergency').empty();
 	       				$('profile-emergency').addClass('loading1');       				
 	       				emergencyListDiv.renderList();  
 	       				emergencyTabDivs.toggle_div();
+	       				s_or_f = 1;
+	       				render_msg(json_data["msg"]);
 	               }              
 	               $('loading-div').removeClass('loading-small');
 	            }
