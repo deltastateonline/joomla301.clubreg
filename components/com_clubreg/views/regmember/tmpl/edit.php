@@ -205,7 +205,7 @@ select{
 <?php 
 if($this->tmpl == "html"){
 $document = JFactory::getDocument();
-ClubregHelper::writeTabAssets($document, "common",array("css"));
+ClubregHelper::writeTabAssets($document, "common",array("css","js"));
 ClubregHelper::writeTabAssets($document, "clubreggroups",array("js"));
 ClubregHelper::writeTabAssets($document, "edit",array("css","js"));
 

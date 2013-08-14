@@ -28,8 +28,7 @@ window.addEvent('domready', function () {
 			onRequest: function(){
 				 $('loading-div').addClass('loading-small');
 			},
-			onComplete: function(response){
-				//document.id('profile-attachments').set('html',response);
+			onComplete: function(response){	
 				
 				var proceedData = JSON.decode(response);				
 				if(proceedData["proceed"]){
@@ -37,15 +36,9 @@ window.addEvent('domready', function () {
 					$('profile-attachments').addClass('loading1');
 					attachmentsListDiv.renderList();				
 				}else{
-					var msg_text  = "";
-					//$('loading-div').addClass('loading-small');
-					if(proceedData["msg"]){ 
-						var msg_count = proceedData["msg"].length;
-						for(var i = 0; i < msg_count; i++ ){
-							msg_text += proceedData["msg"][i]+"<br />";
-						}						
-						
-						render_msg(msg_text);
+					var msg_text  = "";					
+					if(proceedData["msg"]){ 						
+						render_msg(proceedData["msg"]);
 					}else{
 						msg_text = "Unable to complete action";
 						render_msg(msg_text);

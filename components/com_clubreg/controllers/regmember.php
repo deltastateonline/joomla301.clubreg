@@ -85,8 +85,9 @@ class ClubregControllerRegmember extends JControllerLegacy
 		
 		
 		
-		if($return_array["proceed"]){
-			//$return_array["payment_id"] =$current_model->get("payment_id");
+		if($return_array["proceed"]){		
+			$return_array["msg"][] =  "Details Saved";
+			$return_array["msg"][] =  "On to the next One";
 		}else{
 			
 				

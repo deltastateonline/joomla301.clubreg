@@ -67,18 +67,39 @@ function profileFailure(rObject){
 	$('loading-div').removeClass('loading-small');	
 	render_msg(rObject.getHeader('Status'));
 }
-
+var s_or_f = 0;
+var alert_style = "";
 function render_msg(msg_text){
-	$('loading-div').removeClass('loading-small');	
-	$('loading-div').set('html',msg_text);
-	$('loading-div').addClass('alert alert-error');	
 	
+	final_string = "";
+	
+	if(typeof msg_text === 'string'){
+		final_string = msg_text;
+	}else{
+		var msg_count = msg_text.length;
+		for(var i = 0; i < msg_count; i++ ){
+			final_string += msg_text[i]+"<br />";
+		}
+	}
+	
+	
+	$('loading-div').removeClass('loading-small');	
+	$('loading-div').set('html',final_string);
+	
+	if(s_or_f == 1){
+		alert_style = ' alert-success';	
+	}else{	
+		alert_style = ' alert-error';	
+	}
+	s_or_f = 0;
+	$('loading-div').addClass('alert'+alert_style);	 
 	$('loading-div').set('tween', {duration: 6000,
 		
 	    onComplete: function(){
 	        // Run function on complete
 	    	$('loading-div').set('html','');
-	    	$('loading-div').removeClass('alert alert-error');	 
+	    	
+	    	$('loading-div').removeClass('alert'+alert_style);	 
 	    	$('loading-div').set('tween',{duration:10}).fade('in');
 	    }		
 	}).fade('out');

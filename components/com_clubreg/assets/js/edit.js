@@ -35,7 +35,7 @@ window.addEvent('domready', function () {
               
                var json_data = JSON.decode(this.response.text);	
                if(!json_data["proceed"]){            	
-           			alert(json_data["msg"]);
+            	   render_msg(json_data["msg"]);
                } else{
             	  if(json_data["isnew"]){
             		  
@@ -54,6 +54,8 @@ window.addEvent('domready', function () {
             			 allpks.each(function(a_pk){ a_pk.value = json_data["pk"]; });
             		  }
             	  }
+            	  s_or_f = 1;
+            	  render_msg(json_data["msg"]);
                }              
                $('loading-div').removeClass('loading-small');
             },
@@ -64,8 +66,3 @@ window.addEvent('domready', function () {
 		
 	})
 });
-
-function profileFailure(rObject){	
-	//$('loading-div').removeClass('loading-small');
-	alert(rObject.getHeader('Status'));	
-}
