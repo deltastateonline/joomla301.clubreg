@@ -216,6 +216,8 @@ class ClubRegViewAjax extends JViewLegacy
 		$app			= JFactory::getApplication();
 		$Itemid			= $app->input->post->get('Itemid');
 		
+		$this->setLayout("list.guardian");
+		
 		$proceed = FALSE;
 		if($user->get('id') > 0){
 			
@@ -233,9 +235,7 @@ class ClubRegViewAjax extends JViewLegacy
 			$current_model = JModelLegacy::getInstance('regmembers', 'ClubregModel', array('ignore_request' => true));
 			$current_model->setState('com_clubreg.regmembers.member_id',$key_data->pk_id);
 			$current_model->setState('com_clubreg.regmembers.search_value',$search_value);
-			$this->all_guardians = $current_model->getGuardians();
-			
-			
+			$this->all_guardians = $current_model->getGuardians();		
 			
 			$proceed = TRUE;
 		}

@@ -7,11 +7,6 @@
 # @license - http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
 # Websites: http://applications.deltastateonline.com
 # Technical Support:  email - joomla@deltastateonline.com  
-
-style="position: absolute; left: 0px; visibility: visible;"
-style="position: absolute; left: -508px; visibility: hidden;"
-
-
 -------------------------------------------------------------------------*/ 
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' ); 
