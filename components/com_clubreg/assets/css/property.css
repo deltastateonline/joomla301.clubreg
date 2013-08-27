@@ -1,0 +1,9 @@
+@CHARSET "ISO-8859-1";
+
+#propertyFormDiv {	
+	overflow:auto;	
+}
+#profile-propertys{		
+	/* margin-left:10px; */	
+	overflow:auto;
+}
