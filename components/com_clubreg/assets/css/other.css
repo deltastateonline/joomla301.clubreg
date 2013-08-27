@@ -2,11 +2,10 @@
 	/*overflow:auto;*/	
 }
 #profile-other{		
-	margin-left:10px;	
 	overflow:auto;
 }
 #otheritems{
-	
+	width:95%;
 	overflow:auto;	
 	height:400px;
 }

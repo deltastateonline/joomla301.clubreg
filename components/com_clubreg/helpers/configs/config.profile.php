@@ -102,8 +102,10 @@ class ClubRegProfileConfig extends JObject
 		$headings["tab"]["other"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_OTHER'),'img'=>array('fname'=>'other.png','attr'=>$attr));
 		$headings["tab"]["attachments"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_ATTACHMENTS'),'img'=>array('fname'=>'attachments.png','attr'=>$attr));
 		
+		$headings["tab"]["property"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_PROPERTYS'),'img'=>array('fname'=>'property.png','attr'=>$attr));
 		
-		$headings["assets"] = array("emergency","notes","payment","other","attachment");
+		
+		$headings["assets"] = array("emergency","notes","payment","other","attachment","property");
 		return ;
 	}
 	private function getJunior(&$headings = array()){		
@@ -135,7 +137,7 @@ class ClubRegProfileConfig extends JObject
 		$headings["tab"]["other"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_OTHER'),'img'=>array('fname'=>'other.png','attr'=>$attr));
 		$headings["tab"]["attachments"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_ATTACHMENTS'),'img'=>array('fname'=>'attachments.png','attr'=>$attr));
 			
-		$headings["assets"] = array("notes","payment","other","guardian","attachment");
+		$headings["assets"] = array("notes","payment","other","guardian","attachment","property");
 		return ;
 	}
 	

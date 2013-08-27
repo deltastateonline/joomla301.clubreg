@@ -31,9 +31,11 @@ class ClubRegRenderTablesChildrenHelper extends ClubRegRenderTablesHelper
 			  		$rel_string = json_encode(array("Itemid"=>$clubreg_Itemid,"parent_key"=>$viewObject->parent_key,JSession::getFormToken()=>1,'pk'=>$fkey,'action'=>'update'));
 			  	?>			  
 			    <div class="row-fluid" id='childdata_<?php echo $an_item->member_id; ?>' rel=<?php echo $rel_string ?>>
-			    	<div class="pull-left h21" ><a href="javascript:void(0);"  rel=<?php echo $rel_string ?> class='profile-children-button' title=<?php echo JText::_('COM_CLUBREG_PAYMENT_EDIT');?>><?php echo  $an_item->surname; ?></a></div>	
-			    	<div class="pull-right small" style='padding-top:5px;padding-left:15px;'><?php echo $an_item->reg_created_by;?> on  <?php echo $an_item->reg_created_date;?></div>		    	
-				    <div class="clearfix"></div>
+			    	<div class="profile-sub-head-div">
+			    		<div class="pull-left"><a href="javascript:void(0);"  rel=<?php echo $rel_string ?> class='profile-children-button' title=<?php echo JText::_('COM_CLUBREG_PAYMENT_EDIT');?>><?php echo  $an_item->surname; ?></a></div>	
+			    		<div class="pull-right" style='font-size:0.8em'><?php echo $an_item->reg_created_by;?> on  <?php echo $an_item->reg_created_date;?></div>		    	
+				    	 <div class="clearfix"></div>
+				    </div>				   
 				    <?php $this->rendererItems($an_item); ?>
 				    <div class="clearfix"></div>				    
 			    </div>			  

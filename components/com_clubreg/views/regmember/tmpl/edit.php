@@ -21,9 +21,13 @@ JHtml::_('behavior.tooltip');
 
 global $clubreg_Itemid;
 $in_type = "hidden";
+
 if($this->tmpl == "html"){
 	$this->pageTitle = JText::_('CLUBREG_EDIT_PROFILE');
 	ClubregHelper::writePageHeader($this->pageTitle);
+	$div_class = "tab-divs";
+}else{	
+	$div_class= "";
 }
 $playertype = $this->regmemberForm->getField("playertype")->value;
 $session = JFactory::getSession();
@@ -61,7 +65,7 @@ select{
 </script>
 <div class="clugreg-div">
 	<form action="<?php echo JRoute::_($this->formbaction)?> " method="post" name="adminForm_" id="edit-form" class="form-validate">	
-		<div class="row-fluid tab-divs">
+		<div class="row-fluid <?php echo $div_class?>">
 		
 			<div class="row-fluid">
 			<?php			

@@ -1,5 +1,6 @@
 #childrenFormDiv {	
-	overflow:auto;	
+	/*overflow:auto; */	
+	width:95%
 }
 #profile-children{		
 	margin-left:10px;	
