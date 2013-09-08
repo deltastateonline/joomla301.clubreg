@@ -1,4 +1,4 @@
-<?php
+<?php 
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 JHtml::_('formbehavior.chosen', 'select'); 

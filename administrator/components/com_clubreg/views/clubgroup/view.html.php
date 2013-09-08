@@ -24,11 +24,10 @@ class ClubRegViewClubgroup extends JViewLegacy
 	 */
 	public function display($tpl = null){
 				
+	
 			$this->state	= $this->get('State');
 			$this->item		= $this->get('Item');
-			$this->form		= $this->get('Form');
-
-			//echo $this->getLayout();
+			$this->form		= $this->get('Form');		
 			
 			// Check for errors.
 			if (count($errors = $this->get('Errors'))) {
@@ -36,6 +35,7 @@ class ClubRegViewClubgroup extends JViewLegacy
 				return false;
 			}
 			$this->addToolbar();
+			
 		
 		parent::display($tpl);
 		

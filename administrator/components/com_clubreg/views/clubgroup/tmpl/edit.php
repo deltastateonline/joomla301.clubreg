@@ -18,7 +18,6 @@ JHtml::_('formbehavior.chosen', 'select');
 
 $canDo	= ClubregHelper::getActions();
 
-//echo $this->getState('official.activeTab');
 $activeTab = $this->state->get('clubgroup.activeTab');
 if(!isset($activeTab)){
 	$activeTab = "general-details";
@@ -77,15 +76,16 @@ if(!isset($activeTab)){
 			<?php endforeach; ?>					
 					</fieldset>	
 					<?php if((int) $this->item->group_id > 0){ $i =1; 
-					
+						/* <span class="label label-info pull-left"><i class="icon-edit"></i>Add <?php echo JText::_('COM_CLUBREG_SUBGROUPN_LABEL');?></span>*/
 						//$whatAfter = ", onClose: function() {window.location.reload()}";
 						$whatAfter = ", onClose:function() { reloadSubgroup() } ";
 					?>				
-					<div>
-						<a href="index.php?option=com_clubreg&view=clubgroup&tmpl=component&task=clubgroup.subedit&group_parent=<?php echo (int) $this->item->group_id; ?>&group_id=0&layout=subedit" class="modal"  rel="{handler: 'iframe', size: {x: 600, y: 550} <?php echo $whatAfter;?>}"><span class="label label-info pull-left"><i class="icon-edit"></i>Add <?php echo JText::_('COM_CLUBREG_SUBGROUPN_LABEL');?></span></a>
-					</div>
+					
+										<div></div>
 					<div class="clearfix"></div>
 					<div id="subDivisionDiv">
+							<a href="index.php?option=com_clubreg&view=clubgroup&tmpl=component&task=clubgroup.subedit&group_parent=<?php echo (int) $this->item->group_id; ?>&group_id=0&layout=subedit" class="modal"  rel="{handler: 'iframe', size: {x: 600, y: 550} <?php echo $whatAfter;?>}">Add <?php echo JText::_('COM_CLUBREG_SUBGROUPN_LABEL');?></a>
+						
 					<table class="table table-striped ">
 						<thead>
 							<tr>
