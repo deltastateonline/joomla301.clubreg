@@ -4,7 +4,7 @@ window.addEvent('domready', function () {
 	var propertyListDiv = new divListRenderer();
 	
 	
-	propertyListDiv.params = "option=com_clubreg&view=ajax&layout=propertys&tmpl=component";
+	propertyListDiv.params = "option=com_clubreg&view=property&layout=list&tmpl=component&format=raw";
 	
 	if($('propertyFormDiv')){		
 		propertyTabDivs.setObjects(new Fx.Morph($('propertyFormDiv')),1);
@@ -87,7 +87,7 @@ window.addEvent('domready', function () {
 function addProperty(dObject){
 	
 	var json_data = JSON.decode(dObject.get('rel'));		
-	var params = "option=com_clubreg&view=ajax&layout=property&tmpl=component";		
+	var params = "option=com_clubreg&view=property&layout=edit&tmpl=component&format=raw";		
 	var durl = "index.php?"+params;	
 	
 	var a = new Request.HTML({
@@ -107,7 +107,7 @@ function load_property(property_id){
 	wDiv.addClass('loading1');
 	
 	var json_data = JSON.decode(wDiv.get('rel'));		
-	var params = "option=com_clubreg&view=ajax&layout=aproperty&tmpl=component&format=raw";		
+	var params = "option=com_clubreg&view=property&layout=details&tmpl=component&format=raw";		
 	var durl = "index.php?"+params;	
 	
 	var a = new Request.HTML({

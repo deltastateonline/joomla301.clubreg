@@ -1,6 +1,6 @@
 window.addEvent('domready', function () {		
 	
-	notesListDiv.params = "option=com_clubreg&view=ajax&layout=notes&tmpl=component";
+	notesListDiv.params = "option=com_clubreg&view=note&layout=list&tmpl=component&format=raw";
 	
 	if($('noteFormDiv')){
 		$('noteFormDiv').slide('hide').setStyle('visibility', 'visible');
