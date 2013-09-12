@@ -15,6 +15,7 @@ JHtml::_('behavior.tooltip');
 <div class="row-striped ">
 <?php 
 global $clubreg_Itemid;
+if(count($this->all_guardians) > 0){
 foreach($this->all_guardians as $an_item){
 	
 	$an_item->t_address = "";$t_phone =  array();
@@ -46,6 +47,9 @@ foreach($this->all_guardians as $an_item){
 	<div class="span1 pull-right" ><input type="button" value="+"  class="btn btn-mini re-assign-guardian" title="<?php echo JText::_('COM_CLUBREG_SETGUARDIAN')?>" rel=<?php echo json_encode($rel_string_edit);?> /></div>
 </div>
 <?php 	
+}
+}else{
+	echo ClubRegUnAuthHelper::noResults('COM_CLUBREG_PROFILE_GUARDIAN');
 }
 ?>
 </div>

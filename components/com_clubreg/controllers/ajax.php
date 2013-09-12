@@ -219,7 +219,7 @@ class ClubregControllerAjax extends JControllerLegacy
 		$return_array["proceed"] = $proceed;	
 
 		if($proceed){
-			$return_array["msg"][] =  "Details Saved.";
+			$return_array["msg"][] =  JText::_('COM_CLUBREG_DETAILS_UPDATE');
 		}else{
 			$return_array["msg"] =  $current_model->getError();				
 		}		
@@ -258,7 +258,7 @@ class ClubregControllerAjax extends JControllerLegacy
 		$return_array["proceed"] =  $current_model->save($extraDetails,$monthyears);		
 	
 		if($return_array["proceed"]){
-				
+			$return_array["msg"][] = JText::_('COM_CLUBREG_DETAILS_UPDATE');
 		}else{
 			$return_array["msg"] =  $current_model->getError();	
 		}

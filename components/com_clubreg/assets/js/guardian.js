@@ -4,7 +4,7 @@ window.addEvent('domready', function () {
 	
 	
 	
-	guardianListDiv.params = "option=com_clubreg&view=ajax&layout=aguardian&tmpl=component&format=raw";	
+	guardianListDiv.params = "option=com_clubreg&view=guardian&layout=details&tmpl=component&format=raw";	
 	
 	if($('guardianFormDiv')){			
 		guardianTabDivs.setObjects(new Fx.Morph($('guardianFormDiv')),1);
@@ -87,7 +87,7 @@ window.addEvent('domready', function () {
 function listGuardian(dObject, search_value){
 	
 	var json_data = JSON.decode(dObject.get('rel'));		
-	var params = "option=com_clubreg&view=ajax&layout=listguardian&tmpl=component&format=raw";		
+	var params = "option=com_clubreg&view=guardian&layout=list&tmpl=component&format=raw";		
 	var durl = "index.php?"+params;	
 	json_data["search_value"] = search_value;
 	

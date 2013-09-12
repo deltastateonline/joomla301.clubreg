@@ -67,7 +67,7 @@ function profileFailure(rObject){
 	$('loading-div').removeClass('loading-small');	
 	render_msg(rObject.getHeader('Status'));
 }
-var s_or_f = 0;
+var s_or_f = 0; // success or failure flag
 var alert_style = "";
 function render_msg(msg_text){
 	
