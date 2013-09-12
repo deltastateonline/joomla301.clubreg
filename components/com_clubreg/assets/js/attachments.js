@@ -1,6 +1,6 @@
 window.addEvent('domready', function () {		
 	
-	attachmentsListDiv.params = "option=com_clubreg&view=ajax&layout=attachments&tmpl=component&format=raw";
+	attachmentsListDiv.params = "option=com_clubreg&view=attachment&layout=list&tmpl=component&format=raw";
 	
 	if($('attachmentFormDiv')){
 		$('attachmentFormDiv').slide('hide').setStyle('visibility', 'visible');

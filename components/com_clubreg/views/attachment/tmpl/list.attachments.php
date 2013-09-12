@@ -23,7 +23,7 @@ if(count($this->attachments)>0){
 		ob_start();
 	?>
 	<div class="row-fluid" id='attachment_div<?php echo $an_attachment->attachment_id?>'>
-		<div class="pull-left"><a href="index.php?option=com_clubreg&Itemid=<?php echo $clubreg_Itemid  ?>&view=ajax&layout=viewattachment&tmpl=component&format=raw&attachment_key=<?php echo $fkey; ?>" target='_blank'><?php echo $an_attachment->attachment_fname;?></a></div>			
+		<div class="pull-left"><a href="index.php?option=com_clubreg&Itemid=<?php echo $clubreg_Itemid  ?>&view=attachment&layout=view&tmpl=component&format=raw&attachment_key=<?php echo $fkey; ?>" target='_blank'><?php echo $an_attachment->attachment_fname;?></a></div>			
 		<div class="pull-right" style="padding-left:5px"><a href="javascript:void(0);" class='profile-attach-delete' rel=<?php echo $rel_string; ?> ><img src="<?php echo CLUBREG_ASSETS; ?>/images/delete.png" /></a></div>
 	
 	

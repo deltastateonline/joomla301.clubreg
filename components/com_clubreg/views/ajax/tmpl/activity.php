@@ -28,7 +28,7 @@ if(count($activity) > 0){ ?>
 					<div class='span4'><small class='text-info pull-right'><?php echo $an_activity->activity_created; ?></small></div>
 					<div class="clearfix"></div>
 					<?php if($an_activity->which == "files"){ ?>
-						<a href="index.php?option=com_clubreg&Itemid=<?php echo $clubreg_Itemid  ?>&view=ajax&layout=viewattachment&tmpl=component&format=raw&attachment_key=<?php echo $an_activity->item_key; ?>" target='_blank' class='nothing'><?php echo ucwords($an_activity->activity_item); ?></a>
+						<a href="index.php?option=com_clubreg&Itemid=<?php echo $clubreg_Itemid  ?>&view=attachment&layout=view&tmpl=component&format=raw&attachment_key=<?php echo $an_activity->item_key; ?>" target='_blank' class='nothing'><?php echo ucwords($an_activity->activity_item); ?></a>
 					<?php }else{ ?>
 					<div class='<?php echo $activity_class; ?>' <?php echo $rel_string_edit; ?>><?php echo ucwords($an_activity->activity_item); ?></div>
 					<?php } ?>
