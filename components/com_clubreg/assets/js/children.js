@@ -3,7 +3,7 @@ window.addEvent('domready', function () {
 	var childrenTabDivs = new renderingDivs();
 	var childrenListDiv = new divListRenderer();
 	
-	childrenListDiv.params = "option=com_clubreg&view=ajax&layout=children&tmpl=component";
+	childrenListDiv.params = "option=com_clubreg&view=children&layout=list&tmpl=component&format=raw";
 	
 	if($('childrenFormDiv')){			
 		childrenTabDivs.setObjects(new Fx.Morph($('childrenFormDiv')),1);
