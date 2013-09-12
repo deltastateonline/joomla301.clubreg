@@ -14,7 +14,8 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 class ClubRegUnAuthHelper extends JObject
 {
 	
-	public static function unAuthorised(){				
+	public static function unAuthorised(){	
+					
 		JError::raiseWarning( 500, JText::_('CLUBREG_NOTAUTH') );
 		return;
 	}

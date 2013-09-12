@@ -101,76 +101,8 @@ class ClubRegViewAjax extends JViewLegacy
 		}		
 		return $proceed;		
 	}
-	private function aemergency(){
-		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
-		
-		$this->setLayout("details.emergency");
-		
-		$user		= JFactory::getUser();
-		$app			= JFactory::getApplication();
-		$Itemid			= $app->input->post->get('Itemid');
-		
-		$proceed = FALSE;
-		if($user->get('id') > 0){
-		
-			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
-		
-			$proceed = TRUE;
-			$key_data = new stdClass();
-				
-			$key_data->full_key = $app->input->post->getString('member_key', null);
-			$this->uKeyObject = new ClubRegUniqueKeysHelper();
-			$this->uKeyObject->deconstructKey($key_data);
-				
-			unset($currentModel);
-			$currentModel = JModelLegacy::getInstance('emergency', 'ClubregModel', array('ignore_request' => false));
-			$currentModel->setState('com_clubreg.emergency.member_id',$key_data->pk_id); // use the key in the model
-			$currentModel->setState('com_clubreg.emergency.member_key',$key_data->full_key); // use the key in the model
-				
-			$this->emergencyForm = $currentModel->getForm();
-		}
-		
-		return $proceed;
-	}
-	private function aother(){
-		
-	JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
 	
-		$this->setLayout("details.other");
 	
-		$user		= JFactory::getUser();
-		$app			= JFactory::getApplication();
-		$Itemid			= $app->input->post->get('Itemid');
-	
-		$proceed = FALSE;
-		if($user->get('id') > 0){
-	
-			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
-	
-			$proceed = TRUE;
-			$key_data = new stdClass();
-				
-			$key_data->full_key = $app->input->post->getString('member_key', null);
-			$this->uKeyObject = new ClubRegUniqueKeysHelper();
-			$this->uKeyObject->deconstructKey($key_data);
-				
-			unset($currentModel);
-			$currentModel = JModelLegacy::getInstance('other', 'ClubregModel', array('ignore_request' => false));
-			$currentModel->setState('com_clubreg.other.member_id',$key_data->pk_id); // use the key in the model
-			$currentModel->setState('com_clubreg.other.member_key',$key_data->full_key); // use the key in the model
-			
-			require_once CLUBREG_ADMINPATH.'/helpers/clubregControls.php';
-			require_once CLUBREG_ADMINPATH.'/helpers/clubregControlsReadonly.php';
-			JForm::addFieldPath(CLUBREG_ADMINPATH.'/models/fields');
-			$this->extradetails = ClubRegControlsHelper::configOptions(CLUB_PLAYER_DETAILS); // controls				
-			
-			$this->otherForm = $currentModel->getForm();
-			$this->otherValues = $currentModel->get('otherValues');		
-			
-		}
-	
-		return $proceed;
-	}
 	private function aguardian(){
 		
 		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));

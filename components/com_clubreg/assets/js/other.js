@@ -3,7 +3,7 @@ window.addEvent('domready', function () {
 	var otherTabDivs = new renderingDivs();
 	var otherListDiv = new divListRenderer();
 	
-	otherListDiv.params = "option=com_clubreg&view=ajax&layout=aother&tmpl=component&format=raw";
+	otherListDiv.params = "option=com_clubreg&view=other&layout=list&tmpl=component&format=raw";
 	
 	if($('otherFormDiv')){		
 		otherTabDivs.setObjects(new Fx.Morph($('otherFormDiv')),1);
@@ -68,7 +68,7 @@ window.addEvent('domready', function () {
 function editOther(dObject){
 	
 	var json_data = JSON.decode(dObject.get('rel'));		
-	var params = "option=com_clubreg&view=ajax&layout=other&tmpl=component";		
+	var params = "option=com_clubreg&view=other&layout=edit&tmpl=component&format=raw";		
 	var durl = "index.php?"+params;	
 	
 	var a = new Request.HTML({

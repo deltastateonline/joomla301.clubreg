@@ -42,7 +42,10 @@ class ClubRegViewregmember extends JViewLegacy
 		$user			= JFactory::getUser();			
 		
 		$params = JComponentHelper::getParams('com_clubreg');
-		$this->profile_divrightedge =  $params->get("profile_divrightedge");		
+		$this->profile_divrightedge =  $params->get("profile_divrightedge");	
+		$this->profile_tabposition =   $params->get("profile_tabposition");	
+		if(!isset($this->profile_tabposition)){ $this->profile_tabposition = COM_CLUBREG_TABPOSITION; }
+		if(!isset($this->profile_divrightedge) || intval($this->profile_divrightedge) < 500){ $this->profile_divrightedge = COM_CLUBREG_DIVRIGHT; }
 		
 		$this->member_key = $app->input->getString('pk', null);
 			

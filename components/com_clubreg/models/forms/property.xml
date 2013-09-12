@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="propertyDetails"	addfieldpath="/administrator/components/com_clubreg/models/fields">		
+			
+			<field name="property_type" type="configcontrol" label="COM_CLUBREG_PROPERTY_TYPE" description="COM_CLUBREG_PROPERTY_TYPE_DESC" 
+			class="inputbox input-xlarge" default=""  configwhich = "clubreg_asset_type" required="true"/>
+			
+			<field name="property_make" type="text" 	label="COM_CLUBREG_PROPERTY_MAKE" description="COM_CLUBREG_PROPERTY_MAKE_DESC"
+			class="inputbox input-xlarge"   />	
+			
+			<field name="property_model" type="text" 	label="COM_CLUBREG_PROPERTY_MODEL" description="COM_CLUBREG_PROPERTY_MODEL_DESC"
+			class="inputbox input-xlarge"   />	
+			
+			<field name="property_serial" type="text" 	label="COM_CLUBREG_PROPERTY_SERIAL" description="COM_CLUBREG_PROPERTY_SERIAL_DESC"
+			class="inputbox input-xlarge"   />
+			
+			<field name="property_checked_out" type="calendar" 
+			label="COM_CLUBREG_PROPERTY_CHECKOUT" description="COM_CLUBREG_PROPERTY_CHECKOUT_DESC"
+			class="inputbox input-small"   size="10" format="%Y-%m-%d" />
+			
+			<field name="property_checked_in" type="calendar" 
+			label="COM_CLUBREG_PROPERTY_CHECKIN" description="COM_CLUBREG_PROPERTY_CHECKIN_DESC"
+			class="inputbox input-small"   size="10" format="%Y-%m-%d" />					
+			
+			<field name="property_notes" type="textarea" 
+			label="COM_CLUBREG_PROPERTY_NOTES" description="COM_CLUBREG_PROPERTY_NOTES_DESC"
+			class="inputbox input-xlarge"  rows="3" cols="80" />		
+	</fieldset>
+	
+	<fieldset name="hiddenControls"	>			
+		<field name="property_id" type="hidden" default="0" readonly="true" class="readonly" label="PK" description ="PK"/>
+		<field name="member_key" type="hidden" default="0" readonly="true" class="readonly" label="Member key" description ="Member key"/>	
+		<field name="property_key" type="hidden" default="0" readonly="true" class="readonly" label="Asset key" description ="Asset key"/>	
+	</fieldset>
+	
+</form>

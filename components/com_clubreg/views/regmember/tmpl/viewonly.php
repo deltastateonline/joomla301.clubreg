@@ -58,13 +58,13 @@ $headingConfigs = $this->profileConfigs["headings"];
 	var lockMessage ="Are you sure you want to lock this Note?";
 	var token = '<?php echo JSession::getFormToken() ;?>';
 
-	var profilediverightedge = <?php echo isset($this->profile_divrightedge)?$this->profile_divrightedge:700 ;?>;
+	var profilediverightedge = <?php echo $this->profile_divrightedge;?>;
 	
 </script>
 <style>
 <!--
 .form-div{
-	margin-left:-<?php echo isset($this->profile_divrightedge)?$this->profile_divrightedge:700 ;?>px;	
+	margin-left:-<?php echo $this->profile_divrightedge ;?>px;	
 }
 -->
 </style>
@@ -143,7 +143,7 @@ $headingConfigs = $this->profileConfigs["headings"];
 <hr />
 <div id='loading-div'></div>
 <div class="clearfix">&nbsp;</div>
-	<div class="tabbable tabs-top">
+	<div class="tabbable tabs-<?php echo $this->profile_tabposition; ?>">
 		<ul class="nav nav-tabs">
 		<?php foreach($headingConfigs["tab"] as $akey => $tvalue) { ?>
 			<li <?php echo isset($tvalue["css"])?$tvalue["css"]:""; ?>><a href="#tab<?php echo ucwords($akey); ?>" data-toggle="tab"><?php isset($tvalue["img"])?ClubRegHelper::writeImage($tvalue["img"]):""?><?php echo $tvalue["label"] ?></a></li>

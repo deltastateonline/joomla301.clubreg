@@ -3,7 +3,7 @@ window.addEvent('domready', function () {
 	var emergencyTabDivs = new renderingDivs();
 	var emergencyListDiv = new divListRenderer();
 	
-	emergencyListDiv.params = "option=com_clubreg&view=ajax&layout=aemergency&tmpl=component&format=raw";
+	emergencyListDiv.params = "option=com_clubreg&view=emergency&layout=list&tmpl=component&format=raw";
 	
 	
 	if($('emergencyFormDiv')){			
@@ -72,7 +72,7 @@ window.addEvent('domready', function () {
 function editEmergency(dObject){
 	
 	var json_data = JSON.decode(dObject.get('rel'));		
-	var params = "option=com_clubreg&view=ajax&layout=emergency&tmpl=component";		
+	var params = "option=com_clubreg&view=emergency&layout=edit&tmpl=component&format=raw";		
 	var durl = "index.php?"+params;	
 	
 	var a = new Request.HTML({
