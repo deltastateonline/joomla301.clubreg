@@ -43,6 +43,8 @@ define('CLUB_SAVEDCOMMS_TABLE','#__clubreg_saved_comms'); // communication table
 define('CLUB_CONTACT_TABLE','#__clubreg_contact_details'); // contact  table
 define('CLUB_STATS_TABLE','#__clubreg_stats_details'); // Stats  table
 
+define('CLUB_PROPERTY_TABLE','#__clubreg_property_sheet'); // Property sheet  table
+
 
 define('GROUP','Division'); 
 define('GROUPS','Divisions'); 
@@ -80,6 +82,8 @@ define('CLUB_GROUPTYPE','club_grouptype');
 define('CLUB_DOCUMENTS_WHICH','club_documents');
 
 define('CLUB_JUNIORCOUNT',4);
+define('COM_CLUBREG_DIVRIGHT',"700");
+define('COM_CLUBREG_TABPOSITION',"top");
 
 define('CLUBREG_ADMINPATH',JPATH_ADMINISTRATOR.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_clubreg'.DIRECTORY_SEPARATOR);
 

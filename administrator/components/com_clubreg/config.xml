@@ -16,6 +16,16 @@
 			label="COM_CLUBREG_DIVRIGHT_LABEL"
 			description="COM_CLUBREG_DIVRIGHT_DESC" class="inputbox input-large" default="750"/>
 			
+			<field name="profile_tabposition"
+			type="list"			
+			label="COM_CLUBREG_TABPOSITION_LABEL"
+			description="COM_CLUBREG_TABPOSITION_DESC" class="inputbox input-large" default="top">				
+				<option value="top">COM_CLUBREG_TABPOSITION_TOP</option>
+				<option value="left">COM_CLUBREG_TABPOSITION_LEFT</option>
+				<option value="right">COM_CLUBREG_TABPOSITION_RIGHT</option>
+				
+			</field>
+			
 			
 
 	</fieldset>
