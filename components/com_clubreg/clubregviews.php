@@ -17,9 +17,7 @@ class ClubRegViews extends JViewLegacy
 {
 	
 	function display($tpl = null)
-	{	
-		
-		
+	{			
 		
 		$app		= JFactory::getApplication();
 		$user		= JFactory::getUser();
@@ -32,8 +30,8 @@ class ClubRegViews extends JViewLegacy
 			$proceed =  $this->$renderer();			
 		}		
 		
-		if($proceed){
-			parent::display($tpl);
+		if($proceed){		
+			parent::display($tpl);					
 		}else{
 
 			ClubRegUnAuthHelper::unAuthorised();

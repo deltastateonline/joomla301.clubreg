@@ -15,8 +15,9 @@ class ClubRegUnAuthHelper extends JObject
 {
 	
 	public static function unAuthorised(){	
-					
-		JError::raiseWarning( 500, JText::_('CLUBREG_NOTAUTH') );
+		?>
+			<div class="alert alert-error"><h3><?php echo JText::_('CLUBREG_NOTAUTH'),(isset($which)?" - ".JText::_($which):""); ?></h3></div>
+		<?php 
 		return;
 	}
 	
