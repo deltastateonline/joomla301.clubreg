@@ -10,7 +10,7 @@
 -------------------------------------------------------------------------*/
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
-JHtml::_('behavior.formvalidation');
+
 global $clubreg_Itemid;
 $in_type = "hidden";?>
 <style>

@@ -28,6 +28,10 @@ class ClubregControllerAjax extends JControllerLegacy
 		
 		$this->registerTask('saveattachment', 'saveattachment');
 		$this->registerTask('deleteattachment', 'deleteattachment');
+		
+		$this->registerTask('saveproperty', 'saveproperty');
+		
+		
 		$this->uKeyObject = new ClubRegUniqueKeysHelper(10);
 		
 	}	
@@ -179,6 +183,7 @@ class ClubregControllerAjax extends JControllerLegacy
 		
 		if($proceed){
 			$return_array["payment_id"] =$current_model->get("payment_id");
+			$return_array["msg"][] = JText::_('COM_CLUBREG_DETAILS_UPDATE');
 		}else{
 			$return_array["msg"] =  $current_model->getError();
 			
@@ -191,7 +196,7 @@ class ClubregControllerAjax extends JControllerLegacy
 		$app->close();
 		
 	}
-	function saveemergency(){
+	public function saveemergency(){
 		
 		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 		
@@ -437,6 +442,63 @@ class ClubregControllerAjax extends JControllerLegacy
 		}
 	
 		echo json_encode($return_array);
+		$app->close();	
+	}
+	
+	public function saveproperty(){
+	
+		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));	
+	
+		$app    = JFactory::getApplication();
+		$user		= JFactory::getUser();
+	
+		$proceed = FALSE;
+		$data = $this->input->post->get('jform', array(), 'array');
+	
+		unset($current_model);
+		$key_data = new stdClass();
+		$current_model = JModelLegacy::getInstance('regmember', 'ClubregModel', array('ignore_request' => true));
+		$key_data->full_key = $data['member_key'];
+		$current_model->processKey($key_data);
+		$data["member_id"] = $key_data->member_id;
+		$data["created_by"] = $user->get('id');
+	
+		unset($current_model);unset($key_data);
+		$key_data = new stdClass();
+		$current_model = JModelLegacy::getInstance('property', 'ClubregModel', array('ignore_request' => true));
+		$key_data->full_key = $data['property_key'];
+		$this->uKeyObject->deconstructKey($key_data);
+	
+		$isNew = FALSE;
+		$data["property_key"] = $key_data->string_key;
+		$data["property_id"] = $key_data->pk_id;
+	
+		if($key_data->pk_id > 0 && strlen($key_data->string_key) == 0){
+			$data["property_key"] =  $this->uKeyObject->getUniqueKey();
+		}else if($key_data->pk_id == 0){
+			$data["property_key"] =  $this->uKeyObject->getUniqueKey();
+			$data["property_id"] = NULL;
+			$isNew = TRUE;
+		}
+	
+		
+		$current_model->setState('com_clubreg.property.isnew',$isNew);
+		$proceed = $current_model->save($data);
+	
+		$return_array = array();
+		$return_array["proceed"] = $proceed;
+		$return_array["isNew"] = $isNew;
+	
+		if($proceed){
+			$return_array["property_id"] =$current_model->get("property_id");
+			$return_array["msg"][] = JText::_('COM_CLUBREG_DETAILS_UPDATE');
+		}else{
+			$return_array["msg"] =  $current_model->getError();				
+		}
+			
+		unset($current_model);unset($key_data);
+		echo json_encode($return_array);
+	
 		$app->close();
 	
 	}

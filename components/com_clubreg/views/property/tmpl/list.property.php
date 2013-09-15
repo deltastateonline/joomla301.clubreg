@@ -15,5 +15,5 @@ global $clubreg_Itemid;
 if(count($this->items)>0){
 	$tableRender = new ClubRegRenderTablesPaymentsHelper();
 	$tableRender->render($this);	
-}else{ echo ClubRegUnAuthHelper::noResults('COM_CLUBREG_PROFILE_PAYMENTS'); }
+}else{ echo ClubRegUnAuthHelper::noResults('COM_CLUBREG_PROFILE_PROPERTYS'); }
 

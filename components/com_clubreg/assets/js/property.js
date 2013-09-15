@@ -87,7 +87,7 @@ window.addEvent('domready', function () {
 function addProperty(dObject){
 	
 	var json_data = JSON.decode(dObject.get('rel'));		
-	var params = "option=com_clubreg&view=property&layout=edit&tmpl=component&format=raw";		
+	var params = "option=com_clubreg&view=property&layout=edit&tmpl=component";		
 	var durl = "index.php?"+params;	
 	
 	var a = new Request.HTML({
@@ -95,7 +95,8 @@ function addProperty(dObject){
 		method: 'post',	
 		data : json_data,
 		update: $('propertyFormDiv'),
-		onSuccess: function(responseText){ $('propertyFormDiv').removeClass('loading1');	$('loading-div').removeClass('loading-small');}
+		onSuccess: function(responseText){ $('propertyFormDiv').removeClass('loading1');	$('loading-div').removeClass('loading-small');},
+		onFailure:function(){ profileFailure(this);	}
 		}).send();	
 	
 }

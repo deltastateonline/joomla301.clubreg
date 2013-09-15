@@ -15,11 +15,18 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 class ClubRegViewProperty extends ClubRegViews
 {
 
-	protected function edit_property(){
+	/**
+	 * render the list of property for that member
+	 */
+	protected function list_property(){
 	
 		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
 	
-		$this->setLayout("form.property");
+		$this->setLayout("list.property");
+	
+		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
+		require_once CLUBREG_CONFIGS.'config.propertys.php';
+		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.rendertables.payments.php';
 	
 		$user		= JFactory::getUser();
 		$app			= JFactory::getApplication();
@@ -27,34 +34,41 @@ class ClubRegViewProperty extends ClubRegViews
 	
 		$proceed = FALSE;
 		if($user->get('id') > 0){
-	
-			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
-	
 			$proceed = TRUE;
 			$key_data = new stdClass();
 			unset($current_model);
 			$current_model = JModelLegacy::getInstance('regmember', 'ClubregModel', array('ignore_request' => true));
-			$key_data->full_key = $app->input->post->getString('member_key', null);
+			$this->member_key = $key_data->full_key = $app->input->post->getString('member_key', null);
 	
-			unset($currentModel);
-			$currentModel = JModelLegacy::getInstance('property', 'ClubregModel', array('ignore_request' => false));
-			$currentModel->setState('com_clubreg.property.member_key',$key_data->full_key); // use the key in the model
+			$this->uKeyObject = new ClubRegUniqueKeysHelper();
 	
-			unset($key_data);$key_data = new stdClass();
-			$key_data->full_key = $app->input->post->getString('property_key', null);
+			$this->uKeyObject->deconstructKey($key_data);
+			$this->member_id = $key_data->pk_id;
 	
-			$uKeyObject = new ClubRegUniqueKeysHelper();
-			$uKeyObject->deconstructKey($key_data);
-			$currentModel->setState('com_clubreg.property.full_key',$key_data->full_key); // use the key in the model
-			$currentModel->setState('com_clubreg.property.property_key',$key_data->string_key); // use the key in the model
-			$currentModel->setState('com_clubreg.property.property_id',$key_data->pk_id); // use the key in the model
+			unset($current_model);
 	
-			$this->propertyForm = $currentModel->getForm();
+			$current_model = JModelLegacy::getInstance('propertys', 'ClubregModel', array('ignore_request' => true));
+			$this->items = $current_model->getPropertys($user->get('id'),$this->member_id);
+	
+			unset($key_data);
+			unset($current_model);
+	
+			$configObj = new ClubRegPaymentsConfig();
+			$propertysConfigs =  $configObj->getConfig("propertys"); // return headings and filters
+	
+	
+			$tmp_filters["filter_heading"] = $propertysConfigs["filters"];
+			$tmp_filters["group_where"] = $propertysConfigs["group_where"];
+			$tmp_filters["headings"] = $propertysConfigs["headings"];
+			$tmp_filters["otherconfigs"] = $propertysConfigs["otherconfigs"];
+			$this->entity_filters = $tmp_filters;
+	
+			unset($configObj);
+			unset($tmp_filters);
+	
 		}
 	
 		return $proceed;
-	
 	}
-	
 
 }
