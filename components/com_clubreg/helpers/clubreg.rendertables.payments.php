@@ -68,7 +68,7 @@ class ClubRegRenderTablesPaymentsHelper extends ClubRegRenderTablesHelper
 	 */
 	public function renderAnItem($viewObject){
 		
-		global $clubreg_Itemid;
+		global $clubreg_Itemid;		
 		
 				$this->headings =  $viewObject->entity_filters["headings"];						 
 				$an_item = current($viewObject->items);?>

@@ -4,7 +4,7 @@ window.addEvent('domready', function () {
 	var paymentListDiv = new divListRenderer();
 	
 	
-	paymentListDiv.params = "option=com_clubreg&view=ajax&layout=payments&tmpl=component";
+	paymentListDiv.params = "option=com_clubreg&view=payment&layout=list&tmpl=component&format=raw";
 	
 	if($('paymentFormDiv')){		
 		paymentTabDivs.setObjects(new Fx.Morph($('paymentFormDiv')),1);
@@ -45,14 +45,19 @@ window.addEvent('domready', function () {
 	              
 	               var json_data = JSON.decode(this.response.text);	
 	               if(!json_data["proceed"]){            	
-	           			alert(json_data["msg"]);
+	           			alert(json_data["msg"]);	           		
+	           		 	render_msg(json_data["msg"]);
 	               }
 	               if(json_data["isNew"]){
+	            	   s_or_f = 1;
+	            	   render_msg(json_data["msg"]);
 	            	   $('profile-payments').empty();
 	            	   $('profile-payments').addClass('loading1');
 	            	   paymentListDiv.renderList();
 	            	   paymentTabDivs.toggle_div();	
 	               }else{
+	            	   s_or_f = 1;
+	            	   render_msg(json_data["msg"]);
 	            	   paymentTabDivs.toggle_div();
 	            	   load_payment(json_data["payment_id"]);
 	               }
@@ -87,7 +92,7 @@ window.addEvent('domready', function () {
 function addPayment(dObject){
 	
 	var json_data = JSON.decode(dObject.get('rel'));		
-	var params = "option=com_clubreg&view=ajax&layout=payment&tmpl=component";		
+	var params = "option=com_clubreg&view=payment&layout=edit&tmpl=component";		
 	var durl = "index.php?"+params;	
 	
 	var a = new Request.HTML({
@@ -95,7 +100,8 @@ function addPayment(dObject){
 		method: 'post',	
 		data : json_data,
 		update: $('paymentFormDiv'),
-		onSuccess: function(responseText){ $('paymentFormDiv').removeClass('loading1');	$('loading-div').removeClass('loading-small');}
+		onSuccess: function(responseText){ $('paymentFormDiv').removeClass('loading1');	$('loading-div').removeClass('loading-small');},
+		onFailure:function(){ profileFailure(this); }
 		}).send();	
 	
 }
@@ -107,7 +113,7 @@ function load_payment(payment_id){
 	wDiv.addClass('loading1');
 	
 	var json_data = JSON.decode(wDiv.get('rel'));		
-	var params = "option=com_clubreg&view=ajax&layout=apayment&tmpl=component&format=raw";		
+	var params = "option=com_clubreg&view=payment&layout=detail&tmpl=component&format=raw";		
 	var durl = "index.php?"+params;	
 	
 	var a = new Request.HTML({
