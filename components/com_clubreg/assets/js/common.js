@@ -65,7 +65,12 @@ var divListRenderer = new Class({
 
 function profileFailure(rObject){	
 	$('loading-div').removeClass('loading-small');	
-	render_msg(rObject.getHeader('Status'));
+	if(rObject.getHeader('Status'))
+		error_msg = rObject.getHeader('Status')
+	else
+		error_msg = "Error has occured";
+		
+		render_msg(error_msg);
 }
 var s_or_f = 0; // success or failure flag
 var alert_style = "";
