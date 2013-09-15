@@ -1,4 +1,4 @@
-com_clubregJ30
+Com clubreg J30
 ==============
 
 Clubreg Component for joomla 3.0
@@ -12,4 +12,8 @@ the application must get the state from post or get variables
 JModelLegacy::getInstance('eois', 'ClubregModel', array('ignore_request' => false));
 
 To use ajax, you must execute app->close() before the display is called
+
+To use the popup calendar, the view must have a format = html.
+
+
 
