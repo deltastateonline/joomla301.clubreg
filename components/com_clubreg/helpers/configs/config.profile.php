@@ -98,9 +98,9 @@ class ClubRegProfileConfig extends JObject
 		$headings["other"]["send_news"] = array("label"=>JText::_('COM_CLUBREG_SENDNEWS'), 'transform'=>"sendnews"); // use array
 
 		$attr = " width='16' hspace='1' border='0'";
-
 	
 		$headings["assets"] = array("emergency","notes","payments","other","attachments","property");
+		
 		$all_tabs = $this->all_tabs();
 		foreach ($headings["assets"] as $tab_required){
 			if(isset($all_tabs[$tab_required]))

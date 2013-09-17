@@ -44,8 +44,7 @@ window.addEvent('domready', function () {
 	            onComplete: function() {
 	              
 	               var json_data = JSON.decode(this.response.text);	
-	               if(!json_data["proceed"]){            	
-	           			alert(json_data["msg"]);	           		
+	               if(!json_data["proceed"]){            				           		
 	           		 	render_msg(json_data["msg"]);
 	               }
 	               if(json_data["isNew"]){

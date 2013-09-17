@@ -41,17 +41,16 @@ class ClubRegPropertysConfig extends JObject
 	private function getPropertys(&$headings = array()){
 		$entity_filters = $group_where =  array();	
 		
-		//$headings["payment_desc"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_DESCRIPTION'),'label_class'=>'reg-label'); // use array
-		$headings["payment_transact_no"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_TRANSACT'),'label_class'=>'reg-label');
-		$headings["payment_amount"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_AMOUNT').'('.CURRENCY.')', "clearfix"=>true,'transform'=>'applyFactor'); // use array
-				
-		$headings["payment_method"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_METHOD'),'label_class'=>'reg-label');		
-		$headings["payment_status"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_STATUS'), "clearfix"=>true);
+	//	$headings["property_type"] = array("label"=>JText::_('COM_CLUBREG_PROPERTY_TYPE'),'label_class'=>'reg-label');
+					
+		$headings["property_make"] = array("label"=>JText::_('COM_CLUBREG_PROPERTY_MAKE'),'label_class'=>'reg-label');		
+		$headings["property_model"] = array("label"=>JText::_('COM_CLUBREG_PROPERTY_MODEL'), "clearfix"=>true);
 		
-		$headings["payment_date"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_DATE'),'label_class'=>'reg-label');
-		$headings["payment_season"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_SEASON'),'transform'=>"ucfirst", "clearfix"=>true);
+		$headings["property_serial"] = array("label"=>JText::_('COM_CLUBREG_PROPERTY_SERIAL'),'label_class'=>'reg-label', "clearfix"=>true);
+		$headings["property_checked_in"] = array("label"=>JText::_('COM_CLUBREG_PROPERTY_CHECKOUT'),'label_class'=>'reg-label');
+		$headings["property_checked_out"] = array("label"=>JText::_('COM_CLUBREG_PROPERTY_CHECKIN'), "clearfix"=>true);
 	
-		$headings["payment_notes"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_NOTES'),'transform'=>"nl2br",'label_class'=>'reg-label'); // use array
+		$headings["property_notes"] = array("label"=>JText::_('COM_CLUBREG_PROPERTY_NOTES'),'transform'=>"nl2br"); // use array
 		
 		return array("filters"=>$entity_filters, "group_where"=>$group_where);
 	}

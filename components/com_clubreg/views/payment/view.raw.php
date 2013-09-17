@@ -133,7 +133,4 @@ class ClubRegViewPayment extends ClubRegViews
 		}
 		return $proceed;
 	}
-	
-	
-
 }

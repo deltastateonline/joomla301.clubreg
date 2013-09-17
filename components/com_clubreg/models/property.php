@@ -91,8 +91,7 @@ class ClubregModelProperty extends JModelForm
 					
 				$other_details["short_desc"] = "updated property";
 				$other_details["primary_id"] = $data["property_id"];
-				ClubRegAuditHelper::saveData($old_rec, $other_details);
-				
+				ClubRegAuditHelper::saveData($old_rec, $other_details);				
 			}else{
 				$this->setError(JText::_("COM_CLUBREG_NOUPDATE"));
 			}		

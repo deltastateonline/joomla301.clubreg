@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `qjogz_clubreg_property_sheet` (
   `created_by` int(11) NOT NULL,
   PRIMARY KEY  (`property_id`),
   KEY `member_id` (`member_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `qjogz_clubreg_property_sheet`

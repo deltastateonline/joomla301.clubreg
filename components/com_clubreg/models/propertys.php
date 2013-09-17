@@ -50,7 +50,9 @@ class ClubregModelPropertys extends JModelList
 		$query	= $db->getQuery(true);
 		
 		$all_string[] = "`property_id`, `property_key`, `member_id`, pt.`config_name` as `property_type`, 
-		`property_make`, `property_model`, `property_serial`,`property_notes`,`property_checked_out`, `property_checked_in`";
+		`property_make`, `property_model`, `property_serial`,`property_notes`,
+		date_format(a.property_checked_out, '%d/%m/%Y') as `property_checked_out`, 
+		date_format(a.property_checked_in, '%d/%m/%Y') as `property_checked_in`";
 		$all_string[] = "date_format(a.created, '%d/%m/%Y %H:%i:%s') as created, user_reg.name ";
 		
 		$d_var = implode(",", $all_string);

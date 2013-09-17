@@ -483,7 +483,7 @@ class ClubregControllerAjax extends JControllerLegacy
 	
 		
 		$current_model->setState('com_clubreg.property.isnew',$isNew);
-		$proceed = $current_model->save($data);
+		$proceed = TRUE;//$current_model->save($data);
 	
 		$return_array = array();
 		$return_array["proceed"] = $proceed;

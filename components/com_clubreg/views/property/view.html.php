@@ -13,8 +13,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 
 class ClubRegViewProperty extends ClubRegViews
-{
-
+{	
 	protected function edit_property(){
 	
 		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
@@ -50,10 +49,8 @@ class ClubRegViewProperty extends ClubRegViews
 			$currentModel->setState('com_clubreg.property.property_id',$key_data->pk_id); // use the key in the model
 			
 			$this->propertyForm = $currentModel->getForm();
-		}
-	
-		return $proceed;
-	
+		}	
+		return $proceed;	
 	}
 	
 

@@ -45,14 +45,18 @@ window.addEvent('domready', function () {
 	              
 	               var json_data = JSON.decode(this.response.text);	
 	               if(!json_data["proceed"]){            	
-	           			alert(json_data["msg"]);
+	            	   render_msg(json_data["msg"]);
 	               }
 	               if(json_data["isNew"]){
+	            	   s_or_f = 1;
+	            	   render_msg(json_data["msg"]);
 	            	   $('profile-propertys').empty();
 	            	   $('profile-propertys').addClass('loading1');
 	            	   propertyListDiv.renderList();
 	            	   propertyTabDivs.toggle_div();	
 	               }else{
+	            	   s_or_f = 1;
+	            	   render_msg(json_data["msg"]);
 	            	   propertyTabDivs.toggle_div();
 	            	   load_property(json_data["property_id"]);
 	               }
@@ -76,10 +80,8 @@ window.addEvent('domready', function () {
 				 $('propertyFormDiv').addClass('loading1');
 				 addProperty($(this));
 				 propertyTabDivs.toggle_div();	
-			 });			 
-			
-		 }
-	
+			 });			
+		 }	
 	}
 	
 });
@@ -108,7 +110,7 @@ function load_property(property_id){
 	wDiv.addClass('loading1');
 	
 	var json_data = JSON.decode(wDiv.get('rel'));		
-	var params = "option=com_clubreg&view=property&layout=details&tmpl=component&format=raw";		
+	var params = "option=com_clubreg&view=property&layout=detail&tmpl=component&format=raw";		
 	var durl = "index.php?"+params;	
 	
 	var a = new Request.HTML({
