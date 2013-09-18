@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
-	<fieldset name="propertyDetails"	addfieldpath="/administrator/components/com_clubreg/models/fields">		
+	<fieldset name="propertyDetails"	addfieldpath="/administrator/components/com_clubreg/models/fields"
+		addrulepath="components/com_clubreg/models/rules">		
 			
 			<field name="property_type" type="configcontrol" label="COM_CLUBREG_PROPERTY_TYPE" description="COM_CLUBREG_PROPERTY_TYPE_DESC" 
 			class="inputbox input-xlarge" default=""  configwhich = "clubreg_asset_type" required="true"/>
 			
 			<field name="property_make" type="text" 	label="COM_CLUBREG_PROPERTY_MAKE" description="COM_CLUBREG_PROPERTY_MAKE_DESC"
-			class="inputbox input-xlarge"   />	
+			class="inputbox input-xlarge"  validate="notempty"  />	
 			
 			<field name="property_model" type="text" 	label="COM_CLUBREG_PROPERTY_MODEL" description="COM_CLUBREG_PROPERTY_MODEL_DESC"
-			class="inputbox input-xlarge"   />	
+			class="inputbox input-xlarge" validate="notempty" />	
 			
 			<field name="property_serial" type="text" 	label="COM_CLUBREG_PROPERTY_SERIAL" description="COM_CLUBREG_PROPERTY_SERIAL_DESC"
 			class="inputbox input-xlarge"   />

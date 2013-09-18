@@ -77,6 +77,26 @@ class ClubregModelProperty extends JModelForm
 		
 		$isNew = $this->getState("com_clubreg.property.isnew");	
 		$update_me = FALSE;
+		$proceed = FALSE;
+		
+		$d_form = $this->getForm($data,FALSE);
+		
+		$validated = $this->validate($d_form, $data);		
+		if($validated === false){
+			// Get the validation messages.
+			$errors	= $this->getErrors();
+			// Push up to three validation messages out to the user.
+			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++)
+			{
+				if ($errors[$i] instanceof Exception)
+				{					
+					$this->setError($errors[$i]->getMessage());
+				} else {
+					$this->setError($errors[$i]);					
+				}
+			}			
+			return $proceed;			
+		}
 		
 		if(!$isNew){
 			
@@ -98,7 +118,7 @@ class ClubregModelProperty extends JModelForm
 			
 		}
 		
-		$proceed = FALSE;
+		
 		if($isNew || $update_me){
 			$propertyTable = $this->getTable();
 		
@@ -119,4 +139,5 @@ class ClubregModelProperty extends JModelForm
 		
 		return $proceed;
 	}
+	
 }

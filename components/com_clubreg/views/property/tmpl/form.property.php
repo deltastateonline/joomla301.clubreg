@@ -10,14 +10,6 @@
 -------------------------------------------------------------------------*/
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
-
-JHtml::_('behavior.framework',true);
-
-jimport('joomla.html.html.bootstrap');
-JHtml::_('behavior.formvalidation');
-JHTML::_('behavior.calendar');
-JHtml::_('behavior.tooltip');
-
 global $clubreg_Itemid;
 $in_type = "hidden";?>
 <style>
