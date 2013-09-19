@@ -83,19 +83,8 @@ class ClubregModelProperty extends JModelForm
 		
 		$validated = $this->validate($d_form, $data);		
 		if($validated === false){
-			// Get the validation messages.
-			$errors	= $this->getErrors();
-			// Push up to three validation messages out to the user.
-			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++)
-			{
-				if ($errors[$i] instanceof Exception)
-				{					
-					$this->setError($errors[$i]->getMessage());
-				} else {
-					$this->setError($errors[$i]);					
-				}
-			}			
-			return $proceed;			
+			// Get the validation messages.			
+			return $validated;			
 		}
 		
 		if(!$isNew){

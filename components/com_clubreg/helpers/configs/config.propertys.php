@@ -35,20 +35,16 @@ class ClubRegPropertysConfig extends JObject
 		return $filterConfig;
 		
 	}
-					 
-
 	
 	private function getPropertys(&$headings = array()){
 		$entity_filters = $group_where =  array();	
 		
-	//	$headings["property_type"] = array("label"=>JText::_('COM_CLUBREG_PROPERTY_TYPE'),'label_class'=>'reg-label');
-					
 		$headings["property_make"] = array("label"=>JText::_('COM_CLUBREG_PROPERTY_MAKE'),'label_class'=>'reg-label');		
 		$headings["property_model"] = array("label"=>JText::_('COM_CLUBREG_PROPERTY_MODEL'), "clearfix"=>true);
 		
 		$headings["property_serial"] = array("label"=>JText::_('COM_CLUBREG_PROPERTY_SERIAL'),'label_class'=>'reg-label', "clearfix"=>true);
-		$headings["property_checked_in"] = array("label"=>JText::_('COM_CLUBREG_PROPERTY_CHECKOUT'),'label_class'=>'reg-label');
-		$headings["property_checked_out"] = array("label"=>JText::_('COM_CLUBREG_PROPERTY_CHECKIN'), "clearfix"=>true);
+		$headings["property_checked_out"] = array("label"=>JText::_('COM_CLUBREG_PROPERTY_CHECKOUT'),'label_class'=>'reg-label');
+		$headings["property_checked_in"] = array("label"=>JText::_('COM_CLUBREG_PROPERTY_CHECKIN'), "clearfix"=>true);
 	
 		$headings["property_notes"] = array("label"=>JText::_('COM_CLUBREG_PROPERTY_NOTES'),'transform'=>"nl2br"); // use array
 		

@@ -46,19 +46,20 @@ window.addEvent('domready', function () {
 	               var json_data = JSON.decode(this.response.text);	
 	               if(!json_data["proceed"]){            	
 	            	   render_msg(json_data["msg"]);
-	               }
-	               if(json_data["isNew"]){
-	            	   s_or_f = 1;
-	            	   render_msg(json_data["msg"]);
-	            	   $('profile-propertys').empty();
-	            	   $('profile-propertys').addClass('loading1');
-	            	   propertyListDiv.renderList();
-	            	   propertyTabDivs.toggle_div();	
 	               }else{
-	            	   s_or_f = 1;
-	            	   render_msg(json_data["msg"]);
-	            	   propertyTabDivs.toggle_div();
-	            	   load_property(json_data["property_id"]);
+		               if(json_data["isNew"]){
+		            	   s_or_f = 1;
+		            	   render_msg(json_data["msg"]);
+		            	   $('profile-propertys').empty();
+		            	   $('profile-propertys').addClass('loading1');
+		            	   propertyListDiv.renderList();
+		            	   propertyTabDivs.toggle_div();	
+		               }else{
+		            	   s_or_f = 1;
+		            	   render_msg(json_data["msg"]);
+		            	   propertyTabDivs.toggle_div();
+		            	   load_property(json_data["property_id"]);
+		               }
 	               }
 	               $('loading-div').removeClass('loading-small');
 	            }

@@ -302,7 +302,7 @@ class ClubregControllerAjax extends JControllerLegacy
 		$return_array["proceed"] = $current_model->changeProperty("parent_id",intval($parent_key_data->pk_id));
 		
 		if($return_array["proceed"]){
-		
+			$return_array["msg"][] = JText::_('COM_CLUBREG_DETAILS_UPDATE');		
 		}else{
 			$return_array["msg"] =  $current_model->getError();
 		}
@@ -493,7 +493,7 @@ class ClubregControllerAjax extends JControllerLegacy
 			$return_array["property_id"] =$current_model->get("property_id");
 			$return_array["msg"][] = JText::_('COM_CLUBREG_DETAILS_UPDATE');
 		}else{
-			$return_array["msg"] =  $current_model->getErrors();				
+			$return_array["msg"] = $this->error_from_model($current_model);				
 		}
 			
 		unset($current_model);unset($key_data);
@@ -501,6 +501,24 @@ class ClubregControllerAjax extends JControllerLegacy
 	
 		$app->close();
 	
+	}
+	
+	function error_from_model(&$d_model){
+		
+		$errors	= $d_model->getErrors();
+		
+		$error_str = array();
+		for ($i = 0, $n = count($errors); $i < $n; $i++)
+		{
+			if ($errors[$i] instanceof Exception)
+			{
+				$error_str[] = $errors[$i]->getMessage();
+			} else {
+				$error_str[] = $errors[$i];
+			}
+		}
+		
+		return $error_str;
 	}
 	
 }
