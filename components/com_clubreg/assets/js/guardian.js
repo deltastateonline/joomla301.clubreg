@@ -1,9 +1,9 @@
+
 	var guardianTabDivs = new renderingDivs();
 	var guardianListDiv = new divListRenderer();
+	
 window.addEvent('domready', function () {	
-	
-	
-	
+
 	guardianListDiv.params = "option=com_clubreg&view=guardian&layout=details&tmpl=component&format=raw";	
 	
 	if($('guardianFormDiv')){			
@@ -47,12 +47,15 @@ window.addEvent('domready', function () {
 	              
 	               var json_data = JSON.decode(this.response.text);	
 	               if(!json_data["proceed"]){            	
-	           			alert(json_data["msg"]);
+	            	   render_msg(json_data["msg"]);
 	               } else{
+	            	    s_or_f = 1;
+	       				render_msg(json_data["msg"]);
 	            	   	$('profile-guardian').empty();
 	       				$('profile-guardian').addClass('loading1');       				
 	       				guardianListDiv.renderList();  
 	       				guardianTabDivs.toggle_div();
+	       				
 	               }              
 	               $('loading-div').removeClass('loading-small');
 	            }
@@ -111,13 +114,13 @@ function guardian_assign(dObject){
         url: durl,
         data: json_data,
         onComplete: function() {
-        	
-        	//console.log(this.response.text);
-        	 
+    	 
            var json_data = JSON.decode(this.response.text);	
            if(!json_data["proceed"]){            	
-       			alert(json_data["msg"]);
+        	   render_msg(json_data["msg"]);
            } else{
+        	   s_or_f = 1;
+  				render_msg(json_data["msg"]);
         	 	$('profile-guardian').empty();
    				$('profile-guardian').addClass('loading1');       				
    				guardianListDiv.renderList();  

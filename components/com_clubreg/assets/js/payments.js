@@ -46,19 +46,20 @@ window.addEvent('domready', function () {
 	               var json_data = JSON.decode(this.response.text);	
 	               if(!json_data["proceed"]){            				           		
 	           		 	render_msg(json_data["msg"]);
-	               }
-	               if(json_data["isNew"]){
-	            	   s_or_f = 1;
-	            	   render_msg(json_data["msg"]);
-	            	   $('profile-payments').empty();
-	            	   $('profile-payments').addClass('loading1');
-	            	   paymentListDiv.renderList();
-	            	   paymentTabDivs.toggle_div();	
 	               }else{
-	            	   s_or_f = 1;
-	            	   render_msg(json_data["msg"]);
-	            	   paymentTabDivs.toggle_div();
-	            	   load_payment(json_data["payment_id"]);
+		               if(json_data["isNew"]){
+		            	   s_or_f = 1;
+		            	   render_msg(json_data["msg"]);
+		            	   $('profile-payments').empty();
+		            	   $('profile-payments').addClass('loading1');
+		            	   paymentListDiv.renderList();
+		            	   paymentTabDivs.toggle_div();	
+		               }else{
+		            	   s_or_f = 1;
+		            	   render_msg(json_data["msg"]);
+		            	   paymentTabDivs.toggle_div();
+		            	   load_payment(json_data["payment_id"]);
+		               }
 	               }
 	               $('loading-div').removeClass('loading-small');
 	            }

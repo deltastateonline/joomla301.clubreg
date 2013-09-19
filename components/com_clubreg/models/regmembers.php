@@ -106,9 +106,7 @@ class ClubregModelRegmembers extends JModelList
 			$allowed_subgroups = 	$this->state->get('search.allowedsubgroups');
 			if(count($allowed_subgroups) > 0){				
 				$where_[] = sprintf(" a.subgroup in (%s) ",implode(",",$allowed_subgroups));  // Only Eoi Members				
-			}
-			
-			
+			}	
 			
 		}
 		
