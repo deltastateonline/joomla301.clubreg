@@ -103,6 +103,13 @@ class ClubregModelRegmembers extends JModelList
 				$where_[] = sprintf(" a.group in (%s) ",implode(",",$allowed_groups));  // Only Eoi Members
 			}
 			
+			$allowed_subgroups = 	$this->state->get('search.allowedsubgroups');
+			if(count($allowed_subgroups)){				
+				$where_[] = sprintf(" a.subgroup in (%s) ",implode(",",$allowed_subgroups));  // Only Eoi Members				
+			}
+			
+			
+			
 		}
 		
 		if($cfilter == "guardian"){
@@ -184,6 +191,8 @@ class ClubregModelRegmembers extends JModelList
 		
 		$session = JFactory::getSession();		
 		$session->set("com_clubreg.back_url", $back_url);// save the back url	
+		
+		//write_debug($query->__toString());
 		
 		return $query;
 		

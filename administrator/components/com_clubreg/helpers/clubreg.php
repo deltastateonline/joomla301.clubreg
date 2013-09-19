@@ -212,9 +212,11 @@ class ClubRegHelper
 		$options = array();
 	
 		$db		= JFactory::getDBO();
+		$user		= JFactory::getUser();
 	
 		$where[] = "published = 1";
 		$where[] = "group_parent = ".$parent_id;
+		//$where[] = "group_leader = ".$user->get("id");
 		
 		// Build the query for the ordering list.
 		$query = 'SELECT group_id AS '.$value.', group_name AS '.$text .

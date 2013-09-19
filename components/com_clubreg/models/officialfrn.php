@@ -121,8 +121,7 @@ class ClubregModelOfficialfrn extends JModelForm
 		}
 	
 		$db->setQuery($query);
-		$my_groups["group_member"] = $db->loadObjectList("group_id");		
-		
+		$my_groups["group_member"] = $db->loadObjectList("group_id");	 // get all groups that you are a member of		
 		
 	
 		$query	= $db->getQuery(true);
@@ -139,7 +138,7 @@ class ClubregModelOfficialfrn extends JModelForm
 		}
 	
 		$db->setQuery($query);
-		$my_groups["group_leader"]  = $db->loadObjectList("group_id");		
+		$my_groups["group_leader"]  = $db->loadObjectList("group_id");	// ger all groups that you are a leader of
 		
 		@$allowed_groups = array_merge(array_keys($my_groups["group_member"]),array_keys($my_groups["group_leader"]), array(-1));
 	
