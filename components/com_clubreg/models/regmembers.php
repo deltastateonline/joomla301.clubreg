@@ -97,14 +97,14 @@ class ClubregModelRegmembers extends JModelList
 			$query->join('LEFT', CLUB_GROUPS_TABLE.' AS sg ON a.subgroup = sg.group_id');		
 
 			$allowed_groups = 	$this->state->get('search.allowedgroups');
-			if(count($allowed_groups)){
+			if(count($allowed_groups) > 0){
 				$allowed_groups[] = 0;
 				$allowed_groups[] = -1;
 				$where_[] = sprintf(" a.group in (%s) ",implode(",",$allowed_groups));  // Only Eoi Members
 			}
 			
 			$allowed_subgroups = 	$this->state->get('search.allowedsubgroups');
-			if(count($allowed_subgroups)){				
+			if(count($allowed_subgroups) > 0){				
 				$where_[] = sprintf(" a.subgroup in (%s) ",implode(",",$allowed_subgroups));  // Only Eoi Members				
 			}
 			
