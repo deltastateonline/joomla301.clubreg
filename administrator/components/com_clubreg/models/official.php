@@ -189,12 +189,12 @@ class ClubRegModelOfficial extends JModelAdmin
 		$d_qry = array();
 		
 		if(count($currentGroups) > 0 ){
-			$d_qry[] = sprintf("update %s set group_leader = '0' where group_leader = '%d'",CLUB_GROUPS_TABLE,$joomla_id );
+			$d_qry[] = sprintf("update %s set group_leader = '0' where group_leader = '%d' and group_parent = 0 ",CLUB_GROUPS_TABLE,$joomla_id );
 			
 			$d_qry[] = sprintf("update %s set group_leader = '%s' where group_id in (%s)",CLUB_GROUPS_TABLE,$joomla_id, implode(",",$currentGroups) );
 			
 		}else{
-			$d_qry[] = sprintf("update %s set group_leader = '0' where group_leader = '%d'",CLUB_GROUPS_TABLE,$joomla_id );
+			$d_qry[] = sprintf("update %s set group_leader = '0' where group_leader = '%d' and group_parent = 0 ",CLUB_GROUPS_TABLE,$joomla_id );
 		}		
 		
 		$db		= $this->getDbo();		
