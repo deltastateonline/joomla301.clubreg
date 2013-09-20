@@ -27,7 +27,9 @@ class ClubregControllerAjax extends JControllerLegacy
 		$this->registerTask('assignguardian', 'assignguardian');
 		
 		$this->registerTask('saveattachment', 'saveattachment');
-		$this->registerTask('deleteattachment', 'deleteattachment');
+		$this->registerTask('deleteattachment', 'processattachment');
+		$this->registerTask('lockattachment', 'processattachment');
+		
 		
 		$this->registerTask('saveproperty', 'saveproperty');
 		
@@ -57,8 +59,8 @@ class ClubregControllerAjax extends JControllerLegacy
 			
 			$return_array["proceed"] = $current_model->changeStatus(99);
 			
-			if($return_array["proceed"]){
-				$return_array["msg"] =  "Note Deleted";
+			if($return_array["proceed"]){				
+				$return_array["msg"] = JText::_("COM_CLUBREG_PROFILE_DELETE_RESPONSE");
 			}else{
 				$return_array["msg"] =  $current_model->getError();
 			}
@@ -89,7 +91,7 @@ class ClubregControllerAjax extends JControllerLegacy
 			$return_array["proceed"] = $current_model->changeStatus(1);			
 			
 			if($return_array["proceed"]){
-				$return_array["msg"] =  "Note maked as private";
+				$return_array["msg"] = JText::_("COM_CLUBREG_PROFILE_PRIVATE_RESPONSE");
 			}else{
 				$return_array["msg"] =  $current_model->getError();			
 			}			
@@ -413,12 +415,17 @@ class ClubregControllerAjax extends JControllerLegacy
 		
 		$app->close();
 	}
-	public function deleteattachment(){
+	public function processattachment(){
 	
 		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 		$app    = JFactory::getApplication();
 		$user		= JFactory::getUser();
 		$key_data = new stdClass();
+		
+		$c_task = $this->getTask();
+		
+			
+		
 	
 		$return_array = array();
 		$return_array["proceed"] = FALSE;
@@ -431,11 +438,28 @@ class ClubregControllerAjax extends JControllerLegacy
 			$current_model = JModelLegacy::getInstance('attachment', 'ClubregModel', array('ignore_request' => true));
 			$current_model->setState('com_clubreg.attachment.attachment_id',$key_data->pk_id);
 			$current_model->setState('com_clubreg.attachment.attachment_key',$key_data->string_key);
+			
+			if(in_array($c_task,array("lockattachment","deleteattachment"))){
 				
-			$return_array["proceed"] = $current_model->changeStatus(99);
+				switch($c_task){
+					case "lockattachment":
+						$n_status = 2;
+						$return_array["msg"] = JText::_("COM_CLUBREG_PROFILE_PRIVATE_RESPONSE");
+					break;
+					case "deleteattachment":
+						$n_status = 99;
+						$return_array["msg"] = JText::_("COM_CLUBREG_PROFILE_DELETE_RESPONSE");
+					break;
+					default:
+						$n_status = 1;
+					break;
+				}
+				
+				$return_array["proceed"] = $current_model->changeStatus($n_status);
+			}
 				
 			if($return_array["proceed"]){
-				$return_array["attachment_id"] = $key_data->pk_id;
+				$return_array["attachment_id"] = $key_data->pk_id;				
 			}else{
 				$return_array["msg"] =  $current_model->getError();
 			}
@@ -444,6 +468,9 @@ class ClubregControllerAjax extends JControllerLegacy
 		echo json_encode($return_array);
 		$app->close();	
 	}
+	
+	
+	
 	
 	public function saveproperty(){
 	

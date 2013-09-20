@@ -54,10 +54,13 @@ window.addEvent('domready', function () {
 	 if(container){	
 		 
 		 container.addEvent('click:relay(.profile-attach-delete)', function(){		 
-			 if(confirm(deleteMessage)){	
-				// alert(99);
-				
+			 if(confirm(deleteMessage)){				
 				 attachmentAction($(this),"ajax.deleteattachment");
+			 }		
+		 });
+		 container.addEvent('click:relay(.profile-attach-private)', function(){		 
+			 if(confirm(lockMessage)){			 
+				 attachmentAction($(this),"ajax.lockattachment");
 			 }		
 		 });
 	 }
@@ -82,7 +85,9 @@ function attachmentAction(whichObject,whichAction){
 				if(proceedData["proceed"]){
 					$('profile-attachments').empty();
 					$('profile-attachments').addClass('loading1');
-					attachmentsListDiv.renderList();				
+					attachmentsListDiv.renderList();
+					 s_or_f = 1;
+					 render_msg(proceedData["msg"]);
 				}else{
 					if(proceedData["msg"]){render_msg(proceedData["msg"]);}else{
 						render_msg("Unable to complete action");

@@ -54,8 +54,8 @@ $back_url = $session->get("com_clubreg.back_url");// save the back url
 $headingConfigs = $this->profileConfigs["headings"];
 ?>
 <script type="text/javascript">
-	var deleteMessage = "Are you sure you want to delete this item?";
-	var lockMessage ="Are you sure you want to lock this Note?";
+	var deleteMessage 	= "<?php echo JText::_("COM_CLUBREG_PROFILE_DELETE_QUESTION")?>";
+	var lockMessage 	= "<?php echo JText::_("COM_CLUBREG_PROFILE_PRIVATE_QUESTION")?>";
 	var token = '<?php echo JSession::getFormToken() ;?>';
 
 	var profilediverightedge = <?php echo $this->profile_divrightedge;?>;
