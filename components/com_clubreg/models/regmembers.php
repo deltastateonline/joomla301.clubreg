@@ -205,8 +205,12 @@ class ClubregModelRegmembers extends JModelList
 	protected function populateState($ordering = null, $direction = null)
 	{	
 		parent::populateState('a.created', 'DESC');	
+		
+		$params = JComponentHelper::getParams('com_clubreg');
+		$default_playertype = $params->get("default_playertype");
+		$default_playertype = isset($default_playertype)?$default_playertype:"senior";
 				
-		$states[] = array("filter.playertype","playertype","guardian","string");	
+		$states[] = array("filter.playertype","playertype",$default_playertype,"string");	
 		$states[] = array("filter.member_status","member_status","registered");		
 	
 		$tmp_value = null;

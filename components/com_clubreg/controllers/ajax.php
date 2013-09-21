@@ -358,7 +358,7 @@ class ClubregControllerAjax extends JControllerLegacy
 		}
 		
 		$params = JComponentHelper::getParams('com_clubreg');
-		$config		= JFactory::getConfig();
+		//$config		= JFactory::getConfig();
 		
 		$media_params = JComponentHelper::getParams('com_media');		
 		

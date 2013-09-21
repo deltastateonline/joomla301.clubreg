@@ -60,6 +60,10 @@ class ClubRegViewregmembers extends JViewLegacy
 			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
 			
 			$group_type			= $app->input->post->get('playertype');	
+			if(!isset($group_type)){
+				$params = JComponentHelper::getParams('com_clubreg');
+				$group_type = $params->get("default_playertype");				
+			}
 			$all_groups = $current_model->getMyGroups($group_type);
 	
 			unset($current_model);

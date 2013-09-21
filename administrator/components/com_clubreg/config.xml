@@ -1,9 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<fieldset name="Attachments"
-		label="Attachments"
-		description="Configuration for Attachment"
-	>		
+	<fieldset name="General"
+		label="General"
+		description="General Configuration">	
+		
+		<field
+			id="playertypes"
+			name="playertype"
+			type="list"
+			label="COM_CLUBREG_PT"
+			description="COM_CLUBREG_PT_DESC"
+			default="senior"
+			class="inputbox input-xlarge" multiple="multiple">
+			<option
+				value="">COM_CLUBREG_PT</option>
+			<option
+				value="junior">COM_CLUBREG_PT_JUNIOR</option>
+			<option
+				value="senior">COM_CLUBREG_PT_SENIOR</option>
+			<option
+				value="guardian">COM_CLUBREG_PT_GUARDIAN</option>
+			
+		</field>
+		
+		<field
+			id="default_playertype"
+			name="default_playertype"
+			type="list"
+			label="COM_CLUBREG_PT_DEFAULT"
+			description="COM_CLUBREG_PT_DEFAULT_DESC"
+			default="senior"
+			class="inputbox input-xlarge">
+			<option
+				value="">COM_CLUBREG_PT</option>
+			<option
+				value="junior">COM_CLUBREG_PT_JUNIOR</option>
+			<option
+				value="senior">COM_CLUBREG_PT_SENIOR</option>
+			<option
+				value="guardian">COM_CLUBREG_PT_GUARDIAN</option>
+			
+		</field>
+	
 		<field name="attachment_folder"
 			type="text"
 			size="30"
