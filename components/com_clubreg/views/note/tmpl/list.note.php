@@ -12,10 +12,12 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 global $clubreg_Itemid;
 if(count($this->notes)>0){	
-	foreach($this->notes as $a_note){ 
-		$fkey = $this->uKeyObject->constructKey($a_note->note_id,$a_note->note_key);
+	foreach($this->notes as $a_note){
+		
+		 
+		$fkey = $a_note->note_key ;//$this->uKeyObject->constructKey($a_note->note_id,$a_note->note_key);
 		$rel_string = json_encode(array('Itemid'=>$clubreg_Itemid,'note_key'=>$fkey));?>
-	<div class="row-fluid" id='note_div<?php echo $a_note->note_id?>'>
+	<div class="row-fluid" id='note_div<?php echo $a_note->note_key?>'>
 		<div class="pull-left profile-bold"><?php echo $a_note->name; ?></div>
 		<div class="pull-left" style="padding-left: 10px;"><p class="text-info small"><?php echo $a_note->created;?></p></div>
 		

@@ -16,7 +16,7 @@ class ClubregModelNotes extends JModelList
 	{
 		if (empty($config['filter_fields'])) {
 			$config['filter_fields'] = array(
-					'a.note_id',
+					'a.note_key',
 					'a.member_id','a.created'
 					
 			);
@@ -44,7 +44,7 @@ class ClubregModelNotes extends JModelList
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);
 		
-		$all_string[] = "`note_id`, `note_key`, `primary_id`, `notes`,  `note_status`, `note_type`";
+		$all_string[] = " hex(`note_key`) as note_key, `primary_id`, `notes`,  `note_status`, `note_type`";
 		$all_string[] = "date_format(a.created, '%d/%m/%Y %H:%i:%s') as created, user_reg.name ";
 		
 		$d_var = implode(",", $all_string);
@@ -56,7 +56,7 @@ class ClubregModelNotes extends JModelList
 			$query->where($a_where);
 		}		
 		
-		$query->order('a.note_id desc');
+		$query->order('a.created desc');
 		
 		$db->setQuery($query);
 			

@@ -20,7 +20,7 @@ class ClubregTableNote extends ClubregTableDefault{
 	public function __construct(&$_db)
 	{		
 		$this->_hex = array("note_key");
-		parent::__construct(CLUB_NOTES_TABLE, 'note_id', $_db);		
+		parent::__construct(CLUB_NOTES_TABLE, 'note_key', $_db);		
 	}
 
 }

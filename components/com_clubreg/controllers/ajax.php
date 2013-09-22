@@ -117,8 +117,7 @@ class ClubregControllerAjax extends JControllerLegacy
 		$key_data->full_key = $data['member_key'];
 		$current_model->processKey($key_data);
 		$data["primary_id"] = $key_data->member_id;		
-		$data["note_key1"] =  $this->uKeyObject->getUniqueKey();
-		$data["note_key"] =  $this->uKeyObject->get_uuid();
+		$data["note_key"] =  NULL;
 		$data["created_by"] = $user->get('id');
 		if(!isset($data["note_status"])){
 			$data["note_status"] = '0';

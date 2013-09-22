@@ -48,23 +48,22 @@ class ClubregModelNote extends JModelForm
 	protected function getItem($pk = null){
 		$data_ = array();		
 		
-		$data_["note_id"] = $this->getState("com_clubreg.note.note_id");
 		$data_["note_key"] = $this->getState("com_clubreg.note.note_key");
 	
 		$db = JFactory::getDBO();
 		$query	= $db->getQuery(true);
 	
-		$d_var = "a.*";
+		$d_var = "a.*, hex(note_key) as note_key";
 		$query->select($d_var);
 		$query->from($db->quoteName(CLUB_NOTES_TABLE).' AS a');
 	
-		$query->where(' note_id = '.$db->quote($data_["note_id"]));
-		$query->where(' note_key = '.$db->quote($data_["note_key"]));
+		
+		$query->where(' hex(note_key) = '.$db->quote($data_["note_key"]));
 	
 		$db->setQuery($query);
 		$row = $db->loadAssoc();
 	
-		if($row["note_id"] == $data_["note_id"] && $row["note_key"] == $data_["note_key"]){
+		if($row["note_key"] == $data_["note_key"]){
 			return $row;
 		}
 	
@@ -91,11 +90,10 @@ class ClubregModelNote extends JModelForm
 		$db = JFactory::getDbo();
 		$error_ = 0;
 		
-		$note_id = $this->getState("com_clubreg.note.note_id");
 		$note_key = $this->getState("com_clubreg.note.note_key");		
 		
-		$d_qry = sprintf("update %s set note_status = %s where note_id = %s and note_key = %s",
-				$db->quoteName(CLUB_NOTES_TABLE),$db->quote($status), $db->quote($note_id),$db->quote($note_key));
+		$d_qry = sprintf("update %s set note_status = %s where hex(note_key) = %s",
+				$db->quoteName(CLUB_NOTES_TABLE),$db->quote($status), $note_key);
 		
 		$db->setQuery($d_qry);		
 		try

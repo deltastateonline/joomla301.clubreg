@@ -8,7 +8,7 @@
 	</fieldset>
 	
 	<fieldset name="hiddenControls"	>			
-		<field name="note_id" type="hidden" default="0" readonly="true" class="readonly" label="PK" description ="PK"/>
+		<field name="note_key" type="hidden" default="0" readonly="true" class="readonly" label="PK" description ="PK"/>
 		<field name="member_key" type="hidden" default="0" readonly="true" class="readonly" label="Member key" description ="Member key"/>
 		<field name="note_type" type="hidden" default="" readonly="true" class="readonly" label="Note type" description ="Note type"/>	
 	</fieldset>
