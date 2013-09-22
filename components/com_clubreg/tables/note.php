@@ -11,11 +11,16 @@
 
 defined('_JEXEC') or die;
 
-class ClubregTableNote extends JTable{
+require_once("clubreg.tables.php");
 
+class ClubregTableNote extends ClubregTableDefault{
+	
+	protected $_hex = array();
 	
 	public function __construct(&$_db)
-	{
+	{		
+		$this->_hex = array("note_key");
 		parent::__construct(CLUB_NOTES_TABLE, 'note_id', $_db);		
 	}
+
 }
