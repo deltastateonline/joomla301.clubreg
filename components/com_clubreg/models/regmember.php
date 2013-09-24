@@ -237,6 +237,7 @@ class ClubregModelRegmember extends JModelForm
 		
 		$all_string["groupleader"] = "group_leader.name as `groupleader`";
 		$all_string["member_level"] = "mlevel.config_name as member_level";
+		$all_string["groupofficial"] = "subgroup_leader.name as `groupofficial`";
 		
 		
 		$all_string["guardian"] = "concat(parentt.`surname`,' ' ,parentt.`givenname`) as guardian";
@@ -259,6 +260,7 @@ class ClubregModelRegmember extends JModelForm
 		$query->join('LEFT', '#__users AS user_reg ON a.created_by = user_reg.id');
 		$query->join('LEFT', '#__users AS user_approved ON a.approved_by = user_approved.id');
 		$query->join('LEFT', '#__users AS group_leader ON b.group_leader = group_leader.id');
+		$query->join('LEFT', '#__users AS subgroup_leader ON sg.group_leader = subgroup_leader.id');
 		$query->join('LEFT', $db->quoteName(CLUB_CONFIG_TABLE).' as  mlevel ON a.memberlevel = mlevel.config_short');
 		
 		foreach($where_ as $a_where){
@@ -274,7 +276,7 @@ class ClubregModelRegmember extends JModelForm
 		
 		$this->state->set('profile.playertype', $member_data->playertype); // set the value to get the heading config 
 		
-		$member_data->groupofficial = "find some";
+		//$member_data->groupofficial = "find some";
 		
 		$return_data = array();
 		$return_data["member_data"] = $member_data;

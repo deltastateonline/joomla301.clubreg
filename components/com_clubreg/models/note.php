@@ -92,10 +92,11 @@ class ClubregModelNote extends JModelForm
 		
 		$note_key = $this->getState("com_clubreg.note.note_key");		
 		
-		$d_qry = sprintf("update %s set note_status = %s where hex(note_key) = %s",
-				$db->quoteName(CLUB_NOTES_TABLE),$db->quote($status), $note_key);
+		$d_qry = sprintf("update %s set note_status = %s where note_key = 0x%s",
+				$db->quoteName(CLUB_NOTES_TABLE),$db->quote($status), strtolower($note_key));
 		
-		$db->setQuery($d_qry);		
+		$db->setQuery($d_qry);
+
 		try
 		{
 			$db->query();

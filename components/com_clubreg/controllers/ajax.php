@@ -17,8 +17,8 @@ class ClubregControllerAjax extends JControllerLegacy
 		require_once JPATH_COMPONENT_ADMINISTRATOR.DS.'helpers'.DS.'clubreg.php';
 		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
 		parent::__construct($config);
-		$this->registerTask('deletenote', 'deletenote');		
-		$this->registerTask('locknote', 'locknote');
+		$this->registerTask('deletenote', 'processnote');		
+		$this->registerTask('locknote', 'processnote');
 		$this->registerTask('savenote', 'savenote');
 		
 		$this->registerTask('savepayment', 'savepayment');
@@ -28,8 +28,7 @@ class ClubregControllerAjax extends JControllerLegacy
 		
 		$this->registerTask('saveattachment', 'saveattachment');
 		$this->registerTask('deleteattachment', 'processattachment');
-		$this->registerTask('lockattachment', 'processattachment');
-		
+		$this->registerTask('lockattachment', 'processattachment');	
 		
 		$this->registerTask('saveproperty', 'saveproperty');
 		
@@ -37,70 +36,7 @@ class ClubregControllerAjax extends JControllerLegacy
 		$this->uKeyObject = new ClubRegUniqueKeysHelper(10);
 		
 	}	
-
-	public function deletenote(){
-		
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
-		$app    = JFactory::getApplication();
-		$user		= JFactory::getUser();
-		$key_data = new stdClass();
-		
-		$return_array = array();
-		$return_array["proceed"] = FALSE;
-		
-		$key_data->full_key = $app->input->post->getString('note_key', NULL);			
-		$this->uKeyObject->deconstructKey($key_data);
-		
-		if($key_data->pk_id > 0 && strlen($key_data->string_key) > 0){
-			unset($current_model);
-			$current_model = JModelLegacy::getInstance('note', 'ClubregModel', array('ignore_request' => true));		
-			$current_model->setState('com_clubreg.note.note_id',$key_data->pk_id);
-			$current_model->setState('com_clubreg.note.note_key',$key_data->string_key);
-			
-			$return_array["proceed"] = $current_model->changeStatus(99);
-			
-			if($return_array["proceed"]){				
-				$return_array["msg"] = JText::_("COM_CLUBREG_PROFILE_DELETE_RESPONSE");
-			}else{
-				$return_array["msg"] =  $current_model->getError();
-			}
-		}
-
-		echo json_encode($return_array);
-		$app->close();
-		
-	}
-	public function locknote(){
 	
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
-		$app    = JFactory::getApplication();
-		$user		= JFactory::getUser();
-		$key_data = new stdClass();
-		
-		$return_array = array();
-		$return_array["proceed"] = FALSE;
-		$key_data->full_key = $app->input->post->getString('note_key', NULL);			
-		$this->uKeyObject->deconstructKey($key_data);
-		
-		if($key_data->pk_id > 0 && strlen($key_data->string_key) > 0){
-			unset($current_model);
-			$current_model = JModelLegacy::getInstance('note', 'ClubregModel', array('ignore_request' => true));
-			$current_model->setState('com_clubreg.note.note_id',$key_data->pk_id);
-			$current_model->setState('com_clubreg.note.note_key',$key_data->string_key);
-			
-			$return_array["proceed"] = $current_model->changeStatus(1);			
-			
-			if($return_array["proceed"]){
-				$return_array["msg"] = JText::_("COM_CLUBREG_PROFILE_PRIVATE_RESPONSE");
-			}else{
-				$return_array["msg"] =  $current_model->getError();			
-			}			
-		}
-	
-		echo json_encode($return_array);
-		$app->close();
-	
-	}
 	public function savenote(){
 
 		
@@ -117,7 +53,7 @@ class ClubregControllerAjax extends JControllerLegacy
 		$key_data->full_key = $data['member_key'];
 		$current_model->processKey($key_data);
 		$data["primary_id"] = $key_data->member_id;		
-		$data["note_key"] =  NULL;
+		$data["note_key"] =  FALSE;
 		$data["created_by"] = $user->get('id');
 		if(!isset($data["note_status"])){
 			$data["note_status"] = '0';
@@ -422,10 +358,7 @@ class ClubregControllerAjax extends JControllerLegacy
 		$user		= JFactory::getUser();
 		$key_data = new stdClass();
 		
-		$c_task = $this->getTask();
-		
-			
-		
+		$c_task = $this->getTask();		
 	
 		$return_array = array();
 		$return_array["proceed"] = FALSE;
@@ -469,8 +402,52 @@ class ClubregControllerAjax extends JControllerLegacy
 		$app->close();	
 	}
 	
-	
-	
+	public function processnote(){
+		
+		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		$app    = JFactory::getApplication();
+		$user		= JFactory::getUser();
+		$key_data = new stdClass();
+		
+		$c_task = $this->getTask();
+		
+		$return_array = array();
+		$return_array["proceed"] = FALSE;
+		$key_data->note_key = $app->input->post->getString('note_key', NULL);		
+		
+		if(strlen($key_data->note_key) > 0){
+			unset($current_model);
+			$current_model = JModelLegacy::getInstance('note', 'ClubregModel', array('ignore_request' => true));
+			$current_model->setState('com_clubreg.note.note_key',$key_data->note_key);			
+			
+			if(in_array($c_task,array("locknote","deletenote"))){
+			
+				switch($c_task){
+					case "locknote":
+						$n_status = 1;
+						$return_array["msg"] = JText::_("COM_CLUBREG_PROFILE_PRIVATE_RESPONSE");
+						break;
+					case "deletenote":
+						$n_status = 99;
+						$return_array["msg"] = JText::_("COM_CLUBREG_PROFILE_DELETE_RESPONSE");
+						break;
+					default:
+						$n_status = 0;
+					break;
+				}
+			
+				$return_array["proceed"] = $current_model->changeStatus($n_status);
+			}	
+		
+			if(!$return_array["proceed"]){
+				$return_array["msg"] = $this->error_from_model($current_model);	 
+			}
+		}
+		
+		echo json_encode($return_array);
+		$app->close();
+		
+	}
 	
 	public function saveproperty(){
 	

@@ -20,6 +20,7 @@ class ClubregTableDefault extends JTable{
 		$db = JFactory::getDbo();		
 		$pk = $this->_tbl_key;	
 		
+		
 	// If a primary key exists update the object, otherwise insert it.
 		if ($this->$pk){
 			// Store the row
@@ -27,6 +28,7 @@ class ClubregTableDefault extends JTable{
 		}
 		else
 		{		
+			
 			// Iterate over the object variables to build the query fields and values.
 			foreach (get_object_vars($this) as $k => $v){
 					// Only process non-null scalars.
@@ -38,11 +40,14 @@ class ClubregTableDefault extends JTable{
 					if ($k[0] == '_'){
 						continue;
 					}
+					//var_dump($this->_hex);
+					
 					
 					if(in_array($k, $this->_hex)){
 						// Prepare and sanitize the fields and values for the database query.
 						$fields[] = $db->quoteName($k);
-						if($k == $this->$pk && !isset($this->$pk) ){
+						//echo $pk, '-',$k;
+						if($k == $pk && !$this->$pk ){
 							$v = $this->get_uuid();
 						}
 						$values[] = '0x'.$v;
@@ -70,7 +75,7 @@ class ClubregTableDefault extends JTable{
 				return true;
 		}			
 	}
-	public function get_uuid(){
+	private function get_uuid(){
 		$uuid =  sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
 	
 		// 32 bits for "time_low"
@@ -91,6 +96,8 @@ class ClubregTableDefault extends JTable{
 				// 48 bits for "node"
 				mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
 		);
+		
+		//echo $uuid;
 	
 		return str_replace("-", "", $uuid);
 	
