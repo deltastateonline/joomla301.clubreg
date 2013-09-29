@@ -143,9 +143,10 @@ $headingConfigs = $this->profileConfigs["headings"];
 <hr />
 <div id='loading-div'></div>
 <div class="clearfix">&nbsp;</div>
+<?php if(count($headingConfigs["tab"]) > 0 ) { ?>
 	<div class="tabbable tabs-<?php echo $this->profile_tabposition; ?>">
 		<ul class="nav nav-tabs">
-		<?php foreach($headingConfigs["tab"] as $akey => $tvalue) { ?>
+		<?php foreach($headingConfigs["tab"] as $akey => $tvalue) {  ?>
 			<li <?php echo isset($tvalue["css"])?$tvalue["css"]:""; ?>><a href="#tab<?php echo ucwords($akey); ?>" data-toggle="tab"><?php isset($tvalue["img"])?ClubRegHelper::writeImage($tvalue["img"]):""?><?php echo $tvalue["label"] ?></a></li>
 			<?php } ?>					
 		</ul>
@@ -162,6 +163,7 @@ $headingConfigs = $this->profileConfigs["headings"];
 		
 		</div>
 </div>
+<?php } ?>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <?php 
@@ -169,11 +171,14 @@ $document = JFactory::getDocument();
 ClubregHelper::writeTabAssets($document, "common");
 ClubregHelper::writeTabAssets($document, "profile");
 
-foreach($headingConfigs["assets"] as $a_key =>$an_asset){		
-	if(is_array($an_asset)){
+foreach($headingConfigs["tab"] as $a_key =>$an_asset){
+	ClubregHelper::writeTabAssets($document,$a_key);
+}
+
+if(isset($headingConfigs["javascript"]) && count($headingConfigs["javascript"]) > 0){
+	
+	foreach($headingConfigs["javascript"] as $a_key =>$an_asset ){
 		ClubregHelper::writeTabAssets($document,$a_key, $an_asset);
-	}else{
-		ClubregHelper::writeTabAssets($document,$an_asset);
 	}
 }
 ClubregHelper::write_footer();

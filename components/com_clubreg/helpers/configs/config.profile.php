@@ -62,16 +62,11 @@ class ClubRegProfileConfig extends JObject
 		
 		$headings["children_p"]["groupleader"] = array("label"=>JText::_('CLUBREG_OFFICIALS_PROFILE_LEADER'));		
 		$headings["children_p"]["year_registered"] = array("label"=>JText::_('COM_CLUBREG_SEASON_LABEL'), "clearfix"=>true); // one per line
-					
-		$headings["assets"] = array("children","notes");	
 		
 		$all_tabs = $this->all_tabs();
-		foreach ($headings["assets"] as $tab_required){
-			if(isset($all_tabs[$tab_required]))
-				$headings["tab"][$tab_required] = $all_tabs[$tab_required];
-		}
+		$headings["tab"] = $this->configuredTabs("guardian",$all_tabs);
 		
-		$headings["assets"] = array("notes","children","clubreggroups"=>array("js"));
+		$headings["javascript"] = array("clubreggroups"=>array("js"));
 		return ;
 	}
 	
@@ -98,14 +93,9 @@ class ClubRegProfileConfig extends JObject
 		$headings["other"]["send_news"] = array("label"=>JText::_('COM_CLUBREG_SENDNEWS'), 'transform'=>"sendnews"); // use array
 
 		$attr = " width='16' hspace='1' border='0'";
-	
-		$headings["assets"] = array("emergency","notes","payments","other","attachments","property");
 		
-		$all_tabs = $this->all_tabs();
-		foreach ($headings["assets"] as $tab_required){
-			if(isset($all_tabs[$tab_required]))
-				$headings["tab"][$tab_required] = $all_tabs[$tab_required];
-		}
+		$all_tabs = $this->all_tabs();		
+		$headings["tab"] = $this->configuredTabs("senior",$all_tabs);
 		return ;
 	}
 	private function getJunior(&$headings = array()){		
@@ -127,10 +117,7 @@ class ClubRegProfileConfig extends JObject
 					
 		$headings["assets"] = array("guardian","notes","payments","other","attachments","property");
 		$all_tabs = $this->all_tabs();
-		foreach ($headings["assets"] as $tab_required){
-			if(isset($all_tabs[$tab_required]))
-				$headings["tab"][$tab_required] = $all_tabs[$tab_required];
-		}
+		$headings["tab"] = $this->configuredTabs("junior",$all_tabs);
 			
 		return ;
 	}
@@ -144,21 +131,40 @@ class ClubRegProfileConfig extends JObject
 		$headings["bio"]["send_news"] = array("label"=>JText::_('COM_CLUBREG_SENDNEWS'), "clearfix"=>true, 'transform'=>"sendnews"); // use array
 		
 	}
-	private function  all_tabs(){
+	public function  all_tabs(){
 		
 		$attr = " width='16' hspace='1' border='0'";
 		
-		$tabs["children"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_CHILDREN'),"css"=>"class='active'",'default'=>TRUE);			
-		$tabs["guardian"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_GUARDIAN'),"css"=>"class='active'",'default'=>TRUE,'img'=>array('fname'=>'emergency.png','attr'=>$attr));
-		$tabs["emergency"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_EMERGENCY'),"css"=>"class='active'",'default'=>TRUE,'img'=>array('fname'=>'emergency.png','attr'=>$attr));
-		$tabs["notes"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_NOTES'),'img'=>array('fname'=>'notes.png','attr'=>$attr));
-		$tabs["stats"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_STATS'),'img'=>array('fname'=>'stats.png','attr'=>$attr));
-		$tabs["payments"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_PAYMENTS'),'img'=>array('fname'=>'payment.png','attr'=>$attr));
-		$tabs["other"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_OTHER'),'img'=>array('fname'=>'other.png','attr'=>$attr));
-		$tabs["attachments"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_ATTACHMENTS'),'img'=>array('fname'=>'attachments.png','attr'=>$attr));
-		$tabs["property"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_PROPERTYS'),'img'=>array('fname'=>'property.png','attr'=>$attr));
+		$tabs["children"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_CHILDREN'),"css"=>"class='active'",'default'=>TRUE, 'applies'=>array("guardian"));			
+		$tabs["guardian"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_GUARDIAN'),"css"=>"class='active'",'default'=>TRUE,'img'=>array('fname'=>'emergency.png','attr'=>$attr), 'applies'=>array("junior"));
+		$tabs["emergency"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_EMERGENCY'),"css"=>"class='active'",'default'=>TRUE,'img'=>array('fname'=>'emergency.png','attr'=>$attr), 'applies'=>array("senior"));
+		$tabs["notes"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_NOTES'),'img'=>array('fname'=>'notes.png','attr'=>$attr), 'applies'=>array("senior","junior","guardian"));
+	//	$tabs["stats"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_STATS'),'img'=>array('fname'=>'stats.png','attr'=>$attr), 'applies'=>array("senior","junior"));
+		$tabs["payments"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_PAYMENTS'),'img'=>array('fname'=>'payment.png','attr'=>$attr), 'applies'=>array("senior","junior"));
+		$tabs["other"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_OTHER'),'img'=>array('fname'=>'other.png','attr'=>$attr), 'applies'=>array("senior","junior"));
+		$tabs["attachments"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_ATTACHMENTS'),'img'=>array('fname'=>'attachments.png','attr'=>$attr), 'applies'=>array("senior","junior"));
+		$tabs["property"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_PROPERTYS'),'img'=>array('fname'=>'property.png','attr'=>$attr) , 'applies'=>array("senior","junior"));
+	
+		return $tabs;		
+	}
+	private function configuredTabs($player_type = NULL, $all_tabs){
 		
-		return $tabs;
+		$return_data = array();
+		
+			if(isset($player_type)){
+		
+				$params = JComponentHelper::getParams('com_clubreg');
+				$configureTabs = (array)$params->get("tab".$player_type);
+				if(count($configureTabs) > 0){
+					foreach($configureTabs as $config_key => $config_value){
+						if(intval($config_value) == 1){
+							$return_data[$config_key]  = $all_tabs[$config_key];
+						}
+					}
+				}
+			}
+			
+			return $return_data ;
 		
 	}
 }

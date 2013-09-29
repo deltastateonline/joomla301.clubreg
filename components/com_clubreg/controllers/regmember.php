@@ -80,7 +80,7 @@ class ClubregControllerRegmember extends JControllerLegacy
 				$return_array["msg"][] =  $current_model->getError();
 			}
 		}else{
-			$return_array["msg"][] =  "UnAuthorised Attempt";
+			$return_array["msg"][] =  JText::_('CLUBREG_NOTAUTH');
 		}
 		
 		
@@ -147,10 +147,8 @@ class ClubregControllerRegmember extends JControllerLegacy
 		if($proceed){
 			$return_array["payment_id"] =$current_model->get("payment_id");
 		}else{
-			$return_array["msg"] =  $current_model->getError();
-			
-		}
-		
+			$return_array["msg"] =  $current_model->getError();		
+		}		
 		
 		unset($current_model);unset($key_data);
 		echo json_encode($return_array);

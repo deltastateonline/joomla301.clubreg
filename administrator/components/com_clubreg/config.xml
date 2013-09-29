@@ -62,9 +62,7 @@
 				<option value="left">COM_CLUBREG_TABPOSITION_LEFT</option>
 				<option value="right">COM_CLUBREG_TABPOSITION_RIGHT</option>
 				
-			</field>
-			
-			
+			</field>		
 
 	</fieldset>
 	<fieldset name="dropbox"
@@ -97,7 +95,30 @@
 			description="COM_CLUBREG_APPACCESSTYPE_DESC" class="inputbox input-large"/>
 
 	</fieldset>
-
 	
+	<fieldset name="tabs"
+			label="COM_CLUBREG_TAB_LABEL"
+			description="COM_CLUBREG_TAB_DESC"
+			addfieldpath="/administrator/components/com_clubreg/models/fields"
+		>	
+		<field name="tabjunior"
+			label="COM_CLUBREG_PT_JUNIOR"
+			description="Render the following tabs"
+			type="clubtabs" configwhich="junior">		
+		</field>		
+		
+		<field name="tabsenior"
+			label="COM_CLUBREG_PT_SENIOR"
+			description="Render the following tabs"
+			type="clubtabs" configwhich="senior">		
+		</field>		
+		
+		<field name="tabguardian"
+			label="COM_CLUBREG_PT_GUARDIAN"
+			description="Render the following tabs"
+			type="clubtabs" configwhich="guardian">	
+		</field>
+
+	</fieldset>
 
 </config>
