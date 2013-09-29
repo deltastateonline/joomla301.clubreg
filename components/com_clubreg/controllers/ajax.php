@@ -338,12 +338,12 @@ class ClubregControllerAjax extends JControllerLegacy
 				
 				if(!$return_array["proceed"]){
 					$return_array["msg"][] =  $current_model->getError();
+				}else{
+					$return_array["msg"][] =  JText::_('COM_CLUBREG_DETAILS_UPDATE');
 				}
 				
 			}
 			
-			//$return_array["dest"] = $final_dest;
-			//$return_array["src"] = $tmp_src;
 			
 		}
 		

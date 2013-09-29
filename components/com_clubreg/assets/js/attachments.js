@@ -34,7 +34,10 @@ window.addEvent('domready', function () {
 				if(proceedData["proceed"]){
 					$('profile-attachments').empty();
 					$('profile-attachments').addClass('loading1');
-					attachmentsListDiv.renderList();				
+					attachmentsListDiv.renderList();					
+					 s_or_f = 1;
+					 render_msg(proceedData["msg"]);
+					 
 				}else{
 					var msg_text  = "";					
 					if(proceedData["msg"]){ 						
