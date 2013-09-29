@@ -79,12 +79,12 @@ class JFormFieldClubtabs extends JFormField
 						$html[] = "<fieldset class='radio btn-group'>";
 						$ctrl = $tmp_ctrl_id."0";
 						$html[] = '<input type="radio" id="' . $ctrl. '" name="' . $ctrl_name . '" value="0"' . $hide_checked . '/>';					
-						$html[] = '<label for="' . $ctrl .'">'. JText::_(JHIDE) . '</label>';				
+						$html[] = '<label for="' . $ctrl .'">'. JText::_('JHIDE') . '</label>';				
 						
 						
 						$ctrl = $tmp_ctrl_id."1";
 						$html[] = '<input type="radio" id="' . $ctrl. '" name="' . $ctrl_name . '" value="1"' . $show_checked . '/>';		
-						$html[] = '<label for="' . $ctrl .'">'. JText::_(JSHOW) . '</label>';
+						$html[] = '<label for="' . $ctrl .'">'. JText::_('JSHOW') . '</label>';
 						
 						$html[] = "</fieldset>";
 						$html[] = "</div>";
