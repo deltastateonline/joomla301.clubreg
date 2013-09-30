@@ -94,7 +94,7 @@ class ClubRegRenderTablesHelper extends JObject
 			  <tr>
 			    <td><?php echo $i+1 ; ?></td>
 			    <td class="row"><?php if(in_array($an_item->member_status,$this->otherconfigs["allowedstatus"]) &&  in_array($an_item->playertype,$this->otherconfigs["checkboxes"])){ ?><div class="pull-left"><?php echo JHtml::_('grid.id', $i, $an_item->member_id); ?>&nbsp;</div><?php } ?>
-			    	<div class="pull-left h21" ><?php echo $an_item->surname; ?></div>			    	
+			    	<div class="pull-left h21" ><?php echo ucwords($an_item->surname); ?></div>			    	
 			    	<?php /*<div class="pull-right"><a class="btn btn-mini reg-button" rel='<?php echo $an_item->member_id; ?>' href="javascript:void(0);">+</a></div>*/?>
 				    <div class="clearfix"></div>
 				    <?php $this->rendererItems($an_item); ?>
