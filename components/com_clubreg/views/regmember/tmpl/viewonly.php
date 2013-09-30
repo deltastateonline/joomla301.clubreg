@@ -21,7 +21,7 @@ JHtml::_('behavior.tooltip');
 
 
 $member_data = $this->all_data["member_data"];
-$this->pageTitle .= " : ". $member_data->surname;
+$this->pageTitle .= " : ". ucwords($member_data->surname);
 ClubregHelper::writePageHeader($this->pageTitle);
 
 
@@ -146,15 +146,15 @@ $headingConfigs = $this->profileConfigs["headings"];
 <?php if(count($headingConfigs["tab"]) > 0 ) { ?>
 	<div class="tabbable tabs-<?php echo $this->profile_tabposition; ?>">
 		<ul class="nav nav-tabs">
-		<?php foreach($headingConfigs["tab"] as $akey => $tvalue) {  ?>
-			<li <?php echo isset($tvalue["css"])?$tvalue["css"]:""; ?>><a href="#tab<?php echo ucwords($akey); ?>" data-toggle="tab"><?php isset($tvalue["img"])?ClubRegHelper::writeImage($tvalue["img"]):""?><?php echo $tvalue["label"] ?></a></li>
-			<?php } ?>					
+		<?php $i=0; foreach($headingConfigs["tab"] as $akey => $tvalue) {  ?>
+			<li <?php echo ($i == 0)?"class='active'":""; ?>><a href="#tab<?php echo ucwords($akey); ?>" data-toggle="tab"><?php isset($tvalue["img"])?ClubRegHelper::writeImage($tvalue["img"]):""?><?php echo $tvalue["label"] ?></a></li>
+			<?php $i++; } ?>					
 		</ul>
 		
 		<div class="tab-divs">
 			<div class="tab-content" style="min-height:400px;">
-				<?php foreach($headingConfigs["tab"] as $akey => $tvalue){					
-					$active = isset($tvalue["default"])?"active":"";?>
+				<?php $i=0; foreach($headingConfigs["tab"] as $akey => $tvalue){					
+					$active = $i == 0?"active":"";$i++;	?>
 					<div class="tab-pane <?php echo $active; ?>" id="tab<?php echo ucwords($akey); ?>">
 						<?php echo $this->loadTemplate($akey); ?>
 					</div>
