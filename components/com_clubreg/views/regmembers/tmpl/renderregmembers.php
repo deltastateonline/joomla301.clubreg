@@ -9,6 +9,8 @@
 # Technical Support:  email - joomla@deltastateonline.com
 -------------------------------------------------------------------------*/
 JHtml::_('behavior.framework',true);
+JHtml::_('behavior.keepalive');
+
 global $clubreg_Itemid;
 $in_type = "hidden";
 $listOrder	= $this->escape($this->state->get('list.ordering'));
