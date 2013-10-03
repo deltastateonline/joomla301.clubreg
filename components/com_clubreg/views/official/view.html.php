@@ -72,7 +72,7 @@ class ClubRegViewOfficial extends JViewLegacy
 				unset($current_model);
 				
 				if($this->official_details->status == 1){ // ie official has been linked					
-					require_once CLUBREG_ADMINPATH.'/helpers/clubregControls.php';					
+					require_once CLUBREG_ADMINPATH.'helpers/clubregcontrols.php';					
 					$this->extradetails = ClubRegControlsHelper::configOptions(CLUB_MEMBER_WHICH);
 				}else{
 					$renderer = NULL;
@@ -101,7 +101,7 @@ class ClubRegViewOfficial extends JViewLegacy
 	
 	
 	private function readonly(){		
-		require_once CLUBREG_ADMINPATH.'/helpers/clubregcontrolsreadonly.php';		
+		require_once CLUBREG_ADMINPATH.'helpers/clubregcontrolsreadonly.php';		
 		
 		$app		= JFactory::getApplication();
 		$active	= $app->getMenu()->getActive(); // if logged in

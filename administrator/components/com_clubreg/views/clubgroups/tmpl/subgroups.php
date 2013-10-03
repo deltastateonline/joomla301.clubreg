@@ -15,7 +15,7 @@ JHtml::_('behavior.modal');
 		$whatAfter = ", onClose:function() { reloadSubgroup() } ";
 		$i = 1;
 ?>
-<a href="index.php?option=com_clubreg&view=clubgroup&tmpl=component&task=clubgroup.subedit&group_parent=<?php echo (int) $this->item->group_id; ?>&group_id=0&layout=subedit" class="modal"  rel="{handler: 'iframe', size: {x: 600, y: 550} <?php echo $whatAfter;?>}">Add <?php echo JText::_('COM_CLUBREG_SUBGROUPN_LABEL');?></a>
+<a href="index.php?option=com_clubreg&view=clubgroup&tmpl=component&task=clubgroup.subedit&group_parent=<?php echo (int) $this->parent_id; ?>&group_id=0&layout=subedit" class="modal"  rel="{handler: 'iframe', size: {x: 600, y: 550} <?php echo $whatAfter;?>}">Add <?php echo JText::_('COM_CLUBREG_SUBGROUPN_LABEL');?></a>
 
 <table class="table table-striped ">
 	<thead>

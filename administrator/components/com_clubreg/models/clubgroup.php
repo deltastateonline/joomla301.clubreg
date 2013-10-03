@@ -58,8 +58,7 @@ class ClubRegModelClubgroup extends JModelAdmin
 	
 	}
 	protected function populateState()
-	{
-		
+	{		
 		parent::populateState();
 		$input = JFactory::getApplication()->input;
 		

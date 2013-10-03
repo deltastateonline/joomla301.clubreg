@@ -140,11 +140,11 @@ class ClubregModelClubgroups extends JModelList{
 	}
 	public function getSubGroups(){
 		
-		$group_children = array();
+		$group_children = $return_data = array();
 		
 		$input = JFactory::getApplication()->input;
 		
-		$group_id = (int) $input->getInt('group_id');
+		$return_data["parent_id"] = (int) $input->getInt('group_id');
 		
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);		
@@ -152,7 +152,7 @@ class ClubregModelClubgroups extends JModelList{
 		$query->select("a.group_id, a.group_name,a.group_type,a.published,a.group_parent, f.name as group_leader");
 		$query->from($db->quoteName(CLUB_GROUPS_TABLE) .' as a ');
 		$query->join('LEFT',  '#__users AS f ON a.group_leader = f.id');
-		$query->where("a.group_parent = ".$group_id);
+		$query->where("a.group_parent = ".$return_data["parent_id"]);
 		$query->order('a.group_name');		
 		try {
 		
@@ -162,8 +162,8 @@ class ClubregModelClubgroups extends JModelList{
 		{
 			JError::raiseWarning(500, $e->getMessage());
 		}
-		
-		return $group_children;
+		$return_data["group_children"] = $group_children;
+		return $return_data;
 	}
 	
 }

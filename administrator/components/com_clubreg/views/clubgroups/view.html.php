@@ -26,7 +26,10 @@ class ClubregViewClubgroups extends JViewLegacy
 		
 		switch($layout){
 			case "subgroups":
-				$this->items = $this->get('SubGroups');
+				$return_data = $this->get('SubGroups');				
+				$this->items = $return_data["group_children"] ;
+				$this->parent_id = $return_data["parent_id"] ;
+				
 			break;
 			
 			default:
