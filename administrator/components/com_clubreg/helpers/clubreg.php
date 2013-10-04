@@ -207,32 +207,60 @@ class ClubRegHelper
 		
 		return $options;
 	}
+	/**
+	 * get my sub groups
+	 * if i am a leader in a subgroup th
+	 * @param unknown_type $value
+	 * @param unknown_type $text
+	 * @param unknown_type $parent_id
+	 * @return Ambigous <mixed, NULL, multitype:unknown mixed >
+	 */
 	public static function get_subgroup_list($value = "group_id" ,$text= "group_name",$parent_id=0 ){
 	
-		$options = array();
-	
-		$db		= JFactory::getDBO();
+		$options = array();	
+		
 		$user		= JFactory::getUser();
+		
+		if($parent_id > 0){			
+			$options = self::get_subgroups($value ,$text,$parent_id,$user->get("id"));		
+			
+			if(count($options) == 0 ){
+				$options = self::get_subgroups($value ,$text,$parent_id,0);				
+			}
+		}
+		return $options;
+	}
 	
-		$where[] = "published = 1";
+	private static function get_subgroups($value ,$text,$parent_id,$group_leader = 0){
+		
+		$db		= JFactory::getDBO();
+		$option = array();
+		
+		$where[] = "published = 1";		
 		$where[] = "group_parent = ".$parent_id;
-		//$where[] = "group_leader = ".$user->get("id");
+		
+		if($group_leader > 0){
+			$where[] = "group_leader = ".$group_leader;
+		}
 		
 		// Build the query for the ordering list.
 		$query = 'SELECT group_id AS '.$value.', group_name AS '.$text .
 		' FROM '.CLUB_GROUPS_TABLE.
 		sprintf(" WHERE %s ",implode(" and ",$where )) .
-		' ORDER BY group_name asc ';	
-	
+		' ORDER BY group_name asc ';
+		
 		$db->setQuery($query);
 		try {
 			$options = $db->loadObjectList();
 		} catch (RuntimeException $e) {
 			JError::raiseWarning(500, $e->getMessage());
 		}
-	
+		
+		
 		return $options;
+		
 	}
+	
 	public static function get_member_list($value = "joomla_id" ,$text= "name"){
 		
 		$options = array();		
