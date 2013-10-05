@@ -70,7 +70,7 @@ window.addEvent('domready', function () {
 function editOther(dObject){
 	
 	var json_data = JSON.decode(dObject.get('rel'));		
-	var params = "option=com_clubreg&view=other&layout=edit&tmpl=component&format=raw";		
+	var params = "option=com_clubreg&view=other&layout=edit&tmpl=component";		
 	var durl = "index.php?"+params;	
 	
 	var a = new Request.HTML({

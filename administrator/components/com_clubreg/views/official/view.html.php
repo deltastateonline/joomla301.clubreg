@@ -28,7 +28,7 @@ class ClubRegViewOfficial extends JViewLegacy
 		$this->item		= $this->get('Item');
 		$this->form		= $this->get('Form');
 		
-		require_once JPATH_COMPONENT.'/helpers/clubregControls.php';
+		require_once JPATH_COMPONENT.'/helpers/clubregcontrols.php';
 		$this->extradetails = ClubRegControlsHelper::configOptions(CLUB_MEMBER_WHICH);
 		
 		// Check for errors.
