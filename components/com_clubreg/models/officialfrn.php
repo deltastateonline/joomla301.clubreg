@@ -138,7 +138,7 @@ class ClubregModelOfficialfrn extends JModelForm
 		}
 	
 		$db->setQuery($query);
-		$my_groups["group_leader"]  = $db->loadObjectList("group_id");	// ger all groups that you are a leader of
+		$my_groups["group_leader"]  = $db->loadObjectList("group_id");	// get all groups that you are a leader of
 		
 		@$allowed_groups = array_merge(array_keys($my_groups["group_member"]),array_keys($my_groups["group_leader"]), array(-1));
 	
@@ -157,6 +157,11 @@ class ClubregModelOfficialfrn extends JModelForm
 		$query->where('a.published = 1 ');
 		if(isset($group_type)){
 			$query->where('a.group_type =  '. $db->quote($group_type));
+		}
+		
+		if(count($my_groups["group_leader"]) > 0){
+			$all_mysubgroups = sprintf("a.group_parent in (%s)",implode(",",array_keys($my_groups["group_leader"])));			
+			$query->where($all_mysubgroups,"or");
 		}
 		
 		$db->setQuery($query);

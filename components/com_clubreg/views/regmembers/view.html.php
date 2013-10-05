@@ -39,6 +39,7 @@ class ClubRegViewregmembers extends JViewLegacy
 		return $this->renderregmembers();
 	}
 	private function renderregmembers(){
+		
 	
 		$user		= JFactory::getUser();
 		$proceed = FALSE;		

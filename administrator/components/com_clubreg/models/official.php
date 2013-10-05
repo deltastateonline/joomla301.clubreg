@@ -109,8 +109,7 @@ class ClubRegModelOfficial extends JModelAdmin
 		$query->where('a.status = 1');
 		
 		$db->setQuery($query);
-		$my_groups["group_member"] = $db->loadObjectList();
-		
+		$my_groups["group_member"] = $db->loadObjectList();		
 		
 		$query	= $db->getQuery(true);		
 		$d_var = "a.group_id, a.group_name";
@@ -119,9 +118,10 @@ class ClubRegModelOfficial extends JModelAdmin
 		$query->from($db->quoteName(CLUB_GROUPS_TABLE).' AS a');
 		
 		$query->where('a.group_leader = '.$joomla_id);
+		$query->where('a.status = 1');
 		
 		$db->setQuery($query);
-		$my_groups["group_leader"]  = $db->loadObjectList();
+		$my_groups["group_leader"]  = $db->loadObjectList();		
 		
 		return $my_groups;
 		
