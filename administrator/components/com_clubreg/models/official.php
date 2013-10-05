@@ -118,7 +118,7 @@ class ClubRegModelOfficial extends JModelAdmin
 		$query->from($db->quoteName(CLUB_GROUPS_TABLE).' AS a');
 		
 		$query->where('a.group_leader = '.$joomla_id);
-		$query->where('a.status = 1');
+		$query->where('a.published = 1');
 		
 		$db->setQuery($query);
 		$my_groups["group_leader"]  = $db->loadObjectList();		
