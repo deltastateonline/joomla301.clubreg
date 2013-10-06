@@ -45,7 +45,7 @@ line-height:24px;
 			<div class="row-fluid">The Team Leader and Team members are  made up of registered users of the joomla installation. These users have to be linked to this component for them to manage players within Clubreg</div>
 			<div class="row-fluid">ClubReg uses a configurable list of form controls, to collect and render the details about <strong>Coaches , Assistants and Club Officials</strong>. These details can be updated by either the site administrator or the Club officials themselves</div>		
 			<div class="row-fluid">ClubReg allows the club to take expression of interest from the public regarding joining the various groups or divisions within the club. These EOIs can then be converted into registered members or discarded.</div>
-			<div class="row-fluid">Key Features
+			<div class="row-fluid"><h3 class="alert alert-info">Key Features.</h3>
 					<ul>
 						<li>Accept Expression of interest for Junior or Senior Players</li>
 						<li>Convert or Register EOIs to registered Players</li>
@@ -63,8 +63,16 @@ line-height:24px;
 							<li>Add simple property details, to keep track of what items have been given to players</li>
 						</ol>
 						</li>
-					</ul>
-			
+					</ul>			
+			</div>
+			<div class="row-fluid"><h3 class="alert alert-info">Getting Started.</h3>
+					<ol>
+						<li>Link System users to <?php echo JText::_('COM_CLUBREG3') ?> component.</li>
+						<li>Grant Users permission to manage individual features.</li>
+						<li>Add <?php echo JText::_('COM_CLUBREG_GROUPN_LABEL') ?> and <?php echo JText::_('COM_CLUBREG_SUBGROUPN_LABEL') ?> then  assign team members to groups</li>
+						<li>Add <?php echo JText::_('COM_CLUBREG3') ?> menu option</li>
+						<li>Customize your installation, using the Global Configuration menu.  Add or remove tabs, Change position of tab etc </li>
+					</ol>
 			</div>
 		</div>
 		</div>

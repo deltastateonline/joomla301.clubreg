@@ -65,6 +65,7 @@
 			</field>		
 
 	</fieldset>
+	<!--
 	<fieldset name="dropbox"
 		label="Drop Box configuation"
 		description="Configuration for Drop Box"
@@ -95,7 +96,7 @@
 			description="COM_CLUBREG_APPACCESSTYPE_DESC" class="inputbox input-large"/>
 
 	</fieldset>
-	
+	-->
 	<fieldset name="tabs"
 			label="COM_CLUBREG_TAB_LABEL"
 			description="COM_CLUBREG_TAB_DESC"
