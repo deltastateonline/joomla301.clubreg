@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-  <layout title="Manage Club Members-">
+  <layout title="COM_CLUBREG_RENDERREG_DESC">
     <message>
-      <![CDATA[MANAGE CLUB MEMBERS Default File]]>
+      <![CDATA[COM_CLUBREG_RENDERREG_DESC]]>
     </message>
   </layout>
   <fields name="request">
@@ -84,11 +84,6 @@
 		type="media"
 		label="JFIELD_LOGOUT_IMAGE_LABEL"
 		description="JFIELD_LOGOUT_IMAGE_DESC"/>
-
-
-
 		</fieldset>
-	</fields>
-	
-	
+	</fields>	
 </metadata>
