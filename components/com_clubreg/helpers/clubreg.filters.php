@@ -159,19 +159,17 @@ class ClubRegFiltersHelper extends JObject
 		
 			$request_data = $filters["request_data"];
 			$group_where = $filters["group_where"];
-			$all_filters = $this->get_filters_headings($request_data, $group_where);
-			
+			$all_filters = $this->get_filters_headings($request_data, $group_where);			
 			
 			$inValue  = $request_data->get('filter.playertype');	
-			$attr = $all_filters["playertype"]["other"];
-			
-			
-			?>			
-			<fieldset class="eoi">
-			<div class="well well-small"><div class="pull-left"><strong><?php echo $all_filters["playertype"]["label"]?> : </strong> <?php echo JHtml::_('select.genericlist', $all_filters["playertype"]["values"],"playertype", trim($attr), 'value','text',$inValue);?></div>
+			$attr = $all_filters["playertype"]["other"];			
+			?>				
+			<fieldset class="eoi" >
+			<div class="well well-small" style="margin-bottom:5px;"><div class="pull-left"><strong><?php echo $all_filters["playertype"]["label"]?> : </strong> <?php echo JHtml::_('select.genericlist', $all_filters["playertype"]["values"],"playertype", trim($attr), 'value','text',$inValue);?></div>
 				<?php $this->getButtons(); ?>
 			</div>	
-			<div class="reg-filters well well-small">
+			<div><button class="btn btn-mini btn-primary show-filters" type="button" rel='0'>Show Filters</button></div>			
+			<div class="reg-filters well well-small" id="all_filters">
 			<div class="row-fluid">
 			<?php $attr="";
 			foreach($filters["filter_heading"] as $fkey=>$fvalue){ 
