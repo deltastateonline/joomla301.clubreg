@@ -49,10 +49,11 @@ class ClubRegRegmembersConfig extends JObject
 					 
 	private function getGuardian(&$headings = array()){
 		$entity_filters = $group_where =  array();
-		$class_ = "span3";
+		$class_ = "span4";
 		$entity_filters["surname"] = array("filter_col"=>array("a.`surname`","a.givenname"), "class"=>$class_);	
 		$entity_filters["gaddress"] = array("filter_col"=>array("a.`address`", "a.`suburb`","a.`postcode`"), "class"=>$class_);		
-	//	$entity_filters["year_registered"] = array("filter_col"=>"a.`year_registered`","control"=>"select.genericlist");		
+		$entity_filters["emailaddress"] = array("filter_col"=>"a.`emailaddress`", "class"=>$class_, "clearfix"=>true);
+			
 		
 		$headings["emailaddress"] = array("label"=>JText::_('JGLOBAL_EMAIL'), "clearfix"=>true);
 		$headings["t_phone"] = array("label"=>JText::_('COM_CLUBREG_MOBILE'),"sep"=>"/", "clearfix"=>true);
@@ -100,15 +101,16 @@ class ClubRegRegmembersConfig extends JObject
 	}
 	private function getJunior(&$headings = array()){
 		$entity_filters = $group_where =  array();
-		$class_ = "span4";
+		$class_ = "span3";
 		$entity_filters["surname"] = array("filter_col"=>array("a.`surname`","a.givenname"), "class"=>$class_);
 		$entity_filters["gaddress"] = array("filter_col"=>array("d.`address`", "d.`suburb`","d.`postcode`"), "class"=>$class_ );		
-		$entity_filters["gender"] = array("filter_col"=>"a.`gender`","control"=>"select.genericlist", "class"=>$class_,"clearfix"=>true);
+		$entity_filters["gender"] = array("filter_col"=>"a.`gender`","control"=>"select.genericlist", "class"=>$class_);
+		$entity_filters["year_registered"] = array("filter_col"=>"a.`year_registered`","control"=>"select.genericlist", "class"=>$class_ ,"clearfix"=>true);
 		
-		$class_ = "span2";
+		$class_ = "span3";
 		$entity_filters["group"] = array("filter_col"=>"a.`group`","control"=>"select.genericlist", "class"=>$class_);	
 		$entity_filters["subgroup"] = array("filter_col"=>"a.`subgroup`","control"=>"select.genericlist", "class"=>$class_);
-		$entity_filters["year_registered"] = array("filter_col"=>"a.`year_registered`","control"=>"select.genericlist", "class"=>$class_);			
+					
 		
 		$group_where[] = "a.group_type  = 'junior'";	
 
