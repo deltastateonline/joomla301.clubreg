@@ -58,7 +58,7 @@ class ClubRegRenderTablesRegMembersHelper extends ClubRegRenderTablesHelper
 				    <div class="clearfix"></div>
 				    <?php $this->rendererItems($an_item); ?>
 				    <div class="clearfix"></div>
-				    <p class="text-info pull-right small"><?php echo JText::_('COM_CLUBREG_REGISTERED_LABEL');?> :<?php echo $an_item->t_created_by;?> on  <?php echo $an_item->t_created_date;?></p>
+				    <p class=" pull-right small"><?php echo JText::_('COM_CLUBREG_REGISTERED_LABEL');?> :<?php echo $an_item->t_created_by;?> on  <?php echo $an_item->t_created_date;?></p>
 			    </td>			    
 			  </tr>			  
 			  <?php $i++; }
