@@ -76,9 +76,7 @@ class ClubregModelRegmembers extends JModelList
 		$all_string["t_created_by"] = "usert.name as `t_created_by`";
 		
 		$all_string["dob"] = " (if(a.dob = '0000-00-00' , '-' , date_format(a.dob,'%d/%m/%Y'))) as dob";
-		$all_string["gender"] = " (if(a.gender = '-1' , '' , a.gender)) as gender";
-		
-		
+		$all_string["gender"] = " (if(a.gender in ('0','-1') , '' , a.gender)) as gender";		
 		
 		//$table_join ="";	
 		$back_url["playertype"] =  $cfilter = 	$this->state->get('filter.playertype');

@@ -233,7 +233,10 @@ class ClubregModelRegmember extends JModelForm
 		$all_string["app_created_by"] = "user_approved.name as `app_created_by`";
 		
 		$all_string["dob"] = " (if(a.dob = '0000-00-00' , '-' , date_format(a.dob,'%d/%m/%Y'))) as dob";
-		$all_string["gender"] = " (if(a.gender = '-1' , '' , a.gender)) as gender";
+		$all_string["gender"] = " (if(a.gender in ('0','-1') , '' , a.gender)) as gender";
+		
+		//$all_string["gender"] = " (case a.gender when  '-1' , '' , a.gender)) as gender";
+		
 		
 		$all_string["groupleader"] = "group_leader.name as `groupleader`";
 		$all_string["member_level"] = "mlevel.config_name as member_level";
