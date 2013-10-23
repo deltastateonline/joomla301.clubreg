@@ -92,9 +92,8 @@ class ClubRegViewAjax extends JViewLegacy
 				
 				case "notes":
 					
-					$current_model = JModelLegacy::getInstance('note', 'ClubregModel', array('ignore_request' => true));
-					$current_model->setState('com_clubreg.note.note_id',$key_data->pk_id);
-					$current_model->setState('com_clubreg.note.note_key',$key_data->string_key);
+					$current_model = JModelLegacy::getInstance('note', 'ClubregModel', array('ignore_request' => true));					
+					$current_model->setState('com_clubreg.note.note_key',$key_data->full_key);
 					$this->itemForm =  $current_model->getForm();
 					
 				break;

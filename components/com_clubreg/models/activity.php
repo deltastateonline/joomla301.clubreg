@@ -83,7 +83,7 @@ class ClubRegModelActivity extends JModelLegacy
 				date_format(d.created, '%%d/%%m/%%Y %%H:%%i:%%s') as activity_created,
 				d.created as acreated,
 				if(length(d.notes) > 50,concat(SUBSTRING(d.notes,1,50),'...'),d.notes) as activity_item,
-				concat(note_id,note_key,'-',length(note_id)) as item_key,
+				hex(`note_key`) as item_key,
 				e.member_id, e.member_key		
 				from %s as d 	
 				left join %s as e on (d.primary_id = e.member_id)			
