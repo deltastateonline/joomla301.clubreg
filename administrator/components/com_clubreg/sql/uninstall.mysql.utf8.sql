@@ -16,6 +16,8 @@ DROP TABLE IF EXISTS `#__clubreg_payments`;
 
 DROP TABLE IF EXISTS `#__clubreg_payments_setup`;
 
+DROP TABLE IF EXISTS `#__clubreg_property_sheet`;
+
 DROP TABLE IF EXISTS `#__clubreg_registeredmembers`;
 
 DROP TABLE IF EXISTS `#__clubreg_saved_comms`;

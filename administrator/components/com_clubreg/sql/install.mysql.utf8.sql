@@ -3,12 +3,18 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 08, 2013 at 03:53 AM
+-- Generation Time: Oct 22, 2013 at 04:41 AM
 -- Server version: 5.0.41
 -- PHP Version: 5.3.9
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `joomla_301`
@@ -39,13 +45,14 @@ CREATE TABLE IF NOT EXISTS `#__clubreg_attachments` (
   `attachment_access_level` int(11) default NULL,
   PRIMARY KEY  (`attachment_id`),
   KEY `link_id` (`primary_id`,`link_type`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='store files' AUTO_INCREMENT=17 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='store files' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `#__clubreg_configs`
 --
+
 CREATE TABLE IF NOT EXISTS `#__clubreg_configs` (
   `config_id` int(11) NOT NULL auto_increment,
   `config_name` varchar(255) NOT NULL default '',
@@ -61,12 +68,10 @@ CREATE TABLE IF NOT EXISTS `#__clubreg_configs` (
   `params` varchar(1024) NOT NULL default '',
   PRIMARY KEY  (`config_id`),
   UNIQUE KEY `config_short` (`config_short`,`which_config`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Store all configuration List' AUTO_INCREMENT=155 ;
-
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COMMENT='Store all configuration List' AUTO_INCREMENT=1 ;
 --
 -- Dumping data for table `#__clubreg_configs`
 --
-
 INSERT INTO `#__clubreg_configs` (`config_id`, `config_name`, `config_short`, `config_text`, `config_type`, `which_config`, `config_comments`, `createdby`, `created`, `ordering`, `published`, `params`) VALUES
 (2, 'Male', 'male', '', '', 'gender', NULL, 62, '2011-03-20 21:23:20', 1, 1, ''),
 (8, 'Female', 'female', '', '', 'gender', NULL, 62, '2011-03-23 05:46:54', 2, 1, ''),
@@ -76,23 +81,13 @@ INSERT INTO `#__clubreg_configs` (`config_id`, `config_name`, `config_short`, `c
 (36, 'Dr.', 'dr', '', '', 'title', NULL, 62, '2011-04-02 21:13:57', 2, 1, ''),
 (37, 'Chief', 'chief', '', '', 'title', NULL, 62, '2011-04-02 21:14:08', 1, 1, ''),
 (38, 'Eng', 'eng', '', '', 'title', NULL, 62, '2011-04-02 21:14:16', 3, 1, ''),
-(43, 'Birth Certificate', 'birth_certificate', '', '', 'documents', NULL, 62, '2011-04-16 16:40:09', 2, 1, ''),
-(44, 'Police Reports', 'police_reports', '', '', 'documents', NULL, 62, '2011-04-16 16:40:19', 3, 1, ''),
-(45, 'Local Govt Area of Origin', 'local_govt_area_of_origin', '', '', 'documents', NULL, 62, '2011-04-16 16:41:13', 4, 1, ''),
-(50, 'Enrolment Numbering', 'enrolment_numbering', 'a:3:{s:6:"prefix";s:3:"BMC";s:9:"currentno";i:9;s:7:"padding";i:5;}', '', 'enrolment_numbering', NULL, 62, '2011-04-23 18:30:36', 1, 1, ''),
-(56, 'Documents', 'documents', '', '', 'TOPMOST', NULL, 62, '2011-05-04 03:36:04', 5, 1, 'sort_list_by=ordering'),
 (57, 'Gender', 'gender', '', '', 'TOPMOST', NULL, 62, '2011-05-04 03:36:21', 5, 1, 'sort_list_by=ordering\nconfig_type=list'),
-(61, 'Student Status', 'student_status', '', '', 'TOPMOST', NULL, 62, '2011-05-04 03:37:45', 9, 1, 'sort_list_by=ordering\nconfig_type=list'),
 (62, 'Title', 'title', '', '', 'TOPMOST', NULL, 62, '2011-05-04 03:38:01', 10, 99, 'sort_list_by=ordering'),
 (63, 'Enrolment Dates', 'enrol_date', '', '', 'TOPMOST', NULL, 62, '2011-05-29 08:45:45', 4, 1, 'sort_list_by=ordering\nconfig_type=list'),
 (64, 'Last 7 Days', '7days', '', '', 'enrol_date', NULL, 62, '2011-05-29 08:58:22', 1, 1, ''),
 (65, 'Last Month', '30days', '', '', 'enrol_date', NULL, 62, '2011-05-29 08:58:35', 2, 1, ''),
-(68, 'Registration Year', 'reg_year', '', '', 'TOPMOST', 'The year the current registration is for', 62, '2011-07-03 17:33:08', 12, 1, 'sort_list_by=ordering\nconfig_type=list'),
-(69, '2010-2011', '2010-2011', '', '', 'reg_year', '', 62, '2011-07-03 17:34:36', 1, 1, 'sort_list_by=ordering\nconfig_type=list'),
-(70, '2011-2012', '2011-2012', '', '', 'reg_year', '', 62, '2011-07-03 17:35:06', 2, 1, 'sort_list_by=ordering\nconfig_type=list'),
+(66, 'Enrolment  Number Systems', 'numbering_sys', '', '', 'TOPMOST', NULL, 62, '2011-06-05 04:13:02', 11, 1, 'sort_list_by=ordering\nconfig_type=object'),
 (71, 'Groups', 'groups', '', '', 'TOPMOST', '', 62, '2011-07-03 17:36:38', 13, 1, 'sort_list_by=ordering\nconfig_type=list'),
-(72, 'Squirts', 'squirts', '', '', 'groups', '', 62, '2011-07-03 17:37:39', 1, 1, 'sort_list_by=ordering\nconfig_type=list'),
-(73, 'Under 6', 'under_6', '', '', 'groups', '', 62, '2011-07-03 17:37:51', 2, 1, 'sort_list_by=ordering\nconfig_type=list'),
 (74, 'Club Officials Details', 'club_official_details', '', '', 'TOPMOST', 'Holds a list of possible club memeber controls', 62, '2011-08-13 23:49:46', 16, 1, '{"config_type":"inputfields","sort_list_by":"ordering"}'),
 (75, 'School Attending', 'school_attending', '', '', 'club_official_details', '', 62, '2011-08-13 23:50:21', 3, 1, ''),
 (76, 'Email Address', 'email_address', '', '', 'club_official_details', '', 62, '2011-08-13 23:50:53', 1, 1, '{"assign_to":"both","control_type":"email","default_value":"","control_width":"","control_class":""}'),
@@ -159,7 +154,14 @@ INSERT INTO `#__clubreg_configs` (`config_id`, `config_name`, `config_short`, `c
 (151, 'Division Type', 'club_grouptype', 'Store the group or division type', '', 'TOPMOST', NULL, 7, '2013-01-06 08:22:09', 25, 1, '{"config_type":"list","sort_list_by":""}'),
 (152, 'Junior', 'junior', '', '', 'club_grouptype', NULL, 7, '2013-01-06 08:22:40', 1, 1, '{"assign_to":"junior"}'),
 (153, 'Senior', 'senior', '', '', 'club_grouptype', NULL, 7, '2013-01-06 08:23:01', 2, 1, '{"assign_to":"senior"}'),
-(154, 'Sport Equipment', 'sport_equipment', '', '', 'club_documents', NULL, 7, '2013-07-21 16:01:25', 4, 1, '{"assign_to":"both"}');
+(154, 'Sport Equipment', 'sport_equipment', '', '', 'club_documents', NULL, 7, '2013-07-21 16:01:25', 4, 1, '{"assign_to":"both"}'),
+(155, 'Reciepts', 'reciepts', '', '', 'club_documents', NULL, 7, '2013-08-31 16:31:40', 5, 1, '{"assign_to":"both"}'),
+(156, 'Office Key', 'office_key', '', '', 'clubreg_asset_type', NULL, 7, '2013-09-11 10:59:06', 5, 1, '{"assign_to":"both"}'),
+(157, 'Key Card', 'key_card', '', '', 'clubreg_asset_type', NULL, 7, '2013-09-11 10:58:41', 4, 1, '{"assign_to":"both"}'),
+(158, 'Mobile Phone', 'mobile_phone', '', '', 'clubreg_asset_type', NULL, 7, '2013-09-11 10:58:21', 3, 1, '{"assign_to":"both"}'),
+(159, 'Laptop', 'laptop', '', '', 'clubreg_asset_type', NULL, 7, '2013-09-11 10:58:09', 2, 1, '{"assign_to":"both"}'),
+(160, 'Desktop', 'desktop', '', '', 'clubreg_asset_type', NULL, 7, '2013-09-11 10:57:53', 1, 1, '{"assign_to":"both"}'),
+(161, 'Asset Type', 'clubreg_asset_type', '', '', 'TOPMOST', NULL, 7, '2013-09-11 10:57:02', 28, 1, '{"config_type":"list","sort_list_by":""}');
 
 -- --------------------------------------------------------
 
@@ -174,10 +176,6 @@ CREATE TABLE IF NOT EXISTS `#__clubreg_contact_details` (
   `contact_value` text NOT NULL,
   PRIMARY KEY  (`member_id`,`contact_detail`,`contact_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contact Details';
-
---
--- Dumping data for table `#__clubreg_contact_details`
---
 
 -- --------------------------------------------------------
 
@@ -198,10 +196,6 @@ CREATE TABLE IF NOT EXISTS `#__clubreg_details_audit` (
   KEY `primary_id_2` (`primary_id`,`short_desc`),
   KEY `primary_id_3` (`primary_id`,`created_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `#__clubreg_details_audit`
---
 
 -- --------------------------------------------------------
 
@@ -235,11 +229,7 @@ CREATE TABLE IF NOT EXISTS `#__clubreg_eoimembers` (
   `playertype` varchar(11) default NULL,
   PRIMARY KEY  (`member_id`),
   KEY `parent_id` (`parent_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=51 ;
-
---
--- Dumping data for table `#__clubreg_eoimembers`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -267,11 +257,7 @@ CREATE TABLE IF NOT EXISTS `#__clubreg_groups` (
   PRIMARY KEY  (`group_id`),
   UNIQUE KEY `config_short` (`group_short`),
   KEY `which_config` (`which_config`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COMMENT='Store all club groups' AUTO_INCREMENT=22 ;
-
---
--- Dumping data for table `#__clubreg_groups`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COMMENT='Store all club groups' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -280,23 +266,18 @@ CREATE TABLE IF NOT EXISTS `#__clubreg_groups` (
 --
 
 CREATE TABLE IF NOT EXISTS `#__clubreg_notes` (
-  `note_id` int(11) NOT NULL auto_increment,
-  `note_key` varchar(30) NOT NULL,
+  `note_key` binary(16) NOT NULL,
   `primary_id` int(11) NOT NULL COMMENT 'can either be for members or groups',
   `notes` text NOT NULL,
   `created` datetime NOT NULL,
   `created_by` int(11) NOT NULL,
   `note_status` tinyint(11) NOT NULL,
   `note_type` varchar(15) NOT NULL default 'member',
-  PRIMARY KEY  (`note_id`),
   KEY `member_id` (`primary_id`,`created_by`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `#__clubreg_notes`
---
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
+
 
 --
 -- Table structure for table `#__clubreg_payments`
@@ -318,11 +299,7 @@ CREATE TABLE IF NOT EXISTS `#__clubreg_payments` (
   `created_by` int(11) default NULL,
   PRIMARY KEY  (`payment_id`),
   KEY `member_id` (`member_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
-
---
--- Dumping data for table `#__clubreg_payments`
---
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -344,9 +321,28 @@ CREATE TABLE IF NOT EXISTS `#__clubreg_payments_setup` (
   PRIMARY KEY  (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `#__clubreg_payments_setup`
+-- Table structure for table `#__clubreg_property_sheet`
 --
+
+CREATE TABLE IF NOT EXISTS `#__clubreg_property_sheet` (
+  `property_id` int(11) NOT NULL auto_increment,
+  `property_key` varchar(30) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `property_type` varchar(128) NOT NULL,
+  `property_make` varchar(128) NOT NULL,
+  `property_model` varchar(128) NOT NULL,
+  `property_serial` varchar(128) NOT NULL,
+  `property_checked_out` date NOT NULL,
+  `property_checked_in` date NOT NULL,
+  `property_notes` varchar(512) NOT NULL,
+  `created` datetime NOT NULL,
+  `created_by` int(11) NOT NULL,
+  PRIMARY KEY  (`property_id`),
+  KEY `member_id` (`member_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -390,10 +386,6 @@ CREATE TABLE IF NOT EXISTS `#__clubreg_registeredmembers` (
   KEY `playertype` (`playertype`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
---
--- Dumping data for table `#__clubreg_registeredmembers`
---
-
 -- --------------------------------------------------------
 
 --
@@ -415,10 +407,6 @@ CREATE TABLE IF NOT EXISTS `#__clubreg_saved_comms` (
   KEY `template_id` (`template_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='store saved communications' AUTO_INCREMENT=1 ;
 
---
--- Dumping data for table `#__clubreg_saved_comms`
---
-
 -- --------------------------------------------------------
 
 --
@@ -432,10 +420,6 @@ CREATE TABLE IF NOT EXISTS `#__clubreg_stats_details` (
   `stats_value` varchar(512) NOT NULL,
   PRIMARY KEY  (`member_id`,`stats_date`,`stats_detail`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Stats details';
-
---
--- Dumping data for table `#__clubreg_stats_details`
---
 
 -- --------------------------------------------------------
 
@@ -454,10 +438,6 @@ CREATE TABLE IF NOT EXISTS `#__clubreg_tags` (
   UNIQUE KEY `tag_text` (`tag_text`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
---
--- Dumping data for table `#__clubreg_tags`
---
-
 -- --------------------------------------------------------
 
 --
@@ -470,10 +450,6 @@ CREATE TABLE IF NOT EXISTS `#__clubreg_tags_players` (
   PRIMARY KEY  (`tag_id`,`member_id`),
   KEY `tag_id` (`tag_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `#__clubreg_tags_players`
---
 
 -- --------------------------------------------------------
 
@@ -488,10 +464,6 @@ CREATE TABLE IF NOT EXISTS `#__clubreg_teammembers` (
   PRIMARY KEY  (`joomla_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `#__clubreg_teammembers`
---
-
 -- --------------------------------------------------------
 
 --
@@ -505,10 +477,6 @@ CREATE TABLE IF NOT EXISTS `#__clubreg_teammembers_details` (
   PRIMARY KEY  (`joomla_id`,`member_detail`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `#__clubreg_teammembers_details`
---
-
 -- --------------------------------------------------------
 
 --
@@ -521,10 +489,6 @@ CREATE TABLE IF NOT EXISTS `#__clubreg_teammembers_groups` (
   `status` int(11) NOT NULL default '1',
   PRIMARY KEY  (`joomla_id`,`group_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `#__clubreg_teammembers_groups`
---
 
 -- --------------------------------------------------------
 
@@ -565,3 +529,4 @@ INSERT INTO `#__clubreg_templates` (`template_id`, `template_name`, `template_su
 (3, 'Notice of Meeting', 'Next Meeting Invitation', '<p>Dear Member,</p>\r\n<p>A general meeting will be held on {} at {}</p>\r\n<p>Please endevour to attend because matters will be discussed.</p>\r\n<p>Best Regards</p>\r\n<p>General Secretary</p>', 'Dear Member,\r\nA general meeting will be held on {} at {}\r\nPlease endevour to attend because matters will be discussed.\r\nBest Regards\r\nGeneral Secretary', 'new_template', 0, 'team_members', '2011-09-04 18:23:50', 62, 0, '0000-00-00 00:00:00', 1, 3, ''),
 (4, 'Expression Of Interest', 'Expression Of Interest For Player', '<p>Thank you for registering your expression of interest.</p>\r\n<p>One of our team leaders will get back to you in due course.</p>\r\n<p>If you have further enquiries please feel free to contact us, using our contact form.</p>\r\n<p>Yours Truly</p>\r\n<p>Site Administrator</p>', 'Thank you for registering your expression of interest.\r\nOne of our team leaders will get back to you in due course.\r\nIf you have further enquiries please feel free to contact us, using our contact form.\r\nYours Truly\r\nSite Administrator', 'active_template', 0, 'everyone', '2011-10-04 06:40:33', 62, 0, '0000-00-00 00:00:00', 1, 4, ''),
 (5, 'Urgent Email', 'URGENT MESSAGE RE PRESENTATION', '<h1>ATTENTION ALL SQUIRTZ & SSG PLAYERS</h1>\r\n<h2>WE REGRET TO INFORM YOU THAT THE RESCHEDULED PRESENTATION/ROUND ROBIN EVENT SET DOWN FOR THE 28TH AUGUST IS TO BE CANCELLED DUE TO THE PRESENT & FORECASTED WEEKEND WEATHER CONDITIONS.</h2>\r\n<p>We understand how difficult & frustrating these changes are & therefore, to avoid any further disappointment, we are seeking to organise an indoor venue to hold the presentation regardless of the weather.</p>\r\n<p>These details will be posted as soon as we are able to finalise them.</p>\r\n<p>Again, we apologise for the inconvenience caused.</p>', 'ATTENTION ALL SQUIRTZ & SSG PLAYERS\r\nWE REGRET TO INFORM YOU THAT THE RESCHEDULED PRESENTATION/ROUND ROBIN EVENT SET DOWN FOR THE 28TH AUGUST IS TO BE CANCELLED DUE TO THE PRESENT & FORECASTED WEEKEND WEATHER CONDITIONS.\r\nWe understand how difficult & frustrating these changes are & therefore, to avoid any further disappointment, we are seeking to organise an indoor venue to hold the presentation regardless of the weather.\r\nThese details will be posted as soon as we are able to finalise them.\r\nAgain, we apologise for the inconvenience caused.', 'active_template', 0, 'everyone', '2012-03-01 05:00:19', 62, 0, '0000-00-00 00:00:00', 1, 5, '');
+
