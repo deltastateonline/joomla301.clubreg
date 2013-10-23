@@ -148,7 +148,9 @@ class ClubRegFiltersHelper extends JObject
 	<div class="btn-group pull-right">
 	<button class="btn btn-small btn-primary" type="button" onclick="document.adminForm.layout.value='rendereoi';return Joomla.submitbutton('filter');">Filter</button>
 	<button class="btn btn-small" type="button" onclick="if (document.adminForm.boxchecked.value==0){alert('<?php echo JText::_('CLUBREG_PLEASE_SELECT'); ?>');}else{Joomla.submitbutton('eois.register');}" ><?php echo JText::_('CLUBREG_REGISTER');?></button>
+	<?php if(LIVE_SITE){?>
 	<button class="btn btn-small" type="button" onclick="if (document.adminForm.boxchecked.value==0){alert('<?php echo JText::_('CLUBREG_PLEASE_SELECT'); ?>');}else{Joomla.submitbutton('eois.delete');}" ><?php echo JText::_('CLUBREG_DELETE');?></button>
+	<?php } ?>
 	<button class="btn btn-small" type="button" onclick="document.adminForm.layout.value='exporteois';return Joomla.submitbutton('filter');"><?php echo JText::_('CLUBREG_EXPORT');?></button>
 	</div>
 	<?php

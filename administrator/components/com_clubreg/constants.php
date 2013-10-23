@@ -100,4 +100,6 @@ $clubreg_params["setting"]["taxrate"]= array("label"=>"Tax Rate");
 $clubreg_params["setting"]["assign_to"]= array("label"=>"Applies To");
 $clubreg_params["payment"]["assign_to"]= array("label"=>"Applies To");
 
+define('LIVE_SITE',FALSE);
+
 include_once("debugger.php");

@@ -30,9 +30,20 @@ window.addEvent('domready', function () {
 		var searchSlider =  new Fx.Slide("regdata_"+idx);
 		searchSlider.toggle();
 		
+	});
 	
-
-		
+	var showFilters =  new Fx.Slide("all_filters");
+	$("all_filters").slide('hide').setStyle('visibility', 'visible');
+	
+	$$(".show-filters").addEvent('click',function(event){		
+		showFilters.toggle();	
+		if(this.get('rel') == 0){
+			this.set('rel','1');
+			this.set('html',"Hide Filters");	
+		}else{
+			this.set('rel','0');
+			this.set('html',"Show Filters");	
+		}
 	});
 	
 });
