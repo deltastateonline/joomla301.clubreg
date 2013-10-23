@@ -87,6 +87,7 @@ templates/beez3/
 templates/meet_gavern/
 templates/protostar/
 templates/system/
+templates/js_wright/
 
 administrator/cache/
 administrator/help/
@@ -124,6 +125,8 @@ com_tags/
 com_templates/
 com_users/
 com_weblinks/
+com_clubreg.validate.works/
+com_jedchecker/
 
 #Language files Front End
 
@@ -201,6 +204,7 @@ en-GB.tpl_protostar.ini
 en-GB.tpl_protostar.sys.ini
 en-GB.xml
 en-GB.lib_idna_convert.sys.ini
+en-GB.tpl_js_wright.*
 index.html
 
 #Language File Admin
@@ -257,6 +261,7 @@ en-GB.com_weblinks.ini
 en-GB.com_weblinks.sys.ini
 en-GB.com_wrapper.ini
 en-GB.com_wrapper.sys.ini
+en-GB.com_jedchecker*
 en-GB.ini
 en-GB.lib_joomla.ini
 en-GB.localise.php
