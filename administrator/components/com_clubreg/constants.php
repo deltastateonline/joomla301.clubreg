@@ -101,5 +101,6 @@ $clubreg_params["setting"]["assign_to"]= array("label"=>"Applies To");
 $clubreg_params["payment"]["assign_to"]= array("label"=>"Applies To");
 
 define('LIVE_SITE',FALSE);
+define('ATTACHMENT_LIMIT',5);
 
 include_once("debugger.php");

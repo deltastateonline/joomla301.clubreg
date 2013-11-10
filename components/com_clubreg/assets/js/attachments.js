@@ -8,14 +8,13 @@ window.addEvent('domready', function () {
 	
 	if($('profile-attachments')){			
 		attachmentsListDiv.setDivObject($('profile-attachments'));
-		attachmentsListDiv.renderList();
+		attachmentsListDiv.renderList();		
 	}
 	
 	$$(".profile-attachment-button").addEvent('click',function(event){		
 		
 		$('jform_attnotes').set('value','');
-		$('jform_attachment').set('value','');
-		
+		$('jform_attachment').set('value','');		
 		
 		var searchSlider =  new Fx.Slide("attachmentFormDiv");
 		searchSlider.toggle();		
@@ -66,6 +65,16 @@ window.addEvent('domready', function () {
 				 attachmentAction($(this),"ajax.lockattachment");
 			 }		
 		 });
+		 
+		 
+		 container.addEvent('click:relay(.profile-attach-content-btn)', function(){
+			 
+			 var json_data = JSON.decode(this.get('rel'));			 
+			 var attach_content =  new Fx.Slide("profile-attach-"+json_data['content_key']);
+			 attach_content.toggle();			
+			 
+		 });		 
+			 
 	 }
 });
 

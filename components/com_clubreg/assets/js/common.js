@@ -57,7 +57,7 @@ var divListRenderer = new Class({
 			data : json_data,
 			update: current_div,
 			onSuccess: function(responseText){ current_div.removeClass('loading1');$('loading-div').removeClass('loading-small');},
-			onFailure:function(){ profileFailure(this); }
+			onFailure:function(){ profileFailure(this); }		
 			}).send();
 	}
 	

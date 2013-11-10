@@ -11,11 +11,20 @@
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 global $clubreg_Itemid;
+?>
+<script type="text/javascript">
+	$$('.profile-attach-all').each(function(el) {
+	    el.slide('hide');
+	});
+</script>
+<?php 
 if(count($this->attachments)>0){	
 	$all_document_type = $all_document_list = array();
 	
 	
 	foreach($this->attachments as $an_attachment){ 
+		
+		
 		
 		$fkey = $this->uKeyObject->constructKey($an_attachment->attachment_id,$an_attachment->attachment_key);
 		$rel_string = json_encode(array('Itemid'=>$clubreg_Itemid,'attachment_key'=>$fkey));
@@ -41,11 +50,19 @@ if(count($this->attachments)>0){
 	}	
 	
 	foreach($all_attachment_type as $att_type => $att_name){
+		$rel_string = json_encode(array('content_key'=>$att_type));
+		$howmany = count($all_document_list[$att_type]);
+		
+		$hide_all_class = "";
+		if($howmany >= ATTACHMENT_LIMIT){
+			$hide_all_class = "profile-attach-all";
+		}
+		
 		?>
-		<div class="profile-sub-head-div"><?php echo $att_name ;?></div>		
-		<?php 	echo implode("\n",$all_document_list[$att_type]); 
-				
-		?>
+		<div class="profile-sub-head-div" ><?php echo $att_name ;?><a class="label label-info pull-right profile-attach-content-btn"  rel=<?php echo $rel_string; ?>><?php echo $howmany." ".JText::_(COM_CLUBREG_PROFILE_ATTACHMENTS); ?></a></div>
+		<div class="<?php echo $hide_all_class; ?>" id="profile-attach-<?php echo $att_type; ?>" >
+			<?php 	echo implode("\n",$all_document_list[$att_type]); 	?>
+		</div>		
 		
 		<div class="clearfix"></div>
 	<?php 
