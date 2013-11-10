@@ -1,4 +1,16 @@
 <?php 
+/*------------------------------------------------------------------------
+ # com_clubreg - Manage Club Member Registrations
+# ------------------------------------------------------------------------
+# author    Omokhoa Agbagbara
+# copyright Copyright (C) 2013 applications.deltastateonline.com. All Rights Reserved.
+# @license - http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+# Websites: http://applications.deltastateonline.com
+# Technical Support:  email - joomla@deltastateonline.com
+-------------------------------------------------------------------------*/
+// no direct access
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
 	$listOrder	= $this->escape($this->state->get('list.ordering'));
 	$listDirn	= $this->escape($this->state->get('list.direction'));
 	$archived   = $this->state->get('filter.published') == 2 ? true : false;

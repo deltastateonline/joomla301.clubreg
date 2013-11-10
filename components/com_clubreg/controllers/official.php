@@ -38,7 +38,8 @@ class ClubregControllerOfficial extends JControllerForm
 		if ($userId != $loginUserId)
 		{
 			//JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
-			$app->enqueueMessage("Not Authorised Edit Profile", 'warning');
+			$un_auth = JText::_('CLUBREG_NOTAUTH');
+			$app->enqueueMessage($un_auth, 'warning');
 			$durl = JRoute::_('index.php?option=com_clubreg&view=official&layout=noauth&Itemid='.$Itemid, false);
 			$this->setRedirect($durl);
 			return false;

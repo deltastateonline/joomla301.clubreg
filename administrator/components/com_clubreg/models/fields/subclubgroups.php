@@ -8,8 +8,8 @@
 # Websites: http://applications.deltastateonline.com
 # Technical Support:  email - joomla@deltastateonline.com
 -------------------------------------------------------------------------*/
-
-defined('JPATH_BASE') or die;
+// no direct access
+defined( '_JEXEC' ) or die( 'Restricted access' );
 
 class JFormFieldSubclubgroups extends JFormField
 {

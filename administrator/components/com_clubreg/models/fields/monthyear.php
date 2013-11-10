@@ -8,13 +8,13 @@
 # Websites: http://applications.deltastateonline.com
 # Technical Support:  email - joomla@deltastateonline.com
 -------------------------------------------------------------------------*/
+// no direct access
+defined( '_JEXEC' ) or die( 'Restricted access' );
 
 /**
  * this is a composite control ie made up of 2 controls, but only i vaule will be store in the database table.
  * month-year, rather than trying to save 2 values.
  */
-
-defined('JPATH_BASE') or die;
 
 class JFormFieldMonthyear extends JFormField
 {

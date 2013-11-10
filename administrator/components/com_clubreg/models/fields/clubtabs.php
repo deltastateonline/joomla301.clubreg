@@ -8,8 +8,8 @@
 # Websites: http://applications.deltastateonline.com
 # Technical Support:  email - joomla@deltastateonline.com
 -------------------------------------------------------------------------*/
-
-defined('JPATH_BASE') or die;
+// no direct access
+defined( '_JEXEC' ) or die( 'Restricted access' );
 define('DS',DIRECTORY_SEPARATOR);
 require_once (JPATH_ADMINISTRATOR.DS.'components'.DS.'com_clubreg'.DS.'constants.php');
 require_once (JPATH_ADMINISTRATOR.DS.'components'.DS.'com_clubreg'.DS.'helpers'.DS.'clubreg.php');

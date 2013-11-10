@@ -1,6 +1,6 @@
 <?php 
 /*------------------------------------------------------------------------
- # com_clubreg - Manage Club Member Registrations
+# com_clubreg - Manage Club Member Registrations
 # ------------------------------------------------------------------------
 # author    Omokhoa Agbagbara
 # copyright Copyright (C) 2013 applications.deltastateonline.com. All Rights Reserved.
@@ -8,8 +8,8 @@
 # Websites: http://applications.deltastateonline.com
 # Technical Support:  email - joomla@deltastateonline.com
 -------------------------------------------------------------------------*/
-
-defined('_JEXEC') or die;
+// no direct access
+defined( '_JEXEC' ) or die( 'Restricted access' );
 
 JFormHelper::loadFieldClass('list');
 

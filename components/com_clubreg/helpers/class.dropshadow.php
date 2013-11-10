@@ -1,5 +1,4 @@
 <?php
-
 //
 // class.dropshadow.php
 // version 2.0.0, 21st May, 2003

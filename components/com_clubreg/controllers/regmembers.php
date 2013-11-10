@@ -31,11 +31,11 @@ class ClubregControllerRegmembers extends JControllerLegacy
 		
 		$reg_id = $app->input->post->get('cid',array(),'array');		
 		
-		if($user->get('id') > 0){
+		if($user->get('id') > 0 ){
 			$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
 			$current_model->setState('joomla_id',$user->get('id'));
 		
-			if($current_model->getPermissions('deletereg')){
+			if($current_model->getPermissions('deletereg') && LIVE_SITE){
 				if(count($reg_id) > 0 ){
 					
 					$db = JFactory::getDbo();
@@ -68,11 +68,11 @@ class ClubregControllerRegmembers extends JControllerLegacy
 		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
 		$uKeyObject = new ClubRegUniqueKeysHelper(10);
 		
-		if($user->get('id') > 0){
+		if($user->get('id') > 0 ){
 			$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
 			$current_model->setState('joomla_id',$user->get('id'));
 		
-			if($current_model->getPermissions('deletereg')){
+			if($current_model->getPermissions('deletereg') && LIVE_SITE){
 				if(count($reg_id) > 0 ){
 		
 					$db = JFactory::getDbo();
