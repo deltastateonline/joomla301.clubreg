@@ -170,7 +170,10 @@ class ClubRegFiltersHelper extends JObject
 			<div class="well well-small" style="margin-bottom:5px;"><div class="pull-left"><strong><?php echo $all_filters["playertype"]["label"]?> : </strong> <?php echo JHtml::_('select.genericlist', $all_filters["playertype"]["values"],"playertype", trim($attr), 'value','text',$inValue);?></div>
 				<?php $this->getButtons(); ?>
 			</div>	
-			<div><button class="btn btn-mini btn-primary show-filters" type="button" rel='0'>Show Filters</button></div>			
+			<div><button class="btn btn-mini btn-primary show-filters" type="button" rel='0'>Show Filters</button>
+			<div id="reg-filter-selected" class="pull-right"></div>	
+			</div>
+					
 			<div class="reg-filters well well-small" id="all_filters">
 			<div class="row-fluid">
 			<?php $attr="";
