@@ -46,7 +46,7 @@ class ClubRegViewAjax extends JViewLegacy
 			$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));			
 			$current_model->setState('joomla_id',$user->get('id'));		
 			
-			if($current_model->getPermissions('manageeoi')){
+			if($current_model->getPermissions('manageeoi') && $current_model->getPermissions('showeoi') ){
 				$proceed = TRUE;
 				unset($current_model);
 				$current_model = JModelLegacy::getInstance('eois', 'ClubregModel', array('ignore_request' => true));

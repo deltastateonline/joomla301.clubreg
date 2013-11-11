@@ -23,6 +23,8 @@ $activeTab = $this->state->get('official.activeTab');
 if(!isset($activeTab)){
 	$activeTab = "general-details";
 }
+
+$all_fieldsets = $this->form->getFieldsets();
 ?>
 <script type="text/javascript">
 	Joomla.submitbutton = function(task)
@@ -56,7 +58,7 @@ if(!isset($activeTab)){
 				<?php endforeach; ?>
 				
 				<fieldset>
-					<legend><?php echo GROUP;?> Details</legend>
+					<legend><?php echo JText::_('COM_CLUBREG_GROUPN_LABEL');?> Details</legend>
 					<?php  $group_fields =  $this->form->getFieldset('groupdetails') ;	?>
 						<div class="control-group"> 
 							<div class="control-label">
@@ -81,6 +83,7 @@ if(!isset($activeTab)){
 				
 				<div class="span3 pull-right">													
 					<fieldset class="form-vertical">
+					<legend><?php echo JText::_($all_fieldsets["configItems"]->label) ?></legend>						
 						<?php foreach($this->form->getFieldset('configItems') as $field): ?>
 					<div class="control-group"> 
 						<?php if (!$field->hidden): ?>
@@ -95,6 +98,24 @@ if(!isset($activeTab)){
 			<?php endforeach; ?>					
 					</fieldset>	
 				</div>
+				
+				<div class="span3 pull-right">													
+					<fieldset class="form-vertical">
+					<legend><?php echo JText::_($all_fieldsets["showdashboard"]->label) ?></legend>					
+						<?php foreach($this->form->getFieldset('showdashboard') as $field): ?>
+					<div class="control-group"> 
+						<?php if (!$field->hidden): ?>
+							<div class="control-label">
+								<?php echo $field->label; ?>
+							</div>
+						<?php endif; ?>
+						<div class="controls">
+							<?php echo $field->input; ?>
+						</div>
+					</div>
+			<?php endforeach; ?>					
+					</fieldset>	
+				</div>				
 			</div>
 		<?php 
 			echo JHtml::_('bootstrap.endPanel');

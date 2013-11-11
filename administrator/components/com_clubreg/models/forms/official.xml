@@ -31,7 +31,7 @@
 	
 	
 	<fields name="params">	
-		<fieldset name="configItems" label="Default Parameters" description="Default Parameters." >			
+		<fieldset name="configItems" label="COM_CLUBREG_OFFICIAL_PARAMETERS" description="Default Parameters." >			
 
 			<field name="manageeoi" type="list" default="no" label="Manage EOI" description="Manage EOI">
 				<option value="0">-Selete Choice-</option>	
@@ -60,6 +60,18 @@
 				<option value="yes">Allowed</option>	
 				<option value="no">Not Allowed</option>					
 			</field> 		
-		</fieldset>			
+		</fieldset>	
+		<fieldset name="showdashboard" label="COM_CLUBREG_OFFICIAL_DASHBOARD" description="COM_CLUBREG_OFFICIAL_DASHBOARD_DESC" >			
+			<field name="showeoi" type="radio" class="btn-group" default="0" label="COM_CLUBREG_OFFICIAL_DASHBOARD_EOI" description="COM_CLUBREG_OFFICIAL_DASHBOARD_EOI_DESC">				
+				<option value="0">JHIDE</option>
+				<option value="yes">JSHOW</option>								
+			</field>
+			
+			<field name="showbday" type="radio" class="btn-group" default="0" label="COM_CLUBREG_OFFICIAL_DASHBOARD_BDAYS" description="COM_CLUBREG_OFFICIAL_DASHBOARD_BDAYS_DESC">				
+				<option value="0">JHIDE</option>
+				<option value="yes">JSHOW</option>								
+			</field>			
+		</fieldset>	
+				
 	</fields>
 </form>

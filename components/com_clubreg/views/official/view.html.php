@@ -69,6 +69,10 @@ class ClubRegViewOfficial extends JViewLegacy
 			
 				$current_model->setState('joomla_id',$this->member_id);
 				$this->official_details = $current_model->getDetails();
+				$render_sections["showeoi"] =  $current_model->getPermissions("showeoi");
+				$render_sections["showbday"] =  $current_model->getPermissions("showbday");				
+				$this->render_sections = $render_sections;			
+				
 				unset($current_model);
 				
 				if($this->official_details->status == 1){ // ie official has been linked					

@@ -127,14 +127,17 @@ if($this->canedit){
 			<?php }?>
 			</div>
 		<?php } // render group tab 
-		if($renderTab["dashboard"]){  ?>
+		if($renderTab["dashboard"]){  
+			$render_sections = $this->render_sections; ?>
 			<div class="tab-pane" id="tabDashboard">
+				<?php if($render_sections["showeoi"]) { ?>
 				<div class="alert alert-info"><img alt="" src="components/com_clubreg/assets/images/groups.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_EOI'); ?></strong></div>
 				<div class="loading1" id="profileEoi" rel=<?php echo json_encode($rel_string)?>></div>				
-				
+				<?php } 
+				if($render_sections["showbday"]){ ?>
 				<div class="alert alert-info"><img alt="" src="components/com_clubreg/assets/images/groups.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_BDAY'); ?></strong></div>
 				<div class="loading1" id="profileBirthday" rel=<?php echo json_encode($rel_string)?>></div>				
-			
+				<?php } ?>
 				
 				<div class="alert alert-info"><img alt="" src="components/com_clubreg/assets/images/groups.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_ACTIVITY'); ?></strong></div>
 				<div class="loading1" id="profileActivity" rel=<?php echo json_encode($rel_string)?>></div>

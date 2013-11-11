@@ -119,11 +119,27 @@ class ClubRegViewAjax extends JViewLegacy
 	private function bday(){
 		
 		$proceed = FALSE;
-		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
-		$this->uKeyObject = new ClubRegUniqueKeysHelper();
-		$current_model = JModelLegacy::getInstance('activity', 'ClubregModel', array('ignore_request' => true));
-		$this->birthdays = $current_model->getBirthdays();
-		$proceed = TRUE;
+		
+		$user		= JFactory::getUser();	
+		
+		if($user->get('id') > 0){
+			
+			$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
+			$current_model->setState('joomla_id',$user->get('id'));
+				
+			if($current_model->getPermissions('showbday') ){
+				unset($current_model);
+			
+				require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
+				$this->uKeyObject = new ClubRegUniqueKeysHelper();
+				$current_model = JModelLegacy::getInstance('activity', 'ClubregModel', array('ignore_request' => true));
+				$this->birthdays = $current_model->getBirthdays();
+				$proceed = TRUE;
+				
+				unset($current_model);
+			}
+		}
+		
 		return $proceed;
 	}
 	
