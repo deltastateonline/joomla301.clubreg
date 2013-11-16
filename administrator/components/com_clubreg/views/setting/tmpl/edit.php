@@ -73,7 +73,7 @@ $canDo	= ClubregHelper::getActions();
 		
 		if(isset($parameter_settings)){	?>												
 			<fieldset class="form-vertical">
-				<?php $parameter_settings[1] = "";
+				<?php //$parameter_settings[1] = "";
 					foreach($parameter_settings as $param_settings){ 
 						if(! (strlen($param_settings) > 0)){ continue;}
 						foreach($this->form->getFieldset($param_settings) as $field){ ?>

@@ -95,9 +95,8 @@ $headingConfigs = $this->profileConfigs["headings"];
 			<?php echo JHtml::_('form.token'); ?>	
 			
 		</form>		
-	</div>	
-	<div class='profile-img'><img src="<?php echo CLUBREG_ASSETS; ?>/images/clublogo.png" width="128" /></div>
-	
+	</div>
+	<?php echo $this->loadTemplate("pixs"); ?>	
 	<p class="text-info pull-left small"><?php echo JText::_('COM_CLUBREG_REGISTERED_LABEL'), ' :<br />', $member_data->reg_created_by , ' on ', $member_data->reg_created_date ;?></p>
 	</div>
 	<div class="span9">		

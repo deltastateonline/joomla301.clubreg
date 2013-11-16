@@ -92,26 +92,38 @@ class ClubRegHelper
 	private static function getIndex(){
 		return self::$config_index;
 	}
-	public static function configOptions($whichConfig, $ordering='ordering asc'){
+	public static function configOptions($whichConfig, $ordering=" ordering ASC"){
 			
 			$config_index = self::getIndex();
+			
 			
 			$db		= JFactory::getDbo();
 			$query	= $db->getQuery(true);
 		
-			$query->select("  config_short as value, config_name as text, ordering ");
+			$query->select("  *, config_short as value, config_name as text, ordering");
 			$query->from($db->quoteName(CLUB_CONFIG_TABLE));
 			
 			if(is_array($whichConfig)){
 				$query->where(sprintf('which_config = %s', $db->quote($whichConfig[0])));
 				$query->where(sprintf('config_short = %s', $db->quote($whichConfig[1])));
 				
+				$parent_data = self::getConfigTagByName($whichConfig[1]);
+				
 			}else{		
 				$query->where(sprintf('which_config = %s', $db->quote($whichConfig)));
+				$parent_data = self::getConfigTagByName($whichConfig);
+				
 			}
-			$query->order($db->quote($ordering));
-		
-			$db->setQuery($query);
+			
+			if(isset($parent_data)){
+				$ordering = $parent_data->params["sort_list_by"];	
+				if(!is_null($ordering)){
+					$ordering = $ordering." ASC ";
+				}			
+			}					
+			
+			$query->order($ordering);		
+			$db->setQuery($query);			
 		
 			$options = array();
 		
@@ -122,7 +134,7 @@ class ClubRegHelper
 			catch (RuntimeException $e)
 			{
 				JError::raiseWarning(500, $e->getMessage());
-			}
+			}			
 		
 			return $options;
 		

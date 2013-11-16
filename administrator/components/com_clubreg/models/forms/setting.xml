@@ -55,11 +55,9 @@
 				default = "list"
 			>
 				<option value="">Setting Type</option>
-				<option value="list">List</option>
-				<option value="text">Text</option>
+				<option value="list">List</option>				
 				<option value="inputfields">Input Fields</option>
-				<option value="paymentitems">Payment Items</option>
-				<option value="object">Serialized Object</option>
+				<option value="paymentitems">Payment Items</option>				
 			</field>
 			<field name="sort_list_by"
 				type="list"
@@ -68,9 +66,11 @@
 				default = ""
 			>
 				<option value="">Order this List By</option>
-				<option value="ordering">ordering</option>
-				<option value="config_id">config_id</option>
-				<option value="config_short">config_short</option>
+				<option value="ordering">Ordering</option>
+				<option value="config_id">Primary Key</option>
+				<option value="config_name">Setting Name</option>
+				<option value="config_short">Setting Tag</option>
+				
 			</field>			
 		</fieldset>
 		
