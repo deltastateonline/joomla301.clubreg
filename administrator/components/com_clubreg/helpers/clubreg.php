@@ -115,6 +115,7 @@ class ClubRegHelper
 				
 			}
 			
+			$query->where('published = 1');
 			if(isset($parent_data)){
 				$ordering = $parent_data->params["sort_list_by"];	
 				if(!is_null($ordering)){

@@ -49,7 +49,7 @@ class ClubRegFiltersHelper extends JObject
 		$filter_heading["f_created_date"] = $filter_heading["t_created_date"] = array("label"=>JText::_('COM_CLUBREG_CREATED_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-medium'");
 		$filter_heading["year_registered"] = array("label"=>JText::_('COM_CLUBREG_SEASON_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-small'");
 	
-		$query = sprintf("select -1 as value, '-".PLAYER." Level -' as text union  select  `config_short` as value,`config_name` as text
+		$query = sprintf("select -1 as value, '-".JText::_('COM_CLUBREG_SKILLLEVEL_LABEL')." -' as text union  select  `config_short` as value,`config_name` as text
 				from %s as a where which_config = '%s' and published = 1  order by text asc ",
 				CLUB_CONFIG_TABLE,CLUB_PLAYER_LEVEL);
 	
