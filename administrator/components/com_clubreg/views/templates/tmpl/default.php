@@ -55,11 +55,11 @@ JHtml::_('formbehavior.chosen', 'select');
 
 ?>
 </div>
-	<input type="<?= $in_type; ?>" name="Itemid" value="<?= $Itemid; ?>" />	
-	<input type="<?= $in_type; ?>" name="option" value="com_clubreg" />	
-	<input type="<?= $in_type; ?>" name="task" value="" />
-	<input type="<?= $in_type; ?>" name="boxchecked" value="0" />
-	<input type="<?= $in_type; ?>" name="filter_order" value="<?php echo $this->escape($this->state->get('list.ordering'));; ?>" />
-	<input type="<?= $in_type; ?>" name="filter_order_Dir" value="<?php echo $this->escape($this->state->get('list.direction')); ?>" />
+	<input type="<?php echo $in_type; ?>" name="Itemid" value="<?php echo $Itemid; ?>" />	
+	<input type="<?php echo $in_type; ?>" name="option" value="com_clubreg" />	
+	<input type="<?php echo $in_type; ?>" name="task" value="" />
+	<input type="<?php echo $in_type; ?>" name="boxchecked" value="0" />
+	<input type="<?php echo $in_type; ?>" name="filter_order" value="<?php echo $this->escape($this->state->get('list.ordering'));; ?>" />
+	<input type="<?php echo $in_type; ?>" name="filter_order_Dir" value="<?php echo $this->escape($this->state->get('list.direction')); ?>" />
 	<?php echo JHTML::_( 'form.token' ); ?>
 </form>

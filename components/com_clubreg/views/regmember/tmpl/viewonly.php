@@ -79,19 +79,19 @@ $headingConfigs = $this->profileConfigs["headings"];
 		<form action="<?php echo JRoute::_($this->formbackaction); ?>" method="post" name="adminForm_back" id="adminForm_back">			
 			<?php if(count($back_url) > 0){
 					foreach($back_url as $akey=>$avalue){ ?>
-						<input type="<?= $in_type; ?>" name="<?php echo $akey?>" value="<?= $avalue; ?>" />	
+						<input type="<?php echo $in_type; ?>" name="<?php echo $akey?>" value="<?php echo $avalue; ?>" />	
 				<?php }
 			} ?>
-			<input type="<?= $in_type; ?>" name="Itemid" value="<?= $clubreg_Itemid; ?>" />	
-			<input type="<?= $in_type; ?>" name="option" value="com_clubreg" />
-			<input type="<?= $in_type; ?>" name="layout" value="renderregmembers" />
+			<input type="<?php echo $in_type; ?>" name="Itemid" value="<?php echo $clubreg_Itemid; ?>" />	
+			<input type="<?php echo $in_type; ?>" name="option" value="com_clubreg" />
+			<input type="<?php echo $in_type; ?>" name="layout" value="renderregmembers" />
 		</form>	
 		<form action="<?php echo JRoute::_($this->formeditaction); ?>" method="post" name="adminForm_edit" id="adminForm_edit">			
 			
-			<input type="<?= $in_type; ?>" name="Itemid" value="<?= $clubreg_Itemid; ?>" />	
-			<input type="<?= $in_type; ?>" name="option" value="com_clubreg" />
-			<input type="<?= $in_type; ?>" name="layout" value="edit" />
-			<input type="<?= $in_type; ?>" name="pk" value="<?php echo $this->member_key; ?>" />
+			<input type="<?php echo $in_type; ?>" name="Itemid" value="<?php echo $clubreg_Itemid; ?>" />	
+			<input type="<?php echo $in_type; ?>" name="option" value="com_clubreg" />
+			<input type="<?php echo $in_type; ?>" name="layout" value="edit" />
+			<input type="<?php echo $in_type; ?>" name="pk" value="<?php echo $this->member_key; ?>" />
 			<?php echo JHtml::_('form.token'); ?>	
 			
 		</form>		

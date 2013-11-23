@@ -71,15 +71,15 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 		$tableRender->render($this);
 		echo $this->pagination->getListFooter();
 ?>
-	<input type="<?= $in_type; ?>" name="Itemid" value="<?= $clubreg_Itemid; ?>" />	
-	<input type="<?= $in_type; ?>" name="option" value="com_clubreg" />
+	<input type="<?php echo $in_type;  ?>" name="Itemid" value="<?php echo $clubreg_Itemid; ?>" />	
+	<input type="<?php echo $in_type;  ?>" name="option" value="com_clubreg" />
 	
-	<input type="<?= $in_type; ?>" name="layout" value="<?php echo $this->layout; ?>" />
-	<input type="<?= $in_type; ?>" name="task" value="" />
+	<input type="<?php echo $in_type;  ?>" name="layout" value="<?php echo $this->layout; ?>" />
+	<input type="<?php echo $in_type;  ?>" name="task" value="" />
 	
-	<input type="<?= $in_type; ?>" name="boxchecked" value="0" />
-	<input type="<?= $in_type; ?>" name="filter_order" id="filter_order" value="<?php echo $this->escape($this->state->get('list.ordering'));; ?>" />
-	<input type="<?= $in_type; ?>" name="filter_order_Dir" id="filter_order_Dir" value="<?php echo $this->escape($this->state->get('list.direction')); ?>" />
+	<input type="<?php echo $in_type;  ?>" name="boxchecked" value="0" />
+	<input type="<?php echo $in_type;  ?>" name="filter_order" id="filter_order" value="<?php echo $this->escape($this->state->get('list.ordering'));; ?>" />
+	<input type="<?php echo $in_type;  ?>" name="filter_order_Dir" id="filter_order_Dir" value="<?php echo $this->escape($this->state->get('list.direction')); ?>" />
 	<?php echo JHTML::_( 'form.token' ); ?>
 </form>
 <?php 

@@ -158,7 +158,7 @@ select{
 				echo $field->input;
 			}
 			?>
-			<input type="<?php echo $in_type; ?>" name="Itemid" value="<?= $clubreg_Itemid; ?>" />	
+			<input type="<?php echo $in_type; ?>" name="Itemid" value="<?php echo $clubreg_Itemid; ?>" />	
 			
 			<input type="<?php echo $in_type; ?>" name="option" value="com_clubreg" />
 			<input type="<?php echo $in_type; ?>" name="task" value="regmember.savemember" />
@@ -195,12 +195,12 @@ select{
 	<form action="<?php echo JRoute::_($this->formbackaction); ?>" method="post" name="adminForm_back_list" id="adminForm_back_list">			
 			<?php if(count($back_url) > 0){
 					foreach($back_url as $akey=>$avalue){ ?>
-						<input type="<?= $in_type; ?>" name="<?php echo $akey?>" value="<?= $avalue; ?>" />	
+						<input type="<?php echo $in_type; ?>" name="<?php echo $akey?>" value="<?php echo $avalue; ?>" />	
 				<?php }
 			} ?>
-			<input type="<?= $in_type; ?>" name="Itemid" value="<?= $clubreg_Itemid; ?>" />	
-			<input type="<?= $in_type; ?>" name="option" value="com_clubreg" />
-			<input type="<?= $in_type; ?>" name="layout" value="renderregmembers" />
+			<input type="<?php echo $in_type; ?>" name="Itemid" value="<?php echo $clubreg_Itemid; ?>" />	
+			<input type="<?php echo $in_type; ?>" name="option" value="com_clubreg" />
+			<input type="<?php echo $in_type; ?>" name="layout" value="renderregmembers" />
 		</form>	
 	
 	

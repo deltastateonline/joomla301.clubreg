@@ -88,7 +88,7 @@ for($i = 0 ; $i<$howmany; $i++){ ?>
 </fieldset>
 <?php 
 }
-?>		<input type="hidden" name="Itemid" value="<?= $Itemid; ?>" />	
+?>		<input type="hidden" name="Itemid" value="<?php echo $Itemid; ?>" />	
 		<input type="hidden" name="jform[playertype]" id="jform_playertype" value="junior" />
 		<input type="hidden" name="option" value="com_clubreg" />
 		<input type="hidden" name="task" value="eoi.sendrequest" />

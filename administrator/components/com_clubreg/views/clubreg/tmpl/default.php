@@ -32,9 +32,10 @@ line-height:24px;
 		# Author: Omokhoa Agbagbara<br />
 		# Copyright: (C) 2013 applications.deltastateonline.com. All Rights Reserved.<br />
 		# License: http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL<br />
-		# Website:- <a href="http://applications.deltastateonline.com">http://applications.deltastateonline.com</a><br />
+		# Website:- <a href="http://app.deltastateonline.com">http://app.deltastateonline.com</a><br />
 		# Technical Support:  email - <a mailto="joomla@deltastateonline.com">joomla@deltastateonline.com</a><br />
 		# Demo:  <a href="http://demo3.deltastateonline.com">http://demo3.deltastateonline.com</a><br />
+		# Twitter: <a href="https://twitter.com/ejiroesiri">@ejiroesiri</a><br />
 		
 		</div>
 		</div>

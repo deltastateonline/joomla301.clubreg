@@ -36,9 +36,9 @@ if(is_array($this->items) && count($this->items) > 0 ){
 	foreach($this->items as $an_item){ ?>
 		<tr>
 			<td nowrap><?php echo $i+1; ?><span class="pull-right"><?php echo JHtml::_('grid.id', $i, $an_item->id); ?></span></td>			
-			<td><?= $an_item->name ?></td>
-			<td><?= $an_item->email ?></td>
-			<td><?= $an_item->groupname ?></td>
+			<td><?php echo $an_item->name ?></td>
+			<td><?php echo $an_item->email ?></td>
+			<td><?php echo $an_item->groupname ?></td>
 		</tr>	
 	<?php $i++;
 	}
@@ -46,10 +46,10 @@ if(is_array($this->items) && count($this->items) > 0 ){
 
 <?php } ?>
 </table>
-	<input type="<?= $in_type; ?>" name="Itemid" value="<?= $Itemid; ?>" />	
-	<input type="<?= $in_type; ?>" name="option" value="com_clubreg" />	
-	<input type="<?= $in_type; ?>" name="task" value="link" />
-	<input type="<?= $in_type; ?>" name="boxchecked" value="0" />
-	<input type="<?= $in_type; ?>" name="tmpl" value="component" />
+	<input type="<?php echo $in_type; ?>" name="Itemid" value="<?php echo $Itemid; ?>" />	
+	<input type="<?php echo $in_type; ?>" name="option" value="com_clubreg" />	
+	<input type="<?php echo $in_type; ?>" name="task" value="link" />
+	<input type="<?php echo $in_type; ?>" name="boxchecked" value="0" />
+	<input type="<?php echo $in_type; ?>" name="tmpl" value="component" />
 	<?php echo JHTML::_( 'form.token' ); ?>
 </form>

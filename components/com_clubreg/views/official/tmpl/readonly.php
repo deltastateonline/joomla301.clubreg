@@ -150,11 +150,11 @@ if($this->canedit){
 </div>
 <form action="<?php echo JRoute::_($this->formaction_edit); ?>" method="post" name="adminForm" id="adminForm" target='_blank'>
 
-	<input type="<?= $in_type; ?>" name="Itemid" value="<?= $clubreg_Itemid; ?>" />	
-	<input type="<?= $in_type; ?>" name="option" value="com_clubreg" />
+	<input type="<?php echo $in_type;  ?>" name="Itemid" value="<?php echo $clubreg_Itemid; ?>" />	
+	<input type="<?php echo $in_type;  ?>" name="option" value="com_clubreg" />
 	
-	<input type="<?= $in_type; ?>" name="layout" value="viewonly" />	
-	<input type="<?= $in_type; ?>" name="pk" value="" />	
+	<input type="<?php echo $in_type;  ?>" name="layout" value="viewonly" />	
+	<input type="<?php echo $in_type;  ?>" name="pk" value="" />	
 		<?php echo JHTML::_( 'form.token' ); ?>
 </form>
 <?php 
