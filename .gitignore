@@ -82,6 +82,7 @@ modules/
 plugins/
 tmp/
 dump/
+databasereset/
 
 templates/beez3/
 templates/meet_gavern/
@@ -127,6 +128,10 @@ com_users/
 com_weblinks/
 com_clubreg.validate.works/
 com_jedchecker/
+com_contenthistory/
+components/com_ajax/
+com_postinstall/
+administrator/components/com_ajax/
 
 #Language files Front End
 
@@ -205,6 +210,11 @@ en-GB.tpl_protostar.sys.ini
 en-GB.xml
 en-GB.lib_idna_convert.sys.ini
 en-GB.tpl_js_wright.*
+en-GB.plg_*
+en-GB.com_postinstall.*
+en-GB.com_contenthistory.*
+en-GB.com_ajax.*
+
 index.html
 
 #Language File Admin

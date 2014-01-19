@@ -13,7 +13,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 $in_type = "hidden";
 global $clubreg_Itemid;
 $rel_string = array("Itemid"=>$clubreg_Itemid,"member_key"=>$this->member_key,JSession::getFormToken()=>1);?>
-<div><a class="btn profile-attachment-button" href="javascript:void(0)">Add <?php echo JText::_('COM_CLUBREG_PROFILE_ATTACHMENTS')?></a></div>
+<div><a class="btn profile-attachment-button btn-mini btn-info" href="javascript:void(0)">Add <?php echo JText::_('COM_CLUBREG_PROFILE_ATTACHMENTS')?></a></div>
 <div class="well well-small profile-well" id="attachmentFormDiv">
 <form action="index.php" method="post" name="attachmentForm" id="attachment-form" class="form-horizontal form-clubreg form-validate" enctype='multipart/form-data' >
 	<?php foreach($this->attachmentForm->getFieldset('memberAttachment')  as $field){ ?>

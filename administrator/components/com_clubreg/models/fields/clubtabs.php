@@ -41,7 +41,7 @@ class JFormFieldClubtabs extends JFormField
 		$class = $this->element['class'] ? ' class="radio ' . (string) $this->element['class'] . '"' : ' class="radio"';
 		
 		$ctrl_prefix = $this->element['name'];
-		$tab_values = $this->value;
+		$tab_values = $this->value;	
 		
 		if(isset($control_which)){
 			
@@ -56,11 +56,11 @@ class JFormFieldClubtabs extends JFormField
 				
 				foreach($all_tabs as $key =>$a_tab){	
 
-					if(in_array($control_which, $a_tab["applies"])){
+					if(in_array($control_which, $a_tab["applies"])){ // does this tab apply to this type
 						
 						$tmp_ctrl_id = sprintf("%s_%s",$ctrl_prefix,$key);
-						//$ctrl_name = sprintf("jform[%s_%s]",$ctrl_prefix,$key);
-						$ctrl_name = sprintf("jform[%s][%s]",$ctrl_prefix,$key);
+						
+						$ctrl_name = sprintf("jform[%s][%s]",$ctrl_prefix,$key); // [tab{type}][tab_name]
 
 						$show_checked = "";
 						$hide_checked = "";

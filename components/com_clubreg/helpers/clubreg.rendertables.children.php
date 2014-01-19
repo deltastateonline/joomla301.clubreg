@@ -50,7 +50,7 @@ class ClubRegRenderTablesChildrenHelper extends ClubRegRenderTablesHelper
 				<?php 
 				foreach($this->headings as $akey=>$aheading){ 
 					if(isset($aheading["csvonly"]) && $aheading["csvonly"] ){continue;}	?>					
-						<div class="pull-left <?php echo !isset($aheading["label_class"])?"reg-label":"reg-label"?>"><?php echo $aheading["label"]?></div>
+						<div class="pull-left <?php echo !isset($aheading["label_class"])?"reg-label":$aheading["label_class"]?>"><?php echo $aheading["label"]?></div>
 						<div class="pull-left reg-colon">&nbsp;:&nbsp;</div>
 						<div class="pull-left reg-value"><?php echo $this->itemRenderer->render($an_item->$akey,$aheading); ?>&nbsp;</div>				
 				<?php	if(isset($aheading["clearfix"]) && $aheading["clearfix"] ){?><div class="clearfix"></div> <?php }				

@@ -54,14 +54,14 @@ class ClubRegProfileConfig extends JObject
 		
 		
 		$headings["children_p"]["gender"] = array("label"=>JText::_('COM_CLUBREG_GENDER_LABEL'),'transform'=>"ucfirst");
-		$headings["children_p"]["dob"] = array("label"=>JText::_('COM_CLUBREG_DOB_LABEL')); // two per line				
+		$headings["children_p"]["dob"] = array("label"=>JText::_('COM_CLUBREG_DOB_LABEL'),'label_class'=>'reg-label1'); // two per line				
 		$headings["children_p"]["member_status"] = array("label"=>JText::_('COM_CLUBREG_MEMBERSTATUS_LABEL'),'transform'=>"ucfirst");
-		$headings["children_p"]["member_level"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_MEMBERLEVEL'));
+		$headings["children_p"]["member_level"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_MEMBERLEVEL'),'label_class'=>'reg-label1');
 		$headings["children_p"]["reg_group"] = array("label"=>JText::_('COM_CLUBREG_GROUPN_LABEL'));
-		$headings["children_p"]["reg_subgroup"] = array("label"=>JText::_('COM_CLUBREG_SUBGROUPN_LABEL')); // two per line
+		$headings["children_p"]["reg_subgroup"] = array("label"=>JText::_('COM_CLUBREG_SUBGROUPN_LABEL'),'label_class'=>'reg-label1'); // two per line
 		
 		$headings["children_p"]["groupleader"] = array("label"=>JText::_('CLUBREG_OFFICIALS_PROFILE_LEADER'));		
-		$headings["children_p"]["year_registered"] = array("label"=>JText::_('COM_CLUBREG_SEASON_LABEL'), "clearfix"=>true); // one per line
+		$headings["children_p"]["year_registered"] = array("label"=>JText::_('COM_CLUBREG_SEASON_LABEL'), "clearfix"=>true,'label_class'=>'reg-label1'); // one per line
 		
 		$all_tabs = $this->all_tabs();
 		$headings["tab"] = $this->configuredTabs("guardian",$all_tabs);

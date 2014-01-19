@@ -70,12 +70,13 @@ $headingConfigs = $this->profileConfigs["headings"];
 </style>
 
 <div class="row-fluid" >
-	<div class="span3"  style="border:0px solid black">
+	
 	<div class="row-fluid" style="padding-top:3px;">
-		<div class="btn-group">
+		<div class="btn-group pull-left">
 			<button class="btn btn-small btn-primary" type="button" onclick="return adminForm_back.submit();"><?php echo JText::_('COM_CLUBREG_BACK_LIST'); ?></button>
 			<button class="btn btn-small" type="button" onclick="return adminForm_edit.submit();">Edit</button>
 		</div>	
+		<div class="text-info pull-right small"><?php echo JText::_('COM_CLUBREG_REGISTERED_LABEL'), ' :', $member_data->reg_created_by , ' on ', $member_data->reg_created_date ;?></div>
 		<form action="<?php echo JRoute::_($this->formbackaction); ?>" method="post" name="adminForm_back" id="adminForm_back">			
 			<?php if(count($back_url) > 0){
 					foreach($back_url as $akey=>$avalue){ ?>
@@ -92,13 +93,14 @@ $headingConfigs = $this->profileConfigs["headings"];
 			<input type="<?php echo $in_type; ?>" name="option" value="com_clubreg" />
 			<input type="<?php echo $in_type; ?>" name="layout" value="edit" />
 			<input type="<?php echo $in_type; ?>" name="pk" value="<?php echo $this->member_key; ?>" />
-			<?php echo JHtml::_('form.token'); ?>	
-			
-		</form>		
+			<?php echo JHtml::_('form.token'); ?>			
+		</form>				
+	<div class="clearfix"></div>
 	</div>
-	<?php echo $this->loadTemplate("pixs"); ?>	
-	<p class="text-info pull-left small"><?php echo JText::_('COM_CLUBREG_REGISTERED_LABEL'), ' :<br />', $member_data->reg_created_by , ' on ', $member_data->reg_created_date ;?></p>
-	</div>
+	<?php //echo $this->loadTemplate("pixs"); ?>	
+	
+	<?php $render_here = false; 
+	if($render_here){ ?>
 	<div class="span9">		
 		<div class="row-fluid">
 			<div class="span3 h21"><?php echo JText::_('COM_CLUBREG_PROFILE_BIO'); ?> : </div>	
@@ -137,29 +139,34 @@ $headingConfigs = $this->profileConfigs["headings"];
 			</div>	
 		</div>
 		<?php } ?>		
-	</div><?php  // span9 ?>
+	</div><?php  }// span9 ?>
 </div> <?php  // row-fluid ?>
-<hr />
+
 <div id='loading-div'></div>
 <div class="clearfix">&nbsp;</div>
 <?php if(count($headingConfigs["tab"]) > 0 ) { ?>
 	<div class="tabbable tabs-<?php echo $this->profile_tabposition; ?>">
 		<ul class="nav nav-tabs">
-		<?php $i=0; foreach($headingConfigs["tab"] as $akey => $tvalue) {  ?>
-			<li <?php echo ($i == 0)?"class='active'":""; ?>><a href="#tab<?php echo ucwords($akey); ?>" data-toggle="tab"><?php isset($tvalue["img"])?ClubRegHelper::writeImage($tvalue["img"]):""?><?php echo $tvalue["label"] ?></a></li>
+			<li class='active'><a href="#tabProfile" data-toggle="tab"><?php $profile_["fname"] = "profile.png"; $profile_['attr'] = " width='16' hspace='1' border='0'"; ClubRegHelper::writeImage($profile_) ?>Profile</a></li>
+		<?php $i=0; foreach($headingConfigs["tab"] as $akey => $tvalue) { $tvalue["img"]['title'] = $tvalue["label"];  ?>
+			<li <?php echo ($i == 0)?"class='act-ive'":""; ?>><a href="#tab<?php echo ucwords($akey); ?>" data-toggle="tab"><?php isset($tvalue["img"])?ClubRegHelper::writeImage($tvalue["img"]):""?><?php  if($this->profile_icons){ echo $tvalue["label"]; } ?></a></li>
 			<?php $i++; } ?>					
 		</ul>
 		
 		<div class="tab-divs">
 			<div class="tab-content" style="min-height:400px;">
+				<div class="tab-pane active" id="tabProfile">
+					<?php echo $this->loadTemplate('profile'); ?>
+				</div>
+			
+			
 				<?php $i=0; foreach($headingConfigs["tab"] as $akey => $tvalue){					
-					$active = $i == 0?"active":"";$i++;	?>
+					$active = $i == 0?"act-ive":"";$i++;	?>
 					<div class="tab-pane <?php echo $active; ?>" id="tab<?php echo ucwords($akey); ?>">
 						<?php echo $this->loadTemplate($akey); ?>
 					</div>
 					<?php }?>
-			</div>
-		
+			</div>		
 		</div>
 </div>
 <?php } ?>
