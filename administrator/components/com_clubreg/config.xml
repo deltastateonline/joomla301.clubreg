@@ -62,7 +62,20 @@
 				<option value="left">COM_CLUBREG_TABPOSITION_LEFT</option>
 				<option value="right">COM_CLUBREG_TABPOSITION_RIGHT</option>
 				
-			</field>		
+			</field>	
+			
+			<field
+				name="profile_icons"
+				type="radio"
+			class="btn-group btn-group-yesno"
+			default="0"
+			label="COM_CLUBREG_TABICONS_LABEL"
+			description="COM_CLUBREG_TABICONS_DESC">
+			<option
+				value="1">JYES</option>
+			<option
+				value="0">JNO</option>
+		</field>	
 
 	</fieldset>
 	<!--
