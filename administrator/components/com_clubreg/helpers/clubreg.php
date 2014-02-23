@@ -329,7 +329,7 @@ class ClubRegHelper
 		<div class="row-fluid" style='margin-bottom:3px;'><h2 style="border-bottom:1px solid #A5A5A5;padding-bottom:2px"><?php echo $pageTitle; ?></h2></div>
 	<?php }
 	static function writeImage($imagedata){
-		?><img src='<?php echo CLUBREG_ASSETS?>/images/<?php echo $imagedata["fname"]; ?>' <?php echo isset($imagedata["attr"])?$imagedata["attr"]:"";?>/><?php 	
+		?><img src='<?php echo CLUBREG_ASSETS?>/images/<?php echo $imagedata["fname"]; ?>' <?php echo isset($imagedata["attr"])?$imagedata["attr"]:"";?> title='<?php echo $imagedata["title"] ?>'/><?php 	
 	}
 	
 	static function writeTabAssets($document,$whichTab, $assets = array("css","js")){		
