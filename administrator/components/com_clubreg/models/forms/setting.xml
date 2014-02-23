@@ -29,11 +29,13 @@
 			<option value="-2">
 				JTRASHED</option>
 		</field>
+		
 		<field name="ordering"
-			type="ordering"
-			class="inputbox input-xlarge"
+			type="configordering"
+			class="inputbox"
 			label="JFIELD_ORDERING_LABEL"
-			description="JFIELD_ORDERING_DESC"
+			description="JFIELD_ORDERING_DESC" 
+			content_type="com_clubreg.setting"         
 		/>
 				
 		<field name="config_text" type="textarea"
