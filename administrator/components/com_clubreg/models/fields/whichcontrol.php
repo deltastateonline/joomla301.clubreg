@@ -20,7 +20,7 @@ class JFormFieldWhichcontrol extends JFormFieldList //JFormField
 	
 	protected function getOptions()
 	{
-		$options = array();		
+		$options = array();			
 		
 		$config_id = (int) $this->form->getValue('config_id');
 		$control_which = $this->element['name'];
