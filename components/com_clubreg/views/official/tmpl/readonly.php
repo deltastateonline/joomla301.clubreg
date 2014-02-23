@@ -13,6 +13,7 @@ JHtml::_('behavior.framework');
 
 global $clubreg_Itemid;
 $rel_string = array("Itemid"=>$clubreg_Itemid);
+
 $in_type = "hidden";
 ?>
 <script type="text/javascript">

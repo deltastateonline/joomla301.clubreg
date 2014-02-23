@@ -23,14 +23,14 @@ class ClubRegRenderTablesPaymentsHelper extends ClubRegRenderTablesHelper
 		global $clubreg_Itemid;	
 		$i = 0;		
 		$this->headings =  $viewObject->entity_filters["headings"];	?>		
-		<div class='row-striped'>
+		<div>
 			  <?php 
 			  if(count($viewObject->items) > 0){
 			  	foreach($viewObject->items as $an_item){ 			  		
 			  		$fkey = $viewObject->uKeyObject->constructKey($an_item->payment_id,$an_item->payment_key);
 			  		$rel_string = json_encode(array("Itemid"=>$clubreg_Itemid,"member_key"=>$viewObject->member_key,JSession::getFormToken()=>1,'payment_key'=>$fkey,'action'=>'update'));
 			  	?>			  
-			    <div class="row-fluid" id='paymentdata_<?php echo $an_item->payment_id; ?>' rel=<?php echo $rel_string ?>>
+			    <div class="profile-new-div" id='paymentdata_<?php echo $an_item->payment_id; ?>' rel=<?php echo $rel_string ?>>
 			    	<div class='profile-sub-head-div'>
 			    	<div class="pull-left"><a href="javascript:void(0);"  rel=<?php echo $rel_string ?> class='profile-payment-button' title=<?php echo JText::_('COM_CLUBREG_PAYMENT_EDIT');?>><?php echo JText::_('COM_CLUBREG_PAYMENT_DESCRIPTION'),' - ', $an_item->payment_desc; ?></a></div>	
 			    	<div class="pull-right" style='font-size:0.8em;padding-left:15px;'><?php echo $an_item->name;?> on  <?php echo $an_item->created;?></div>		    	
@@ -40,7 +40,7 @@ class ClubRegRenderTablesPaymentsHelper extends ClubRegRenderTablesHelper
 				    <div class="clearfix"></div>				    
 			    </div>			  
 			  <?php  }?>
-			 </div> 		
+			 </div>
 		<?php }else{?>			  		  		
 			  	<div class="alert alert-error"><h3>No Results</h3></div>			  
 		<?php } 
@@ -50,7 +50,7 @@ class ClubRegRenderTablesPaymentsHelper extends ClubRegRenderTablesHelper
 	 * @see ClubRegRenderTablesHelper::rendererItems()
 	 */
 	protected function rendererItems($an_item){?>
-				<div class="reg-well" >
+				<div class="profile-reg-well" >
 				<?php 
 				foreach($this->headings as $akey=>$aheading){ 
 					if(isset($aheading["csvonly"]) && $aheading["csvonly"] ){continue;}	?>					
@@ -72,7 +72,8 @@ class ClubRegRenderTablesPaymentsHelper extends ClubRegRenderTablesHelper
 		
 				$this->headings =  $viewObject->entity_filters["headings"];						 
 				$an_item = current($viewObject->items);?>
-				<div class='profile-sub-head-div'>
+			<div class="payment-new-div">
+				<div class='payment-sub-head-div'>
 				<?php if(isset($viewObject->hide_created) && $viewObject->hide_created){?>
 					<div class="pull-left" ><?php echo JText::_('COM_CLUBREG_PAYMENT_DESCRIPTION'),' - ', $an_item->payment_desc; ?></div>
 				<?php }else{					  		  		
@@ -84,7 +85,8 @@ class ClubRegRenderTablesPaymentsHelper extends ClubRegRenderTablesHelper
 				    <div class="clearfix"></div>
 				    </div>
 				    <?php $this->rendererItems($an_item); ?>
-				    <div class="clearfix"></div>					    		  
+				    <div class="clearfix"></div>
+			</div>				    		  
 	<?php 		
 	}
 		

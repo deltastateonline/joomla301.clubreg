@@ -59,12 +59,14 @@ if(count($this->attachments)>0){
 		}
 		
 		?>
-		<div class="profile-sub-head-div" ><?php echo $att_name ;?><a class="label label-info pull-right profile-attach-content-btn"  rel=<?php echo $rel_string; ?>><?php echo $howmany." ".JText::_(COM_CLUBREG_PROFILE_ATTACHMENTS); ?></a></div>
-		<div class="<?php echo $hide_all_class; ?>" id="profile-attach-<?php echo $att_type; ?>" >
+		<div class="attach-new-div">
+		<div class="attach-sub-head-div" ><?php echo $att_name ;?><a class="label label-info pull-right profile-attach-content-btn"  rel=<?php echo $rel_string; ?>><?php echo $howmany." ".JText::_(COM_CLUBREG_PROFILE_ATTACHMENTS); ?></a></div>
+		<div class="<?php echo $hide_all_class; ?> attach-reg-well row-striped" id="profile-attach-<?php echo $att_type; ?>" >
 			<?php 	echo implode("\n",$all_document_list[$att_type]); 	?>
 		</div>		
 		
 		<div class="clearfix"></div>
+		</div>
 	<?php 
 	}
 }else{ 	echo ClubRegUnAuthHelper::noResults('COM_CLUBREG_PROFILE_ATTACHMENTS'); }

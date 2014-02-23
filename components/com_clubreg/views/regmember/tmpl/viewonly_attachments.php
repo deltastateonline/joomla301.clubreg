@@ -35,7 +35,7 @@ $rel_string = array("Itemid"=>$clubreg_Itemid,"member_key"=>$this->member_key,JS
 </div>
 </form>
 </div>
-<div class="loading1 row-striped" id="profile-attachments" rel=<?php echo json_encode($rel_string)?>></div>
+<div class="loading1" id="profile-attachments" rel=<?php echo json_encode($rel_string)?>></div>
 <?php 
 $document = JFactory::getDocument();
 ClubregHelper::writeTabAssets($document, "iFrameFormRequest",array("js"));

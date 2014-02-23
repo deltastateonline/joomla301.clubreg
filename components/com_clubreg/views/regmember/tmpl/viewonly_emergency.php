@@ -21,7 +21,7 @@ $rel_string_list = array("Itemid"=>$clubreg_Itemid,"member_key"=>$this->member_k
 $rel_string_edit = array("Itemid"=>$clubreg_Itemid,"member_key"=>$this->member_key,JSession::getFormToken()=>1);
 
 ?>
-<div><a class="btn profile-emergency-button" href="javascript:void(0)" rel=<?php echo json_encode($rel_string_edit)?>>Edit <?php echo JText::_('COM_CLUBREG_PROFILE_EMERGENCY')?></a></div>
+<div><a class="btn profile-emergency-button btn-mini btn-info" href="javascript:void(0)" rel=<?php echo json_encode($rel_string_edit)?>>Edit <?php echo JText::_('COM_CLUBREG_PROFILE_EMERGENCY')?></a></div>
 
 <div class="clugreg-div-wrapper">
 	<div class="clugreg-div form-div" id="emergencyFormDiv" rel=<?php echo json_encode($rel_string_edit)?> ></div>

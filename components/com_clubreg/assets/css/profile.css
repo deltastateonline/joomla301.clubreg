@@ -52,7 +52,7 @@
 	
 
 div.tab-divs{
-	border-color:#ddd;
+/*	border-color:#ddd;
     -moz-border-radius: 5px;
   	border-radius: 5px;
     border-style:solid;
@@ -60,7 +60,7 @@ div.tab-divs{
     padding:5px;
     box-shadow: 10px 10px 5px #DDEDED;
     -webkit-box-shadow: 10px 10px 5px #DDEDED;
-    -moz-box-shadow: 10px 10px 5px #DDEDED;
+    -moz-box-shadow: 10px 10px 5px #DDEDED;*/
     
 }
 .profile-bold{
@@ -134,6 +134,7 @@ div.tab-divs{
 	min-width:145px;
 	font-size:0.9em;
 	color: #3a87ad;	
+	font-weight:bold;
 }
 .reg-value{
 	min-width:145px;
@@ -141,12 +142,18 @@ div.tab-divs{
 }
 .reg-label1{	
 	color: #3a87ad;	
+	font-weight:bold;
 }
 .profile-sub-head-div{
-	
 	font-size:1.1em;
+	padding:3px 5px 3px 3px;
+	border-bottom: 1px solid #DDD;
+	background-color:#EFEFEF;
+	
+	/*
+			
 	color: #D4D7FE;	
-	/*background-color:#666666; */
+	background-color:#666666;
 	background-color:#1e8fc6;
 	padding:2px 2px 2px 5px;
 	border-color:#ddd;
@@ -154,8 +161,17 @@ div.tab-divs{
   	border-radius: 5px;
     border-style:solid;
     border-width:1px;  
-    border-bottom:1px ;
+    border-bottom:1px ; */
 }
-.profile-sub-head-div a{
-	color: #D4D7FE;	
+.profile-sub-head-div a{	
+	/*color: #D4D7FE;	
+	font-weight:bold;*/
+}
+.profile-new-div{
+	margin-bottom:10px;
+	border:1px solid #DDD;
+	border-radius: 5px;
+}
+.profile-reg-well{
+	padding:3px 5px 3px 3px;
 }

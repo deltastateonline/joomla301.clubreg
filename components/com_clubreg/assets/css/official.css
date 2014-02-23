@@ -40,3 +40,19 @@
 	font-weight:bold;
 	min-width:125px;
 }
+
+.payment-new-div{
+	margin-bottom:10px;
+	border:1px solid #DDD;
+	border-radius: 5px;
+}
+
+.payment-reg-well{
+	padding:3px 5px 3px 3px;
+}
+.payment-sub-head-div{
+	font-size:1.1em;
+	padding:3px 5px 3px 3px;
+	border-bottom: 1px solid #DDD;
+	background-color:#EFEFEF;
+}

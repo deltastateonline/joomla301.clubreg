@@ -23,14 +23,15 @@ class ClubRegRenderTablesPropertysHelper extends ClubRegRenderTablesHelper
 		global $clubreg_Itemid;	
 		$i = 0;		
 		$this->headings =  $viewObject->entity_filters["headings"];	?>		
-		<div class='row-striped'>
+		
 			  <?php 
-			  if(count($viewObject->items) > 0){
+			  if(count($viewObject->items) > 0){?>
+			 <div><?php 
 			  	foreach($viewObject->items as $an_item){ 			  		
 			  		$fkey = $viewObject->uKeyObject->constructKey($an_item->property_id,$an_item->property_key);
 			  		$rel_string = json_encode(array("Itemid"=>$clubreg_Itemid,"member_key"=>$viewObject->member_key,JSession::getFormToken()=>1,'property_key'=>$fkey,'action'=>'update'));
 			  	?>			  
-			    <div class="row-fluid" id='propertydata_<?php echo $an_item->property_id; ?>' rel=<?php echo $rel_string ?>>
+			    <div class="profile-new-div" id='propertydata_<?php echo $an_item->property_id; ?>' rel=<?php echo $rel_string ?>>
 			    	<div class='profile-sub-head-div'>
 			    	<div class="pull-left"><a href="javascript:void(0);"  rel=<?php echo $rel_string ?> class='profile-property-button' title=<?php echo JText::_('COM_CLUBREG_PROPERTY_EDIT');?>><?php echo JText::_('COM_CLUBREG_PROPERTY_TYPE'),' - ', $an_item->property_type; ?></a></div>	
 			    	<div class="pull-right" style='font-size:0.8em;padding-left:15px;'><?php echo $an_item->name;?> on  <?php echo $an_item->created;?></div>		    	
@@ -50,7 +51,7 @@ class ClubRegRenderTablesPropertysHelper extends ClubRegRenderTablesHelper
 	 * @see ClubRegRenderTablesHelper::rendererItems()
 	 */
 	protected function rendererItems($an_item){?>
-				<div class="reg-well" >
+				<div class="profile-reg-well" >
 				<?php 
 				foreach($this->headings as $akey=>$aheading){ 
 					if(isset($aheading["csvonly"]) && $aheading["csvonly"] ){continue;}	?>					
