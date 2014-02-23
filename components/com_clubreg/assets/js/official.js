@@ -5,13 +5,13 @@ window.addEvent('domready', function () {
 				
 		$('profileEoi').addClass('well well-large');	
 		
-		var json_data = JSON.decode($('profileEoi').get('rel'));
+		var json_data = JSON.decode($('profileEoi').get('rel'));		
 		
 		var durl = "index.php";	
 		
 		var params = "option=com_clubreg&view=ajax&layout=eoi&tmpl=component";
 		
-		if(json_data["Itemid"]){
+		if(json_data && json_data["Itemid"]){
 			params = params + "&Itemid="+json_data["Itemid"];
 		}
 		var a = new Request.HTML({ 
@@ -31,7 +31,7 @@ window.addEvent('domready', function () {
 		
 		var durl = "index.php";	
 		var params = "option=com_clubreg&view=ajax&layout=activity&tmpl=component";		
-		if(json_data["Itemid"]){
+		if(json_data && json_data["Itemid"]){
 			params = params + "&Itemid="+json_data["Itemid"];
 		}
 		var req = new Request.HTML({
@@ -66,7 +66,7 @@ window.addEvent('domready', function () {
 		
 		var params = "option=com_clubreg&view=ajax&layout=bday&tmpl=component&format=raw";
 		
-		if(json_data["Itemid"]){
+		if(json_data && json_data["Itemid"]){
 			params = params + "&Itemid="+json_data["Itemid"];
 		}
 		var a = new Request.HTML({ 
