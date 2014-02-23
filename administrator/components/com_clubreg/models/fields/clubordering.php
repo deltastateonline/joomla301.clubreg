@@ -30,7 +30,7 @@ class JFormFieldClubordering extends JFormField
 		$control_which = $this->element['name'];
 		$control_label = $this->element['label'];		
 	
-		//$options = ClubRegHelper::configOptions($control_which);
+		$options = ClubRegHelper::configOptions($control_which);
 	
 		$tmp = JHtml::_('select.option', '-1',	'-Select '.$control_label.' -', 'value', 'text');
 	
