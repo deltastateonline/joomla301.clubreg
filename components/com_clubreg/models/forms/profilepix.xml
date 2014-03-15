@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>	
+	<fieldset name="memberProfilepix"	>			
+		<field name="attachment"  type="file" label="COM_CLUBREG_PROFILE_ATTACHMENT" description="COM_CLUBREG_PROFILE_ATTACHMENT_DESC"
+			class="profilepix" onchange="uploadPic(this);" style="opacity:0;" accept=".gif,.jpg,.jpeg,.png,.doc,.docx"/>	
+		
+	</fieldset>
+	<fieldset name="hiddenControls"	>		
+		<field name="document_type" type="hidden" label="document type" description="document type" 
+			class="" default="profile_pics"  required="true"/>		
+		<field name="member_key" type="hidden" default="0" readonly="true" class="readonly" label="Member key" description ="Member key"/>
+		<field name="link_type" type="hidden" default="" readonly="true" class="readonly" label="Link Type" description ="Link type"/>	
+	</fieldset>	
+</form>
