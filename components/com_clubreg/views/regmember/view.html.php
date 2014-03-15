@@ -39,7 +39,9 @@ class ClubRegViewregmember extends JViewLegacy
 		$proceed = TRUE;	
 		
 		$app			= JFactory::getApplication();
-		$user			= JFactory::getUser();			
+		$user			= JFactory::getUser();		
+		
+		
 		
 		$params = JComponentHelper::getParams('com_clubreg');
 		$this->profile_divrightedge =  $params->get("profile_divrightedge");	
@@ -54,6 +56,9 @@ class ClubRegViewregmember extends JViewLegacy
 			
 		$currentModel = $this->getModel();
 		$currentModel->setState('com_clubreg.regmember.member_key',$this->member_key); // use the key in the model
+		$key_data->full_key = $this->member_key;
+		$currentModel->processKey($key_data);
+		
 		
 		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.renderItem.php';
 		require_once CLUBREG_CONFIGS.'config.profile.php';
@@ -81,8 +86,25 @@ class ClubRegViewregmember extends JViewLegacy
 		
 		$this->attachmentForm = $currentModel->getForm();
 		unset($currentModel);
-
 		
+		$currentModel = JModelLegacy::getInstance('profilepix', 'ClubregModel', array('ignore_request' => false));
+		$currentModel->setState('com_clubreg.profilepix.member_key',$this->member_key); // use the key in the model
+		$currentModel->setState('com_clubreg.profilepix.link_type',"profile"); // use the note type in the model
+		
+		$this->profilepixForm = $currentModel->getForm();
+		unset($currentModel);		
+		
+		$link_type = 'profile';
+		$current_model = JModelLegacy::getInstance('attachments', 'ClubregModel', array('ignore_request' => true));
+		$profile_pixs = $current_model->getAttachments($user->get('id'),$key_data->member_id,$link_type);
+		
+		if($profile_pixs && is_array($profile_pixs) && count($profile_pixs) > 0){
+			$profiles_pix = current($profile_pixs);
+			$this->profiles_pix = JURI::base().$profiles_pix->attachment_location.$profiles_pix->attachment_savedfname;
+			$this->profiles_pix = str_replace("\\", "/", $this->profiles_pix );
+		}else{
+			$this->profiles_pix = CLUBREG_ASSETS."/images/clublogo.png";
+		}		
 		return $proceed;
 	}
 	

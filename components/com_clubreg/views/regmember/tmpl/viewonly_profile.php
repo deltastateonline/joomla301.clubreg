@@ -21,29 +21,34 @@
 	  	$t_phone[] = $member_data->mobile;
 	  }
 	  $member_data->t_phone = $t_phone ;
-	  /** some preprocessing*/	  	 
+	  /** some preprocessing*/	  
+
+	  
 ?>
-<div class="row-fluid">
-	<div class="h21"><?php echo JText::_('COM_CLUBREG_PROFILE_BIO'); ?> : </div>
-			<div class="row-striped">
-				<?php $profile_details = $headingConfigs["bio"]; 
-					foreach($profile_details as $akey => $tvalue){ 					
-					?>
-					<div class="row-fluid">
-						<div class="pull-left profile-label"><?php echo $tvalue["label"]?></div>
-						<div class="pull-left profile-colon"> :&nbsp;&nbsp;</div>
-						<div class="pull-left profile-value"> <?php echo $itemRenderer->render($member_data->$akey,$tvalue); ?></div>
-					</div>
-				<?php }?>
-				
-			</div>	
-		</div>	
+	<div class="row-fluid" style="max-width:97%">
+	<div class="span4"><?php echo $this->loadTemplate("pixs"); ?></div>
+	<div class="frame-div span8">
+			<div class="h21"><?php echo JText::_('COM_CLUBREG_PROFILE_BIO'); ?> : </div>
+					<?php $profile_details = $headingConfigs["bio"]; 
+						foreach($profile_details as $akey => $tvalue){ 					
+						?>
+						<div class="row-fluid" style="border-bottom:1px solid #EEEFEF">
+							<div class="pull-left profile-label1"><?php echo $tvalue["label"]?></div>
+							<div class="pull-left" style='padding:0px 5px;'> : </div>
+							<div class="pull-left profile-value"> <?php echo $itemRenderer->render($member_data->$akey,$tvalue); ?></div>
+						</div>
+					<?php }?>		
+		</div>
+	
+	</div>	
+
 		<?php if(isset($this->profileConfigs["headings"]["club"])){ ?>
 		<div class="clearfix">&nbsp;</div>
-		<div class="row-fluid">
+		<div class="row-fluid frame-div" style="max-width:97%">
 			
-			<div class="h21"><?php echo JText::_('COM_CLUBREG_PROFILE_DIVISION'); ?> :
+			<div class="h21"><?php echo JText::_('COM_CLUBREG_PROFILE_DIVISION'); ?> :&nbsp;&nbsp;
 				<a class="btn btn-mini profile-div-button pull-right" rel='<?php echo $member_data->member_id; ?>' href="javascript:void(0);">-</a><br />
+			 	
 			 </div>	
 			<div class="row-striped">
 			<div id="profile-division">

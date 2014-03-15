@@ -10,5 +10,27 @@
 -------------------------------------------------------------------------*/ 
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' ); 
+$in_type = "hidden";
+global $clubreg_Itemid;
 ?>
-<div class='profile-img'><img src="<?php echo CLUBREG_ASSETS; ?>/images/clublogo.png" width="128" title="<?php echo JText::_("COM_CLUBREG_PROFILE_NEW_PHOTO")?>"/></div>
+<div class="text-center">
+<div class='profile-img'>
+<img src="<?php echo $this->profiles_pix; ?>" width="150" id="profileimg" title="<?php echo JText::_("COM_CLUBREG_PROFILE_NEW_PHOTO")?>"/>
+<form action="index.php" method="post" name="profilepixForm" id="profile-pix-form" class="" enctype='multipart/form-data' >
+
+<?php
+ foreach($this->profilepixForm->getFieldset('memberProfilepix')  as $field){
+			echo str_replace("jform_attachment", "uploadimage", $field->input); 
+ }
+foreach($this->profilepixForm->getFieldset('hiddenControls') as $field){
+	echo $field->input;
+}
+?>
+<input type="<?php echo $in_type;?>" name="Itemid" value="<?php echo $clubreg_Itemid; ?>" />
+<input type="<?php echo $in_type;?>" name="option" value="com_clubreg" />
+<input type="<?php echo $in_type;?>" name="task" value="ajax.saveattachment" />
+<?php echo JHtml::_('form.token'); ?>
+</form>
+</div>
+<button id="profilebtn" class="btn profile-pix-button btn-mini btn-info">Change Profile Pix</button>
+</div>
