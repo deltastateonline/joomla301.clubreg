@@ -80,7 +80,7 @@ define('CLUB_DOCUMENTS_WHICH','club_documents');
 
 define('CLUB_JUNIORCOUNT',4);
 define('COM_CLUBREG_DIVRIGHT',"700");
-define('COM_CLUBREG_TABPOSITION',"top");
+define('COM_CLUBREG_TABPOSITION',"left");
 
 define('CLUBREG_ADMINPATH',JPATH_ADMINISTRATOR.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_clubreg'.DIRECTORY_SEPARATOR);
 
@@ -100,7 +100,7 @@ $clubreg_params["setting"]["taxrate"]= array("label"=>"Tax Rate");
 $clubreg_params["setting"]["assign_to"]= array("label"=>"Applies To");
 $clubreg_params["payment"]["assign_to"]= array("label"=>"Applies To");
 
-define('LIVE_SITE',FALSE);
+define('LIVE_SITE',TRUE);
 define('ATTACHMENT_LIMIT',5);
 
 include_once("debugger.php");
