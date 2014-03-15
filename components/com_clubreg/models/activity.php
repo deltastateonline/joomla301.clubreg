@@ -102,9 +102,21 @@ class ClubRegModelActivity extends JModelLegacy
 				from %s as att 	
 				left join %s as att_m on (att.primary_id = att_m.member_id)			
 				where att.created_by = %d 
-				and lcase(att.link_type) = 'member'
+				and lcase(att.link_type) = 'member'				
 				
-				order by acreated desc
+				union
+				
+				select 'assets' as which, 
+				concat('Asset Added To ') as which_label, concat(ass_m.givenname,' ',ass_m.surname) as 'activity_label', 
+				date_format(asset.created, '%%d/%%m/%%Y %%H:%%i:%%s') as activity_created,
+				asset.created as acreated,
+				concat('Make :',asset.property_make,' S/N:',asset.property_serial) as activity_item,
+				concat(property_id,property_key,'-',length(property_id)) as item_key,
+				ass_m.member_id, ass_m.member_key		
+				from %s as asset 	
+				left join %s as ass_m on (asset.member_id = ass_m.member_id)			
+				where asset.created_by = %d 				
+				order by acreated desc				
 				",
 				$var_string,
 				CLUB_AUDIT_TABLE,
@@ -118,12 +130,16 @@ class ClubRegModelActivity extends JModelLegacy
 				$user_id,
 				CLUB_ATTACHMENTS_TABLE,
 				CLUB_REGISTEREDMEMBERS_TABLE,
+				$user_id,
+				CLUB_PROPERTY_TABLE,
+				CLUB_REGISTEREDMEMBERS_TABLE,
 				$user_id
 				);
 		
 		$db->setQuery($d_qry, 0, 20);
 		
 		$activity = $db->loadObjectList();
+		
 		if($db->getErrorNum()> 0){
 			write_debug($db);
 		}
