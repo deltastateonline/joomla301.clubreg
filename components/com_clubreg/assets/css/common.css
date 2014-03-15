@@ -12,6 +12,7 @@
 	background-position:center center; 
  	min-height:34px;
  	height:40px;
+ 	z-index:300px;
 }
 
 ol.activity li{

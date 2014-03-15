@@ -9,14 +9,29 @@
 	font-weight:bold;
 	line-height:20px;
 	padding-top:4px;
-	pading-left:0px;
-	padding-bottom:4px;
+	padding-left:5px;
+	padding-bottom:4px;	
+	
+	border-bottom: 1px solid #DDD;
+	background-color:#EFEFEF;
+}
+.frame-div{
+	margin-bottom:10px;
+	margin-right:0px;
+	border:1px solid #DDD;
+	border-radius: 5px;
+	padding:0px 0px 0px 0px;
+}
+.frame-div .row-fluid{
+	padding:5px;
+	width:96%;
+	
 }
 
 .reg-well{
 	padding : 5px 0px 0px 20px;
 }
-.profile-label, .profile-value,.profile-colon {
+.profile-label, .profile-value,.profile-colon,profile-label1 {
 	/*padding-top :5px;*/
 	font-size:90%;
 	
@@ -28,11 +43,19 @@
 	font-weight:bold;	
 	/*border-bottom:dashed 1px #999999;*/
 }
+.profile-label1{	
+	font-size:0.9em;
+	color: #3a87ad;
+	font-weight:bold;
+}
 .profile-value{
-	min-width:150px;	
+	min-width:150px;
 }
 .profile-img{
-	min-height:128px;
+	min-height:180x;
+	border:1px solid #EEEFEF;
+	margin-bottom:5px;
+	padding:5px;
 }
 
 .subprofile-label, .subprofile-value,.subprofile-colon {	
@@ -174,4 +197,7 @@ div.tab-divs{
 }
 .profile-reg-well{
 	padding:3px 5px 3px 3px;
+}
+.profilepix{
+	opacity:0;
 }
