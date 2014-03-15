@@ -97,52 +97,9 @@ $headingConfigs = $this->profileConfigs["headings"];
 		</form>				
 	<div class="clearfix"></div>
 	</div>
-	<?php //echo $this->loadTemplate("pixs"); ?>	
-	
-	<?php $render_here = false; 
-	if($render_here){ ?>
-	<div class="span9">		
-		<div class="row-fluid">
-			<div class="span3 h21"><?php echo JText::_('COM_CLUBREG_PROFILE_BIO'); ?> : </div>	
-			<div class="span9 row-striped">
-				<?php $profile_details = $headingConfigs["bio"]; 
-					foreach($profile_details as $akey => $tvalue){ 					
-					?>
-					<div class="row-fluid">
-						<div class="pull-left profile-label"><?php echo $tvalue["label"]?></div>
-						<div class="pull-left profile-colon"> :&nbsp;&nbsp;</div>
-						<div class="pull-left profile-value"> <?php echo $itemRenderer->render($member_data->$akey,$tvalue); ?></div>
-					</div>
-				<?php }?>
-				
-			</div>	
-		</div>	
-		<?php if(isset($this->profileConfigs["headings"]["club"])){ ?>
-		<div class="clearfix">&nbsp;</div>
-		<div class="row-fluid">
-			<div class="span3">
-			<div class="h21"><?php echo JText::_('COM_CLUBREG_PROFILE_DIVISION'); ?> :</div>
-				<a class="btn btn-mini profile-div-button" rel='<?php echo $member_data->member_id; ?>' href="javascript:void(0);">-</a><br />
-			 </div>	
-			<div class="span9 row-striped">
-			<div id="profile-division">
-				<?php $profile_details = $headingConfigs["club"]; 
-					foreach($profile_details as $akey => $tvalue){ 					
-					?>
-					<div class="row-fluid">
-						<div class="pull-left profile-label"><?php echo $tvalue["label"]?></div>
-						<div class="pull-left profile-colon"> :&nbsp;&nbsp;</div>
-						<div class="pull-left profile-value"><?php echo $itemRenderer->render($member_data->$akey,$tvalue); ?></div>
-					</div>
-				<?php }?>
-				</div>
-			</div>	
-		</div>
-		<?php } ?>		
-	</div><?php  }// span9 ?>
+	<?php //echo $this->loadTemplate("pixs"); ?>
 </div> <?php  // row-fluid ?>
 
-<div id='loading-div'></div>
 <div class="clearfix">&nbsp;</div>
 <?php if(count($headingConfigs["tab"]) > 0 ) { ?>
 	<div class="tabbable tabs-<?php echo $this->profile_tabposition; ?>">
@@ -153,7 +110,7 @@ $headingConfigs = $this->profileConfigs["headings"];
 			<?php $i++; } ?>					
 		</ul>
 		
-		<div class="tab-divs">
+		<div class="tab-divs">		
 			<div class="tab-content" style="min-height:400px;">
 				<div class="tab-pane active" id="tabProfile">
 					<?php echo $this->loadTemplate('profile'); ?>
@@ -187,4 +144,8 @@ if(isset($headingConfigs["javascript"]) && count($headingConfigs["javascript"]) 
 		ClubregHelper::writeTabAssets($document,$a_key, $an_asset);
 	}
 }
+?>
+<div id='loading-div'></div>
+<?php 
+ClubregHelper::writeTabAssets($document, "iFrameFormRequest",array("js"));
 ClubregHelper::write_footer();

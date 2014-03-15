@@ -136,7 +136,7 @@ class ClubRegProfileConfig extends JObject
 		
 		$attr = " width='16' hspace='1' border='0'";
 		
-		$tabs["children"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_CHILDREN'),"css"=>"class='active'",'default'=>TRUE, 'applies'=>array("guardian"));			
+		$tabs["children"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_CHILDREN'),"css"=>"class='active'",'default'=>TRUE,'img'=>array('fname'=>'groups.png','attr'=>$attr), 'applies'=>array("guardian"));			
 		$tabs["guardian"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_GUARDIAN'),"css"=>"class='active'",'default'=>TRUE,'img'=>array('fname'=>'emergency.png','attr'=>$attr), 'applies'=>array("junior"));
 		$tabs["emergency"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_EMERGENCY'),"css"=>"class='active'",'default'=>TRUE,'img'=>array('fname'=>'emergency.png','attr'=>$attr), 'applies'=>array("senior"));
 		$tabs["notes"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_NOTES'),'img'=>array('fname'=>'notes.png','attr'=>$attr), 'applies'=>array("senior","junior","guardian"));
