@@ -16,8 +16,32 @@ JHtml::_('formbehavior.chosen', 'select');
 
 $uri = JURI::getInstance();
 $Itemid = $uri->getVar('Itemid');
+
+
 ?>
 <form action="<?php echo JRoute::_('index.php')?> " method="post" name="adminForm" id="eoi-form" class="form-validate form-horizontal">
+<?php 
+if($this->eoi_usetable){
+	?>
+	<table width="90%" cellpadding="5" cellspacing="5">
+		<tr>
+			<td colspan=2 style="border-bottom:solid 1px #EFEFEE;font-weight:bold;font-size:1.5em;"><?php echo JText::_('COM_CLUBREG_EOIFORM_LABEL'); ?></td>
+		</tr>
+		<?php foreach($this->form->getFieldset('senior') as $field): ?>
+			<?php if (!$field->hidden){ ?>
+			<tr>
+				<td style="text-align:right;font-size:1.2em;font-weight:bold;"><?php echo $field->label; ?></td>
+				<td><?php echo $field->input; ?></td>
+			</tr>
+			<?php }else{  ?>
+					<?php echo $field->input; ?>
+			<?php } ?>
+		<?php endforeach; ?>
+	</table>
+	
+	<?php 
+}
+else{ ?>
 <fieldset class="well">
 <legend><?php echo JText::_('COM_CLUBREG_EOIFORM_LABEL'); ?></legend>
 <div class="row-fluid">
@@ -35,6 +59,7 @@ $Itemid = $uri->getVar('Itemid');
 		<?php endforeach; ?>
 </div>
 </fieldset>
+<?php } ?>
 		<input type="hidden" name="Itemid" value="<?php echo $Itemid; ?>" />	
 		<input type="hidden" name="jform[playertype]" id="jform_playertype" value="senior" />
 		<input type="hidden" name="option" value="com_clubreg" />

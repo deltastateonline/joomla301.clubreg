@@ -34,11 +34,15 @@ class ClubRegVieweoi extends JViewLegacy
 			ClubRegUnAuthHelper::unAuthorised();
 		}
 	}
-	private function senior(){		
+	private function senior(){	
+		$params = JComponentHelper::getParams('com_clubreg');
+		$this->eoi_usetable =  $params->get("eoi_usetable");		
 		$this->form		= $this->get('Form');	
 		return TRUE;
 	}
 	private function junior(){
+		$params = JComponentHelper::getParams('com_clubreg');
+		$this->eoi_usetable =  $params->get("eoi_usetable");
 		$this->form		= $this->get('Form');	
 		$this->juniorDetails = $this->get('JuniorDetails');	
 		$this->juniorControls = $this->get('juniorControls');
