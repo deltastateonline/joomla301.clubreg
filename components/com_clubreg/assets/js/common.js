@@ -47,9 +47,18 @@ var divListRenderer = new Class({
 	
 	renderList:function(){
 		
-		var json_data = JSON.decode(this.listDiv.get('rel'));			
-		var durl = "index.php?"+this.params;
+		var json_data = JSON.decode(this.listDiv.get('rel'));		
+		var durl = "index.php";
 		var current_div = this.listDiv;
+		
+		var t_strings = this.params.split("&");		
+		var t_length = t_strings.length;
+		
+		for(var i = 0; i < t_length; i++){
+			var b = t_strings[i].split('=');			
+			json_data[decodeURIComponent(b[0])] = decodeURIComponent(b[1]);			
+		}	
+		
 		
 		var a = new Request.HTML({
 			url : durl, 
