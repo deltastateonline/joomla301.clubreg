@@ -22,9 +22,10 @@ switch($this->which){
 		$itemControl = $this->itemForm->getField("notes");		
 		echo nl2br($itemControl->value);		
 	break;
-	case "files":
-		//$itemControl = $this->itemForm->getField("notes");
-		//echo nl2br($itemControl->value);
+	case "assets":
+		$tableRender = new ClubRegRenderTablesPropertysHelper();
+		$this->hide_created = true;
+		$tableRender->renderAnItem($this);
 	break;
 	
 }

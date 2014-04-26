@@ -100,11 +100,36 @@ class ClubRegViewAjax extends JViewLegacy
 				case "files":					
 					$app			= JFactory::getApplication();					
 					$d_url = sprintf("index.php?option=com_clubreg&Itemid=%s&view=ajax&layout=viewattachment&tmpl=component&format=raw&attachment_key=%s",
-						$clubreg_Itemid	,$key_data->full_key);
-					
-					$app->redirect($d_url);		
-					
+						$clubreg_Itemid	,$key_data->full_key);					
+					$app->redirect($d_url);						
 					return ;
+				break;
+				case "assets":
+					
+					$current_model = JModelLegacy::getInstance('propertys', 'ClubregModel', array('ignore_request' => true));
+						
+					$current_model->setState('com_clubreg.propertys.full_key',$key_data->full_key); // use the key in the model
+					$current_model->setState('com_clubreg.propertys.property_key',$key_data->string_key); // use the key in the model
+					$current_model->setState('com_clubreg.propertys.property_id',$key_data->pk_id); // use the key in the model
+						
+					$this->items = $current_model->getPropertys($user->get('id'));
+					
+					require_once CLUBREG_CONFIGS.'config.propertys.php';
+					require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.rendertables.propertys.php';
+						
+					$configObj = new ClubRegPropertysConfig();
+					$propertysConfigs =  $configObj->getConfig("propertys"); // return headings and filters
+						
+					$tmp_filters["filter_heading"] = $propertysConfigs["filters"];
+					$tmp_filters["group_where"] = $propertysConfigs["group_where"];
+					$tmp_filters["headings"] = $propertysConfigs["headings"];
+					$tmp_filters["otherconfigs"] = $propertysConfigs["otherconfigs"];
+					$this->entity_filters = $tmp_filters;
+						
+					unset($configObj);
+					unset($tmp_filters);
+						
+					
 				break;
 				
 			}

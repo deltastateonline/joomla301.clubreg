@@ -71,9 +71,11 @@ class ClubRegRenderTablesPropertysHelper extends ClubRegRenderTablesHelper
 		
 		global $clubreg_Itemid;		
 		
-				$this->headings =  $viewObject->entity_filters["headings"];						 
+				$this->headings =  $viewObject->entity_filters["headings"];	
+							 
 				$an_item = current($viewObject->items);?>
-				<div class='profile-sub-head-div'>
+			<div class="payment-new-div">
+				<div class='payment-sub-head-div'>
 				<?php if(isset($viewObject->hide_created) && $viewObject->hide_created){?>
 					<div class="pull-left" ><?php echo JText::_('COM_CLUBREG_PROPERTY_TYPE'),' - ', $an_item->property_type; ?></div>
 				<?php }else{					  		  		
@@ -85,7 +87,8 @@ class ClubRegRenderTablesPropertysHelper extends ClubRegRenderTablesHelper
 				    <div class="clearfix"></div>
 				    </div>
 				    <?php $this->rendererItems($an_item); ?>
-				    <div class="clearfix"></div>					    		  
+				    <div class="clearfix"></div>
+			</div>					    		  
 	<?php 		
 	}
 		
