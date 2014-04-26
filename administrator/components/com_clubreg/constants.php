@@ -20,8 +20,8 @@ define('CLUB_ATTACHMENTS_TABLE','#__clubreg_attachments');  // the template tabl
 
 define('CLUB_CONFIG_TABLE','#__clubreg_configs'); // configuration table
 
-define('DESIGNED_BY','deltastateonline.com');
-define('OUR_WEBSITE','applications.deltastateonline.com');
+define('DESIGNED_BY','app.deltastateonline.com');
+define('OUR_WEBSITE','app.deltastateonline.com');
 
 
 define('CLUB_EOIMEMBERS_TABLE','#__clubreg_eoimembers'); // eoi members
