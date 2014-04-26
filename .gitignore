@@ -89,6 +89,8 @@ templates/meet_gavern/
 templates/protostar/
 templates/system/
 templates/js_wright/
+templates/baseline/
+templates/yougrids/
 
 administrator/cache/
 administrator/help/
