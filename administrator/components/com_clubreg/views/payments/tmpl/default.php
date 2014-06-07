@@ -18,6 +18,8 @@ JHtml::_('behavior.modal');
 JHtml::_('behavior.multiselect');
 JHtml::_('formbehavior.chosen', 'select');
 
+require_once JPATH_COMPONENT_SITE.'/helpers/clubreg.renderItem.php';
+
 	global $Itemid, $option;
 	$in_type="hidden";
 	$listOrder	= $this->escape($this->state->get('list.ordering'));

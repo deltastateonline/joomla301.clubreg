@@ -59,6 +59,7 @@ defined('_JEXEC') or die;
 								<?php echo $row->product_name;?>
 						<?php } ?>
 					</td>
+					<td><?php echo applyFactor($row->product_amount); 	?></td>
 					<td>
 						<?php echo $row->validfrom_str; ?><br />
 						<?php echo $row->validto_str; ?>

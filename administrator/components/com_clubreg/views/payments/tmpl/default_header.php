@@ -24,6 +24,9 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 	<th>
 		<?php echo JHtml::_('grid.sort', 'Payment Name', 'a.product_name', $listDirn, $listOrder); ?>
 	</th>	
+	<th width="15%">
+		<?php echo JText::_('Amount'); ?>
+	</th>	
 	<th width="15%" class="hidden-phone">
 		<?php echo JText::_('Valid From - To'); ?>
 	</th>	
