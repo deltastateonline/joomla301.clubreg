@@ -33,6 +33,9 @@ define('CLUB_PAYMENTS_SETUP_TABLE','#__clubreg_payments_setup'); // payments set
 define('CLUB_PAYMENTS_TABLE','#__clubreg_payments'); // payments details
 define('CLUB_NOTES_TABLE','#__clubreg_notes'); // notes details
 
+define('CLUB_SACCOUNTS_TABLE','#__clubreg_saccounts'); // accounts details
+define('CLUB_SACCOUNTS_ITEMS_TABLE','#__clubreg_saccounts_items'); // account items details
+
 define('CLUB_TAG_TABLE','#__clubreg_tags'); // tag table
 define('CLUB_TAGPLAYER_TABLE','#__clubreg_tags_players'); // player tag link
 
@@ -77,6 +80,7 @@ define('CLUB_PLAYER_DETAILS','club_player_details');
 define('CLUB_PLAYER_STATS','club_stats');
 define('CLUB_GROUPTYPE','club_grouptype');
 define('CLUB_DOCUMENTS_WHICH','club_documents');
+define('CLUB_SCHOOLTERMS','school_term');
 
 define('CLUB_JUNIORCOUNT',4);
 define('COM_CLUBREG_DIVRIGHT',"700");
