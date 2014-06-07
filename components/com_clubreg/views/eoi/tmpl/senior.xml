@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+  <layout title="COM_CLUBREG_EOIFORM_LAYOUT_LABEL">
+    <message>
+      <![CDATA[COM_CLUBREG_EOIFORM_LABEL]]>
+    </message>
+  </layout>
+  <fields name="request">
+		<fieldset name="request">			
+		<field name="layout" type="list" default="senior" label="COM_CLUBREG_EOIFORM_TEMPLATE_LABEL" description='COM_CLUBREG_EOIFORM_TEMPLATE_DESC'>
+			<option value="">COM_CLUBREG_SELECTPLAYERS</option>
+			<option value="junior">COM_CLUBREG_JUNIORPLAYERS</option>
+			<option value="senior">COM_CLUBREG_SENIORPLAYERS</option>			
+       </field>
+		</fieldset>
+	</fields>	
+</metadata>

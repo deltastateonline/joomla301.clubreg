@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+  <layout title="COM_CLUBREG_RENDERREG_DESC">
+    <message>
+      <![CDATA[COM_CLUBREG_RENDERREG_DESC]]>
+    </message>
+  </layout>
+  	<fields name="request">
+		<fieldset name="request">			
+			<field name="layout" type="hidden" default="renderregmembers"  value="renderregmembers" label="Render Member Lists" description="Render Member Lists"></field>
+      		<field name="resetpage" type="hidden" value="reset" label="Reset Filters" description="Reset Filters"></field>
+		</fieldset>
+	</fields>	
+</metadata>

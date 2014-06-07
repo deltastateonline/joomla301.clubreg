@@ -24,8 +24,7 @@ class ClubRegVieweoi extends JViewLegacy
 		$proceed = FALSE;
 		
 		if(method_exists($this, $renderer)){
-			$proceed =  $this->$renderer();
-			
+			$proceed =  $this->$renderer();			
 		}	
 
 		if($proceed){

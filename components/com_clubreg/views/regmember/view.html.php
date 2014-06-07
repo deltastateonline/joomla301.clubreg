@@ -110,41 +110,49 @@ class ClubRegViewregmember extends JViewLegacy
 	
 	private function edit(){
 		
-		$proceed = TRUE;
+		$proceed = FALSE;
 		
 		$app			= JFactory::getApplication();
-		$user			= JFactory::getUser();
+		$user			= JFactory::getUser();		
 		
-		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';			
+		$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
+		$current_model->setState('joomla_id',$user->get('id'));
 		
-		$key_data = new stdClass(); $parent_key_data = new stdClass();
+		if($current_model->getPermissions('manageusers')){
+			
+			$proceed = TRUE;
 		
-		$key_data->full_key = $this->member_key = $app->input->getString('pk', null);		
-		$this->uKeyObject = new ClubRegUniqueKeysHelper();
-		$this->uKeyObject->deconstructKey($key_data);
+			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';			
+			
+			$key_data = new stdClass(); $parent_key_data = new stdClass();
+			
+			$key_data->full_key = $this->member_key = $app->input->getString('pk', null);		
+			$this->uKeyObject = new ClubRegUniqueKeysHelper();
+			$this->uKeyObject->deconstructKey($key_data);
+			
+			$this->formbaction = 'index.php?option=com_clubreg&view=regmember'; // back to profile
+			$this->formbackaction = 'index.php?option=com_clubreg&view=regmembers'; // back to list
+			
+			$this->tmpl = $app->input->getString('tmpl', "html");		// determine if you are calling from add child 
+			
+			$currentModel = $this->getModel();		
+			$currentModel->setState('com_clubreg.regmember.member_key',$key_data->string_key); // use the key in the model		
+			$currentModel->setState('com_clubreg.regmember.member_id',$key_data->pk_id); // use the key in the model		
+			
+			$playertype = $app->input->getString('playertype', null);
+			if(isset($playertype)){
+				$currentModel->setState('com_clubreg.regmember.playertype',$playertype); // use the key in the model
+			}
+			
+			$parent_key_data->full_key = $app->input->getString('parent_key', null);  // if it is a child
+			if(isset($parent_key_data)){			
+				$this->uKeyObject->deconstructKey($parent_key_data);			
+				$currentModel->setState('com_clubreg.regmember.parent_id',$parent_key_data->pk_id); // use the key in the model
+			}		
+			
+			$this->regmemberForm = $currentModel->getForm();	
 		
-		$this->formbaction = 'index.php?option=com_clubreg&view=regmember'; // back to profile
-		$this->formbackaction = 'index.php?option=com_clubreg&view=regmembers'; // back to list
-		
-		$this->tmpl = $app->input->getString('tmpl', "html");		// determine if you are calling from add child 
-		
-		$currentModel = $this->getModel();		
-		$currentModel->setState('com_clubreg.regmember.member_key',$key_data->string_key); // use the key in the model		
-		$currentModel->setState('com_clubreg.regmember.member_id',$key_data->pk_id); // use the key in the model		
-		
-		$playertype = $app->input->getString('playertype', null);
-		if(isset($playertype)){
-			$currentModel->setState('com_clubreg.regmember.playertype',$playertype); // use the key in the model
 		}
-		
-		$parent_key_data->full_key = $app->input->getString('parent_key', null);  // if it is a child
-		if(isset($parent_key_data)){			
-			$this->uKeyObject->deconstructKey($parent_key_data);			
-			$currentModel->setState('com_clubreg.regmember.parent_id',$parent_key_data->pk_id); // use the key in the model
-		}		
-		
-		$this->regmemberForm = $currentModel->getForm();	
-		
 		
 		return $proceed;
 		
