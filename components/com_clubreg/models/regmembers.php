@@ -18,7 +18,8 @@ class ClubregModelRegmembers extends JModelList
 			$config['filter_fields'] = array(
 					'a.member_id',
 					'a.surname','a.givenname',
-					'a.emailaddress'
+					'a.emailaddress',
+					'a.gender'
 			);
 		}
 	

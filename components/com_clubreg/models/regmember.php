@@ -43,6 +43,8 @@ class ClubregModelRegmember extends JModelForm
 		if(empty($data)){
 			$data["playertype"] =  $this->getState("com_clubreg.regmember.playertype");
 			$data["parent_id"] =  $this->getState("com_clubreg.regmember.parent_id");
+			$data["year_registered"] = date('Y');
+			$data["joining_date"] = date('Y-m-d');
 		}
 		return $data;
 	}
@@ -80,6 +82,7 @@ class ClubregModelRegmember extends JModelForm
 		
 		$db->setQuery($query);
 		$row = $db->loadAssoc();
+		
 		
 		return $row;		
 	}
