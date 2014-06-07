@@ -16,7 +16,6 @@ jimport( 'joomla.application.component.view');
 class ClubRegViewAjax extends JViewLegacy
 {
 
-	
 	function display($tpl = null)
 	{	
 		
