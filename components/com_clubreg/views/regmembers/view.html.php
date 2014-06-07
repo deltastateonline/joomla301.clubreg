@@ -72,7 +72,7 @@ class ClubRegViewregmembers extends JViewLegacy
 			
 			$this->formaction = 'index.php?option=com_clubreg&view=regmembers';			
 			$this->formaction_comp = 'index.php?option=com_clubreg&view=regmembers&format=raw';// the csv file
-			$this->formaction_edit = 'index.php?option=com_clubreg&view=regmember';
+			$this->formaction_edit = 'index.php?option=com_clubreg&view=regmember&layout=edit';
 			$this->state		= $current_model->getState();		
 			
 			$configObj = new ClubRegRegmembersConfig();			
@@ -108,7 +108,8 @@ class ClubRegViewregmembers extends JViewLegacy
 	{
 		return array(
 				'a.created' => JText::_('COM_CLUBREG_CREATED_LABEL'),
-				'a.surname' => JText::_('COM_CLUBREG_SURNAME_LABEL')." ".JText::_('COM_CLUBREG_GIVENNAME_LABEL'),
+				'a.surname' => JText::_('COM_CLUBREG_PLAYERNAME_LABEL'),
+				'a.gender' => JText::_('COM_CLUBREG_GENDER_LABEL'),
 				'a.emailaddress' => JText::_('JGLOBAL_EMAIL')
 	
 	
