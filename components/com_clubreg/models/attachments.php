@@ -44,6 +44,9 @@ class ClubregModelAttachments extends JModelList
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);
 		
+		$limit_["limit"] = intval($this->getState("com_clubreg.attachments.limit"));
+		$limit_["limitstart"] = intval($this->getState("com_clubreg.attachments.limitstart"));
+		
 		$all_string[] = "`attachment_id`, `attachment_key`, `primary_id`, `link_type`, `attachment_fname`, `attachment_notes`, 
 		`attachment_type`, a.`params`, `attachment_savedfname`, `attachment_location`, a. `created_by`, 
 		`attachment_parameter_type`, `attachment_file_type`, `attachment_status`, `attachment_access_level`";
@@ -62,7 +65,11 @@ class ClubregModelAttachments extends JModelList
 		
 		$query->order('config_tags.config_name asc , a.attachment_id desc');
 		
-		$db->setQuery($query);
+		if($limit_["limit"] && $limit_["limitstart"] ){			
+			$db->setQuery($query,$limit_["limitstart"],$limit_["limit"]);
+		}else{		
+			$db->setQuery($query);
+		}
 		try {
 			$attachmentsList = $db->loadObjectList();
 			return $attachmentsList;
