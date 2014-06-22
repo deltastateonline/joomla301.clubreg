@@ -36,26 +36,52 @@ function ClubregBuildRoute(&$query)
 		$menuItem = $menu->getItem($query['Itemid']);
 	}	
 	
-	$mView	= (empty($menuItem->query['view'])) ? null : $menuItem->query['view'];
-	$mLayout	= (empty($menuItem->query['layout'])) ? null : $menuItem->query['layout'];
-	$mId	= (empty($menuItem->query['id'])) ? null : $menuItem->query['id'];
-	$mresetpage = (empty($menuItem->query['resetpage'])) ? null : $menuItem->query['resetpage'];
+	
+	$mView	= (empty($query['view'])) ?$menuItem->query['view']:$query['view'];
+	$mLayout	= (empty($query['layout'])) ?$menuItem->query['layout']:$query['layout'];
+	$mId	= (empty($query['id'])) ?$menuItem->query['id']:$query['id'];
+	$mresetpage = (empty($query['resetpage'])) ? $menuItem->query['resetpage']:$query['resetpage'];
+	$mPlayertype = (empty($query['playertype'])) ?$menuItem->query['playertype']:$query['playertype'];
+	
+	$mFormat	= (empty($query['format'])) ?$menuItem->query['format']:$query['format'];
+	$mTmpl	= (empty($query['tmpl'])) ?$menuItem->query['tmpl']:$query['tmpl'];
 	
 	
 	if(isset($mView)){
 		$segments[] = "view:".$mView;
+		unset($query['view']);
 	}
 	if(isset($mId)){		
-		$segments[] = "id:".$mId;	 
+		$segments[] = "id:".$mId;
+		unset($query['id']);
 	}
 	
 	if(isset($mLayout)){		
 		$segments[] = "layout:".$mLayout;
+		unset($query['layout']);
 	}
 	
 	if(isset($mresetpage)){
 		$segments[] = "resetpage:".$mresetpage;
+		unset($query['resetpage']);
 	}
+	
+	if(isset($mPlayertype)){
+		$segments[] = "playertype:".$mPlayertype;
+		unset($query['playertype']);
+	}
+	
+	if(isset($mFormat)){
+		$segments[] = "format:".$mFormat;
+		unset($query['format']);
+	}
+	
+	if(isset($mTmpl)){
+		$segments[] = "tmpl:".$mTmpl;
+		unset($query['tmpl']);
+	}
+	
+	
 	return $segments;
 }
 /**
