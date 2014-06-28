@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+  <layout title="COM_CLUBREG_CGROUPS_LAYOUT_LABEL">
+    <message>
+      <![CDATA[COM_CLUBREG_CGROUPS_LABEL]]>
+    </message>
+  </layout>
+  <fields name="request">
+		<fieldset name="request" addfieldpath="/administrator/components/com_clubreg/models/fields" > 
+			<field name="groups" type="clubgroups"  label="CLUBREG_GROUPS" description='CLUBREG_GROUPS' />      
+       		<field name="year" type="clubyears"  label="COM_CLUBREG_SEASON_LABEL" description='COM_CLUBREG_SEASON_LABEL' />       
+		</fieldset>
+	</fields>	
+</metadata>
