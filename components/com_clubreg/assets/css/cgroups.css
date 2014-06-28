@@ -1,0 +1,36 @@
+span.introduction {
+font-size: 35px;
+ text-align:center;
+ color: ##D#D#D;
+ vertical-align:middle;
+ padding-top:10px;
+}
+
+.cgroup-pix{
+	
+	border-radius: 5px;
+    border-style:solid;
+    border-width:0px;
+    border-color:#DDEDED;
+    padding:5px;
+    min-height:48px;  
+    width:48px;
+    
+}
+
+.cgroup-div{
+	border-color:#ddd;
+    -moz-border-radius: 5px;
+  	border-radius: 5px;
+    border-style:solid;
+    border-width:1px;
+    padding:0px 5px 0px 5px;
+    box-shadow: 10px 10px 5px #DDEDED;
+    -webkit-box-shadow: 10px 10px 5px #DDEDED;
+    -moz-box-shadow: 10px 10px 5px #DDEDED;
+    padding:5px;
+    margin:7px 5px 7px 10px;
+}
+.cgroup-subgroup{	
+	font-size:0.9em;
+}
