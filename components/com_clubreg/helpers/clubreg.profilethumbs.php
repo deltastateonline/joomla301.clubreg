@@ -19,7 +19,7 @@ class ClubRegProfileThumbsHelper extends JObject
 		$this->_thumb_path = $thumb_path;		
 	}
 	
-	public function renderMemberThumb($member_id){
+	public function renderMemberThumb($member_id,$use_clubreg=FALSE){
 		
 		$media_path = sprintf("%smber_%s%s",$this->_thumb_path,$member_id,DS);
 		$file_path = JPATH_ROOT.DS.$media_path."th".DS."profile.jpg";
@@ -39,10 +39,12 @@ class ClubRegProfileThumbsHelper extends JObject
 			$ffound = TRUE;
 		}
 		
-		$alt = "width='48' hspace='2' ";
+		$alt = "width='48'  ";
 		
 		if($ffound){
 			return JHtml::image(JURI::base().$image_url, "profile",$alt);					  		
+		 }else{		 	
+		 	return FALSE;
 		 }
 	} 
 }

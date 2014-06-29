@@ -11,6 +11,7 @@
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.rendertables.php';
+require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.profilethumbs.php';
 class ClubRegRenderTablesRegMembersHelper extends ClubRegRenderTablesHelper
 {
 	protected $headings = array();
@@ -21,6 +22,14 @@ class ClubRegRenderTablesRegMembersHelper extends ClubRegRenderTablesHelper
 	}	
 
 	public function render($viewObject){		
+		$params = JComponentHelper::getParams('com_clubreg');		
+		$folder_path = $params->get("attachment_folder");
+	
+		$media_params = JComponentHelper::getParams('com_media');		
+		$full_media_path = $media_params->get('file_path').DS.$folder_path.DS;
+		
+		$thumbrenderer = new ClubRegProfileThumbsHelper($full_media_path);		
+		
 		$i = 0;		
 		$this->headings =  $viewObject->entity_filters["headings"];	
 		$this->otherconfigs = $viewObject->entity_filters["otherconfigs"];?>
@@ -49,11 +58,13 @@ class ClubRegRenderTablesRegMembersHelper extends ClubRegRenderTablesHelper
 			  	$an_item->t_phone = $t_phone ;			  
 			  	
 			  	$fkey = $viewObject->uKeyObject->constructKey($an_item->member_id,$an_item->member_key);
+			 
 			  	?>
 			  <tr>
 			    <td><?php echo $i+1 ; ?></td>
-			    <td class="row"><?php if(in_array($an_item->member_status,$this->otherconfigs["allowedstatus"]) &&  in_array($an_item->playertype,$this->otherconfigs["checkboxes"])){ ?><div class="pull-left"><?php echo JHtml::_('grid.id', $i, $an_item->member_id); ?>&nbsp;</div><?php } ?>
-			    	<div class="pull-left h21" ><a href="javascript:void(0);" onclick="Joomla.sbutton('<?php echo $fkey;?>')"><?php echo ucwords($an_item->surname); ?></a></div>			    			    	
+			    <td class="row"><?php if(in_array($an_item->member_status,$this->otherconfigs["allowedstatus"]) &&  in_array($an_item->playertype,$this->otherconfigs["checkboxes"])){ ?><div class="pull-left"><?php echo JHtml::_('grid.id', $i, $an_item->member_id); ?>&nbsp;</div><?php } ?>			    	
+			    <div class="pull-left h21" ><?php echo $thumbrenderer->renderMemberThumb($an_item->member_id); ?>			  	
+			  	<a href="javascript:void(0);" onclick="Joomla.sbutton('<?php echo $fkey;?>')"><?php echo ucwords($an_item->surname); ?></a></div>			    			    	
 			    	<?php /*<div class="pull-right"><a class="btn btn-mini reg-button" rel='<?php echo $an_item->member_id; ?>' href="javascript:void(0);">+</a></div>*/?>
 				    <div class="clearfix"></div>
 				    <?php $this->rendererItems($an_item); ?>
