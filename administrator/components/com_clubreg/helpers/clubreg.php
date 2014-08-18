@@ -86,12 +86,21 @@ class ClubRegHelper
 	
 		return $result;
 	}
+	/**
+	 * set  static value
+	 * @param unknown_type $index
+	 */
 	public static function setIndex($index){
 		self::$config_index = $index;
 	}
 	private static function getIndex(){
 		return self::$config_index;
 	}
+	/**
+	 * 
+	 * @param unknown_type $whichConfig
+	 * @param unknown_type $ordering
+	 */
 	public static function configOptions($whichConfig, $ordering=" ordering ASC"){
 			
 			$config_index = self::getIndex();
