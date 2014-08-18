@@ -72,8 +72,8 @@ class ClubRegRenderTablesPaymentsHelper extends ClubRegRenderTablesHelper
 		
 				$this->headings =  $viewObject->entity_filters["headings"];						 
 				$an_item = current($viewObject->items);?>
-			<div class="payment-new-div">
-				<div class='payment-sub-head-div'>
+			
+				<div class='profile-sub-head-div'>
 				<?php if(isset($viewObject->hide_created) && $viewObject->hide_created){?>
 					<div class="pull-left" ><?php echo JText::_('COM_CLUBREG_PAYMENT_DESCRIPTION'),' - ', $an_item->payment_desc; ?></div>
 				<?php }else{					  		  		
@@ -83,10 +83,9 @@ class ClubRegRenderTablesPaymentsHelper extends ClubRegRenderTablesHelper
 			    	<div class="pull-right small" style='font-size:0.8em;padding-left:15px;'><?php echo $an_item->name;?> on  <?php echo $an_item->created;?></div>		    	
 				<?php } ?>								   
 				    <div class="clearfix"></div>
-				    </div>
+				 </div>
 				    <?php $this->rendererItems($an_item); ?>
-				    <div class="clearfix"></div>
-			</div>				    		  
+				 <div class="clearfix"></div>
 	<?php 		
 	}
 		

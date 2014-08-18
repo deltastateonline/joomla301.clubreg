@@ -14,18 +14,22 @@ global $clubreg_Itemid;
 
 switch($this->which){
 	case "payments":
+		echo "<div class='profile-new-div'>";
 		$tableRender = new ClubRegRenderTablesPaymentsHelper();
 		$this->hide_created = true;
 		$tableRender->renderAnItem($this);
+		echo "</div >";
 	break;
 	case "notes":
 		$itemControl = $this->itemForm->getField("notes");		
 		echo nl2br($itemControl->value);		
 	break;
 	case "assets":
+		echo "<div class='profile-new-div'>";
 		$tableRender = new ClubRegRenderTablesPropertysHelper();
 		$this->hide_created = true;
 		$tableRender->renderAnItem($this);
+		echo "</div >";
 	break;
 	
 }

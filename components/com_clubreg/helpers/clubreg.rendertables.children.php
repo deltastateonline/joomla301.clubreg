@@ -32,7 +32,7 @@ class ClubRegRenderTablesChildrenHelper extends ClubRegRenderTablesHelper
 			  	?>			  
 			    <div class="profile-new-div" id='childdata_<?php echo $an_item->member_id; ?>' rel=<?php echo $rel_string ?>>
 			    	<div class="profile-sub-head-div">
-			    		<div class="pull-left"><a href="javascript:void(0);"  rel=<?php echo $rel_string ?> class='profile-children-button' title=<?php echo JText::_('COM_CLUBREG_PAYMENT_EDIT');?>><?php echo  $an_item->surname; ?></a></div>	
+			    		<div class="pull-left"><a href="javascript:void(0);"  rel=<?php echo $rel_string ?> class='profile-children-button' title=<?php echo JText::_('COM_CLUBREG_PAYMENT_EDIT');?>><?php echo  ucwords($an_item->surname); ?></a></div>	
 			    		<div class="pull-right" style='font-size:0.8em'><?php echo $an_item->reg_created_by;?> on  <?php echo $an_item->reg_created_date;?></div>		    	
 				    	 <div class="clearfix"></div>
 				    </div>				   
