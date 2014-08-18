@@ -56,6 +56,9 @@ if($this->canedit){
 	$myGroups = $this->official_details->group_member; // group_name
 	$myLeaders = $this->official_details->group_leader;
 	if(count($myGroups) > 0 || count($myLeaders)> 0){ $renderTab["group"] = TRUE; }
+	
+	if($renderTab["dashboard"]){ $next_tab =""; }else{ $next_tab = "active"; }
+	
 ?>
 <fieldset id="users-profile-core">
 	<legend>
@@ -64,20 +67,19 @@ if($this->canedit){
 	
 	<div class="tabbable tabs-top">
 		<ul class="nav nav-tabs">
-			<li class="active"><a href="#tabDetails" data-toggle="tab"><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_DETAILS') ?></a></li>
+			<?php  if($renderTab["dashboard"]){ ?><li class="active"><a href="#tabDashboard" data-toggle="tab"><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_DASHBOARD') ?></a></li><?php } ?>
+			<li class="<?php echo $next_tab; ?>"><a href="#tabDetails" data-toggle="tab"><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_DETAILS') ?></a></li>
 			<?php  if($renderTab["group"]){ ?><li><a href="#tabGroups" data-toggle="tab"><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_GROUP') ?></a></li><?php } ?>
-			<?php  if($renderTab["dashboard"]){ ?><li><a href="#tabDashboard" data-toggle="tab"><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_DASHBOARD') ?></a></li><?php } ?>
+			
 			
 		</ul>
-	<div class="tab-content">
-		
-		<?php 
-		
+	<div class="tab-content">		
+		<?php 		
 		
 		$joomla_details = $this->official_details->extraDetails;
 		
 	if(count($this->extradetails) > 0){	?>
-		<div class="tab-pane active" id="tabDetails">
+		<div class="tab-pane <?php echo $next_tab; ?>" id="tabDetails">
 			<dl class="dl-horizontal">
 			<?php 
 			foreach($this->extradetails as $a_detail){ 	$a_detail->config_short;?>
@@ -130,7 +132,10 @@ if($this->canedit){
 		<?php } // render group tab 
 		if($renderTab["dashboard"]){  
 			$render_sections = $this->render_sections; ?>
-			<div class="tab-pane" id="tabDashboard">
+			<div class="tab-pane active" id="tabDashboard">				
+				<div class="alert alert-info"><img alt="" src="components/com_clubreg/assets/images/groups.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_MEMBERS'); ?></strong></div>
+				<div class="loading1" id="profileMembers" rel=<?php echo json_encode($rel_string)?>></div>		
+			
 				<?php if($render_sections["showeoi"]) { ?>
 				<div class="alert alert-info"><img alt="" src="components/com_clubreg/assets/images/groups.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_EOI'); ?></strong></div>
 				<div class="loading1" id="profileEoi" rel=<?php echo json_encode($rel_string)?>></div>				
@@ -160,7 +165,6 @@ if($this->canedit){
 </form>
 <?php 
 $document = JFactory::getDocument();
-//$document->addStyleSheet(CLUBREG_ASSETS.'/css/common.css?'.time());
 ClubregHelper::writeTabAssets($document, "common",array("css"));
 ClubregHelper::writeTabAssets($document, "official");
 ClubregHelper::write_footer(); ?>
