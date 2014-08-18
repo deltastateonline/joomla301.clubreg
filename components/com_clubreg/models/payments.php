@@ -35,7 +35,7 @@ class ClubregModelPayments extends JModelList
 		
 		$db		= $this->getDbo();
 		if(isset($member_id) && intval($member_id) > 0){
-			$where_[] = sprintf(" member_id = %d",$member_id) ;
+			$where_[] = sprintf(" a.member_id = %d",$member_id) ;
 		}
 		
 		$data_["payment_id"] = intval($this->getState("com_clubreg.payments.payment_id"));
@@ -50,7 +50,7 @@ class ClubregModelPayments extends JModelList
 		
 		$query	= $db->getQuery(true);
 		
-		$all_string[] = "`payment_id`, `payment_key`, `member_id`,`payment_transact_no`, `payment_date`, `payment_season`,
+		$all_string[] = "`payment_id`, `payment_key`, a.`member_id`,`payment_transact_no`, `payment_date`, `payment_season`,
 		pm.`config_name` as `payment_method`,		
 		ps.`config_name` as `payment_status`,		
 		 pd.`config_name` as `payment_desc`, 
