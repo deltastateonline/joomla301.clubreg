@@ -17,9 +17,6 @@ class ClubRegVieweois extends JViewLegacy
 {
 	function display($tpl = null)
 	{		
-
-		global $mainframe;
-		
 		$this->layout  = $renderer =  $this->getLayout();
 		$proceed = FALSE;
 		
