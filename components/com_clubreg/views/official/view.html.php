@@ -24,8 +24,6 @@ class ClubRegViewOfficial extends JViewLegacy
 	
 	function _display($tpl = null){		
 
-		global $mainframe;
-		
 		$app		= JFactory::getApplication();
 		$user		= JFactory::getUser();
 		$dispatcher = JEventDispatcher::getInstance();
