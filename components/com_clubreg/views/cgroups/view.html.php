@@ -16,9 +16,7 @@ jimport( 'joomla.application.component.view');
 class ClubRegViewcgroups extends JViewLegacy
 {
 	function display($tpl = null)
-	{		
-
-		global $mainframe;
+	{
 		
 		$renderer = "cgroups"; // $this->getLayout();
 		$proceed = FALSE;
@@ -35,8 +33,6 @@ class ClubRegViewcgroups extends JViewLegacy
 	}
 	private function cgroups(){	
 		
-		
-		
 		// must be set groups and year
 		$app			= JFactory::getApplication();
 		$menu	= $app->getMenu();
@@ -52,12 +48,11 @@ class ClubRegViewcgroups extends JViewLegacy
 		
 		$query = $menuItem->query;
 		
+		$this->year_default = $query['year'] = $app->input->getString('year', date('Y'));
+		
 		if(empty($query['year']) or strlen($query['year']) < 3){
 			$query['year'] = date('Y');
-		}
-		
-		$group_id = $app->input->getString('groups', null);
-		$season = $app->input->getString('year', null);
+		}			
 		
 		JModelLegacy::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/models');
 		
@@ -78,8 +73,7 @@ class ClubRegViewcgroups extends JViewLegacy
 			foreach($all_children['group_children'] as $a_child){
 				//$all_groups["sub_groups_ids"][] = $a_child->group_id;
 			}		
-		 }
-		 
+		 }		 
 		 
 		$configObj = new ClubRegRegmembersConfig();
 		$configObj->setOfficialGroups($all_groups["allowed_groups"]);
@@ -102,7 +96,7 @@ class ClubRegViewcgroups extends JViewLegacy
 		
 		$this->items		= $current_model->getItems();
 		$this->current_group = $current_group;	
-		$this->pageTitle = $menuItem->title .' '.$query['year'];
+		$this->pageTitle = $menuItem->title .' / '.$query['year'];
 		unset($current_model);
 		
 		// reset the filters		
@@ -116,6 +110,12 @@ class ClubRegViewcgroups extends JViewLegacy
 		$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
 		$current_model->setState('joomla_id',$current_group->group_leader);		
 		$this->group_leader = $current_model->getDetails();
+		
+		
+		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.seasons.php';
+		$this->year_registered = ClubRegSeasonsHelper::generate_List();
+		$this->year_registered_control = array("label"=>JText::_('COM_CLUBREG_SEASON_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-medium cgroups-season' id='cgroups_season'");
+		
 		
 		return TRUE;
 	}

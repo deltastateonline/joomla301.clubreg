@@ -61,6 +61,7 @@ class ClubregModelRegmembers extends JModelList
 	
 	protected function getListQuery()
 	{
+		
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);		
 		
@@ -215,7 +216,7 @@ class ClubregModelRegmembers extends JModelList
 		$tmp_value = null;
 		foreach($states as $a_state){
 			$vartype = isset($a_state[3])?$a_state[3]:null;
-			$tmp_value = $this->getUserStateFromRequest($this->context.'.'.$a_state[0], $a_state[1], $a_state[2],$vartype);
+			$tmp_value = $this->getUserStateFromRequest($this->context.'.'.$a_state[0], $a_state[1], $a_state[2],$vartype);			
 			$this->setState($a_state[0], $tmp_value);					
 			unset($tmp_value);
 		}	
@@ -238,6 +239,7 @@ class ClubregModelRegmembers extends JModelList
 				$app->setUserState($this->context.'.'.$f_key, NULL); // we should try and reset the session variables
 			}
 			$tmp_value = $this->getUserStateFromRequest($this->context.'.'.$f_key, $a_key, $default); // get the key in the request which is in the format {column name}
+			
 			$this->setState($f_key, $tmp_value);			// set the state for the getListQuery Method	
 	
 			unset($tmp_value);
