@@ -89,7 +89,7 @@ class ClubregModelPayments extends JModelList{
 
 		$states[] = array("filter.search","filter_search",NULL);
 		$states[] = array("filter.state","filter_state","-1");	
-		//$states[] = array("filter.whichConfig","which_config",NULL);	
+	
 		
 		$tmp_value = null;
 		foreach($states as $a_state){
