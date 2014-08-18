@@ -38,10 +38,8 @@
 							<div class="pull-left profile-value"> <?php echo $itemRenderer->render($member_data->$akey,$tvalue); ?></div>
 						</div>
 					<?php }?>		
-		</div>
-	
+		</div>	
 	</div>	
-
 		<?php if(isset($this->profileConfigs["headings"]["club"])){ ?>
 		<div class="clearfix">&nbsp;</div>
 		<div class="row-fluid frame-div" style="max-width:97%">

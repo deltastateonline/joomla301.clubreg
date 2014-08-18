@@ -59,7 +59,7 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 	{
 
 		var form = document.getElementById('adminForm');	
-		document.adminForm.action='<?php echo JRoute::_($this->formaction_edit,false); ?>';		
+		document.adminForm.action='<?php echo JRoute::_($this->formaction_edit); ?>';		
 		document.adminForm.target='';
 		document.adminForm.playertype.value= '<?php echo $this->state->get('filter.playertype'); ?>';
 		document.adminForm.layout.value= 'viewonly';
@@ -72,7 +72,7 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 	{
 
 		var form = document.getElementById('adminForm');	
-		document.adminForm.action='<?php echo JRoute::_($this->formaction_edit,false); ?>';		
+		document.adminForm.action='<?php echo JRoute::_($this->formaction_edit); ?>';		
 		document.adminForm.target='';
 		document.adminForm.playertype.value= '<?php echo $this->state->get('filter.playertype'); ?>';
 		document.adminForm.layout.value= 'edit';
