@@ -43,7 +43,7 @@
 				<option value="0">-Selete Choice-</option>	
 				<option value="yes">Allowed</option>	
 				<option value="no">Not Allowed</option>				
-			</field> 
+			</field>		
 			
 			<field name="sendcommunication" type="list" default="no" label="Manage Communications" description="Manage Communications">
 				<option value="0">-Selete Choice-</option>	
@@ -59,6 +59,11 @@
 				<option value="0">-Selete Choice-</option>	
 				<option value="yes">Allowed</option>	
 				<option value="no">Not Allowed</option>					
+			</field> 
+			<field name="uploadfiles" type="list" default="no" label="Upload Profile Pix" description="Upload Profile Pix">
+				<option value="0">-Selete Choice-</option>	
+				<option value="yes">Allowed</option>	
+				<option value="no">Not Allowed</option>				
 			</field> 		
 		</fieldset>	
 		<fieldset name="showdashboard" label="COM_CLUBREG_OFFICIAL_DASHBOARD" description="COM_CLUBREG_OFFICIAL_DASHBOARD_DESC" >			
