@@ -2,13 +2,13 @@
 <extension type="component" version="3.0" method="upgrade">
 	<name>com_clubreg</name>
 	<author>Deltastateonline.com</author>
-	<creationDate>October 2013</creationDate>
+	<creationDate>Mar 2014</creationDate>
 	<copyright>(C) 2005 - 2012 Open Source Matters. All rights reserved.
 	</copyright>
 	<license>GNU General Public License version 2 or later; see
 		LICENSE.txt</license>
 	<authorEmail>joomla@deltastateonline.com</authorEmail>
-	<authorUrl>applications.deltastateonline.com</authorUrl>
+	<authorUrl>app.deltastateonline.com</authorUrl>
 	<version>3.0.0</version>
 	<description>Club Registration Component</description>
 
