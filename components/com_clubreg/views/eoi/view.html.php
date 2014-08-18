@@ -16,9 +16,7 @@ jimport( 'joomla.application.component.view');
 class ClubRegVieweoi extends JViewLegacy
 {
 	function display($tpl = null)
-	{		
-
-		global $mainframe;
+	{
 		
 		$renderer =  $this->getLayout();
 		$proceed = FALSE;
