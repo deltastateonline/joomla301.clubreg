@@ -16,9 +16,8 @@ global $clubreg_Itemid;
 <div class="text-center">
 <div class='profile-img'>
 	<img src="<?php echo $this->profiles_pix; ?>" width="150" id="profileimg" title="<?php echo JText::_("COM_CLUBREG_PROFILE_NEW_PHOTO")?>"/>
-<?php if(LIVE_SITE){ ?>
-	<form action="index.php" method="post" name="profilepixForm" id="profile-pix-form" class="" enctype='multipart/form-data' >
-	
+<?php if(isset($this->uploadfiles) && $this->uploadfiles){ ?>
+	<form action="index.php" method="post" name="profilepixForm" id="profile-pix-form" class="" enctype='multipart/form-data' >	
 		<?php
 		 foreach($this->profilepixForm->getFieldset('memberProfilepix')  as $field){
 					echo str_replace("jform_attachment", "uploadimage", $field->input); 
@@ -34,7 +33,7 @@ global $clubreg_Itemid;
 	</form>
 <?php } ?>
 </div>
-<?php if(LIVE_SITE){ ?>
+<?php if(isset($this->uploadfiles) && $this->uploadfiles){ ?>
 	<button id="profilebtn" class="btn profile-pix-button btn-mini btn-info">Change Profile Pix</button>
 <?php }else{ ?>
 	<button id="profilebtn" class="btn btn-mini btn-danger">Pix Upload Not Available</button>
