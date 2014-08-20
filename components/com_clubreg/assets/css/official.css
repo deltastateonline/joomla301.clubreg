@@ -56,3 +56,41 @@
 	border-bottom: 1px solid #DDD;
 	background-color:#EFEFEF;
 }
+
+.dashboard-div{
+	margin-bottom:10px;
+	margin-right:0px;
+	border:1px solid #DDD;
+	border-radius: 5px;
+	padding:5px 2px 5px 1px;
+}
+.profile-sub-head-div{
+	font-size:1.1em;
+	padding:3px 5px 3px 3px;
+	border-bottom: 1px solid #DDD;
+	background-color:#EFEFEF;
+	
+}
+.profile-reg-well{
+	padding:3px 5px 3px 3px;
+}
+.profile-new-div{
+	margin-bottom:10px;
+	border:1px solid #DDD;
+	border-radius: 5px;
+}
+
+.recent-div{
+	border-bottom:solid 1px #ddd;
+	padding:1px 5px 1px 5px;   
+    margin:1px 5px 1px 10px;
+}
+.recent-subgroup{	
+	font-size:0.9em;
+}
+.recent-playertype{
+	font-size:1.1em;
+	font-weight:bold;
+	padding-left:10px;
+	margin-top:10px;
+}
