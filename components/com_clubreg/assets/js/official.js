@@ -3,7 +3,7 @@ window.addEvent('domready', function () {
 	
 	if($('profileEoi')){
 				
-		$('profileEoi').addClass('well well-large');	
+		$('profileEoi').addClass('dashboard-div');	
 		
 		var json_data = JSON.decode($('profileEoi').get('rel'));		
 		
@@ -25,7 +25,7 @@ window.addEvent('domready', function () {
 	
 	if($('profileActivity')){
 			
-		$('profileActivity').addClass('well well-large');		
+		$('profileActivity').addClass('dashboard-div');		
 		
 		var json_data = JSON.decode($('profileActivity').get('rel'));
 		
@@ -58,7 +58,7 @@ window.addEvent('domready', function () {
 	
 	if($('profileBirthday')){
 		
-		$('profileBirthday').addClass('well well-large');	
+		$('profileBirthday').addClass('dashboard-div');	
 		
 		var json_data = JSON.decode($('profileBirthday').get('rel'));
 		
@@ -78,16 +78,28 @@ window.addEvent('domready', function () {
 		
 	}
 	
-	var container = $('profileBirthday');
-	/*
-	container.addEvent("click:relay($(this))", function(event){	
-		event.stop();				
-		var var_class = $(this).get('class');
-		
-		if(var_class.test('activity-bday')){			
-			Joomla.sbutton('934-93','');
+	
+	if($('profileMembers')){
+			
+			$('profileMembers').addClass('dashboard-div');	
+			
+			var json_data = JSON.decode($('profileMembers').get('rel'));
+			
+			var durl = "index.php";	
+			
+			var params = "option=com_clubreg&view=ajax&layout=members&tmpl=component&format=raw";
+			
+			if(json_data && json_data["Itemid"]){
+				params = params + "&Itemid="+json_data["Itemid"];
+			}
+			var a = new Request.HTML({ 
+				url : durl, 
+				method: 'get',	
+				update: $('profileMembers'),
+				onSuccess: function(responseText){ $('profileMembers').removeClass('loading1');	}
+				}).send(params);
+			
 		}
-	});*/
 });
 
 function renderActivity(dObject){
