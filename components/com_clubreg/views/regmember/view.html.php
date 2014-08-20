@@ -16,9 +16,7 @@ jimport( 'joomla.application.component.view');
 class ClubRegViewregmember extends JViewLegacy
 {
 	function display($tpl = null)
-	{		
-
-		global $mainframe;
+	{
 		
 		$this->layout  = $renderer =  $this->getLayout();
 		$proceed = FALSE;
@@ -42,7 +40,6 @@ class ClubRegViewregmember extends JViewLegacy
 		$user			= JFactory::getUser();		
 		
 		
-		
 		$params = JComponentHelper::getParams('com_clubreg');
 		$this->profile_divrightedge =  $params->get("profile_divrightedge");	
 		$this->profile_tabposition =   $params->get("profile_tabposition");	
@@ -52,8 +49,19 @@ class ClubRegViewregmember extends JViewLegacy
 		if(!isset($this->profile_divrightedge) || intval($this->profile_divrightedge) < 500){ $this->profile_divrightedge = COM_CLUBREG_DIVRIGHT; }
 		if(!isset($this->profile_icons)){$this->profile_icons = 0;}
 		
+		$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
+		$current_model->setState('joomla_id',$user->get('id'));
+		
+		$app		= JFactory::getApplication();
+		$active	= $app->getMenu()->getActive(); // if logged in
+		
+		if($current_model->getPermissions('uploadfiles') && $current_model->getPermissions('uploadfiles') == "yes"){$this->uploadfiles = TRUE; }
+		
+		
+		
 		$this->member_key = $app->input->getString('pk', null);
-			
+		
+		unset($current_model);
 		$currentModel = $this->getModel();
 		$currentModel->setState('com_clubreg.regmember.member_key',$this->member_key); // use the key in the model
 		$key_data->full_key = $this->member_key;
@@ -96,6 +104,10 @@ class ClubRegViewregmember extends JViewLegacy
 		
 		$link_type = 'profile';
 		$current_model = JModelLegacy::getInstance('attachments', 'ClubregModel', array('ignore_request' => true));
+		
+		$current_model->setState('com_clubreg.attachments.limit',1); 
+		$current_model->setState('com_clubreg.attachments.limitstart',0);
+		
 		$profile_pixs = $current_model->getAttachments($user->get('id'),$key_data->member_id,$link_type);
 		
 		if($profile_pixs && is_array($profile_pixs) && count($profile_pixs) > 0){
@@ -137,7 +149,9 @@ class ClubRegViewregmember extends JViewLegacy
 			
 			$currentModel = $this->getModel();		
 			$currentModel->setState('com_clubreg.regmember.member_key',$key_data->string_key); // use the key in the model		
-			$currentModel->setState('com_clubreg.regmember.member_id',$key_data->pk_id); // use the key in the model		
+			$currentModel->setState('com_clubreg.regmember.member_id',$key_data->pk_id); // use the key in the model	
+
+			
 			
 			$playertype = $app->input->getString('playertype', null);
 			if(isset($playertype)){

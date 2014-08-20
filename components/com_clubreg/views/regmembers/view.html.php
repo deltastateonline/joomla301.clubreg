@@ -16,9 +16,7 @@ jimport( 'joomla.application.component.view');
 class ClubRegViewregmembers extends JViewLegacy
 {
 	function display($tpl = null)
-	{		
-
-		global $mainframe;
+	{	
 		
 		$this->layout  = $renderer =  $this->getLayout();
 		$proceed = FALSE;
@@ -73,7 +71,7 @@ class ClubRegViewregmembers extends JViewLegacy
 			$this->formaction = 'index.php?option=com_clubreg&view=regmembers';			
 			$this->formaction_comp = 'index.php?option=com_clubreg&view=regmembers&format=raw';// the csv file
 			$this->formaction_edit = 'index.php?option=com_clubreg&view=regmember&layout=edit';
-			$this->state		= $current_model->getState();		
+			$this->state		= $current_model->getState();				
 			
 			$configObj = new ClubRegRegmembersConfig();			
 			$configObj->setOfficialGroups($all_groups["allowed_groups"]);
