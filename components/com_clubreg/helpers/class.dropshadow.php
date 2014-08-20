@@ -56,7 +56,7 @@
 // php@amnuts.com, http://php.amnuts.com/
 //
 
-
+defined( '_JEXEC' ) or die( 'Restricted access' ); 
 
 class dropShadow
 {
