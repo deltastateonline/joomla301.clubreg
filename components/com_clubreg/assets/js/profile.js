@@ -1,6 +1,4 @@
-window.addEvent('domready', function () {	
-	
-	
+window.addEvent('domready', function () {
 	
 	if($('profile-division')){
 		//$('profile-division').slide('hide').setStyle('visibility', 'visible');
@@ -11,13 +9,10 @@ window.addEvent('domready', function () {
 			var searchSlider =  new Fx.Slide("profile-division");
 			searchSlider.toggle();	
 			
-		});
-		
-		
+		});		
 	}
 	
-	$("profilebtn").addEvent('click',function(event){	
-		
+	$("profilebtn").addEvent('click',function(event){		
 		 var fileInput = jQuery("#uploadimage").trigger("click");
 	});
 	
@@ -44,14 +39,8 @@ window.addEvent('domready', function () {
 				}			
 			},
             onFailure:function(){ profileFailure(this); }
-		});
-	
-		
-	}
-
-	
-	
-	
+		});		
+	}	
 });
 
 function uploadPic(input) {
@@ -66,8 +55,7 @@ function uploadPic(input) {
 			reader.onload = function(e) {
 				$('profileimg')
 				.set('src', e.target.result)
-				.set("width",width)
-				
+				.set("width",width)				
 			};
 			reader.readAsDataURL(input.files[0]);
 			input.form.submit();
