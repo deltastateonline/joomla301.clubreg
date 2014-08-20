@@ -167,5 +167,80 @@ class ClubRegViewAjax extends JViewLegacy
 		return $proceed;
 	}
 	
+	private function members(){
+		$proceed = FALSE;
+		
+		$user		= JFactory::getUser();		
+		$app			= JFactory::getApplication();
+		
+		$recent_registered_members = array();
+		
+		if($user->get('id') > 0){
+			
+			$all_group_types = array("senior","junior");
+			
+			foreach($all_group_types as $group_type){
+				
+				$app->setUserState('com_clubreg.regmembers.filter.playertype', NULL);
+				$app->setUserState('com_clubreg.regmembers.filter.member_status',NULL);
+				$app->setUserState('com_clubreg.regmembers.filter.year_registered',NULL);
+				$app->setUserState('com_clubreg.regmembers.filter.group',NULL);
+				
+			
+				$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
+				$current_model->setState('joomla_id',$user->get('id'));			
+				
+				$all_active_groups = $current_model->getMyGroups($group_type);
+				
+				$all_groups = array("allowed_groups"=>$all_active_groups['allowed_groups'],"sub_groups_ids"=>$all_active_groups['sub_groups_ids']);
+				require_once CLUBREG_CONFIGS.'config.regmembers.php';		
+					
+				$configObj = new ClubRegRegmembersConfig();
+				$configObj->setOfficialGroups($all_groups["allowed_groups"]);
+				$configObj->setOfficialSubGroups($all_groups["sub_groups_ids"]);
+				$regmembersConfigs =  $configObj->getConfig($group_type); // return headings and filters
+				
+				// set the filters for the regmember filters
+				$app->setUserState('com_clubreg.regmembers.filter.playertype', $group_type);
+				$app->setUserState('com_clubreg.regmembers.filter.member_status','registered');
+				//$app->setUserState('com_clubreg.regmembers.filter.year_registered',$query['year']);		
+				
+				
+				unset($current_model);
+				$current_model = JModelLegacy::getInstance('regmembers', 'ClubregModel', array('ignore_request' => true));
+				$current_model->setState('filter.playertype', $group_type);
+				$current_model->setState('list.ordering', 'a.created');
+				$current_model->setState('list.direction', 'DESC');
+				
+				$current_model->setState('list.limit', 5);				
+				
+				$current_model->setMoreStates($regmembersConfigs["filters"],$all_groups); // set more states
+				
+				$recent_registered_members[$group_type]	= $current_model->getItems();				
+				
+				unset($current_model);
+			}
+			
+			
+			// reset the filters
+			$app->setUserState('com_clubreg.regmembers.filter.playertype', NULL);
+			$app->setUserState('com_clubreg.regmembers.filter.member_status',NULL);
+			$app->setUserState('com_clubreg.regmembers.filter.year_registered',NULL);
+			$app->setUserState('com_clubreg.regmembers.filter.group',NULL);
+			
+			
+			$this->recent_registrations = $recent_registered_members;
+			
+			unset($current_model);
+			
+			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
+			$this->uKeyObject = new ClubRegUniqueKeysHelper();
+				
+			$proceed = TRUE;
+		}
+		
+		return $proceed;
+	}
+	
 	
 }
