@@ -154,10 +154,35 @@ class ClubregModelTemplates extends JModelList{
 		// Load the parameters.
 		$params = JComponentHelper::getParams('com_clubreg');
 		$this->setState('params', $params);
-		// List state information.
-		
-		
+		// List state information.		
 		
 	}
+	
+	public function getCurrentTemplates(){
+		
+		$options = array();
+		$db		= JFactory::getDBO();
+		$query	= $db->getQuery(true);
+		
+		$d_var = "a.template_id as value , a.template_name as text ";
+		
+		$query->select($d_var);
+		$query->from($db->quoteName(CLUB_TEMPLATE_TABLE).' AS a');
+		
+		$query->where('a.published = 1');
+		
+		$query->order($db->escape('template_name asc'));
+		
+		$db->setQuery($query);
+		try {
+			$options = $db->loadObjectList();
+		} catch (RuntimeException $e) {
+			JError::raiseWarning(500, $e->getMessage());
+		}		
+		
+		return $options;
+	}
+	
+	
 	
 }
