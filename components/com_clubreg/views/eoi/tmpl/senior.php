@@ -23,14 +23,12 @@ $Itemid = $uri->getVar('Itemid');
 <?php 
 if($this->eoi_usetable){
 	?>
-	<table width="90%" cellpadding="5" cellspacing="5">
-		<tr>
-			<td colspan=2 style="border-bottom:solid 1px #EFEFEE;font-weight:bold;font-size:1.5em;"><?php echo JText::_('COM_CLUBREG_EOIFORM_LABEL'); ?></td>
-		</tr>
+	<div class="eoi-heading" style="font-size:1.5em;"><?php echo JText::_('COM_CLUBREG_EOIFORM_LABEL'); ?></div>
+	<table width="90%" class="eoi-table eoi-guardian">		
 		<?php foreach($this->form->getFieldset('senior') as $field): ?>
 			<?php if (!$field->hidden){ ?>
 			<tr>
-				<td style="text-align:right;font-size:1.2em;font-weight:bold;"><?php echo $field->label; ?></td>
+				<td class='label-g'><?php echo $field->label; ?></td>
 				<td><?php echo $field->input; ?></td>
 			</tr>
 			<?php }else{  ?>
@@ -74,4 +72,8 @@ else{ ?>
 		</button>
 	</div>
 </form>
-<?php ClubregHelper::write_footer(); ?>
+<?php 
+$document = JFactory::getDocument();
+$document->addScript('components/com_clubreg/assets/js/eoi.js?'.time());
+$document->addStyleSheet('components/com_clubreg/assets/css/eoi.css?'.time());
+ClubregHelper::write_footer(); ?>

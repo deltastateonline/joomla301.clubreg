@@ -13,5 +13,18 @@
 			<option value="senior">COM_CLUBREG_SENIORPLAYERS</option>			
        </field>
 		</fieldset>
-	</fields>	
+	</fields>
+	<fields name="params">	
+	<fieldset name="basic" label="Rendering Options">	
+		<field name="eoi_usetable" type="radio" class="btn-group btn-group-yesno"
+			default="0"
+			label="COM_CLUBREG_USETABLE_LABEL"
+			description="COM_CLUBREG_USETABLE_DESC">
+			<option
+				value="1">JYES</option>
+			<option
+				value="0">JNO</option>
+		</field>
+	</fieldset>	
+	</fields>
 </metadata>

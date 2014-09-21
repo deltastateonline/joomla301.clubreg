@@ -21,15 +21,12 @@ $Itemid = $uri->getVar('Itemid');
 ?>
 <form action="<?php echo JRoute::_('index.php')?> " method="post" name="adminForm" id="eoi-form" class="form-validate form-horizontal">
 <?php if($this->eoi_usetable){ ?>
-	<table width="90%" cellpadding="5" cellspacing="5" style="border:solid 1px #EFEFEE">
-		<tr>
-			<td colspan=2 style="border-bottom:solid 1px #EFEFEE;font-weight:bold;font-size:1.5em;">
-				<?php echo JText::_('COM_CLUBREG_EOIFORM_LABEL'); ?> :: <?php echo JText::_('COM_CLUBREG_GUARDIAN_LABEL')?></td>
-		</tr>
+	<div class="eoi-heading" style="font-size:1.5em;"><?php echo JText::_('COM_CLUBREG_EOIFORM_LABEL'); ?> :: <?php echo JText::_('COM_CLUBREG_GUARDIAN_LABEL')?></div>
+	<table width="90%" class="eoi-table eoi-guardian">		
 	<?php foreach($this->form->getFieldset('guardian') as $field): ?>
 			<?php if (!$field->hidden){ ?>
 					<tr>
-						<td style="text-align:right;font-size:1.2em;font-weight:bold;"><?php echo $field->label; ?></td>
+						<td class='label-g'><?php echo $field->label; ?></td>
 						<td><?php echo $field->input; ?></td>
 					</tr>				
 			<?php }else{  ?>				
@@ -66,11 +63,9 @@ $rm = array("jform_","_counter",); // extra string to remove
 for($i = 0 ; $i<$howmany; $i++){ 
 
 	if($this->eoi_usetable){ ?><p>&nbsp;</p>
-		<table width="90%" cellpadding="5" cellspacing="5" style="border:solid 1px #EFEFEE">
-			<tr>
-				<td colspan=2 style="border-bottom:solid 1px #EFEFEE;font-weight:bold;font-size:1.3em;"><?php echo JText::_('COM_CLUBREG_JUNIOR_LABEL')," ",$i+1; ?></td>
-			</tr>
-					<?php $cl_ = array("",""); $j=0;	
+		<div class="eoi-heading" style="font-size:1.3em;"><?php echo JText::_('COM_CLUBREG_JUNIOR_LABEL')," ",$i+1; ?></div>
+		<table width="90%" class="eoi-table">
+			<?php $cl_ = array("",""); $j=0;	
 		
 		foreach($this->form->getFieldset('junior') as $field){	
 			

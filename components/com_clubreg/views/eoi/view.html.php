@@ -21,6 +21,11 @@ class ClubRegVieweoi extends JViewLegacy
 		$renderer =  $this->getLayout();
 		$proceed = FALSE;
 		
+		$app	= JFactory::getApplication();
+		$menu	= $app->getMenu();		
+		$menuItem = $menu->getActive();
+		if($menuItem){ $this->eoi_usetable =  $menuItem->params->get('eoi_usetable'); }
+		
 		if(method_exists($this, $renderer)){
 			$proceed =  $this->$renderer();			
 		}	
@@ -31,15 +36,11 @@ class ClubRegVieweoi extends JViewLegacy
 			ClubRegUnAuthHelper::unAuthorised();
 		}
 	}
-	private function senior(){	
-		$params = JComponentHelper::getParams('com_clubreg');
-		$this->eoi_usetable =  $params->get("eoi_usetable");		
+	private function senior(){					
 		$this->form		= $this->get('Form');	
 		return TRUE;
 	}
-	private function junior(){
-		$params = JComponentHelper::getParams('com_clubreg');
-		$this->eoi_usetable =  $params->get("eoi_usetable");
+	private function junior(){		
 		$this->form		= $this->get('Form');	
 		$this->juniorDetails = $this->get('JuniorDetails');	
 		$this->juniorControls = $this->get('juniorControls');
