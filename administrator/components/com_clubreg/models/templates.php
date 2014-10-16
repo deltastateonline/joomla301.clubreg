@@ -164,14 +164,16 @@ class ClubregModelTemplates extends JModelList{
 		$db		= JFactory::getDBO();
 		$query	= $db->getQuery(true);
 		
-		$d_var = "a.template_id as value , a.template_name as text ";
+		$d_var = " -1 as value, '-".JText::_('COM_CLUBREG_COMMS_TEMPLATES')."-' as text union 
+		select '0' as value, '".JText::_('CLUBREG_COMMUNICATIONS_BLANK')."' as text union 
+		select a.template_id as value , a.template_name as text ";
 		
 		$query->select($d_var);
 		$query->from($db->quoteName(CLUB_TEMPLATE_TABLE).' AS a');
 		
 		$query->where('a.published = 1');
 		
-		$query->order($db->escape('template_name asc'));
+		$query->order($db->escape('text asc'));
 		
 		$db->setQuery($query);
 		try {
