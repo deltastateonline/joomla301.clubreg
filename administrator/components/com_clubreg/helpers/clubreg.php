@@ -277,11 +277,33 @@ class ClubRegHelper
 			$options = $db->loadObjectList();
 		} catch (RuntimeException $e) {
 			JError::raiseWarning(500, $e->getMessage());
+		}		
+		return $options;		
+	}
+	
+	public static function get_selected_group_list($group_ids){
+	
+		$options = array();
+	
+		$db		= JFactory::getDBO();
+	
+		$where[] = "published = 1";
+		$where[] = sprintf("group_id in (%s)",implode(",",$group_ids));
+		
+		// Build the query for the ordering list.
+		$query = 'SELECT group_id , group_name '.
+		' FROM '.CLUB_GROUPS_TABLE.
+		sprintf(" WHERE %s ",implode(" and ",$where )) .
+		' ORDER BY group_name asc ';	
+	
+		$db->setQuery($query);
+		try {
+			$options = $db->loadObjectList();
+		} catch (RuntimeException $e) {
+			JError::raiseWarning(500, $e->getMessage());
 		}
-		
-		
+	
 		return $options;
-		
 	}
 	
 	public static function get_member_list($value = "joomla_id" ,$text= "name"){
