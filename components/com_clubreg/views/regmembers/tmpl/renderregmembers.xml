@@ -8,7 +8,7 @@
   	<fields name="request">
 		<fieldset name="request">			
 			<field name="layout" type="hidden" default="renderregmembers"  value="renderregmembers" label="Render Member Lists" description="Render Member Lists"></field>
-      		<field name="resetpage" type="hidden" value="reset" label="Reset Filters" description="Reset Filters"></field>
+      		<field name="resetpage" type="hidden" default="reset" value="reset" label="Reset Filters" description="Reset Filters"></field>
 		</fieldset>
 	</fields>	
 </metadata>
