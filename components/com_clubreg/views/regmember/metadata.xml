@@ -1,2 +1,6 @@
-<?xml version="1.0"?>
-<metadata />
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<view title="Regmember">
+		<message><![CDATA[COM_CLUBREG_REGFORM_LAYOUT_LABEL1]]></message>
+	</view>	
+</metadata>

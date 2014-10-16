@@ -53,8 +53,8 @@ class ClubRegViewregmembers extends JViewLegacy
 			
 			require_once CLUBREG_CONFIGS.'config.regmembers.php';
 			
-			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.filters.regmembers.php';					
-			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.rendertables.regmembers.php';			
+			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.filters.regmembers.php';	
+			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.rendertables.regmembers.php';
 			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.pagination.php';
 			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
 			

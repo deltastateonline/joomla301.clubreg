@@ -6,7 +6,7 @@
     </message>
   </layout>
   <fields name="request">
-		<fieldset name="request" addfieldpath="/administrator/components/com_clubreg/models/fields">			
+		<fieldset name="request" addfieldpath="/administrator/components/com_clubreg/models/fields" >			
 			<field name="id" type="clubmember" label="CLUBREG_OFFICIALS_LABEL" 
 			description="CLUBREG_OFFICIALS_DESC" />			
 		</fieldset>
