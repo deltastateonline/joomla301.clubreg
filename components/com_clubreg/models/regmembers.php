@@ -99,13 +99,16 @@ class ClubregModelRegmembers extends JModelList
 			$allowed_groups = 	$this->state->get('search.allowedgroups');
 			if(count($allowed_groups) > 0){
 				$allowed_groups[] = 0;
-				$allowed_groups[] = -1;
-				$where_[] = sprintf(" a.group in (%s) ",implode(",",$allowed_groups));  // Only Eoi Members
+				$allowed_groups[] = -1;				
 			}
 			
 			$allowed_subgroups = 	$this->state->get('search.allowedsubgroups');
 			if(count($allowed_subgroups) > 0){				
-				$where_[] = sprintf(" a.subgroup in (%s) ",implode(",",$allowed_subgroups));  // Only Eoi Members				
+				$where_[] = sprintf("( a.group in (%s) or  a.subgroup in (%s) )",
+						implode(",",$allowed_groups),
+						implode(",",$allowed_subgroups));  // Only Eoi Members				
+			}else{
+				$where_[] = sprintf(" a.group in (%s) ",implode(",",$allowed_groups));  // Only Eoi Members
 			}	
 			
 		}
@@ -190,8 +193,6 @@ class ClubregModelRegmembers extends JModelList
 		$session = JFactory::getSession();		
 		$session->set("com_clubreg.back_url", $back_url);// save the back url	
 		
-		//write_debug($query->__toString());
-		
 		return $query;
 		
 	}
@@ -217,7 +218,7 @@ class ClubregModelRegmembers extends JModelList
 		foreach($states as $a_state){
 			$vartype = isset($a_state[3])?$a_state[3]:null;
 			$tmp_value = $this->getUserStateFromRequest($this->context.'.'.$a_state[0], $a_state[1], $a_state[2],$vartype);			
-			$this->setState($a_state[0], $tmp_value);					
+			$this->setState($a_state[0], $tmp_value);
 			unset($tmp_value);
 		}	
 	}
@@ -242,6 +243,7 @@ class ClubregModelRegmembers extends JModelList
 			
 			$this->setState($f_key, $tmp_value);			// set the state for the getListQuery Method	
 	
+			
 			unset($tmp_value);
 		}
 		$s_key = "search.columns";
@@ -313,7 +315,47 @@ class ClubregModelRegmembers extends JModelList
 		
 		$db->setQuery($query, 0,20);
 		$all_data = $db->loadObjectList();	
-		return 	$all_data;
+		return 	$all_data;		
+	}
+	
+	public function getMembersByGroups($group_ids){
+		
+		$final_recipients = array();
+		
+		$db		= $this->getDbo();
+		$query	= $db->getQuery(true);
+		
+		$group_str = implode(",",$group_ids);
+		
+		$d_var = "a.emailaddress,concat(a.surname,' ',a.givenname) as sending_name,
+		a.parent_id,a.playertype, if(a.parent_id > 0,b.emailaddress ,a.emailaddress) as sending_email";
+		
+		$query->select($d_var);
+		
+		$query->from($db->quoteName(CLUB_REGISTEREDMEMBERS_TABLE).' AS a');
+		$query->join('LEFT', CLUB_REGISTEREDMEMBERS_TABLE.' AS b ON (a.parent_id = b.member_id)');
+		
+		
+		$query->where(sprintf("a.`group` in (%s) or a.`subgroup` in (%s)",$group_str,$group_str));
+		
+		
+		$query->order($db->escape('a.emailaddress ASC '));
+		
+		$db->setQuery($query);
+		$all_recipients = $db->loadObjectList();		
+		
+		if(count($all_recipients) > 0){
+			foreach($all_recipients as $a_member){
+				if(JMailHelper::isEmailAddress($a_member->sending_email)){
+					//$a_member->sending_email = "shellv@deltastateonline.com";
+					$final_recipients["emails"][] = $a_member->sending_email;
+					$final_recipients["names"][] = $a_member->sending_name;
+				}
+			}
+		}
+		unset($all_recipients);
+		
+		return $final_recipients;		
 		
 	}
 	
