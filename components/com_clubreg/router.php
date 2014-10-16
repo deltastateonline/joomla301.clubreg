@@ -44,8 +44,9 @@ function ClubregBuildRoute(&$query)
 	$mPlayertype = (empty($query['playertype'])) ?$menuItem->query['playertype']:$query['playertype'];
 	
 	$mFormat	= (empty($query['format'])) ?$menuItem->query['format']:$query['format'];
-	$mTmpl	= (empty($query['tmpl'])) ?$menuItem->query['tmpl']:$query['tmpl'];
-	
+	$mTmpl	= (empty($query['tmpl'])) ?$menuItem->query['tmpl']:$query['tmpl'];	
+	$mTmplId	= (empty($query['template_id'])) ?$menuItem->query['template_id']:$query['template_id'];	
+	$mCommId	= (empty($query['comm_id'])) ?$menuItem->query['comm_id']:$query['comm_id'];
 	
 	if(isset($mView)){
 		$segments[] = "view:".$mView;
@@ -62,7 +63,7 @@ function ClubregBuildRoute(&$query)
 	}
 	
 	if(isset($mresetpage)){
-		$segments[] = "resetpage:".$mresetpage;
+		$segments[] = "resetpage:reset";
 		unset($query['resetpage']);
 	}
 	
@@ -80,8 +81,15 @@ function ClubregBuildRoute(&$query)
 		$segments[] = "tmpl:".$mTmpl;
 		unset($query['tmpl']);
 	}
+	if(isset($mTmplId)){
+		$segments[] = "template_id:".$mTmplId;
+		unset($query['template_id']);
+	}
 	
-	
+	if(isset($mCommId)){
+		$segments[] = "comm_id:".$mCommId;
+		unset($query['comm_id']);
+	}
 	return $segments;
 }
 /**
