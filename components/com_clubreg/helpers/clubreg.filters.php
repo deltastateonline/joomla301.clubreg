@@ -62,7 +62,7 @@ class ClubRegFiltersHelper extends JObject
 		if(isset($group_where["groups"]) && preg_match("/group_id/", $group_where["groups"]) ){
 			$group_where_[] = $group_where["groups"];
 			
-			$subgroup_where = str_replace("a.group_id", "a.group_parent", $group_where["groups"]);
+			$subgroup_where = str_replace("a.group_id", "a.group_parent", $group_where["groups"]); // use the group_id as group_parent
 		}
 		$group_where_[] = "published=1";
 		$group_where_[] = "group_parent = 0";
@@ -170,40 +170,45 @@ class ClubRegFiltersHelper extends JObject
 			<div class="well well-small" style="margin-bottom:5px;"><div class="pull-left"><strong><?php echo $all_filters["playertype"]["label"]?> : </strong> <?php echo JHtml::_('select.genericlist', $all_filters["playertype"]["values"],"playertype", trim($attr), 'value','text',$inValue);?></div>
 				<?php $this->getButtons(); ?>
 			</div>	
-			<div><button class="btn btn-mini btn-primary show-filters" type="button" rel='0'>Show Filters</button>
-			<div id="reg-filter-selected" class="pull-right"></div>	
+			<div style="margin-bottom:4px;">
+				<button class="btn btn-mini btn-primary show-filters" type="button" rel='0'>Show Filters</button>
+				<div id="reg-filter-selected" class="pull-right"></div>	
 			</div>
-					
-			<div class="reg-filters well well-small" id="all_filters">
-			<div class="row-fluid">
-			<?php $attr="";
-			foreach($filters["filter_heading"] as $fkey=>$fvalue){ 
-				$control_type = $all_filters[$fkey]["control"];  				
-				$ctrl_class = isset($fvalue["class"])?$fvalue["class"]:"";				
-				$nfkey = "filter.".$fkey;  $default =  $request_data->get($nfkey);	
-				$attr= $all_filters[$fkey]["other"];
-				?>				
-				<div class='control-group  <?php echo $ctrl_class; ?>'>
-					<div class="control-label"><strong><?php echo $all_filters[$fkey]["label"]?></strong></div> 
-					 <div class="controls">
-					 <?php  switch($control_type){ 
-					 	case "select.genericlist":					 		
-					 		echo JHtml::_('select.genericlist', $all_filters[$fkey]["values"],$fkey, trim($attr), 'value','text',$default);
-					 	break;					 	
-					 	default:					 		
-						?><input type="text" id="<?php echo $fkey ?>" name="<?php echo $fkey ?>" <?php echo $attr; ?> placeholder="<?php echo $all_filters[$fkey]["label"]?>" value="<?php echo $default; ?>"><?php 
-					 	break;
-					}?>						 
-					 </div> 
-					 <input type="hidden" name="prev_filters[]" value="<?php echo $fkey; ?>" />
-				 </div>
-				<?php  	
-				if(isset($fvalue["clearfix"])){?></div><div class="row-fluid"><?php }			
-			}  ?>
-			
+				
+			<div class="reg-filters"  id="all_filters">			
+				<div class="shadowed-div" style="margin-right:10px;">			
+				<div class="row-fluid ">
+				<?php $attr="";
+				foreach($filters["filter_heading"] as $fkey=>$fvalue){ 
+					$control_type = $all_filters[$fkey]["control"];  				
+					$ctrl_class = isset($fvalue["class"])?$fvalue["class"]:"";				
+					$nfkey = "filter.".$fkey;  $default =  $request_data->get($nfkey);	
+					$attr= $all_filters[$fkey]["other"];
+					?>				
+					<div class='control-group  <?php echo $ctrl_class; ?>'>
+						<div class="control-label"><strong><?php echo $all_filters[$fkey]["label"]?></strong></div> 
+						 <div class="controls">
+						 <?php  switch($control_type){ 
+						 	case "select.genericlist":					 		
+						 		echo JHtml::_('select.genericlist', $all_filters[$fkey]["values"],$fkey, trim($attr), 'value','text',$default);
+						 	break;					 	
+						 	default:					 		
+							?><input type="text" id="<?php echo $fkey ?>" name="<?php echo $fkey ?>" <?php echo $attr; ?> placeholder="<?php echo $all_filters[$fkey]["label"]?>" value="<?php echo $default; ?>"><?php 
+						 	break;
+						}?>						 
+						 </div> 
+						 <input type="hidden" name="prev_filters[]" value="<?php echo $fkey; ?>" />
+					 </div>
+					<?php  	
+					if(isset($fvalue["clearfix"])){?>
+					</div>
+					<div class="row-fluid"><?php }			
+				}  ?>
+				
 			</div>
 			</div>
-			</fieldset>			
+			</div>
+		</fieldset>			
 			<?php 		
 	}
 }
