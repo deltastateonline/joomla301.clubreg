@@ -4,3 +4,32 @@
 	margin:0px;
 	padding:0px;
 }
+
+.eoi-heading{
+	padding-bottom:5px;
+	font-weight:bold;
+}
+.eoi-table{
+	border-color:#ddd;
+    -moz-border-radius: 5px;
+  	border-radius: 5px;
+    border-style:solid;
+    border-width:1px;
+    padding:0px 5px 0px 5px;
+    box-shadow: 10px 10px 5px #DDEDED;
+    -webkit-box-shadow: 10px 10px 5px #DDEDED;
+    -moz-box-shadow: 10px 10px 5px #DDEDED;
+    padding:5px;
+    margin:7px 5px 7px 10px;
+}
+.eoi-table td{
+	 padding: 7px;
+}
+.eoi-guardian td.label-g{	
+	text-align:right;
+	font-size:1.2em;
+}
+
+.eoi-table label{		
+	font-weight:bold;
+}
