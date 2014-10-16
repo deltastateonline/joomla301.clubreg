@@ -83,9 +83,7 @@ class ClubregModelOfficialfrn extends JModelForm
 		
 		$registry = isset($userPermission->params)?new JRegistry($userPermission->params):new JObject();
 		
-		$proceed = FALSE;
-		
-		
+		$proceed = FALSE;	
 		
 		if($registry->get($permission)){			
 			if($registry->get($permission) == "yes"){
@@ -95,6 +93,11 @@ class ClubregModelOfficialfrn extends JModelForm
 		
 		return $proceed;		
 	}
+	/**
+	 * 
+	 * @param unknown_type $group_type
+	 * @return Ambigous <mixed, NULL, multitype:unknown mixed >
+	 */
 	
 	
 	public function getMyGroups($group_type = null){
@@ -150,22 +153,24 @@ class ClubregModelOfficialfrn extends JModelForm
 		$d_var = "a.group_id, a.group_name";
 		
 		$query->select($d_var);
-		$query->from($db->quoteName(CLUB_GROUPS_TABLE).' AS a');
+		$query->from($db->quoteName(CLUB_GROUPS_TABLE).' AS a');		
 		
 		$query->where('a.group_leader in ('.$joomla_id.")");		
-		$query->where('a.group_parent > 0 ');
-		$query->where('a.published = 1 ');
+		$query->where('a.published = 1');		
+		
 		if(isset($group_type)){
 			$query->where('a.group_type =  '. $db->quote($group_type));
-		}
+		}			
 		
 		if(count($my_groups["group_leader"]) > 0){
-			$all_mysubgroups = sprintf("a.group_parent in (%s)",implode(",",array_keys($my_groups["group_leader"])));			
-			$query->where($all_mysubgroups,"or");
-		}
+			$all_mysubgroups = sprintf("(a.group_parent > 0 or a.group_parent in (%s))",implode(",",array_keys($my_groups["group_leader"])));
+			$query->where($all_mysubgroups);
+		}else{
+			$query->where('a.group_parent > 0 ');
+		}	
 		
 		$db->setQuery($query);
-		$sub_groups  = $db->loadObjectList("group_id");	
+		$sub_groups  = $db->loadObjectList("group_id");		
 		
 		$my_groups["sub_groups_ids"] = array_keys($sub_groups);
 		$my_groups["sub_groups"] = $sub_groups;
