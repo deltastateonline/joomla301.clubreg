@@ -18,7 +18,7 @@ class ClubRegViewcommunications extends JViewLegacy
 	function display($tpl = null)
 	{
 		
-		$renderer =  $this->getLayout();
+		$this->layout  = $renderer =  $this->getLayout();
 		$proceed = FALSE;
 		
 		if(method_exists($this, $renderer)){
@@ -36,6 +36,7 @@ class ClubRegViewcommunications extends JViewLegacy
 		global $clubreg_Itemid;
 		// must be set groups and year
 		$app			= JFactory::getApplication();
+		$user			= JFactory::getUser();
 		$menu	= $app->getMenu();
 		
 		$uri = JUri::getInstance();
@@ -47,100 +48,70 @@ class ClubRegViewcommunications extends JViewLegacy
 			$menuItem = $menu->getItem($query['Itemid']);
 		}	
 		
+		$app->setUserState('com_clubreg.communication.data', array());
 		
 		$tmp_filters = array();
 		
 		$query = $menuItem->query;
-		
+		require_once CLUBREG_CONFIGS.'config.communications.php';
 		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.filters.communications.php';
+		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.rendertables.comms.php';
+		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.pagination.php';
 		
-		JModelLegacy::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/models');
-		
+		JModelLegacy::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/models');		
 		unset($current_model);
 		$current_model = JModelLegacy::getInstance('templates', 'ClubregModel', array('ignore_request' => false));	
+		$tmp_filters["currentTemplates"] = $current_model->getCurrentTemplates();	
 
-		$tmp_filters["currentTemplates"] = $current_model->getCurrentTemplates();
+		
+		unset($current_model);
+		$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => false));
+		$current_model->setState('joomla_id',$user->get('id'));
+		$allowedGroups = $current_model->getMyGroups();
+		$all_groups = array("allowed_groups"=>$allowedGroups["group_leader"],"sub_groups"=>$allowedGroups["sub_groups"]);
+						
+		unset($current_model);
+		$current_model = JModelLegacy::getInstance('communications', 'ClubregModel', array('ignore_request' => false));
+		$this->state		= $current_model->getState();
+		
 		$tmp_filters["editAction"] = sprintf('index.php?option=com_clubreg&view=communication&Itemid=%d&layout=edit&template_id=',$clubreg_Itemid); // back to list
+		
+		
+		$configObj = new ClubRegCommsConfig();
+		$configObj->setOfficialGroups(array_keys($all_groups["allowed_groups"])); // only groups u are a leader of
+		$configObj->setOfficialSubGroups(array_keys($all_groups["sub_groups"])); // only subgroups u are a leader of
+			
+		$commsConfigs =  $configObj->getConfig("comms"); // return headings and filters
+		$current_model->setMoreStates($commsConfigs["filters"],$all_groups); // set more states
+		
+		$this->items		= $current_model->getItems();
+		$this->pagination	= $current_model->getPagination();
+				
+		$tmp_filters["request_data"] = $this->state;
+		$tmp_filters["filter_heading"] = $commsConfigs["filters"];	
+		$tmp_filters["group_where"] = $commsConfigs["group_where"];
+		$tmp_filters["headings"] = $commsConfigs["headings"];
+		$tmp_filters["otherconfigs"] = $commsConfigs["otherconfigs"];		
 		
 		$this->entity_filters =  $tmp_filters;		
 		$this->pageTitle = $menuItem->title;
 		
+		$this->edit_comms_url = sprintf('index.php?option=com_clubreg&view=communication&Itemid=%d&layout=edit&comm_id=',$clubreg_Itemid); // back to list
 		
 		
 		unset($current_model);
 		
-		
-
-		/*
-		$this->year_default = $query['year'] = $app->input->getString('year', date('Y'));
-		
-		if(empty($query['year']) or strlen($query['year']) < 3){
-			$query['year'] = date('Y');
-		}			
-		
-		JModelLegacy::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/models');
-		
-		unset($current_model);
-		$current_model = JModelLegacy::getInstance('clubgroup', 'ClubregModel', array('ignore_request' => false));
-		$current_group = $current_model->getItem($query["groups"]);		
-		
-		unset($current_model);
-		$app->input->set('group_id',$query["groups"]);
-		$current_model = JModelLegacy::getInstance('clubgroups', 'ClubregModel', array('ignore_request' => false));
-		$all_children = $current_model->getSubGroups();
-		
-		$all_groups = array("allowed_groups"=>array(),"sub_groups_ids"=>array());
-		require_once CLUBREG_CONFIGS.'config.regmembers.php';		
-		//$all_groups["allowed_groups"] = array($current_group->group_id);
-		
-		if(count($all_children['group_children']) > 0 ){
-			foreach($all_children['group_children'] as $a_child){
-				//$all_groups["sub_groups_ids"][] = $a_child->group_id;
-			}		
-		 }		 
-		 
-		$configObj = new ClubRegRegmembersConfig();
-		$configObj->setOfficialGroups($all_groups["allowed_groups"]);
-		$configObj->setOfficialSubGroups($all_groups["sub_groups_ids"]);
-		$regmembersConfigs =  $configObj->getConfig($current_group->group_type); // return headings and filters
-		
-		// set the filters for the regmember filters
-		$app->setUserState('com_clubreg.regmembers.filter.playertype', $current_group->group_type);
-		$app->setUserState('com_clubreg.regmembers.filter.member_status','registered');
-		$app->setUserState('com_clubreg.regmembers.filter.year_registered',$query['year']);
-		$app->setUserState('com_clubreg.regmembers.filter.group',$current_group->group_id);
-		
-		
-		unset($current_model);
-		$current_model = JModelLegacy::getInstance('regmembers', 'ClubregModel', array('ignore_request' => true));		
-		$current_model->setState('filter.playertype', $current_group->group_type);	
-		$current_model->setState('list.ordering', 'sg.group_name,  surname');
-		$current_model->setState('list.direction', 'ASC');
-		$current_model->setMoreStates($regmembersConfigs["filters"],$all_groups); // set more states			
-		
-		$this->items		= $current_model->getItems();
-		$this->current_group = $current_group;	
-		$this->pageTitle = $menuItem->title .' / '.$query['year'];
-		unset($current_model);
-		
-		// reset the filters		
-		$app->setUserState('com_clubreg.regmembers.filter.playertype', NULL);
-		$app->setUserState('com_clubreg.regmembers.filter.member_status',NULL);
-		$app->setUserState('com_clubreg.regmembers.filter.year_registered',NULL);
-		$app->setUserState('com_clubreg.regmembers.filter.group',NULL);	
-		
-		
-		unset($current_model);
-		$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
-		$current_model->setState('joomla_id',$current_group->group_leader);		
-		$this->group_leader = $current_model->getDetails();
-		
-		
-		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.seasons.php';
-		$this->year_registered = ClubRegSeasonsHelper::generate_List();
-		$this->year_registered_control = array("label"=>JText::_('COM_CLUBREG_SEASON_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-medium communications-season' id='communications_season'");
-		
-		*/
 		return TRUE;
 	}	
+	
+	public function getSortFields()
+	{
+		return array(
+				'a.created' => JText::_('COM_CLUBREG_CREATED_LABEL'),
+				'a.sent_date' => JText::_('COM_CLUBREG_COMMS_SENTDATE'),
+				'template_name' => JText::_('COM_CLUBREG_COMMS_TEMPLATES'),				
+	
+	
+		);
+	}
 }
