@@ -74,14 +74,7 @@ class ClubRegModelTemplate extends JModelAdmin
 	 * @see JModelAdmin::prepareTable()
 	 */
 	protected function prepareTable($table)
-	{
-	
-		/*$table->config_short = JApplication::stringURLSafe($table->config_short);
-	
-		if (empty($table->config_short)) {
-			$table->config_short = JApplication::stringURLSafe($table->config_name);
-		}*/
-	
+	{	
 		if (empty($table->template_id)) {
 			// Set the values
 			$user	= JFactory::getUser();
