@@ -13,77 +13,75 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 jimport( 'joomla.application.component.view');
 
-class ClubRegViewcommunication extends JViewLegacy
-{
-	function display($tpl = null)
-	{
-		
-		$renderer =  $this->getLayout();
-		$proceed = FALSE;
-		
-		if(method_exists($this, $renderer)){
-			$proceed =  $this->$renderer();			
-		}	
-
-		if($proceed){
-			parent::display($tpl);
-		}else{
-			ClubRegUnAuthHelper::unAuthorised();
-		}
-	}	
+class ClubRegViewcommunication extends ClubRegViews
+{	
 	
-	private function edit(){
+	protected function edit_communication(){
 	
 		$proceed = FALSE;
 	
 		$app			= JFactory::getApplication();
 		$user			= JFactory::getUser();
 		
-		JModelLegacy::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/models');
+		$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
+		$current_model->setState('joomla_id',$user->get('id'));
 		
-		$template_id =  $app->input->getInt('template_id', null);
-		$communication_key =  $app->input->getString('communication_key', null);
-		$communication_id =  $app->input->getInt('comm_id', null);
+		if($current_model->getPermissions('sendcommunication')){
 		
-		unset($commsModel);
-		$commsModel = JModelLegacy::getInstance('communication', 'ClubregModel', array('ignore_request' => false));
-		$commsModel->setState('com_clubreg.communication.communication_key',$communication_key); // use the key in the model
-		$commsModel->setState('com_clubreg.communication.comm_id',$communication_id); // use the key in the model
-		
-		if($template_id > 0){
+			JModelLegacy::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/models');
+			
+			$template_id =  $app->input->getInt('template_id', null);
+			
+			$this->comm_id =  $app->input->getInt('comm_id', null);
+			$comm_type =  $app->input->getString('comm_type', "email");
+			
+			unset($commsModel);
+			$commsModel = JModelLegacy::getInstance('communication', 'ClubregModel', array('ignore_request' => false));
+			
+			$commsModel->setState('com_clubreg.communication.comm_id',$this->comm_id); // use the  in the model
+			if($comm_type && empty($this->comm_id))
+				$commsModel->setState('com_clubreg.communication.comm_type',$comm_type); // use the  in the model
+			
 			unset($current_model);
-			$current_model = JModelLegacy::getInstance('template', 'ClubregModel', array('ignore_request' => false));
-			$current_model->setState("template.template_id",$template_id);
-			$this->template_data = $current_model->getItem();		
+			$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => false));
+			$current_model->setState('joomla_id',$user->get('id'));
+			$this->allowedGroups = $current_model->getMyGroups();			
+			
+			if($template_id > 0){
+				unset($current_model);
+				$current_model = JModelLegacy::getInstance('template', 'ClubregModel', array('ignore_request' => false));
+				$current_model->setState("template.template_id",$template_id);
+				$this->template_data = $current_model->getItem();		
 
-			$commsModel->setState('com_clubreg.communication.comm_subject',$this->template_data->template_subject); // Use the template subject
-			$commsModel->setState('com_clubreg.communication.comm_message',$this->template_data->template_text); // use the template text
-			$commsModel->setState('com_clubreg.communication.comm_pmessage',$this->template_data->template_ptext); // use the template plain text
+				if(empty($this->comm_id)){
+	
+					$commsModel->setState('com_clubreg.communication.comm_subject',$this->template_data->template_subject); // Use the template subject
+					$commsModel->setState('com_clubreg.communication.comm_message',$this->template_data->template_text); // use the template text
+					
+					if($comm_type == "sms"){
+						$commsModel->setState('com_clubreg.communication.comm_pmessage',$this->template_data->template_ptext); // use the template plain text
+					}
+				}
+				$commsModel->setState('com_clubreg.communication.template_id',$this->template_data->template_id); // use the template plain text
+				
+				$commsModel->setState('com_clubreg.communication.template_name',$this->template_data->template_name); // use the template plain text
+						
+			}			
 			
+			$this->communicationForm = $commsModel->getForm();		
+			$this->selectedGroups = $commsModel->get('com_clubreg.communication.comm_sendto_array');
+			$this->comm_title = $commsModel->get('com_clubreg.communication.comm_title');			
 			
-		}	
+			if(empty($this->comm_title)){
+				$this->comm_title = $commsModel->getState('com_clubreg.communication.template_name');
+			}
+			
+			$this->formbackaction = 'index.php'; // back to list
+			
+			$proceed = TRUE;
 		
-		
-		$this->communicationForm = $commsModel->getForm();
-		
-		
-		
-		
-		
-		/*
-		
-		unset($currentModel);
-		$currentModel = JModelLegacy::getInstance('communication', 'ClubregModel', array('ignore_request' => false));
-		$currentModel->setState('com_clubreg.communication.communication_id',$key_data->pk_id); // use the key in the model
-		$currentModel->setState('com_clubreg.communication.template_id',$template_id); // use the key in the model
-		
-		$this->emergencyForm = $currentModel->getForm();
-		
-		*/
-		//$tmp_filters["currentTemplates"] = $current_model->getCurrentTemplates();
-		
-		
-		return TRUE;
+		}
+		return $proceed;
 	}
 	
 	

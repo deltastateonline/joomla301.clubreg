@@ -123,4 +123,17 @@ div.fieldSetDiv__{
   /*  border:solid 1px #AAAAAA;*/
      border-top:solid 4px #666666;
 }
+.shadowed-div{
+	border-color:#ddd;
+    -moz-border-radius: 5px;
+  	border-radius: 5px;
+    border-style:solid;
+    border-width:1px;
+    padding:0px 5px 0px 5px;
+    box-shadow: 10px 10px 5px #DDEDED;
+    -webkit-box-shadow: 10px 10px 5px #DDEDED;
+    -moz-box-shadow: 10px 10px 5px #DDEDED;
+    padding:5px;
+    margin:7px 5px 7px 10px;
+}
 

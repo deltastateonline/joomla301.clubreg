@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="recipients" addfieldpath="/administrator/components/com_clubreg/models/fields">	
+		<field name="comm_sendto" type="clubsendto" label="COM_CLUBREG_COMM_SENDTO" description="COM_CLUBREG_COMM_SENDTO_DESC"
+			class="inputbox input-xxlarge"   />	
+	</fieldset>
+
+	<fieldset name="communication" addfieldpath="/administrator/components/com_clubreg/models/fields">	
+				
+			<field name="comm_subject" type="text" label="COM_CLUBREG_COMM_SUBJECT" description="COM_CLUBREG_COMM_SUBJECT_DESC"
+			class="inputbox input-xxlarge"  required="true" />									
+	</fieldset>
+	
+	<fieldset name="communication_type">	
+	
+			<field name="comm_message" type="editor" label="COM_CLUBREG_COMM_MESSAGE" description="COM_CLUBREG_COMM_MESSAGE_DESC"
+			class="inputbox input-xxlarge"  filter="JComponentHelper::filterText" buttons="false" required="true" showonly="email"/>	
+			
+			<field name="comm_pmessage" type="textarea" label="COM_CLUBREG_COMM_MESSAGE" description="COM_CLUBREG_COMM_MESSAGE"
+			class="inputbox input-xxlarge"  rows="5" cols="80" showonly="sms"/>	
+	</fieldset>
+	
+		
+	<fieldset name="hiddenControls"	>	
+		<field name="comm_type" type="hidden" default="email" label="Communication Type" description ="Communication Type"/>			
+		<field name="template_id" type="hidden" default="0" readonly="true" class="readonly" label="Template Id" description ="Template Id"/>			
+		<field name="comm_id" type="hidden" default="0" readonly="true" class="readonly" label="Communication Id" description ="Communication Id"/>			
+		<field name="comm_groups" type="hidden" default="0" readonly="true"  label="Communication Groups" description ="Communication Groups"/>			
+	
+	
+	</fieldset>
+	
+</form>

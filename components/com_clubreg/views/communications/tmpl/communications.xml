@@ -5,4 +5,9 @@
       <![CDATA[COM_CLUBREG_COMMUNICATIONS_LABEL]]>
     </message>
   </layout>	
+  <fields name="request">
+		<fieldset name="request">				
+      		<field name="resetpage" type="hidden" default="reset" value="reset" label="Reset Filters" description="Reset Filters"></field>
+		</fieldset>
+	</fields>	
 </metadata>
