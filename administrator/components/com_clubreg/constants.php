@@ -40,10 +40,12 @@ define('CLUB_TAG_TABLE','#__clubreg_tags'); // tag table
 define('CLUB_TAGPLAYER_TABLE','#__clubreg_tags_players'); // player tag link
 
 define('CLUB_SAVEDCOMMS_TABLE','#__clubreg_saved_comms'); // communication table
+define('CLUB_SAVEDCOMMS_GROUP_TABLE','#__clubreg_saved_comms_groups');
 define('CLUB_CONTACT_TABLE','#__clubreg_contact_details'); // contact  table
 define('CLUB_STATS_TABLE','#__clubreg_stats_details'); // Stats  table
 
 define('CLUB_PROPERTY_TABLE','#__clubreg_property_sheet'); // Property sheet  table
+
 
 
 define('GROUP','Division'); 
@@ -106,5 +108,7 @@ $clubreg_params["payment"]["assign_to"]= array("label"=>"Applies To");
 
 define('LIVE_SITE',TRUE);
 define('ATTACHMENT_LIMIT',5);
+define('CLUBREG_COMM_SENTSTATUS', 30);
+define('CLUBREG_COMM_DELETESTATUS', 99);
 
 include_once("debugger.php");
