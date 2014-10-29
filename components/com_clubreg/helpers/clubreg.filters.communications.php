@@ -27,6 +27,8 @@ class ClubRegFiltersCommunicationsHelper extends ClubRegFiltersHelper
 		$filter_heading = array();
 	
 		$db	= JFactory::getDBO();
+		
+		$filter_heading["comm_type"] = array("label"=>JText::_('COMM_CLUBREG_COMM_COMM_TYPE'),"control"=>"select.genericlist","other"=>"class='inputbox input-large'");
 	
 		$filter_heading["comm_subject"] = array("label"=>JText::_('COM_CLUBREG_COMMS_SUBMSG'),"control"=>"text","other"=>"class='inputbox input-large'");
 	
@@ -105,7 +107,7 @@ class ClubRegFiltersCommunicationsHelper extends ClubRegFiltersHelper
 		$filter_heading["f_created_date"]["values"] = $filter_heading["t_created_date"]["values"] = $tmp_list;
 	
 		$filter_heading["year_registered"]["values"] = ClubRegSeasonsHelper::generate_List();
-		$filter_heading["playertype"]["values"] = ClubRegPlayertypeHelper::generate_List();
+		$filter_heading["comm_type"]["values"] = $this->getCommType();
 			
 		$filter_heading["comm_status"]["values"] = $this->getCommstatus();
 	
@@ -124,20 +126,34 @@ class ClubRegFiltersCommunicationsHelper extends ClubRegFiltersHelper
 		return $tmp_list;
 	}
 	
+	protected function getCommType(){
+		$tmp_list = array();
+		$tmp_list['-1'] = JHTML::_('select.option',  '-1', '-'.JText::_('COMM_CLUBREG_COMM_COMM_TYPE').'-' );
+		$tmp_list['email'] = JHTML::_('select.option',  'email', JText::_( 'COMM_CLUBREG_COMM_COMM_TYPE_EMAIL' ) );
+		$tmp_list['sms'] = JHTML::_('select.option',  "sms", JText::_( 'COMM_CLUBREG_COMM_COMM_TYPE_SMS' ) );
 	
-	protected function getButtons($templates,$editAction){?>	
-		<div class="btn-group pull-right">		  	 
-		  <a class="btn dropdown-toggle btn-small" data-toggle="dropdown" href="#"><?php echo JText::_('CLUBREG_COMMUNICATIONS_TEMPLATES_SMS');?>&nbsp;<span class="caret"></span></a>
-		  <ul class="dropdown-menu">
-		  	<?php 
-				if(count($templates) > 0){ 					
-					foreach($templates as $a_template){ if($a_template->value == -1) continue; // ignore the
-					$t_action = JRoute::_($editAction.$a_template->value."&comm_type=sms");
-					?>
-				<li><a href="<?php echo $t_action ?>" data-template_id="<?php echo $a_template->value; ?>" class="template-action"><?php echo JText::_($a_template->text);?></a></li>
-				<?php } } ?>				
-		  </ul>		  
-  		</div>
+		return $tmp_list;
+	}
+	
+	
+	protected function getButtons($templates,$editAction){ 
+		$params = JComponentHelper::getParams('com_clubreg');
+		$sms_suffix = $params->get("sms_suffix");	
+		
+		if(preg_match("/@/", $sms_suffix)){		?>	
+			<div class="btn-group pull-right">		  	 
+			  <a class="btn dropdown-toggle btn-small" data-toggle="dropdown" href="#"><?php echo JText::_('CLUBREG_COMMUNICATIONS_TEMPLATES_SMS');?>&nbsp;<span class="caret"></span></a>
+			  <ul class="dropdown-menu">
+			  	<?php 
+					if(count($templates) > 0 ){ 					
+						foreach($templates as $a_template){ if($a_template->value == -1) continue; // ignore the
+						$t_action = JRoute::_($editAction.$a_template->value."&comm_type=sms");
+						?>
+					<li><a href="<?php echo $t_action ?>" data-template_id="<?php echo $a_template->value; ?>" class="template-action"><?php echo JText::_($a_template->text);?></a></li>
+					<?php } } ?>				
+			  </ul>		  
+	  		</div>
+  		<?php } ?>
   		
 		<div class="btn-group pull-right">	
 			<button class="btn btn-small btn-primary" type="button" onclick="document.adminForm.layout.value='communications';return Joomla.submitbutton('filter');"><?php echo JText::_('CLUBREG_FILTER');?></button>
@@ -163,9 +179,16 @@ class ClubRegFiltersCommunicationsHelper extends ClubRegFiltersHelper
 		$request_data = $filters["request_data"];
 		$group_where = $filters["group_where"];
 		$this->templateValues = $filters["currentTemplates"];
-		$all_filters = $this->get_filters_headings($request_data, $group_where);		
+		$all_filters = $this->get_filters_headings($request_data, $group_where);	
+
+		$inValue  = $request_data->get('filter.comm_type');
+		$attr = $all_filters["comm_type"]["other"];
+		
 		?>
 				<fieldset class="eoi" >
+				
+				<div class="well well-small" style="margin-bottom:5px;"><div class="pull-left"><strong><?php echo $all_filters["comm_type"]["label"]?> : </strong> <?php echo JHtml::_('select.genericlist', $all_filters["comm_type"]["values"],"comm_type", trim($attr), 'value','text',$inValue);?></div
+				
 					<div class="comms-order">
 						<?php $this->getButtons($filters["currentTemplates"],$filters["editAction"]); ?>												
 					</div>					

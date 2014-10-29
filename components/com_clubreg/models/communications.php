@@ -57,6 +57,8 @@ class ClubregModelCommunications extends JModelList
 		$all_string["added_groups"] = " group_concat(gr.`group_name` ORDER BY gr.`group_name` ASC SEPARATOR ':' ) as added_groups";
 	
 		
+		$back_url["comm_type"] =  $cfilter = 	$this->state->get('filter.comm_type');
+		
 		$s_key = "search.comms.columns";
 		$search_columns = $this->getState($s_key);	// get the list of passed columns for filtering		
 		
@@ -68,6 +70,12 @@ class ClubregModelCommunications extends JModelList
 		$query->join('LEFT', '#__users AS usert ON a.created_by = usert.id');
 		$query->join('LEFT', CLUB_SAVEDCOMMS_GROUP_TABLE.' AS s ON a.comm_id = s.comm_id');
 		$query->join('LEFT', CLUB_GROUPS_TABLE.' AS gr ON s.group_id = gr.group_id');
+		
+		if($cfilter){
+			$where_[] = sprintf(" a.comm_type = '%s' ",$cfilter);  // Only Eoi Members
+		}
+		
+		unset($cfilter);
 		
 		require_once(CLUBREG_COMPONENTS."helpers/clubreg.daterange.php");
 		$dateRangeObj = new ClubRegDateRangeHelper();
@@ -138,15 +146,15 @@ class ClubregModelCommunications extends JModelList
 	protected function populateState($ordering = null, $direction = null)
 	{	
 		parent::populateState('a.created', 'DESC');				
-		$states[] = array("filter.comm_status","comm_status","1");		 // possible that this doesn't work
+		$states[] = array("filter.comm_status","comm_status","0");		 // possible that this doesn't work
+		$states[] = array("filter.comm_type","comm_type","email","string");
 	
 		$tmp_value = null;
 		foreach($states as $a_state){
 			$vartype = isset($a_state[3])?$a_state[3]:null;
 			$tmp_value = $this->getUserStateFromRequest($this->context.'.'.$a_state[0], $a_state[1], $a_state[2],$vartype);			
-			$this->setState($a_state[0], $tmp_value);	
-
-			
+			$this->setState($a_state[0], $tmp_value);
+									
 			unset($tmp_value);
 		}	
 	}
@@ -164,10 +172,7 @@ class ClubregModelCommunications extends JModelList
 		
 		if($reseter == "reset"){
 			$reset = FALSE;
-		}
-		
-		
-		//write_debug($states);
+		}		
 		
 		foreach($states as $a_key => $a_state){
 			$f_key = "filter.".$a_key;	// this will set the state filter key as filter.{colname}

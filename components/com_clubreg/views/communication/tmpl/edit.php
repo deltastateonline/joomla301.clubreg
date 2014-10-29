@@ -51,15 +51,15 @@ $back_url = $session->get("com_clubreg.comms.back_url");// save the back url
 					if(!in_array($a_group->group_id, $this->selectedGroups)){?>
 					<a class="btn btn-mini" title="click to add" data-groupid='<?php echo $a_group->group_id ;?>'><?php echo $a_group->group_name ;?></a>
 			<?php }
-			} 
+				} 
 			if(count($this->allowedGroups["sub_groups"])){?>			
 			<?php foreach($this->allowedGroups["sub_groups"] as $a_group){
 					if(!in_array($a_group->group_id, $this->selectedGroups)){?>
 					<a class="btn btn-mini" data-groupid='<?php echo $a_group->group_id ;?>'><?php echo $a_group->group_name ;?></a>
 				<?php } 
 					}?>
-			</div>
-			<?php }?>	
+				<?php }?>
+			</div>				
 		</div>
 		<?php foreach($this->communicationForm->getFieldset('communication') as $field){ ?>
 			<div class="control-group">					
@@ -98,7 +98,7 @@ $back_url = $session->get("com_clubreg.comms.back_url");// save the back url
 		<div class="form-actions">			 
 			<button type="submit" class="btn btn-primary validate"><span><?php echo JText::_('COM_CLUBREG_COMM_SAVE'); ?></span></button>			
 			<button type="button" class="btn" onclick="return adminForm_back_list.submit();" ><?php echo JText::_('COM_CLUBREG_BACK_LIST'); ?></button>	
-			<?php if(!empty($this->comm_id) && $this->comm_id > 0 ){ ?>				
+			<?php if(!empty($this->comm_id) && $this->comm_id > 0 && false ){ ?>				
 			<button type="submit" class="btn pull-right"><span><?php echo JText::_('COM_CLUBREG_COMM_PREVIEW'); ?></span></button>
 			<?php } ?>
 		</div>

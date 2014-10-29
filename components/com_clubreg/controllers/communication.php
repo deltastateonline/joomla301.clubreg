@@ -25,6 +25,9 @@ class ClubregControllerCommunication extends JControllerLegacy
 		
 		$this->registerTask('save', 'savecommunication');		
 		$this->registerTask('send', 'sendcommunication');
+		$this->registerTask('fdelete', 'deletecommunication');
+		$this->registerTask('sreset', 'sresetcommunication');
+		
 		$this->uKeyObject = new ClubRegUniqueKeysHelper(10);
 		
 	}	
@@ -76,7 +79,7 @@ class ClubregControllerCommunication extends JControllerLegacy
 		if($return_array["proceed"]){
 				
 			if($isNew){
-				$data["comm_status"] = 1;
+				$data["comm_status"] = 0;
 				$data["created"] = date("Y-m-d H:i:s");
 				$data["created_by"] = $user->id;			
 			}
@@ -91,11 +94,9 @@ class ClubregControllerCommunication extends JControllerLegacy
 			}else{
 				$comm_id = $current_model->get('com_clubreg.communication.comm_id');
 			}
-		}else{
-			$data["comm_sendto"] = ($data["comm_groups"])?json_decode($data["comm_groups"],TRUE):array();
 		}
 		
-		
+		$data["comm_sendto"] = ($data["comm_groups"])?json_decode($data["comm_groups"],TRUE):array();
 		
 		return array("all_errors"=>$all_errors, "comm_id" => $comm_id, "data"=>$data,'template_id'=>$template_id);
 	}
@@ -174,23 +175,36 @@ class ClubregControllerCommunication extends JControllerLegacy
 			$comm_id = $return_array["comm_id"];
 			$all_errors = $return_array["all_errors"];
 			$data = $return_array["data"];		
-			$template_id	= $return_array['template_id'];
+			$template_id	= $return_array['template_id'];			
+			
+			$params = JComponentHelper::getParams('com_clubreg');			
+			$sms_suffix = $params->get("sms_suffix");
 			
 			$comm_sendto = ($data["comm_groups"])?json_decode($data["comm_groups"],TRUE):array();
 			
-			$url_ = $validEmails = array();			
-			
+			$url_ = $validEmails = array();		
+
 			if(is_array($comm_sendto) && count($comm_sendto) > 0){
-				unset($current_model);
-				//$current_model = JModelLegacy::getInstance('communication', 'ClubregModel', array('ignore_request' => true));
+				unset($current_model);			
+				
+				$comm_key = "email";
+				
+				if($data["comm_type"] == "sms"){					
+					$comm_key = "sms";
+				}			
 				
 				$current_model = JModelLegacy::getInstance('regmembers', 'ClubregModel', array('ignore_request' => true));
-				$validEmails = $current_model->getMembersByGroups($comm_sendto);
+				$validEmails = $current_model->getMembersByGroups($comm_sendto,$comm_key);				
+	
+				if($data["comm_type"] == "sms"){
+					$validEmails["emails"] = $validEmails["sms"];					
+				}
 				
 				if(!count($validEmails["emails"]) > 0){
 					$all_errors[] = JText::_('COM_CLUBREG_COMMS_VALLIDEMAILS');
 					throw new Exception(JText::_('COM_CLUBREG_COMMS_VALLIDEMAILS'));
-				}
+				}			
+				
 				$msg_log = array("<br />");
 				$sending_['mailfrom'] = $app->get('mailfrom');
 				$sending_['fromname'] = $app->get('fromname');
@@ -227,7 +241,7 @@ class ClubregControllerCommunication extends JControllerLegacy
 
 					$current_model = JModelLegacy::getInstance('communication', 'ClubregModel', array('ignore_request' => true));
 					$current_model->setState('com_clubreg.communication.comm_id',$comm_id);
-					$in_data = array("sent" =>SENTSTATUS);
+					$in_data = array("sent" =>CLUBREG_COMM_SENTSTATUS);
 					$current_model->changeStatus($in_data);
 					
 					
@@ -255,9 +269,9 @@ class ClubregControllerCommunication extends JControllerLegacy
 			}
 			
 			
-		} catch (Exception $e) {		
+		} catch (Exception $e) {	
 			$app->setUserState('com_clubreg.communication.data', $data);
-			$app->enqueueMessage(implode("<br />",$all_errors), 'warning');		
+			$app->enqueueMessage(implode("<br />",$all_errors), 'warning');			
 		}
 		
 		$redirect_url = JRoute::_('index.php?option=com_clubreg&view=communication&layout=edit&Itemid='.$Itemid.$pk_string, false);
@@ -265,7 +279,84 @@ class ClubregControllerCommunication extends JControllerLegacy
 		
 	}
 	
+	public function deletecommunication(){
+		
+		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		
+		$app    = JFactory::getApplication();
+		$user		= JFactory::getUser();
+		
+		$proceed = FALSE;
+		
+		$return_array = array();
+		
+		
+		$data = $this->input->post->get('jform', array(), 'array');
+		
+		if($data["comm_id"]){
+			$current_model = JModelLegacy::getInstance('communication', 'ClubregModel', array('ignore_request' => true));
+			$current_model->setState('com_clubreg.communication.comm_id',$data["comm_id"]);
+			$in_data = array("status" =>CLUBREG_COMM_DELETESTATUS);
+			$return_array["proceed"] = $current_model->changeStatus($in_data);			
+			
+			if(!$return_array["proceed"]){			
+				$return_array["errors"] = $this->errorFromModel($current_model);
+				$return_array["proceed"] = FALSE;		
+
+				$return_array["msg_content"] =JText::_('COM_CLUBREG_COMM_NOTDELETE_MSG');
+				$return_array["msg_btn"] ="<a href='javascript:void(0)' class=\"btn pull-right\" data-dismiss=\"modal\" onclick=\"window.parent.SqueezeBox.close()\">Close</a>";
+				
+			}else{
+				$return_array["msg_content"] =JText::_('COM_CLUBREG_COMM_DELETE_MSG');
+				$return_array["msg_btn"] = "<a href='javascript:void(0)' class=\"btn pull-right\" data-dismiss=\"modal\" onclick=\"window.parent.SqueezeBox.close()\">Close</a>";
+				$return_array["comm_id"] =$data["comm_id"];
+			}
+		}		
+		
+		unset($current_model);
+		echo json_encode($return_array);
+		
+		$app->close();
+	}
 	
+	public function sresetcommunication(){
+		JSession::checkToken("get") or jexit(JText::_('JINVALID_TOKEN'));
+		
+		$app    = JFactory::getApplication();
+		$user		= JFactory::getUser();
+		
+		$proceed = FALSE;
+		
+		$return_array = array();
+		$return_array["proceed"] = FALSE;
+		
+		
+		$data["comm_id"] = $app->input->getInt('comm_id', null);		
+		
+		if($data["comm_id"]){
+			$current_model = JModelLegacy::getInstance('communication', 'ClubregModel', array('ignore_request' => true));
+			$current_model->setState('com_clubreg.communication.comm_id',$data["comm_id"]);
+			$in_data = array("status" =>0);
+			$return_array["proceed"] = $current_model->changeStatus($in_data);
+				
+			if(!$return_array["proceed"]){
+				$return_array["errors"] = $this->errorFromModel($current_model);
+				$return_array["proceed"] = FALSE;
+		
+				$return_array["msg_content"] =str_replace("<br/>", "\n", JText::_('COM_CLUBREG_COMM_NOTCOMPLETE_MSG'));				
+			}else{
+				$return_array["msg_content"] =JText::_('COM_CLUBREG_COMM_RESET_MSG');
+				$return_array["comm_id"] =$data["comm_id"];
+			}
+		}else{
+			
+		}
+		
+		unset($current_model);
+		echo json_encode($return_array);
+		
+		$app->close();
+	}
 	
 	private function errorFromModel(&$d_model){
 	

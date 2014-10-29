@@ -11,9 +11,9 @@
 defined('_JEXEC') or die;
 jimport('joomla.html.html.bootstrap');
 JHtml::_('behavior.formvalidation');
-JHTML::_('behavior.calendar');
 JHtml::_('behavior.tooltip');
 JHtml::_('formbehavior.chosen', 'select');
+JHtml::_('behavior.modal', 'a.modal');
 
 $uri = JURI::getInstance();
 $Itemid = $uri->getVar('Itemid');

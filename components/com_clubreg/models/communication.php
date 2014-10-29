@@ -21,8 +21,7 @@ class ClubregModelCommunication extends JModelForm
 	
 	public function getForm($data = array(), $loadData = true)
 	{
-		// Get the form.		
-		$form_name = "";
+		// Get the form.
 	
 		$form = $this->loadForm('com_clubreg.communication', 'communication', array('control' => 'jform', 'load_data' => true));		
 		if (empty($form)) {
@@ -92,7 +91,6 @@ class ClubregModelCommunication extends JModelForm
 			}
 		}
 		
-		//write_debug($row);
 		return $row;
 	}
 	
@@ -167,12 +165,10 @@ class ClubregModelCommunication extends JModelForm
 			$d_qry = sprintf("update %s set  %s where comm_id = %s",
 					$db->quoteName(CLUB_SAVEDCOMMS_TABLE),$update_str,$db->quote($comm_id));
 			
-			$db->setQuery($d_qry);	
-
-			jLog::add($d_qry);
+			$db->setQuery($d_qry);		
 	
 			try{
-				$db->query();
+				$db->execute();
 			}
 			catch (RuntimeException $e)	{
 				$this->setError($e->getMessage());

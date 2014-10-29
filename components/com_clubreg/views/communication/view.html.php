@@ -68,12 +68,18 @@ class ClubRegViewcommunication extends ClubRegViews
 						
 			}			
 			
-			$this->communicationForm = $commsModel->getForm();		
-			$this->selectedGroups = $commsModel->get('com_clubreg.communication.comm_sendto_array');
-			$this->comm_title = $commsModel->get('com_clubreg.communication.comm_title');			
+			$this->communicationForm = $commsModel->getForm();
+			$form_data = $this->communicationForm->getData();
+			
+			$this->selectedGroups = $form_data->get('comm_sendto',array()); 
+			$this->comm_title = $commsModel->get('com_clubreg.communication.comm_title',"Blank Template");			
 			
 			if(empty($this->comm_title)){
 				$this->comm_title = $commsModel->getState('com_clubreg.communication.template_name');
+				
+				if($this->comm_title){
+					$this->comm_title = "Blank Template";
+				}
 			}
 			
 			$this->formbackaction = 'index.php'; // back to list
@@ -81,6 +87,41 @@ class ClubRegViewcommunication extends ClubRegViews
 			$proceed = TRUE;
 		
 		}
+		return $proceed;
+	}
+	
+	protected function sdelete_communication(){
+		
+		$proceed = FALSE;
+		
+		$app			= JFactory::getApplication();
+		$user			= JFactory::getUser();
+		
+		$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
+		$current_model->setState('joomla_id',$user->get('id'));
+		
+		if($current_model->getPermissions('sendcommunication')){
+			
+			$this->comm_id =  $app->input->getInt('comm_id', null);			
+				
+			unset($commsModel);
+			$commsModel = JModelLegacy::getInstance('communication', 'ClubregModel', array('ignore_request' => false));
+			
+			$commsModel->setState('com_clubreg.communication.comm_id',$this->comm_id); // use the  in the model
+			
+			$this->communicationForm = $commsModel->getForm();
+			$this->comm_title = $commsModel->get('com_clubreg.communication.comm_title');
+			if(empty($this->comm_title)){
+				$this->comm_title = "No Template Used";
+			}
+			$this->comm_type = $commsModel->getState('com_clubreg.communication.comm_type');
+			
+			$this->comm_key ="";
+			
+			
+			$proceed = TRUE;
+		}
+		
 		return $proceed;
 	}
 	
