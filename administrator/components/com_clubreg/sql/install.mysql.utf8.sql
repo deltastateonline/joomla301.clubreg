@@ -403,10 +403,20 @@ CREATE TABLE IF NOT EXISTS `#__clubreg_saved_comms` (
   `comm_status` tinyint(4) NOT NULL default '0',
   `sent_date` datetime default '0000-00-00 00:00:00',
   `sent_by` int(11) default '0',
+  `comm_type` VARCHAR(10) NULL DEFAULT 'email',
   PRIMARY KEY  (`comm_id`),
-  KEY `template_id` (`template_id`)
+  KEY `template_id` (`template_id`),
+  KEY `comm_type` (`comm_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='store saved communications' AUTO_INCREMENT=1 ;
 
+
+CREATE TABLE IF NOT EXISTS `#__clubreg_saved_comms_groups` (
+	  `group_id` int(11) NOT NULL,
+	  `comm_id` int(11) NOT NULL,
+	  `joomla_id` int(11) NOT NULL,
+	  `status` tinyint(4) NOT NULL DEFAULT '1',
+	  PRIMARY KEY (`comm_id`,`joomla_id`,`group_id`)
+	) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 -- --------------------------------------------------------
 
 --
