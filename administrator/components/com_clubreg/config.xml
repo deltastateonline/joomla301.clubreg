@@ -89,6 +89,12 @@
 			<option
 				value="0">JNO</option>
 		</field>	
+		
+		<field name="sms_suffix"
+			type="text"
+			size="30"
+			label="COM_CLUBREG_COMMUNICATION_SUFFIX_LABEL"
+			description="COM_CLUBREG_COMMUNICATION_SUFFIX_DESC" class="inputbox input-large" default=""/>
 
 	</fieldset>
 	<!--
