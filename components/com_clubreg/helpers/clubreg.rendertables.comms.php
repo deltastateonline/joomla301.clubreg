@@ -48,12 +48,19 @@ class ClubRegRenderTablesCommsHelper extends ClubRegRenderTablesHelper
 	
 	protected function rendererItems($an_item){ 
 			$d_url = JRoute::_($this->edit_comms_url .$an_item->comm_id);
+			
+			
+			
+			$delete_url = JRoute::_("index.php?option=com_clubreg&view=communication&layout=sdelete&tmpl=component&comm_id=".$an_item->comm_id);
+			$reset_url = JRoute::_("index.php?option=com_clubreg&task=communication.sreset&comm_id=".$an_item->comm_id."&".JSession::getFormToken()."=1");
 		?>
-		<div class="comms-div" data-comm_id=<?php echo $an_item->comm_id; ?>>
+		<div class="comms-div" data-comm_id="<?php echo $an_item->comm_id; ?>" id="comm_item_div<?php echo $an_item->comm_id; ?>">
 		<div class="h21 pull-left">
 		<?php if(in_array($an_item->comm_status,$this->otherconfigs["allowedstatus"]) ||  in_array($an_item->commtype,$this->otherconfigs["checkboxes"])){ ?>
 			<?php echo JHtml::_('grid.id', $an_item->idx, $an_item->comm_id);  } ?>		
-			<a href="<?php echo $d_url ?>" ><?php echo ucwords($an_item->comm_subject); ?><?php echo ($an_item->template_name)?"&nbsp;<span class='small label label-info'>".$an_item->template_name."</span>":"";?></a></div>			
+			<a href="<?php echo $d_url ?>" ><?php echo (!empty($an_item->comm_subject))?ucwords($an_item->comm_subject):"Click to Edit"; ?></a>
+			<?php echo ($an_item->template_name)?"&nbsp;<span class='small label label-info'>".$an_item->template_name."</span>":"";?>
+			</div>			
 			
 			<?php if($an_item->comm_type == "sms") {?>
 				<img src="<?php echo CLUBREG_ASSETS; ?>/images/sms-blue-24.png" hspace=10 width="24"/>
@@ -66,9 +73,15 @@ class ClubRegRenderTablesCommsHelper extends ClubRegRenderTablesHelper
 					$t_string  = strip_tags(trim($an_item->comm_message));
 					echo ucfirst(strtok($t_string,"\n"));
 					echo "<br />";
-					echo strtok("\n")."<a href='javascript:void(0);' class='pull-right comm_msg_more' title='Show Full Message'><img src=\"".CLUBREG_ASSETS."/images/down.png\"/></a>";					
+					echo strtok("\n")."<a href='javascript:void(0);' class='pull-right comm_msg_more comm_img_hidden' title='Show Full Message'><img src=\"".CLUBREG_ASSETS."/images/down.png\"/></a>";				
+					
 				?>
-					<a href='javascript:void(0);' class='pull-right comm_msg_more comm-delete-message' title='Delete message' ><img src="<?php echo CLUBREG_ASSETS; ?>/images/delete-32.png"/></a>
+					<?php if($an_item->comm_status != CLUBREG_COMM_DELETESTATUS){?>
+					<a href='<?php echo $delete_url; ?>' class='pull-right comm-delete-message1 comm_img_hidden modal' title='Delete message' rel="{handler:'ajax', size: {x: 600, y: 300}}" ><img src="<?php echo CLUBREG_ASSETS; ?>/images/delete-32.png"/></a>
+					<?php }else { ?>
+					<a href='<?php echo $reset_url; ?>' class='pull-right comm_img_hidden comm-reset-msg' title='reset message status'  ><img src="<?php echo CLUBREG_ASSETS; ?>/images/check-32.png"/></a>
+					<?php } ?>
+					
 				<div class="clearfix"></div>
 			</div>
 			<div><b><?php echo $this->headings["added_groups"]["label"]; ?> :&nbsp;</b><?php if(!empty($an_item->added_groups)){ $all_groups = explode(":", $an_item->added_groups); 
@@ -78,7 +91,7 @@ class ClubRegRenderTablesCommsHelper extends ClubRegRenderTablesHelper
 			}?></div>
 			<div style="padding:5px;" class="comm_msg">				
 				<?php echo trim($an_item->comm_message); ?>	
-				<div><a href='javascript:void(0);' class='comm_msg_more pull-right' title='Hide Message'><img src="<?php echo CLUBREG_ASSETS?>/images/up.png"/></a></div>			
+				<div><a href='javascript:void(0);' class='comm_msg_more pull-right comm_img_hidden' title='Hide Message'><img src="<?php echo CLUBREG_ASSETS?>/images/up.png"/></a></div>			
 				<div class="clearfix"></div>
 			</div>
 			
