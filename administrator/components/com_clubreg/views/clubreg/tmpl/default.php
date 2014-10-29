@@ -46,7 +46,21 @@ line-height:24px;
 			<div class="row-fluid">The Team Leader and Team members are  made up of registered users of the joomla installation. These users have to be linked to this component for them to manage players within Clubreg</div>
 			<div class="row-fluid">ClubReg uses a configurable list of form controls, to collect and render the details about <strong>Coaches , Assistants and Club Officials</strong>. These details can be updated by either the site administrator or the Club officials themselves</div>		
 			<div class="row-fluid">ClubReg allows the club to take expression of interest from the public regarding joining the various groups or divisions within the club. These EOIs can then be converted into registered members or discarded.</div>
-			<div class="row-fluid"><h3 class="alert alert-info">This Update. 3.0.12.</h3>
+			<div class="row-fluid"><h3 class="alert alert-info">This Update. 3.0.13</h3>
+				<ol>
+					<li>Add a communication manager, which allows club officials to send communication {emails and sms} to club members.<br />
+						<p>To use the sms function , you must signup to a bulk sms provider in your country, which supports the use of email to sms.<br />
+						In most cases they would ask you to simply append a suffix to the the phone number.						
+						</p>
+						<p>So for example if you are in australia and you registered with a company called <a href="www.messagemedia.com.au" target="_blank">messagemedia.com.au</a>
+							They would require that all sms to be sent have "@messagemedia.com.au" appended to them.
+						</p>
+						<p>Also the phone numbers have to be a valid phone number</p>
+					</li>
+					<li>Minor styling changes</li>
+				<ol>			
+			</div>			
+			<div class="row-fluid"><h3 class="alert alert-info">Update. 3.0.12.</h3>
 				<ol>
 					<li>Add option to render eoi using tables as well as using bootstrap divs, because some joomla templates do not include bootstrap. This option can now be set on a per menu basis.</li>
 				<ol>
