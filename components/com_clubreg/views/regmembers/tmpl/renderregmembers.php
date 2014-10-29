@@ -40,10 +40,14 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 			if(document.adminForm.limitstart){
 				document.adminForm.limitstart.value='0';
 			}
-			if(pressbutton == "regmembers.register"){
+			if(pressbutton == "regmembers.batchUpdate"){
 				document.adminForm.task.value= pressbutton;
 			}
 			if(pressbutton == "regmembers.delete"){
+				document.adminForm.task.value= pressbutton;
+			}
+
+			if(pressbutton == "regmembers.resetMemberKey"){
 				document.adminForm.task.value= pressbutton;
 			}
 
