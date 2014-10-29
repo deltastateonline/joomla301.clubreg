@@ -23,31 +23,31 @@ class ClubRegFiltersHelper extends JObject
 	
 		$db	= JFactory::getDBO();		
 	
-		$filter_heading["surname"] = array("label"=>JText::_('COM_CLUBREG_SURNAME_LABEL'),"control"=>"text","other"=>"class='inputbox input-medium'");
+		$filter_heading["surname"] = array("label"=>JText::_('COM_CLUBREG_SURNAME_LABEL'),"control"=>"text","other"=>"class='inputbox input-large'");
 		$filter_heading["address"] = array("label"=>JText::_('COM_CLUBREG_ADDRESS'),"control"=>"text","other"=>"class='inputbox input-large'");
-		$filter_heading["suburb"] = array("label"=>JText::_('COM_CLUBREG_SUBURB'),"control"=>"text","other"=>"class='inputbox input-small'");
-		$filter_heading["postcode"] = array("label"=>JText::_('COM_CLUBREG_POSTCODE'),"control"=>"text","other"=>"class='inputbox input-mini'");
+		$filter_heading["suburb"] = array("label"=>JText::_('COM_CLUBREG_SUBURB'),"control"=>"text","other"=>"class='inputbox input-large'");
+		$filter_heading["postcode"] = array("label"=>JText::_('COM_CLUBREG_POSTCODE'),"control"=>"text","other"=>"class='inputbox input-large'");
 	
 		//guardian details
-		$filter_heading["gaddress"] = array("label"=>JText::_('COM_CLUBREG_ADDRESS'),"control"=>"text","other"=>"class='inputbox input-medium'","filter_col"=>"d.`address`");
+		$filter_heading["gaddress"] = array("label"=>JText::_('COM_CLUBREG_ADDRESS'),"control"=>"text","other"=>"class='inputbox input-large'","filter_col"=>"d.`address`");
 		$filter_heading["gsuburb"] = array("label"=>JText::_('COM_CLUBREG_SUBURB'),"control"=>"text","other"=>"class='inputbox input-small'","filter_col"=>"d.`suburb`");
 		$filter_heading["gpostcode"] = array("label"=>JText::_('COM_CLUBREG_POSTCODE'),"control"=>"text","other"=>"class='inputbox input-mini'","filter_col"=>"d.`postcode`");
 	
-		$filter_heading["emailaddress"] = array("label"=>JText::_('JGLOBAL_EMAIL'),"control"=>"text","other"=>"class='inputbox input-medium'");
-		$filter_heading["memberlevel"] = array("label"=>PLAYER." Level","control"=>"select.genericlist","other"=>"class='inputbox input-medium'");
+		$filter_heading["emailaddress"] = array("label"=>JText::_('JGLOBAL_EMAIL'),"control"=>"text","other"=>"class='inputbox input-large'");
+		$filter_heading["memberlevel"] = array("label"=>PLAYER." Level","control"=>"select.genericlist","other"=>"class='inputbox input-large'");
 	
-		$filter_heading["playertype"] = array("label"=>JText::_('COM_CLUBREG_PT'),"control"=>"select.genericlist","other"=>"class='inputbox input-medium'");
+		$filter_heading["playertype"] = array("label"=>JText::_('COM_CLUBREG_PT'),"control"=>"select.genericlist","other"=>"class='inputbox input-large'");
 			
-		$filter_heading["group"] = array("label"=>JText::_('COM_CLUBREG_GROUPN_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-medium'");
+		$filter_heading["group"] = array("label"=>JText::_('COM_CLUBREG_GROUPN_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-large'");
 	
-		$filter_heading["subgroup"] = array("label"=>JText::_('COM_CLUBREG_SUBGROUPN_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-medium'");
+		$filter_heading["subgroup"] = array("label"=>JText::_('COM_CLUBREG_SUBGROUPN_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-large'");
 	
-		$filter_heading["gender"] = array("label"=>JText::_('COM_CLUBREG_GENDER_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-medium'");
+		$filter_heading["gender"] = array("label"=>JText::_('COM_CLUBREG_GENDER_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-large'");
 			
-		$filter_heading["member_status"] = array("label"=>JText::_('COM_CLUBREG_MEMBERSTATUS_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-medium'");
+		$filter_heading["member_status"] = array("label"=>JText::_('COM_CLUBREG_MEMBERSTATUS_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-large'");
 				
-		$filter_heading["f_created_date"] = $filter_heading["t_created_date"] = array("label"=>JText::_('COM_CLUBREG_CREATED_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-medium'");
-		$filter_heading["year_registered"] = array("label"=>JText::_('COM_CLUBREG_SEASON_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-small'");
+		$filter_heading["f_created_date"] = $filter_heading["t_created_date"] = array("label"=>JText::_('COM_CLUBREG_CREATED_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-large'");
+		$filter_heading["year_registered"] = array("label"=>JText::_('COM_CLUBREG_SEASON_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-large'");
 	
 		$query = sprintf("select -1 as value, '-".JText::_('COM_CLUBREG_SKILLLEVEL_LABEL')." -' as text union  select  `config_short` as value,`config_name` as text
 				from %s as a where which_config = '%s' and published = 1  order by text asc ",
