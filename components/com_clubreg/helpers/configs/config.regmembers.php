@@ -36,8 +36,8 @@ class ClubRegRegmembersConfig extends JObject
 			$headings["member_status"] = array("label"=>JText::_('COM_CLUBREG_MEMBERSTATUS_LABEL'),'transform'=>"ucfirst");
 			$filterConfig["headings"] = $headings;
 			
-			$filterConfig["filters"]["t_created_date"] = array("filter_col"=>"a.`created`","control"=>"date.range", "class"=>"span3");
-			$filterConfig["filters"]["member_status"] = array("filter_col"=>"a.`member_status`","control"=>"select.genericlist","def"=>"registered", "class"=>"span3");
+			$filterConfig["filters"]["t_created_date"] = array("filter_col"=>"a.`created`","control"=>"date.range", "class"=>"span4");
+			$filterConfig["filters"]["member_status"] = array("filter_col"=>"a.`member_status`","control"=>"select.genericlist","def"=>"registered", "class"=>"span4");
 			
 			$filterConfig["otherconfigs"]["checkboxes"] = array("senior","junior"); // show checkbox in these player type 
 			$filterConfig["otherconfigs"]["allowedstatus"] = array("registered"); //  show checkbox in this member status
@@ -71,11 +71,13 @@ class ClubRegRegmembersConfig extends JObject
 		$entity_filters["address"] = array("filter_col"=>array("a.`address`", "a.`suburb`","a.`postcode`"), "class"=>$class_);		
 		$entity_filters["emailaddress"] = array("filter_col"=>"a.`emailaddress`", "class"=>$class_, "clearfix"=>true);
 		
-		$class_ = "span3";
+		$class_ = "span4";
 		$entity_filters["gender"] = array("filter_col"=>"a.`gender`","control"=>"select.genericlist", "class"=>$class_);
 		$entity_filters["group"] = array("filter_col"=>"a.`group`","control"=>"select.genericlist", "class"=>$class_);
-		$entity_filters["subgroup"] = array("filter_col"=>"a.`subgroup`","control"=>"select.genericlist", "class"=>$class_);		
-		$entity_filters["year_registered"] = array("filter_col"=>"a.`year_registered`","control"=>"select.genericlist", "class"=>$class_,"clearfix"=>true);			
+		$entity_filters["subgroup"] = array("filter_col"=>"a.`subgroup`","control"=>"select.genericlist", "class"=>$class_, "clearfix"=>true);		
+		
+		$class_ = "span4";
+		$entity_filters["year_registered"] = array("filter_col"=>"a.`year_registered`","control"=>"select.genericlist", "class"=>$class_);			
 		
 		$group_where[] = "a.group_type  = 'senior'";		
 		if($this->allowed_groups){
@@ -101,16 +103,15 @@ class ClubRegRegmembersConfig extends JObject
 	}
 	private function getJunior(&$headings = array()){
 		$entity_filters = $group_where =  array();
-		$class_ = "span3";
+		$class_ = "span4";
 		$entity_filters["surname"] = array("filter_col"=>array("a.`surname`","a.givenname"), "class"=>$class_);
 		$entity_filters["gaddress"] = array("filter_col"=>array("d.`address`", "d.`suburb`","d.`postcode`"), "class"=>$class_ );		
-		$entity_filters["gender"] = array("filter_col"=>"a.`gender`","control"=>"select.genericlist", "class"=>$class_);
-		$entity_filters["year_registered"] = array("filter_col"=>"a.`year_registered`","control"=>"select.genericlist", "class"=>$class_ ,"clearfix"=>true);
-		
-		$class_ = "span3";
+		$entity_filters["gender"] = array("filter_col"=>"a.`gender`","control"=>"select.genericlist", "class"=>$class_ ,"clearfix"=>true);
+			
+		$class_ = "span4";
+		$entity_filters["year_registered"] = array("filter_col"=>"a.`year_registered`","control"=>"select.genericlist", "class"=>$class_ );		
 		$entity_filters["group"] = array("filter_col"=>"a.`group`","control"=>"select.genericlist", "class"=>$class_);	
-		$entity_filters["subgroup"] = array("filter_col"=>"a.`subgroup`","control"=>"select.genericlist", "class"=>$class_);
-					
+		$entity_filters["subgroup"] = array("filter_col"=>"a.`subgroup`","control"=>"select.genericlist", "class"=>$class_ ,"clearfix"=>true);
 		
 		$group_where[] = "a.group_type  = 'junior'";	
 
