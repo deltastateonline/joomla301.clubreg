@@ -318,7 +318,7 @@ class ClubregModelRegmembers extends JModelList
 		return 	$all_data;		
 	}
 	
-	public function getMembersByGroups($group_ids){
+	public function getMembersByGroups($group_ids,$comm_type="email"){
 		
 		$final_recipients = array();
 		
@@ -327,14 +327,17 @@ class ClubregModelRegmembers extends JModelList
 		
 		$group_str = implode(",",$group_ids);
 		
+		$params = JComponentHelper::getParams('com_clubreg');
+		$sms_suffix = $params->get("sms_suffix");
+		
 		$d_var = "a.emailaddress,concat(a.surname,' ',a.givenname) as sending_name,
-		a.parent_id,a.playertype, if(a.parent_id > 0,b.emailaddress ,a.emailaddress) as sending_email";
+		a.parent_id,a.playertype, if(a.parent_id > 0,b.emailaddress ,a.emailaddress) as sending_email,
+		if(a.parent_id > 0,b.phoneno ,a.phoneno) as sending_phone";
 		
 		$query->select($d_var);
 		
 		$query->from($db->quoteName(CLUB_REGISTEREDMEMBERS_TABLE).' AS a');
-		$query->join('LEFT', CLUB_REGISTEREDMEMBERS_TABLE.' AS b ON (a.parent_id = b.member_id)');
-		
+		$query->join('LEFT', CLUB_REGISTEREDMEMBERS_TABLE.' AS b ON (a.parent_id = b.member_id)');		
 		
 		$query->where(sprintf("a.`group` in (%s) or a.`subgroup` in (%s)",$group_str,$group_str));
 		
@@ -346,10 +349,18 @@ class ClubregModelRegmembers extends JModelList
 		
 		if(count($all_recipients) > 0){
 			foreach($all_recipients as $a_member){
-				if(JMailHelper::isEmailAddress($a_member->sending_email)){
-					//$a_member->sending_email = "shellv@deltastateonline.com";
-					$final_recipients["emails"][] = $a_member->sending_email;
-					$final_recipients["names"][] = $a_member->sending_name;
+				
+				if($comm_type == "email"){				
+					if(JMailHelper::isEmailAddress($a_member->sending_email)){						
+						
+						$final_recipients["emails"][] = $a_member->sending_email;
+						$final_recipients["names"][] = $a_member->sending_name;						
+					}
+				}else if($comm_type == "sms"){
+					if(!empty($a_member->sending_phone) && is_numeric($a_member->sending_phone)){
+						$final_recipients["names"][] = $a_member->sending_name;
+						$final_recipients["sms"][] = $a_member->sending_phone.$sms_suffix;
+					}
 				}
 			}
 		}
