@@ -11,9 +11,6 @@
     border-style:solid;
     border-width:1px;
     padding:0px 5px 0px 5px;
-/*    box-shadow: 10px 10px 5px #DDEDED;
-    -webkit-box-shadow: 10px 10px 5px #DDEDED;
-    -moz-box-shadow: 10px 10px 5px #DDEDED;*/
     padding:5px;
     margin:7px 5px 7px 10px;
    background-color:#FEFEFE;
@@ -24,14 +21,15 @@
 .comm_msg_intro{
 	padding:5px;	
 }
-.comm_msg_intro a.comm_msg_more{
+.comm_msg_intro a.comm_img_hidden{
 	visibility:hidden;
 	font-weight:bold;
 }
-.comm_msg_intro:hover a.comm_msg_more{
+.comm_msg_intro:hover a.comm_img_hidden{
 	visibility:visible;
 }
-.comm_msg_more img{
+
+.comm_img_hidden{
 	border-top:solid 0px #EDEDED;
 	border-right:solid 1px #ADADAD;
 	border-bottom:solid 1px #ADADAD;
