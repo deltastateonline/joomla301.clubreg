@@ -109,6 +109,7 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 		$tableFilters = new ClubRegFiltersRegmembersHelper();
 		$tableRender = new ClubRegRenderTablesRegMembersHelper();
 		$tableFilters->renderFilters($this->entity_filters);
+		$tableFilters->render_batch_filters($this->entity_filters);
 		$tableRender->render($this);
 		echo $this->pagination->getListFooter();
 ?>

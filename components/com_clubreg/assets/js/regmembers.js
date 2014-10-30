@@ -31,6 +31,9 @@ window.addEvent('domready', function () {
 	var showFilters =  new Fx.Slide("all_filters");
 	$("all_filters").slide('hide').setStyle('visibility', 'visible');
 	
+	var showFilters1 =  new Fx.Slide("all_batch_filters");
+	$("all_batch_filters").slide('hide').setStyle('visibility', 'visible');
+	
 	$$(".show-filters").addEvent('click',function(event){		
 		showFilters.toggle();	
 		if(this.get('rel') == 0){
@@ -40,6 +43,18 @@ window.addEvent('domready', function () {
 			this.set('rel','0');
 			this.set('html',"Show Filters");	
 		}
+	});
+	
+	$$(".show-batch-filters").addEvent('click',function(event){		
+		showFilters1.toggle();	
+		/*
+		if(this.get('rel') == 0){
+			this.set('rel','1');
+			this.set('html',"Hide Filters");	
+		}else{
+			this.set('rel','0');
+			this.set('html',"Show Filters");	
+		}*/
 	});
 	
 	if($('group')){
@@ -53,6 +68,20 @@ window.addEvent('domready', function () {
 			group_onchange(this,$("subgroup"),-1);
 		});
 	}
+	
+	if($('batch_group')){
+		
+		if($("batch_subgroup").value > 0){
+			var c_sgroup = $("batch_subgroup").value;
+			group_onchange($('batch_group'),$("batch_subgroup"),c_sgroup);				
+		}
+		
+		$('batch_group').addEvent('change', function (){	
+			group_onchange(this,$("batch_subgroup"),-1);
+		});
+	}
+
+
 	
 	if($('playertype')){
 		$('playertype').addEvent('change', function (){	
