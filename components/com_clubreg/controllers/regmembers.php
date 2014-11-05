@@ -19,7 +19,7 @@ class ClubregControllerRegmembers extends JControllerLegacy
 		
 		$this->registerTask('delete', 'delete');
 		$this->registerTask('resetMemberKey', 'resetMemberKey');
-		//$this->registerTask('subedit', 'edit');	
+		$this->registerTask('batchUpdate', 'batchUpdate');	
 	}	
 	
 
@@ -55,6 +55,99 @@ class ClubregControllerRegmembers extends JControllerLegacy
 		}
 		
 		return parent::display();
+	}
+	
+	public function batchUpdate(){
+		
+		
+		
+		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		$app    = JFactory::getApplication();
+		$user		= JFactory::getUser();
+		
+		$reg_ids = $app->input->post->get('cid',array(),'array');
+		$batchProperties = $app->input->post->get('batch',array(),'array');
+		
+		$return_array["msg"] = array();
+		
+		$count = 0;
+		
+		if($user->get('id') > 0 ){
+			$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
+			$current_model->setState('joomla_id',$user->get('id'));
+		
+			if($current_model->getPermissions('manageusers') && LIVE_SITE && count($reg_ids) > 0){
+				
+				$default_value = array("-1","");					
+					
+					foreach($batchProperties as $property_key =>$property_value){
+						
+						if(in_array($property_value, $default_value)){
+							unset($batchProperties[$property_key]);						
+						}
+					}
+					
+					// subgroup is set but group not set unset subgroup
+					if(isset($batchProperties["subgroup"]) && empty($batchProperties["group"])){
+							unset($batchProperties["subgroup"]);
+					}					
+					
+					
+					//need to make sure that the subgroup is valid
+					if(isset($batchProperties["group"])){
+						
+						$sub_groups_array = array();
+						$sub_groups = ClubRegHelper::get_subgroup_by_parent("group_id","group_name",$batchProperties["group"]);
+						
+						foreach($sub_groups as $a_group){							
+							$sub_groups_array[] = $a_group->group_id;							
+						}
+						
+						if(!in_array($batchProperties["subgroup"], $sub_groups_array)){
+							$batchProperties["subgroup"] = "-1";
+						}						
+					}					
+				
+					
+					if(count($batchProperties) > 0){
+						foreach($reg_ids as $member_id){
+							unset($current_model);
+							try {								
+							
+								$current_model = JModelLegacy::getInstance('regmember', 'ClubregModel', array('ignore_request' => false));
+								$current_model->setState('com_clubreg.regmember.member_id',$member_id);
+								
+								$current_model->batchUpdate($batchProperties);
+								
+								$count++;
+							
+							} catch (Exception $e) {								
+								$return_array["msg"][] =  $e->getMessage();
+							}							
+						}
+					}else{
+						JError::raiseWarning( 500, JText::_("COM_CLUBREG_COMM_NOTCOMPLETE_MSG"));
+						$app->enqueueMessage("No properties to be updated", 'warning');
+					}
+				
+				
+			}else{
+				JError::raiseWarning( 500, JText::_("COM_CLUBREG_COMM_NOTCOMPLETE_MSG"));
+			}
+		}else{
+			JError::raiseWarning( 500, JText::_('CLUBREG_NOTAUTH'));
+		}
+		
+		if(count($return_array["msg"]) > 0){			
+			$app->enqueueMessage(implode("<br />",$return_array["msg"]), 'warning');	
+		}
+		
+		if($count > 0){
+			$app->enqueueMessage(JText::_("COM_CLUBREG_DETAILS_UPDATE")." $count Records.", 'info');
+		}
+		
+		return parent::display();
+		
 	}
 	
 	public function resetMemberKey(){
