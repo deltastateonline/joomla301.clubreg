@@ -254,6 +254,16 @@ class ClubRegHelper
 		return $options;
 	}
 	
+	public static function get_subgroup_by_parent($value = "group_id" ,$text= "group_name",$parent_id=0 ){
+	
+		$options = array();	
+		
+		if($parent_id > 0){		
+			$options = self::get_subgroups($value ,$text,$parent_id,0);
+		}
+		return $options;
+	}
+	
 	private static function get_subgroups($value ,$text,$parent_id,$group_leader = 0){
 		
 		$db		= JFactory::getDBO();
