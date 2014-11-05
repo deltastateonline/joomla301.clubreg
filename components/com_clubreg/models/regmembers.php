@@ -108,6 +108,7 @@ class ClubregModelRegmembers extends JModelList
 						implode(",",$allowed_groups),
 						implode(",",$allowed_subgroups));  // Only Eoi Members				
 			}else{
+				if(is_array($allowed_groups) && count($allowed_groups) > 0)
 				$where_[] = sprintf(" a.group in (%s) ",implode(",",$allowed_groups));  // Only Eoi Members
 			}	
 			
@@ -192,6 +193,8 @@ class ClubregModelRegmembers extends JModelList
 		
 		$session = JFactory::getSession();		
 		$session->set("com_clubreg.back_url", $back_url);// save the back url	
+		
+		//write_debug($query->__toString());
 		
 		return $query;
 		
