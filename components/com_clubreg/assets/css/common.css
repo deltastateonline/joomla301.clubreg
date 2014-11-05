@@ -137,3 +137,13 @@ div.fieldSetDiv__{
     margin:7px 5px 7px 10px;
 }
 
+.msg_more{
+	border-top:solid 0px #EDEDED;
+	border-right:solid 1px #ADADAD;
+	border-bottom:solid 1px #ADADAD;
+	margin:0px 2px 0px 2px;
+	width:16px;
+	-moz-border-radius: 5px;
+  	border-radius: 5px;
+}
+

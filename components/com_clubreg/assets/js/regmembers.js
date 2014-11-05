@@ -46,16 +46,14 @@ window.addEvent('domready', function () {
 	});
 	
 	$$(".show-batch-filters").addEvent('click',function(event){		
-		showFilters1.toggle();	
-		/*
-		if(this.get('rel') == 0){
-			this.set('rel','1');
-			this.set('html',"Hide Filters");	
-		}else{
-			this.set('rel','0');
-			this.set('html',"Show Filters");	
-		}*/
+		showFilters1.toggle();		
 	});
+	
+	$$(".hide-batch-filters").addEvent('click',function(event){		
+		showFilters1.toggle();		
+	});
+	
+	
 	
 	if($('group')){
 		
@@ -136,12 +134,7 @@ jQuery(document).ready(function() {
 			
 			event.stopPropagation();
 			event.preventDefault();		
-			
-			//alert("Here now");
-			
-			//document.adminForm.boxchecked.value==0
-		
-			
+				
 			if(document.adminForm.boxchecked.value == 0){
 				alert(selectOneString);		
 				return;
@@ -167,7 +160,6 @@ jQuery(document).ready(function() {
 			
 			Joomla.submitbutton('regmembers.batchUpdate');
 			
-		});	
-	
+		});		
 	
 });

@@ -95,6 +95,8 @@ class ClubRegFiltersRegmembersHelper extends ClubRegFiltersHelper
 					} ?>
 					</div>
 					<button class="btn btn-small btn-primary btn-batch-update" type="button" ><?php echo JText::_('CLUBREG_BATCHUPDATE');?></button>
+					<div class="pull-right"><a href='javascript:void(0);' class='msg_more pull-right hide-batch-filters' title='Hide'><img src="<?php echo CLUBREG_ASSETS?>/images/up.png"/></a></div>
+					<div class="clearfix"></div>
 					</div>
 						
 				</div>
