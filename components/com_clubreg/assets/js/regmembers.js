@@ -128,3 +128,46 @@ window.addEvent('domready', function () {
 	$('reg-filter-selected').set('html',all_selected);
 	
 });
+
+jQuery(document).ready(function() {
+	
+	
+	jQuery(document).on('click',".btn-batch-update",function(event){		
+			
+			event.stopPropagation();
+			event.preventDefault();		
+			
+			//alert("Here now");
+			
+			//document.adminForm.boxchecked.value==0
+		
+			
+			if(document.adminForm.boxchecked.value == 0){
+				alert(selectOneString);		
+				return;
+			}
+			
+			var batchSelects = 0;
+			jQuery('select[id^="batch_"]').each(function(){
+				
+				var s_item = jQuery(this).find("option:selected");				
+				
+				if(jQuery(this).val() == -1){
+					
+				}else{	
+					batchSelects = batchSelects + 1;
+					//all_selected = all_selected +  "<span class='label label-info'>"+s_item.text()+"</span> <span class='divider'>&nbsp;</span>";			
+				}
+			});
+			
+			if(batchSelects == 0){
+				alert("Please a property to be update.");
+				return ;
+			}			
+			
+			Joomla.submitbutton('regmembers.batchUpdate');
+			
+		});	
+	
+	
+});
