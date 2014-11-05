@@ -78,6 +78,7 @@ class ClubRegRegmembersConfig extends JObject
 		
 		$class_ = "span4";
 		$entity_filters["year_registered"] = array("filter_col"=>"a.`year_registered`","control"=>"select.genericlist", "class"=>$class_);			
+		$entity_filters["memberlevel"] = array("filter_col"=>"a.`memberlevel`","control"=>"select.genericlist", "class"=>$class_);
 		
 		$group_where[] = "a.group_type  = 'senior'";		
 		if($this->allowed_groups){
@@ -97,7 +98,8 @@ class ClubRegRegmembersConfig extends JObject
 		$headings["joining_date"] = array("label"=>JText::_('COM_CLUBREG_JOINING_LABEL'), 'transform'=>"clubregdate");
 		$headings["year_registered"] = array("label"=>JText::_('COM_CLUBREG_SEASON_LABEL') , "clearfix"=>true);
 		$headings["gender"] = array("label"=>JText::_('COM_CLUBREG_GENDER_LABEL'),'transform'=>"ucfirst");
-		$headings["send_news"] = array("label"=>JText::_('COM_CLUBREG_SENDNEWS'), "transform"=>"sendnews", "clearfix"=>true); 	
+		$headings["memberlevel"] = array("label"=>JText::_('COM_CLUBREG_SKILLLEVEL_LABEL'),'transform'=>"ucfirst", "clearfix"=>true);
+		$headings["send_news"] = array("label"=>JText::_('COM_CLUBREG_SENDNEWS'), "transform"=>"sendnews"); 	
 		
 		return array("filters"=>$entity_filters, "group_where"=>$group_where);
 	}
@@ -112,6 +114,9 @@ class ClubRegRegmembersConfig extends JObject
 		$entity_filters["year_registered"] = array("filter_col"=>"a.`year_registered`","control"=>"select.genericlist", "class"=>$class_ );		
 		$entity_filters["group"] = array("filter_col"=>"a.`group`","control"=>"select.genericlist", "class"=>$class_);	
 		$entity_filters["subgroup"] = array("filter_col"=>"a.`subgroup`","control"=>"select.genericlist", "class"=>$class_ ,"clearfix"=>true);
+		
+		$class_ = "span4";
+		$entity_filters["memberlevel"] = array("filter_col"=>"a.`memberlevel`","control"=>"select.genericlist", "class"=>$class_);
 		
 		$group_where[] = "a.group_type  = 'junior'";	
 
@@ -131,9 +136,10 @@ class ClubRegRegmembersConfig extends JObject
 		$headings["year_registered"] = array("label"=>JText::_('COM_CLUBREG_SEASON_LABEL'), "clearfix"=>true); // two per line
 		
 		$headings["gender"] = array("label"=>JText::_('COM_CLUBREG_GENDER_LABEL'),'transform'=>"ucfirst");
-		$headings["dob"] = array("label"=>JText::_('COM_CLUBREG_DOB_LABEL'), "clearfix"=>true); // two per line
-		
-		$headings["t_address"] = array("label"=>JText::_('COM_CLUBREG_ADDRESS'), "cols" => array("gaddress", "gsuburb","gpostcode"));		
+		$headings["dob"] = array("label"=>JText::_('COM_CLUBREG_DOB_LABEL'), "clearfix"=>true); // two per line		
+		$headings["t_address"] = array("label"=>JText::_('COM_CLUBREG_ADDRESS'), "cols" => array("gaddress", "gsuburb","gpostcode"), "clearfix"=>true);	
+
+		$headings["memberlevel"] = array("label"=>JText::_('COM_CLUBREG_SKILLLEVEL_LABEL'),'transform'=>array("ucfirst","removeUnderscore"));
 		
 		return array("filters"=>$entity_filters, "group_where"=>$group_where);
 	}
