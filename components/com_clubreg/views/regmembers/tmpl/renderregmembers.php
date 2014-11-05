@@ -21,6 +21,8 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 <script type="text/javascript">
 	var token = '<?php echo JSession::getFormToken() ;?>';
 
+	var selectOneString = "<?php echo JText::_('CLUBREG_PLEASE_SELECT'); ?>";
+
 	Joomla.submitbutton = function(pressbutton)
 	{
 		var form = document.getElementById('adminForm');	
