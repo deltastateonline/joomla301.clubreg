@@ -87,24 +87,8 @@ class ClubregModelProperty extends JModelForm
 			return $validated;			
 		}
 		
-		if(!$isNew){
-			
-			$db = JFactory::getDBO();
-			
-			$old_rec = $this->getTable();
-			$tb_keys = array("property_id"=>$data["property_id"],"property_key"=>$data["property_key"]);
-			$old_rec->load($tb_keys);
-			
-			if($old_rec->property_id == $data["property_id"] && $old_rec->property_key == $data["property_key"]){
-				$update_me = TRUE;			
-					
-				$other_details["short_desc"] = "updated property";
-				$other_details["primary_id"] = $data["property_id"];
-				ClubRegAuditHelper::saveData($old_rec, $other_details);				
-			}else{
-				$this->setError(JText::_("COM_CLUBREG_NOUPDATE"));
-			}		
-			
+		if(!$isNew){			
+			$update_me = TRUE;			
 		}
 		
 		

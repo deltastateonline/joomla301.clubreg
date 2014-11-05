@@ -17,5 +17,6 @@ class ClubregTablePaymentfrn extends JTable{
 	public function __construct(&$_db)
 	{
 		parent::__construct(CLUB_PAYMENTS_TABLE, 'payment_id', $_db);		
+		JTableObserverAudit::createObserver($this, array('typeAlias' => 'com_clubreg.payment'));
 	}
 }

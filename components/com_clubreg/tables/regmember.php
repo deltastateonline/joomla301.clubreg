@@ -17,5 +17,6 @@ class ClubregTableRegmember extends JTable{
 	public function __construct(&$_db)
 	{
 		parent::__construct(CLUB_REGISTEREDMEMBERS_TABLE, 'member_id', $_db);		
+		JTableObserverAudit::createObserver($this, array('typeAlias' => 'com_clubreg.{playertype}'));
 	}
 }

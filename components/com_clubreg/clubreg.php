@@ -16,6 +16,7 @@ require_once (JPATH_COMPONENT.DS."helpers/buttons.php");
 require_once (JPATH_COMPONENT.DS."helpers/clubreg.unauth.php");
 require_once (JPATH_COMPONENT.DS."clubregviews.php");
 JTable::addIncludePath(JPATH_COMPONENT.DS.'tables');
+require_once (JPATH_COMPONENT.DS."tables".DS."observer".DS."audit.php");
 
 global $clubreg_Itemid,$overRide;
 

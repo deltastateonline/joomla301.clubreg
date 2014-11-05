@@ -362,14 +362,6 @@ class ClubregModelRegmember extends JModelForm
 	
 		$memberTable->bind($data);
 		
-		if(intval($data["member_id"]) > 0 ){
-			$oldTable = $this->getTable();
-			$oldTable->load($data["member_id"]);
-			$other_details["short_desc"] = "updated ".$oldTable->playertype;
-			$other_details["primary_id"] = $data["member_id"];
-			ClubRegAuditHelper::saveData($oldTable, $other_details);
-		}
-	
 		if(!$memberTable->store()){
 			$this->setError($memberTable->getError());
 			return FALSE;
@@ -389,9 +381,27 @@ class ClubregModelRegmember extends JModelForm
 		if(!$current_table->store()){
 			$this->setError($current_table->getError());
 			return FALSE;
-		}else{
-			
+		}else{			
 			return TRUE;
 		}
+	}
+	
+	public function batchUpdate($propertyArray = array()){
+		
+		$current_table = $this->getTable();
+		$current_table->member_id = $this->getState('com_clubreg.regmember.member_id');
+		
+		foreach($propertyArray as $property => $propertyValue){			
+			$current_table->$property = $propertyValue;			
+		}
+		
+		$stored = $current_table->store();	
+		
+		if(!$stored){			
+			throw new Exception("Error Updating Table ".$current_table->getDbo()->getQuery());			
+		}else{
+			return TRUE;
+		}
+		
 	}
 }

@@ -16,6 +16,8 @@ class ClubregTableProperty extends JTable{
 	
 	public function __construct(&$_db)
 	{
+		
 		parent::__construct(CLUB_PROPERTY_TABLE, 'property_id', $_db);		
+		JTableObserverAudit::createObserver($this, array('typeAlias' => 'com_clubreg.property'));
 	}
 }
