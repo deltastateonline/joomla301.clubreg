@@ -28,7 +28,13 @@ class ClubRegRenderItemHelper extends JObject
 			return  implode($config["sep"],$value);
 		}else {
 			if(isset($config["transform"])){
-				$value = call_user_func($config["transform"],$value);
+				if(is_array($config["transform"])){
+					foreach($config["transform"] as $aFunction){
+						$value = call_user_func($aFunction,$value);
+					}
+				}else{
+					$value = call_user_func($config["transform"],$value);
+				}
 			}
 			return $value;
 		}
@@ -49,4 +55,7 @@ function clubregdate($value){
 		$dates = preg_split("/-/", $value);
 		echo sprintf("%s/%s/%s", $dates[2],$dates[1],$dates[0]);
 	}
+}
+function removeUnderscore($value){	
+	return str_replace(array("_","-") ," ", $value);
 }
