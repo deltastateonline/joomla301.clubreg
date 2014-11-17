@@ -42,4 +42,15 @@ class ClubRegPlayertypeHelper extends JObject
 		return $t_array;
 	
 	}
+	
+	static function batch_generate_List(){
+		$t_array = array();	
+	
+		$t_array['-1'] = JHTML::_('select.option',  '-1',"-".JText::_( 'COM_CLUBREG_PT' )."-" );
+		$t_array['senior'] = JHTML::_('select.option',  'senior', JText::_( 'COM_CLUBREG_PT_SENIOR' ) );
+		
+	
+		return $t_array;
+	
+	}
 }

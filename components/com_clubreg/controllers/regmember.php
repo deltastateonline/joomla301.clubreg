@@ -84,6 +84,7 @@ class ClubregControllerRegmember extends JControllerLegacy
 		}	
 		
 		
+		
 		if($return_array["proceed"]){		
 			$return_array["msg"][] =  JText::_('COM_CLUBREG_DETAILS_UPDATE');
 		}else{

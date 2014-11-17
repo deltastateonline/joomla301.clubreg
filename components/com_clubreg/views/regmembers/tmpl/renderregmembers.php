@@ -22,6 +22,7 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 	var token = '<?php echo JSession::getFormToken() ;?>';
 
 	var selectOneString = "<?php echo JText::_('CLUBREG_PLEASE_SELECT'); ?>";
+	var changedPlayertypeString = "<?php echo JText::_('CLUBREG_CHANGEPLAYERTYPE'); ?>";
 
 	Joomla.submitbutton = function(pressbutton)
 	{
@@ -109,7 +110,7 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 <form action="<?php echo JRoute::_($this->formaction); ?>" method="post" name="adminForm" id="adminForm">
 <?php 
 		$tableFilters = new ClubRegFiltersRegmembersHelper();
-		$tableRender = new ClubRegRenderTablesRegMembersHelper();
+		$tableRender = new ClubRegRenderTablesRegMembersHelper();		
 		$tableFilters->renderFilters($this->entity_filters);
 		$tableFilters->render_batch_filters($this->entity_filters);
 		$tableRender->render($this);

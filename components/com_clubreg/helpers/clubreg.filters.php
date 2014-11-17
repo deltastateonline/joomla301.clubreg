@@ -34,20 +34,20 @@ class ClubRegFiltersHelper extends JObject
 		$filter_heading["gpostcode"] = array("label"=>JText::_('COM_CLUBREG_POSTCODE'),"control"=>"text","other"=>"class='inputbox input-mini'","filter_col"=>"d.`postcode`");
 	
 		$filter_heading["emailaddress"] = array("label"=>JText::_('JGLOBAL_EMAIL'),"control"=>"text","other"=>"class='inputbox input-large'");
-		$filter_heading["memberlevel"] = array("label"=>PLAYER." Level","control"=>"select.genericlist","other"=>"class='inputbox input-large'","batch"=>"yes");
+		$filter_heading["memberlevel"] = array("label"=>PLAYER." Level","control"=>"select.genericlist","other"=>"class='inputbox input-large'");
 	
 		$filter_heading["playertype"] = array("label"=>JText::_('COM_CLUBREG_PT'),"control"=>"select.genericlist","other"=>"class='inputbox input-large'");
 			
-		$filter_heading["group"] = array("label"=>JText::_('COM_CLUBREG_GROUPN_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-large'","batch"=>"yes");
+		$filter_heading["group"] = array("label"=>JText::_('COM_CLUBREG_GROUPN_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-large'");
 	
-		$filter_heading["subgroup"] = array("label"=>JText::_('COM_CLUBREG_SUBGROUPN_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-large'","batch"=>"yes");
+		$filter_heading["subgroup"] = array("label"=>JText::_('COM_CLUBREG_SUBGROUPN_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-large'");
 	
-		$filter_heading["gender"] = array("label"=>JText::_('COM_CLUBREG_GENDER_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-large'","batch"=>"yes");
+		$filter_heading["gender"] = array("label"=>JText::_('COM_CLUBREG_GENDER_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-large'");
 			
 		$filter_heading["member_status"] = array("label"=>JText::_('COM_CLUBREG_MEMBERSTATUS_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-large'");
 				
 		$filter_heading["f_created_date"] = $filter_heading["t_created_date"] = array("label"=>JText::_('COM_CLUBREG_CREATED_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-large'");
-		$filter_heading["year_registered"] = array("label"=>JText::_('COM_CLUBREG_SEASON_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-large'","batch"=>"yes");
+		$filter_heading["year_registered"] = array("label"=>JText::_('COM_CLUBREG_SEASON_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-large'");
 	
 		$query = sprintf("select -1 as value, '-".JText::_('COM_CLUBREG_SKILLLEVEL_LABEL')." -' as text union  select  `config_short` as value,`config_name` as text
 				from %s as a where which_config = '%s' and published = 1  order by text asc ",
@@ -63,11 +63,16 @@ class ClubRegFiltersHelper extends JObject
 			$group_where_[] = $group_where["groups"];
 			
 			$subgroup_where = str_replace("a.group_id", "a.group_parent", $group_where["groups"]); // use the group_id as group_parent
+		}		
+		
+		if(isset($group_where["group_type"])){
+			$group_where_[] = $group_where["group_type"];
 		}
+		
 		$group_where_[] = "published=1";
 		$group_where_[] = "group_parent = 0";
 	
-		$group_where_str = "where ".implode(" and ", $group_where_);
+		$group_where_str = "where ".implode(" and ", $group_where_);		
 	
 		
 		$query = sprintf("select -1 as value, '-".JText::_('COM_CLUBREG_GROUPN_LABEL')."-' as text union  select  `group_id` as value,`group_name` as text
@@ -75,9 +80,7 @@ class ClubRegFiltersHelper extends JObject
 	
 		$db->setQuery( $query );
 		$tmp_list = $db->loadObjectList();
-		$filter_heading["group"]["values"] = $tmp_list;
-		
-		
+		$filter_heading["group"]["values"] = $tmp_list;		
 	
 		unset($tmp_list);
 		unset($group_where_);		
@@ -126,7 +129,7 @@ class ClubRegFiltersHelper extends JObject
 		$filter_heading["f_created_date"]["values"] = $filter_heading["t_created_date"]["values"] = $tmp_list;
 	
 		$filter_heading["year_registered"]["values"] = ClubRegSeasonsHelper::generate_List();
-		$filter_heading["playertype"]["values"] = ClubRegPlayertypeHelper::generate_List();	
+		$filter_heading["playertype"]["values"] = ClubRegPlayertypeHelper::generate_List();			
 			
 		$filter_heading["member_status"]["values"] = $this->getMemberstatus();
 	

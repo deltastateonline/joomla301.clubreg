@@ -51,28 +51,33 @@ class ClubRegFiltersRegmembersHelper extends ClubRegFiltersHelper
 	
 	public function render_batch_filters($filters = array()){
 	
+		//write_debug();
+		
+		$batch_filters = $filters["batch_update"];
+		
 		$request_data = $filters["request_data"];
-		$group_where = $filters["group_where"];
+		$group_where = $batch_filters["group_where"];
+			
+		unset($group_where["groups"]);
 	
-		$group_where["groups"] = NULL;
+		$group_where["group_type"] = $group_where[0];
 		$group_where["subgroups"] = " a.group_id in (-99)";	 // set this value to extreme so that the subgroup is empty.
 	
 		$all_filters = $this->get_filters_headings($request_data, $group_where);
+		
+		$all_filters["playertype"]["values"] = ClubRegPlayertypeHelper::batch_generate_List();;
 		?>
 		<fieldset class="eoi" >
 			<div class="reg-filters"  id="all_batch_filters">
 					<div class="shadowed-div" style="margin-right:10px;">			
 					<div class="row-fluid ">
 						<?php $attr="";
-					foreach($filters["filter_heading"] as $fkey=>$fvalue){ 
-						
-						if (isset($all_filters[$fkey]["batch"]) && $all_filters[$fkey]["batch"] == "yes"){
+					foreach($batch_filters["filters"] as $fkey=>$fvalue){ 					
 						
 							$control_type = $all_filters[$fkey]["control"];  				
 							$ctrl_class = isset($fvalue["class"])?$fvalue["class"]:"";				
 							$nfkey = "batch.".$fkey;  $default =  "";
-							$attr= $all_filters[$fkey]["other"];
-							
+							$attr= $all_filters[$fkey]["other"];							
 							?>				
 							<div class='control-group  <?php echo $ctrl_class; ?>'>
 								<div class="control-label"><strong><?php echo $all_filters[$fkey]["label"]?></strong></div> 
@@ -91,7 +96,7 @@ class ClubRegFiltersRegmembersHelper extends ClubRegFiltersHelper
 							if(isset($fvalue["clearfix"])){?>
 							</div>
 							<div class="row-fluid"><?php }			
-						} 
+						
 					} ?>
 					</div>
 					<button class="btn btn-small btn-primary btn-batch-update" type="button" ><?php echo JText::_('CLUBREG_BATCHUPDATE');?></button>

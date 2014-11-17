@@ -86,28 +86,9 @@ class ClubregControllerRegmembers extends JControllerLegacy
 							unset($batchProperties[$property_key]);						
 						}
 					}
-					
-					// subgroup is set but group not set unset subgroup
-					if(isset($batchProperties["subgroup"]) && empty($batchProperties["group"])){
-							unset($batchProperties["subgroup"]);
-					}					
-					
-					
-					//need to make sure that the subgroup is valid
-					if(isset($batchProperties["group"])){
-						
-						$sub_groups_array = array();
-						$sub_groups = ClubRegHelper::get_subgroup_by_parent("group_id","group_name",$batchProperties["group"]);
-						
-						foreach($sub_groups as $a_group){							
-							$sub_groups_array[] = $a_group->group_id;							
-						}
-						
-						if(!in_array($batchProperties["subgroup"], $sub_groups_array)){
-							$batchProperties["subgroup"] = "-1";
-						}						
-					}					
-				
+					require_once(JPATH_COMPONENT.DS."logic".DS."group.batch.php");					
+					$batch_logic = new GroupBatchUpdate($batchProperties);					
+					$batchProperties = $batch_logic->processBatchProperties();					
 					
 					if(count($batchProperties) > 0){
 						foreach($reg_ids as $member_id){
@@ -132,7 +113,12 @@ class ClubregControllerRegmembers extends JControllerLegacy
 				
 				
 			}else{
-				JError::raiseWarning( 500, JText::_("COM_CLUBREG_COMM_NOTCOMPLETE_MSG"));
+				if(LIVE_SITE){
+					JError::raiseWarning( 500, JText::_("COM_CLUBREG_COMM_NOTCOMPLETE_MSG"));
+				}else{
+					JError::raiseWarning( 500, "Batch Updated Disabled, But it works. Trust Me!!");
+				}
+				
 			}
 		}else{
 			JError::raiseWarning( 500, JText::_('CLUBREG_NOTAUTH'));

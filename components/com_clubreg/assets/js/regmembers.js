@@ -78,6 +78,17 @@ window.addEvent('domready', function () {
 			group_onchange(this,$("batch_subgroup"),-1);
 		});
 	}
+	
+	if($('batch_playertype')){
+		$('batch_playertype').addEvent('change', function (){
+			var playerType = $('batch_playertype').value;
+			if(playerType == -1){
+				playerType = "junior";
+			}
+			group_onload($("batch_group"),-1,playerType);
+			group_onchange($("batch_group"),$("batch_subgroup"),-1);
+		});
+	}
 
 
 	
@@ -156,7 +167,12 @@ jQuery(document).ready(function() {
 			if(batchSelects == 0){
 				alert("Please a property to be update.");
 				return ;
-			}			
+			}
+			
+			if(jQuery("#batch_playertype").val() != -1 && jQuery("#batch_group").val() < 1 ){
+				alert(changedPlayertypeString);
+				return;
+			}
 			
 			Joomla.submitbutton('regmembers.batchUpdate');
 			
