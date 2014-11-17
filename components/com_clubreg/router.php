@@ -114,8 +114,11 @@ function ClubregParseRoute($segments)
 	$count = count($segments);
 	
 	foreach($segments as $a_seg){
-		list($key,$value) = explode(":",$a_seg);
-		$vars[$key]	= $value;
+		$entities  = explode(":",$a_seg);
+		if(count($entities) == 2 ){
+			//list($key,$value) = explode(":",$a_seg);
+			$vars[$entities[0]]	= $entities[1];
+		}
 		
 	}
 	
