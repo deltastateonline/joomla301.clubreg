@@ -40,7 +40,7 @@ class ClubRegRegmembersConfig extends JObject
 			$filterConfig["filters"]["member_status"] = array("filter_col"=>"a.`member_status`","control"=>"select.genericlist","def"=>"registered", "class"=>"span4");
 			
 			$filterConfig["otherconfigs"]["checkboxes"] = array("senior","junior"); // show checkbox in these player type 
-			$filterConfig["otherconfigs"]["allowedstatus"] = array("registered"); //  show checkbox in this member status
+			$filterConfig["otherconfigs"]["allowedstatus"] = array("registered"); //  show checkbox in this member status		
 			
 		}		
 		return $filterConfig;
