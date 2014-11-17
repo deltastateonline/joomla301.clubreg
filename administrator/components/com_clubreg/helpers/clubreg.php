@@ -398,3 +398,4 @@ class ClubRegHelper
 	}
 	
 }
+require_once("clubreg.groups.php");
