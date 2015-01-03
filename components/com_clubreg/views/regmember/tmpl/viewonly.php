@@ -52,6 +52,9 @@ $session = JFactory::getSession();
 $back_url = $session->get("com_clubreg.back_url");// save the back url
 
 $headingConfigs = $this->profileConfigs["headings"];
+
+$hasClubProfile = isset($this->profileConfigs["headings"]['club'])?TRUE:FALSE;
+
 ?>
 <script type="text/javascript">
 	var deleteMessage 	= "<?php echo JText::_("COM_CLUBREG_PROFILE_DELETE_QUESTION")?>";
@@ -97,28 +100,33 @@ $headingConfigs = $this->profileConfigs["headings"];
 		</form>				
 	<div class="clearfix"></div>
 	</div>
-	<?php //echo $this->loadTemplate("pixs"); ?>
+	<?php echo $this->loadTemplate("newprofile"); ?>
 </div> <?php  // row-fluid ?>
-
+<div id='loading-div'></div>
 <div class="clearfix">&nbsp;</div>
-<?php if(count($headingConfigs["tab"]) > 0 ) { ?>
+<?php if(count($headingConfigs["tab"]) > 0 ) { $i=0; ?>
 	<div class="tabbable tabs-<?php echo $this->profile_tabposition; ?>">
 		<ul class="nav nav-tabs">
+			<?php if($hasClubProfile){ $i++; ?>	
 			<li class='active'><a href="#tabProfile" data-toggle="tab"><?php $profile_["fname"] = "profile.png"; $profile_['attr'] = " width='16' hspace='1' border='0'"; ClubRegHelper::writeImage($profile_) ?>Profile</a></li>
-		<?php $i=0; foreach($headingConfigs["tab"] as $akey => $tvalue) { $tvalue["img"]['title'] = $tvalue["label"];  ?>
-			<li <?php echo ($i == 0)?"class='act-ive'":""; ?>><a href="#tab<?php echo ucwords($akey); ?>" data-toggle="tab"><?php isset($tvalue["img"])?ClubRegHelper::writeImage($tvalue["img"]):""?><?php  if($this->profile_icons){ echo $tvalue["label"]; } ?></a></li>
+			<?php } ?>
+		<?php ; foreach($headingConfigs["tab"] as $akey => $tvalue) { $tvalue["img"]['title'] = $tvalue["label"];  ?>
+			<li <?php echo ($i == 0)?"class='active'":""; ?>><a href="#tab<?php echo ucwords($akey); ?>" data-toggle="tab"><?php isset($tvalue["img"])?ClubRegHelper::writeImage($tvalue["img"]):""?><?php  if($this->profile_icons){ echo $tvalue["label"]; } ?></a></li>
 			<?php $i++; } ?>					
 		</ul>
 		
 		<div class="tab-divs">		
 			<div class="tab-content" style="min-height:400px;">
-				<div class="tab-pane active" id="tabProfile">
-					<?php echo $this->loadTemplate('profile'); ?>
-				</div>
+				<?php $i=0;
+					 if($hasClubProfile){ ?>
+						<div class="tab-pane active" id="tabProfile">
+							<?php echo $this->loadTemplate('profile'); ?>
+						</div>
+				<?php $i++;
+					 } ?>
 			
-			
-				<?php $i=0; foreach($headingConfigs["tab"] as $akey => $tvalue){					
-					$active = $i == 0?"act-ive":"";$i++;	?>
+				<?php  foreach($headingConfigs["tab"] as $akey => $tvalue){					
+					$active = $i == 0?"active":"";$i++;	?>
 					<div class="tab-pane <?php echo $active; ?>" id="tab<?php echo ucwords($akey); ?>">
 						<?php echo $this->loadTemplate($akey); ?>
 					</div>
@@ -144,8 +152,9 @@ if(isset($headingConfigs["javascript"]) && count($headingConfigs["javascript"]) 
 		ClubregHelper::writeTabAssets($document,$a_key, $an_asset);
 	}
 }
+/*
 ?>
 <div id='loading-div'></div>
-<?php 
+<?php */
 ClubregHelper::writeTabAssets($document, "iFrameFormRequest",array("js"));
 ClubregHelper::write_footer();
