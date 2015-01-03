@@ -18,16 +18,18 @@ window.addEvent('domready', function () {
 	
 	if($('profile-pix-form')){
 		
+		
 		var iFrame = new iFrameFormRequest('profile-pix-form',{
 			onRequest: function(){
+				
 				 $('loading-div').addClass('loading-small');
 			},
-			onComplete: function(response){	
-				
-				var proceedData = JSON.decode(response);				
+			onComplete: function(response){				
+				var proceedData = JSON.decode(response);
+				console.log(response);
 				if(proceedData["proceed"]){									
 					 s_or_f = 1;
-					 render_msg(proceedData["msg"]);					 
+					 render_msg(proceedData["msg"]);					
 				}else{
 					var msg_text  = "";					
 					if(proceedData["msg"]){ 						
@@ -37,7 +39,7 @@ window.addEvent('domready', function () {
 						render_msg(msg_text);
 					}
 				}			
-			},
+			},			
             onFailure:function(){ profileFailure(this); }
 		});		
 	}	
@@ -58,7 +60,7 @@ function uploadPic(input) {
 				.set("width",width)				
 			};
 			reader.readAsDataURL(input.files[0]);
-			input.form.submit();
+			input.form.submit();			
 		}
 	}else{
 		msg_text = "Please select an image file!!";
