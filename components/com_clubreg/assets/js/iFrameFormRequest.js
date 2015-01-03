@@ -23,10 +23,10 @@ var iFrameFormRequest = new Class({
 
 	Implements: [Options, Events],
 
-	options: { /*
-		onRequest: function(){},
+	options: { 
+		/*onRequest: function(){},
 		onComplete: function(data){},
-		onFailure: function(){}, */
+		onFailure: function(){}, 	*/	
 		eventName: 'submit'
 	},
 
@@ -37,8 +37,8 @@ var iFrameFormRequest = new Class({
 
 		this.form = document.id(form);
 
-		this.formEvent = function(){
-			loading = true;
+		this.formEvent = function(){			
+			loading = true;			
 			this.fireEvent('request');
 		}.bind(this);
 
@@ -49,9 +49,11 @@ var iFrameFormRequest = new Class({
 			},
 			src: 'about:blank',
 			events: {
-				load: function(){
+				load: function(){					
+					var doc = this.iframe.contentWindow.document;			
+					
 					if (loading){
-						var doc = this.iframe.contentWindow.document;
+						var doc = this.iframe.contentWindow.document; 
 						if (doc && doc.location.href != 'about:blank'){
 							this.complete(doc.body.innerHTML);
 						} else {
@@ -59,6 +61,11 @@ var iFrameFormRequest = new Class({
 						}
 						loading = false;
 					}
+					
+					if (doc && doc.location.href != 'about:blank'){
+						this.complete(doc.body.innerHTML);
+					}
+					
 				}.bind(this)
 			}
 		}).inject(document.body);
@@ -66,33 +73,31 @@ var iFrameFormRequest = new Class({
 		this.attach();
 	},
 
-	complete: function(response){
+	complete: function(response){		
 		this.fireEvent('complete', response);
 	},
 
-	send: function(){
+	send: function(){		
 		this.form.submit();
 		this.formEvent();
 	},
 
-	attach: function(){
+	attach: function(){		
 		this.target = this.form.get('target');
-		this.form.set('target', this.frameId)
-			.addEvent(this.options.eventName, this.formEvent);
+		this.form.set('target', this.frameId).addEvent(this.options.eventName, this.formEvent);
 	},
 
 	detach: function(){
 		this.form.set('target', this.target)
 			.removeEvent(this.options.eventName, this.formEvent);
 	},
-
 	toElement: function(){
 		return this.iframe;
 	}
 
 });
 
-Element.implement('iFrameFormRequest', function(options){
+Element.implement('iFrameFormRequest', function(options){	
 	this.store('iFrameFormRequest', new iFrameFormRequest(this, options));
 	return this;
 });
