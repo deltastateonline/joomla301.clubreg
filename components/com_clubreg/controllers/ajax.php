@@ -313,7 +313,7 @@ class ClubregControllerAjax extends JControllerLegacy
 			$file_name = 	time(). JFile::makeSafe($attachment['name']);
 			$final_dest	= $media_path.$file_name;
 			$tmp_src	= $attachment['tmp_name'];
-			$profile_name = "profile.".JFile::getExt($attachment['name']);; 
+			$profile_name = strtolower("profile.".JFile::getExt($attachment['name'])); 
 			
 			// Move uploaded file
 			jimport('joomla.filesystem.file');
@@ -324,8 +324,7 @@ class ClubregControllerAjax extends JControllerLegacy
 				if($data["link_type"] == "profile"){
 					$media_path_th = $media_path.DS.'th';
 					jimport('joomla.filesystem.folder');					
-					JFolder::create($media_path_th);
-					
+					JFolder::create($media_path_th);					
 					
 					jimport('joomla.filesystem.image');
 					$JImage = new JImage($final_dest);
@@ -338,6 +337,10 @@ class ClubregControllerAjax extends JControllerLegacy
 						$return_array["msg"][] =  JText::_('COM_CLUBREG_MSG_CREATE_THUMBNAIL');
 					}
 					
+					$success_string = JText::_('COM_CLUBREG_MSG_UPLOAD_PROFILE');
+					
+				}else{
+					$success_string = JText::_('COM_CLUBREG_MSG_UPLOAD_DOCUMENT');
 				}
 				
 				$current_model = JModelLegacy::getInstance('attachment', 'ClubregModel', array('ignore_request' => true));
@@ -359,7 +362,7 @@ class ClubregControllerAjax extends JControllerLegacy
 				if(!$return_array["proceed"]){
 					$return_array["msg"][] =  $current_model->getError();
 				}else{
-					$return_array["msg"][] =  JText::_('COM_CLUBREG_DETAILS_UPDATE');
+					$return_array["msg"][] =  $success_string;
 				}
 				
 			}
