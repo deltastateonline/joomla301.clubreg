@@ -39,7 +39,7 @@ class ClubregModelAttachments extends JModelList
 		$where_[] = sprintf("  attachment_status != 99 ") ;
 		$where_[] = sprintf("  link_type = '%s' ",$link_type) ;
 		
-		$where_str = implode(" and ", $where_);
+		//$where_str = implode(" and ", $where_);
 		
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);
