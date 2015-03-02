@@ -60,3 +60,9 @@
     padding:3px 1px 1px 6px;
     margin:7px 5px 7px 10px;
 }
+.p-thumbnail div.btn-group {
+  
+	 position: absolute; 
+	 left:0;
+	 bottom:0;
+}

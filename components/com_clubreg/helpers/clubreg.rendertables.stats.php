@@ -61,7 +61,13 @@ class ClubRegRenderDivsStatsHelper extends ClubRegRenderTablesHelper
 				  <div class="thumbnail pull-left" style="margin-left:5px;"><?php echo ($profile_pix)?$profile_pix:$defaultImg; ?></div>			  
 				  	<div class="p-thumbnail pull-left" >
 			  			<a href="javascript:void(0);" onclick="Joomla.sbutton('<?php echo $fkey;?>')"><?php echo ucwords($an_item->surname); ?></a>
-			  		</div>				    
+			  			<br /><span><?php echo $an_item->group; ?>
+			  			<?php if($an_item->subgroup){?>|&nbsp;<span class='small-group recent-subgroup'><?php echo $an_item->subgroup;?></span>&nbsp;<?php } ?>
+			  			<div class="btn-group">	
+			  				<a href="" class="btn btn-mini">Yes</a>
+			  				<a href="" class="btn btn-mini">No</a>
+			  			</div>
+			  		</div>			  				    
 				   <div class="clearfix"></div>		    	
 			    </div>		 	  
 			  <?php $i++; }
