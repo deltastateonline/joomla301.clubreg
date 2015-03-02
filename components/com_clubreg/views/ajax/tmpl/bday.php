@@ -12,19 +12,36 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 global $clubreg_Itemid;
 
+require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.profilethumbs.php';
+
+$params = JComponentHelper::getParams('com_clubreg');
+$folder_path = $params->get("attachment_folder");
+
+$media_params = JComponentHelper::getParams('com_media');
+$full_media_path = $media_params->get('file_path').DS.$folder_path.DS;
+
+$thumbrenderer = new ClubRegProfileThumbsHelper($full_media_path);
+
+$defaultImg = "<img src='".JURI::base().CLUBREG_ASSETS."/images/clublogo32.png' >";
+
 
 if(count($this->birthdays)> 0){ $i=1; ?>
-	<div class="row-striped"><?php 
+	<div class="recent-div"><?php 
 	foreach($this->birthdays as $a_bday){
 		$fkey = $this->uKeyObject->constructKey($a_bday->member_id,$a_bday->member_key);
+		$profile_pix = $thumbrenderer->renderMemberThumb($a_bday->member_id,64);
 		?>
-		<div class="row-fluid">
-			<div class="span1"><?php echo $i++; ?></div>
-			<div class="span4"><a href="javascript:void(0);" onclick="Joomla.sbutton('<?php echo $fkey;?>')" class='activity-bday'><?php echo $a_bday->givenname," ",$a_bday->surname; ?></a></div>
-			<div class="span4"><?php echo $a_bday->bdays ?></div>
+		<div class="pull-left thumbnail-div">
+			<div class="thumbnail">
+				<?php echo ($profile_pix)?$profile_pix:$defaultImg; ?>								
+			</div>
+			<div class="profile-text">
+				<span><a href="javascript:void(0);" onclick="Joomla.sbutton('<?php echo $fkey;?>')"><?php echo ucwords(strtolower($a_bday->givenname." ".$a_bday->surname)) ;?></a></span><br />
+				<small class='text-info'><?php echo $a_bday->bdays; ?></small>					
+			</div>
 		</div>
-	<?php 
-	} ?></div><?php 
+		<?php 
+	} ?><div class="clearfix"></div></div><?php 
 }else{	
 	echo ClubRegUnAuthHelper::noResults(); 
 }
