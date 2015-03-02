@@ -53,6 +53,7 @@ class ClubRegViewregmembers extends JViewLegacy
 			
 			require_once CLUBREG_CONFIGS.'config.regmembers.php';
 			require_once CLUBREG_CONFIGS.'config.batchupdate.php';
+			require_once CLUBREG_CONFIGS.'regmember.display.php';
 			
 			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.filters.regmembers.php';	
 			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.rendertables.regmembers.php';
@@ -90,6 +91,11 @@ class ClubRegViewregmembers extends JViewLegacy
 
 			unset($configObj);
 			
+			
+			$configObj = new ClubRegRegmembersDisplayConfig();			
+			$headingConfigs =  $configObj->getConfig($this->state->get('filter.playertype')); // return headings and filters			
+			unset($configObj);
+			
 			$this->items		= $current_model->getItems();
 			$this->pagination	= $current_model->getPagination();		
 			
@@ -99,13 +105,15 @@ class ClubRegViewregmembers extends JViewLegacy
 			$tmp_filters["headings"] = $regmembersConfigs["headings"];
 			$tmp_filters["otherconfigs"] = $regmembersConfigs["otherconfigs"];
 			
-			$tmp_filters["batch_update"] = $batchConfigs;
-			$this->entity_filters = $tmp_filters;		
+			$tmp_filters["headingsConfig"] = $headingConfigs["headings"];
 			
+			$tmp_filters["batch_update"] = $batchConfigs;
+			$this->entity_filters = $tmp_filters;
 			
 			$this->uKeyObject = new ClubRegUniqueKeysHelper();			
 		
 			unset($tmp_filters);
+			unset($headingConfigs);
 	
 		}
 		$this->pageTitle = $active->title;

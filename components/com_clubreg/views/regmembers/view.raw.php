@@ -47,7 +47,8 @@ class ClubRegViewregmembers extends JViewLegacy
 			
 			require_once CLUBREG_CONFIGS.'config.regmembers.php';
 			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.filters.regmembers.php';			
-			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.exporttable.php';		
+			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.exporttable.php';	
+			require_once CLUBREG_CONFIGS.'regmember.csv.php';
 				
 			$group_type			= $app->input->post->get('playertype');	
 			$all_groups = $current_model->getMyGroups($group_type);
@@ -63,16 +64,22 @@ class ClubRegViewregmembers extends JViewLegacy
 			$regmembersConfigs =  $configObj->getConfig($this->state->get('filter.playertype')); // return headings and filters			
 			$current_model->setMoreStates($regmembersConfigs["filters"],$all_groups); // set more states
 			
-			$this->items		= $current_model->getItems();					
+			$this->items		= $current_model->getItems();		
+
+			unset($configObj);
+			$configObj = new ClubRegRegmembersCsvConfig();
+			$headingConfigs =  $configObj->getConfig($this->state->get('filter.playertype')); // return headings and filters
+			unset($configObj);
+			
+			
 			
 			$tmp_filters["request_data"] = $this->state;
 			$tmp_filters["filter_heading"] = $regmembersConfigs["filters"];	
 			$tmp_filters["group_where"] = $regmembersConfigs["group_where"];
-			$tmp_filters["headings"] = $regmembersConfigs["headings"];
+			$tmp_filters["headings"] = $headingConfigs["headings"];
 			$tmp_filters["otherconfigs"] = $regmembersConfigs["otherconfigs"];
-			$this->entity_filters = $tmp_filters;	
+			$this->entity_filters = $tmp_filters;						
 			
-			unset($configObj);
 			unset($tmp_filters);
 			
 			$basename = "player.export.".time();

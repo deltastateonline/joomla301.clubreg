@@ -109,8 +109,9 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 <?php ClubregHelper::writePageHeader($this->pageTitle); ?> 
 <form action="<?php echo JRoute::_($this->formaction); ?>" method="post" name="adminForm" id="adminForm">
 <?php 
-		$tableFilters = new ClubRegFiltersRegmembersHelper();
-		$tableRender = new ClubRegRenderTablesRegMembersHelper();		
+		$tableFilters = new ClubRegFiltersRegmembersHelper();	
+		$tableRender = new ClubRegRenderDivsRegMembersHelper();
+		
 		$tableFilters->renderFilters($this->entity_filters);
 		$tableFilters->render_batch_filters($this->entity_filters);
 		$tableRender->render($this);
@@ -132,6 +133,7 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 ClubregHelper::write_footer();
 $document = JFactory::getDocument();
 ClubregHelper::writeTabAssets($document, "common",array("css"));
+ClubregHelper::writeTabAssets($document, "filters_logic",array("js"));
 ClubregHelper::writeTabAssets($document, "clubreggroups",array("js"));
 ClubregHelper::writeTabAssets($document, "regmembers",array("css","js"));
 ?>
