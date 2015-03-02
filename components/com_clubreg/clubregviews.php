@@ -15,6 +15,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 class ClubRegViews extends JViewLegacy
 {
+	protected $layout = NULL;
 	
 	function display($tpl = null)
 	{			
@@ -22,9 +23,11 @@ class ClubRegViews extends JViewLegacy
 		$app		= JFactory::getApplication();
 		$user		= JFactory::getUser();
 		
-		$renderer =  sprintf("%s_%s",$this->getLayout(),$this->getName());
+		$this->layout = $this->getLayout();
 		
-		$proceed = FALSE;
+		$renderer =  sprintf("%s_%s",$this->layout,$this->getName());
+		
+		$proceed = FALSE;		
 		
 		if(method_exists($this, $renderer)){			
 			$proceed =  $this->$renderer();			
