@@ -95,6 +95,19 @@
 			size="30"
 			label="COM_CLUBREG_COMMUNICATION_SUFFIX_LABEL"
 			description="COM_CLUBREG_COMMUNICATION_SUFFIX_DESC" class="inputbox input-large" default=""/>
+			
+		<field
+				name="new_members"
+				type="list"
+			class="inputbox input-xlarge"
+			default="members.list"
+			label="COM_CLUBREG_NEWMEMBERS_LABEL"
+			description="COM_CLUBREG_NEWMEMBERS_DESC">
+			<option
+				value="members.list">Member List</option>
+			<option
+				value="members.profile">Member Profile</option>
+		</field>
 
 	</fieldset>
 	<!--
