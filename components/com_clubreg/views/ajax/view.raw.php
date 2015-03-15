@@ -146,6 +146,19 @@ class ClubRegViewAjax extends JViewLegacy
 		
 		$user		= JFactory::getUser();	
 		
+		$params = JComponentHelper::getParams('com_clubreg');
+		$new_members_config = $params->get("new_members");
+		
+		if(isset($new_members_config)){
+			
+			$new_members_config = str_replace("members", "bday", $new_members_config);
+			$this->setLayout($new_members_config);
+		}else{
+			$this->setLayout("bday.list");
+		}
+		
+		
+		
 		if($user->get('id') > 0){
 			
 			$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
@@ -173,6 +186,15 @@ class ClubRegViewAjax extends JViewLegacy
 		$user		= JFactory::getUser();		
 		$app			= JFactory::getApplication();
 		
+		$params = JComponentHelper::getParams('com_clubreg');
+		$new_members_config = $params->get("new_members");
+		
+		if(isset($new_members_config)){
+			$this->setLayout($new_members_config);
+		}else{
+			$this->setLayout("members.list");
+		}
+				
 		$recent_registered_members = array();
 		
 		if($user->get('id') > 0){
