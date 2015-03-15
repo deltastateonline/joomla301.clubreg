@@ -38,16 +38,22 @@ class ClubRegViewstats extends ClubRegViews
 			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
 			
 			$group_type			= $app->input->post->get('playertype');	
+			$subgroup			= (int) $app->input->post->get('subgroup');	
 			if(!isset($group_type)){
 				$params = JComponentHelper::getParams('com_clubreg');
 				$group_type = $params->get("default_playertype");				
 			}
 			$all_groups = $current_model->getMyGroups($group_type);
+			
+			if(is_array($all_groups["sub_groups_ids"]) && $subgroup > 0){
+				$all_groups["sub_groups_ids"][] = $subgroup;
+			}
 	
 			unset($current_model);
 			$current_model = JModelLegacy::getInstance('regmembers', 'ClubregModel', array('ignore_request' => false));
 			
 			$this->formaction = 'index.php?option=com_clubreg&view=stats';
+			$this->formaction_edit = 'index.php?option=com_clubreg&view=regmember&layout=viewonly';
 			
 			$this->state		= $current_model->getState();				
 			

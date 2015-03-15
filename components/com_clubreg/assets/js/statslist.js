@@ -27,3 +27,42 @@ window.addEvent('domready', function () {
 	}
 	
 });
+
+
+var statsRequestConfig = {
+		rUrl: "",	
+		rMethod :"post",
+		rData :{}
+		
+};
+
+jQuery(document).ready(function(){
+	
+        jQuery('div.btn-stats-group').on('click','a.btn-stats-btn',function(){
+        	var cvalue = jQuery(this).data('statsvalue');        
+        	if(cvalue == 1){
+        		jQuery(this).parents('div.btn-group').find('a.btn-mini').removeClass('btn-danger');        		
+        		jQuery(this).toggleClass('btn-success', '' );
+        	}else{
+        		jQuery(this).parents('div.btn-group').find('a.btn-mini').removeClass('btn-success');
+        		jQuery(this).toggleClass('btn-danger', '' );
+        	}
+        	
+        	var member_key = jQuery(this).parents('div.cgroup-div-stats').data('member_key');  
+        	
+        	jQuery('#statsAdminForm #pk').val(member_key);       	
+        	
+        	statsRequestConfig.rData = jQuery('#statsAdminForm').serialize();
+        	
+        	ClubRegObject.loadAjaxRequest(statsRequestConfig);
+   
+        	
+        });
+       
+});
+function statsDateChanged(){
+	
+	 var value = jQuery("#stats_date").val();
+     
+     console.log(value);
+}
