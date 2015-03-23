@@ -44,12 +44,13 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 </script>
 <form action="<?php echo JRoute::_($this->formaction); ?>" method="post" name="adminForm" id="adminForm">
 <?php 
-		$tableFilters = new ClubRegFiltersStatsHelper();	
+		$tableFilters = new ClubRegFiltersStatsHelper();		
+		$tableFilters->set('stats_date',$this->stats_date);
+		
 		$tableRender = new ClubRegRenderDivsStatsHelper();
 		$tableFilters->renderFilters($this->entity_filters);		
 		$tableRender->render($this);		
 		echo $this->pagination->getListFooter();
-		
 ?>
 	<input type="<?php echo $in_type; ?>" name="Itemid" value="<?php echo $clubreg_Itemid; ?>" />	
 	<input type="<?php echo $in_type; ?>" name="option" value="com_clubreg" />
@@ -66,12 +67,14 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 
 <form action="<?php echo JRoute::_($this->formaction); ?>" method="post" name="statsAdminForm" id="statsAdminForm">
 
-	<input type="<?php echo $in_type; ?>" name="Itemid" value="<?php echo $clubreg_Itemid; ?>" />	
-	<input type="<?php echo $in_type; ?>" name="option" value="com_clubreg" />	
+	<input type="<?php echo $in_type; ?>" name="Itemid" id="Itemid"  value="<?php echo $clubreg_Itemid; ?>" />	
+	<input type="<?php echo $in_type; ?>" name="option" id="option" value="com_clubreg" />	
 	<input type="<?php echo $in_type; ?>" name="task" value="stats.savestats" />
-	<input type="<?php echo $in_type; ?>" name="pk" id="pk" value="" />
-	<input type="<?php echo $in_type; ?>" name="stat_value" id="stat_value" value="" />
-	<input type="<?php echo $in_type; ?>" name="stat_date" id="stat_date" value="" />
+	
+	<input type="<?php echo $in_type; ?>" name="statsform[stats_detail]" id="stats_detail" value="stats_attendance" />	
+	<input type="<?php echo $in_type; ?>" name="statsform[pk]" id="pk" value="" />
+	<input type="<?php echo $in_type; ?>" name="statsform[stats_value]" id="stats_value" value="" />
+	<input type="<?php echo $in_type; ?>" name="statsform[stats_date]" id="stats_date" value="<?php echo $this->stats_date; ?>" />
 	<?php echo JHTML::_( 'form.token' ); ?>
 </form>
 <?php 

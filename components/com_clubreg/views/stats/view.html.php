@@ -39,6 +39,18 @@ class ClubRegViewstats extends ClubRegViews
 			
 			$group_type			= $app->input->post->get('playertype');	
 			$subgroup			= (int) $app->input->post->get('subgroup');	
+			
+			$stats_date =  $app->input->post->get('stats_date',NULL,'string');
+			
+			if(!isset($stats_date)){
+				$stats_date = JHtml::date('now','Y-m-d');
+			}else{				
+				$stats_date = str_replace("/", "-", $stats_date); // replace / with a -  so that you can perform a strtotime properly				
+				$stats_date = JHtml::date(strtotime($stats_date),'Y-m-d');
+			}			
+			
+			$this->stats_date = $stats_date;			
+			
 			if(!isset($group_type)){
 				$params = JComponentHelper::getParams('com_clubreg');
 				$group_type = $params->get("default_playertype");				
@@ -74,6 +86,8 @@ class ClubRegViewstats extends ClubRegViews
 			$tmp_filters["group_where"] = $regmembersConfigs["group_where"];
 			$tmp_filters["headings"] = $regmembersConfigs["headings"];
 			$tmp_filters["otherconfigs"] = $regmembersConfigs["otherconfigs"];
+			
+		
 			
 			
 			

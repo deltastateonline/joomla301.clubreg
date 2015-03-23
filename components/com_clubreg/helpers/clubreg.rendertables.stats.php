@@ -36,6 +36,7 @@ class ClubRegRenderDivsStatsHelper extends ClubRegRenderTablesHelper
 		
 		$this->headings =  $viewObject->entity_filters["headingsConfig"];	
 		$this->otherconfigs = $viewObject->entity_filters["otherconfigs"];?>
+		<div class="pull-right" id="stats_loading" style="width:32px;" >&nbsp;</div>
 		<table class="table table-bordered table-striped table-hover table-condensed">
 			<?php $this->renderHead($viewObject);?>
 		</table>
@@ -54,18 +55,18 @@ class ClubRegRenderDivsStatsHelper extends ClubRegRenderTablesHelper
 				  		$t_phone[] = $an_item->mobile;
 				  	}
 				  	$an_item->t_phone = $t_phone ;			  	
-				  	$fkey = $viewObject->uKeyObject->constructKey($an_item->member_id,$an_item->member_key);			 
+				  	$fkey = $viewObject->uKeyObject->constructKey($an_item->member_id,$an_item->member_key);	//data-toggle="buttons-radio"		 
 			  	?>			 
-			    <div class="row cgroup-div-stats" style="margin:7px 5px 7px 10px;">		    
+			    <div class="row cgroup-div-stats" style="margin:7px 5px 7px 10px;" data-member_key='<?php echo $fkey; ?>'>		    
 			      <div class="pull-left"><?php echo $i+1; ?></div>			    
 				  <div class="thumbnail pull-left" style="margin-left:5px;"><?php echo ($profile_pix)?$profile_pix:$defaultImg; ?></div>			  
 				  	<div class="p-thumbnail pull-left" >
 			  			<a href="javascript:void(0);" onclick="Joomla.sbutton('<?php echo $fkey;?>')"><?php echo ucwords($an_item->surname); ?></a>
-			  			<br /><span><?php echo $an_item->group; ?>
+			  			<br /><?php echo $an_item->group; ?>
 			  			<?php if($an_item->subgroup){?>|&nbsp;<span class='small-group recent-subgroup'><?php echo $an_item->subgroup;?></span>&nbsp;<?php } ?>
-			  			<div class="btn-group">	
-			  				<a href="" class="btn btn-mini">Yes</a>
-			  				<a href="" class="btn btn-mini">No</a>
+			  			<div class="btn-group btn-stats-group" >	
+			  				<a href="javascript:void(0);" class="btn btn-mini btn-stats-btn" data-statsvalue='yes'><?php echo JText::_('JYES'); ?></a>
+			  				<a href="javascript:void(0);" class="btn btn-mini btn-stats-btn" data-statsvalue='no'><?php echo JText::_('JNO'); ?></a>
 			  			</div>
 			  		</div>			  				    
 				   <div class="clearfix"></div>		    	

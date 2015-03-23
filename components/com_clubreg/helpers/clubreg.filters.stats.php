@@ -17,12 +17,18 @@ require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.filters.php';
  *
  */
 class ClubRegFiltersStatsHelper extends ClubRegFiltersHelper{
-
-	protected function getButtons(){?>
 	
+	protected  $stats_date = NULL;
+
+	protected function getButtons(){  $attribs = array("class"=>"inputbox input-small","onchange"=>"statsDateChanged();"); ?>	
+			
 		<div class="btn-group pull-right">		
 			<button class="btn btn-small btn-primary" type="button" onclick="return Joomla.submitbutton('filter');"><?php echo JText::_('CLUBREG_FILTER');?></button>
   		</div>
+  		<?php  echo JHtml::calendar($this->stats_date, "stats_date", 'stats_date','%d/%m/%Y',$attribs) ?>
+  		<div class="pull-left" style="margin-left:10px;">
+  			<b>Date : </b>&nbsp;	
+		</div>		
   		<?php 
 	}
 	
@@ -34,6 +40,5 @@ class ClubRegFiltersStatsHelper extends ClubRegFiltersHelper{
 	
 		return $tmp_list;
 	}
-	
 	
 }
