@@ -161,3 +161,41 @@ div.activity-div{
   overflow:hidden;
 }
 
+div.eoi-counts{
+	border-color:#ddd;
+    -moz-border-radius: 5px;
+  	border-radius: 5px;
+    border-style:solid;
+    border-width:1px;     
+    margin:7px 5px 7px 10px;
+    background-color:#1E7FC6;
+    padding:5px;   
+}
+div.eoi-count-head{
+	font-size:1.4em;
+	font-weight:bold;	
+	padding:5px;
+	color:white;
+}
+div.eoi-count-head a{
+	color:white;	
+}
+div.eoi-count-body{
+	font-size:1.9em;
+	text-align:center;
+	padding:15px 0px;
+	font-weight:bold;
+	color:#1E7FC6;
+	background-color:#FEFEFE;
+	border-color:#ddd;
+    -moz-border-radius: 5px;
+  	border-radius: 5px;
+    border-style:solid;
+     border-width:0px;   
+     
+}
+div.eoi-counts-div{
+	margin: 0 auto;
+    width:75%;
+}
+
