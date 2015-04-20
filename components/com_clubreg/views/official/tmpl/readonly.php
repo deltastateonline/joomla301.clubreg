@@ -10,6 +10,11 @@
 -------------------------------------------------------------------------*/
 defined('_JEXEC') or die;
 JHtml::_('behavior.framework');
+jimport('joomla.html.html.bootstrap');
+
+//JHtml::_('formbehavior.chosen', 'select');
+JHTML::_('behavior.calendar');
+JHtml::_('behavior.tooltip');
 
 global $clubreg_Itemid;
 $rel_string = array("Itemid"=>$clubreg_Itemid);
