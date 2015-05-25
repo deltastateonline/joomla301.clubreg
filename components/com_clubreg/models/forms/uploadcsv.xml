@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="csvAttachment"	addfieldpath="/administrator/components/com_clubreg/models/fields">			
+		<field name="attachment" type="file" label="COM_CLUBREG_CSV_UPLOAD" description="COM_CLUBREG_CSV_UPLOAD_DESC"
+			class="inputbox input-xlarge"  required="true" accept=".csv"/>		
+	</fieldset>
+	
+	<fieldset name="hiddenControls"	>
+		<field name="link_type" type="hidden" default="" readonly="true" class="readonly" label="Link Type" description ="Link type"/>	
+	</fieldset>
+	
+</form>
