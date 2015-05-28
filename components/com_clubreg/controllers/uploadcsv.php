@@ -34,57 +34,86 @@ class ClubregControllerUploadcsv extends JControllerLegacy
 		$return_array["proceed"] = $return_array["upload_error"] = FALSE;
 	
 		$app    = JFactory::getApplication();
-		$user		= JFactory::getUser();
+		$user		= JFactory::getUser();		
+		
+		unset($current_model);
+		$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
+		$current_model->setState('joomla_id',$user->get('id'));
+		
+		
 	
-		$data = $this->input->post->get('jform', array(), 'array');
-	
+		$data = $this->input->post->get('jform', array(), 'array');	
 		$file_data =  $this->input->files->get('jform',array(),'array');
 		$attachment = $file_data["attachment"];
 	
-		$return_array["msg"] = array();		
+		$return_array["msg"] = array();
+		
+		$return_array["proceed"] = TRUE;
 	
-		if (!ClubRegMediaHelper::canUpload($attachment, $err))
-		{
-			$return_array["msg"][] = JText::_($err);
-			$return_array["upload_error"] = TRUE;
-		}else{
+		
+		try {
 			
-			$return_array["proceed"] = TRUE;
+			if(!$current_model->getPermissions('manageusers')){				
+				throw new Exception(JText::_('CLUBREG_NOTAUTH'));
+			}			
 			
-			$params = JComponentHelper::getParams('com_clubreg');			
-			$media_params = JComponentHelper::getParams('com_media');		
-			
-			$folder_path = $params->get("attachment_folder");
-			if(!isset($folder_path) || is_null($folder_path)){
-				$return_array["msg"][] = JText::_('COM_CLUBREG_MSG_FOLDERNOT_SET');
-				$return_array["upload_error"] = TRUE;
+			if (!ClubRegMediaHelper::canUpload($attachment, $err))
+			{
+				throw new Exception(JText::_($err));			
+				
 			}else{
-				$media_path = $media_params->get('file_path').DS.$folder_path.DS;
-				$attachment_data["attachment_location"] = $media_path = sprintf("%s%s%s",$media_path,"csv_upload",DS);
-				$media_path = JPATH_ROOT.DS.$media_path;
-				
-				$return_array["attachment_location"] = $media_path;
-			}	
+					
+				$params = JComponentHelper::getParams('com_clubreg');
+				$media_params = JComponentHelper::getParams('com_media');
+					
+				$folder_path = $params->get("attachment_folder");
+				if(!isset($folder_path) || is_null($folder_path)){					
+					throw new Exception(JText::_('COM_CLUBREG_MSG_FOLDERNOT_SET'));				
+				}					
+			}
 			
-		}	
+			
+			$media_path = $media_params->get('file_path').DS.$folder_path.DS;
+			$attachment_data["attachment_location"] = $media_path = sprintf("%s%s%s",$media_path,"csv_upload",DS);
+			$media_path = JPATH_ROOT.DS.$media_path;
+				
+			$return_array["attachment_location"] = $media_path;
+			
+			
+				// Build the appropriate paths
+				$file_name = 	"upload.csv";
+				$final_dest	= $media_path.$file_name;
+				$tmp_src	= $attachment['tmp_name'];
+			
+				// Move uploaded file
+				jimport('joomla.filesystem.file');
+				$return_array["proceed"] = JFile::upload($tmp_src, $final_dest);
+			
+				if($return_array["proceed"]){
+					$success_string = JText::_('COM_CLUBREG_MSG_UPLOAD_DOCUMENT');
+					$return_array["msg"][] =  $success_string;
+			
+					require_once(JPATH_COMPONENT.DS."logic".DS."csvupload.php");
+					$csv_upload = new CsvUpload($final_dest);
+					$return_array["proceed"] = $csv_upload->process();
+			
+					$return_array["data"] = $csv_upload->get_array();
+					$return_array["msg"] =  array_merge($return_array["msg"],$csv_upload->get_message());
+				}else{
+					throw new Exception(JText::sprintf('JLIB_FILESYSTEM_ERROR_UPLOAD',$attachment['name']));					
+				}			
+			
+		} catch (Exception $e) {
+			$return_array["proceed"] = FALSE;
+			$return_array["msg"][] = JText::_($e->getMessage());	
+			
+		}
 		
 		
-		if(!$return_array["upload_error"]){
-			// Build the appropriate paths
-			$file_name = 	"upload.csv";
-			$final_dest	= $media_path.$file_name;
-			$tmp_src	= $attachment['tmp_name'];		
-				
-			// Move uploaded file
-			jimport('joomla.filesystem.file');
-			$return_array["proceed"] = JFile::upload($tmp_src, $final_dest);
-				
-			if($return_array["proceed"]){								
-				$success_string = JText::_('COM_CLUBREG_MSG_UPLOAD_DOCUMENT');		
-				$return_array["msg"][] =  $success_string;	
-			}		
-				
-		}	
+		
+		
+		
+	
 		
 		
 		$uploadCsvView = $this->getView("uploadcsv","html");
@@ -93,6 +122,10 @@ class ClubregControllerUploadcsv extends JControllerLegacy
 		
 		return parent::display();	
 	
+	}
+	
+	public function finishcsv(){
+		
 	}
 	
 	
