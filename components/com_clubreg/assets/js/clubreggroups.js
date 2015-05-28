@@ -18,7 +18,12 @@ function group_onload(group_control,c_selection,group_type){
 	
 }
 
-
+/**
+ * 
+ * @param group_control
+ * @param subgroup_control
+ * @param c_selection
+ */
 
 function group_onchange(group_control,subgroup_control,c_selection){
 	

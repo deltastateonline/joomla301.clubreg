@@ -22,6 +22,7 @@ defined('_JEXEC') or die;
 
 function ClubregBuildRoute(&$query)
 {
+	global $clubreg_Itemid;
 	$segments = array();
 
 	// get a menu item based on Itemid or currently active
@@ -34,6 +35,7 @@ function ClubregBuildRoute(&$query)
 		$menuItem = $menu->getActive();
 	} else {
 		$menuItem = $menu->getItem($query['Itemid']);
+		$clubreg_Itemid = $query['Itemid'];
 	}	
 	
 	

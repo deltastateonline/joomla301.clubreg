@@ -45,6 +45,14 @@ class ClubRegUniqueKeysHelper extends JObject
 		return  sprintf("%s%s-%s",$pk_id,$string_key,strlen($pk_id));		
 	}
 	
+	
+	/**
+	 * 	split key by '-', part1 is the data part 2 is the length of the pk
+	 *  pk_id is from 0 to part2
+	 *  string_key is from part2 to the end
+	 * @param unknown $key_data
+	 */
+	
 	public function deconstructKey(&$key_data){
 	
 		@list($part1,$part2) = preg_split("/-/",  $key_data->full_key); //

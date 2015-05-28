@@ -1,6 +1,5 @@
 window.addEvent('domready', function () {	
 	
-	
 
 	if($('playertype')){
 		$('playertype').addEvent('change', function (){	
@@ -24,10 +23,14 @@ window.addEvent('domready', function () {
 	var all_selected = "";
 	var empty_str = /^\s*$/;
 	
-	var all_filters =  $('adminForm').getElements('input[type=text]');			
+	var all_filters =  $('adminForm').getElements('input[type=text]');	
+	var ignore_these = ["stats_date"];
 	all_filters.each(function(a_filter){		
 			var s_item = a_filter.value;
-			if(s_item && ! empty_str.test(s_item)){
+			
+			if((ignore_these.indexOf(a_filter.name) > -1)){
+				
+			}else if(s_item && ! empty_str.test(s_item)){
 				all_selected = all_selected + "<span class='label label-info '>"+a_filter.value+"</span><span class='divider'>&nbsp;</span>";
 			}
 	});

@@ -83,7 +83,7 @@ class ClubregControllerRegmembers extends JControllerLegacy
 					foreach($batchProperties as $property_key =>$property_value){
 						
 						if(in_array($property_value, $default_value)){
-							unset($batchProperties[$property_key]);						
+							unset($batchProperties[$property_key]);			// remove that option			
 						}
 					}
 					require_once(JPATH_COMPONENT.DS."logic".DS."group.batch.php");					
