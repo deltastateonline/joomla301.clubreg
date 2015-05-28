@@ -120,7 +120,3 @@ function render_msg(msg_text){
 	
 	
 }
-
-
-
-	

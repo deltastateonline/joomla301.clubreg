@@ -83,7 +83,6 @@ class ClubregModelRegmember extends JModelForm
 		$db->setQuery($query);
 		$row = $db->loadAssoc();
 		
-		
 		return $row;		
 	}
 	/**

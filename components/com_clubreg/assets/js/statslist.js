@@ -91,9 +91,9 @@ statsListRequestDef.prototype.useResults  = function(response){
 			
 			if(statsButton != undefined){			
 				if(item == "yes"){				
-					cDiv.find("[data-statsvalue='"+item+"']").addClass('btn-success');				
+					cDiv.find("[data-statsvalue='"+item+"']").addClass('btn-success');	// find the button with a yes
 				}else if(item == "no"){				
-					cDiv.find("[data-statsvalue='"+item+"']").addClass('btn-danger');			
+					cDiv.find("[data-statsvalue='"+item+"']").addClass('btn-danger');	// find the button with a no
 				}			
 			}	
 		});	

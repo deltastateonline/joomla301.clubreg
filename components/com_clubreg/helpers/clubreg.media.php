@@ -18,7 +18,7 @@ class ClubRegMediaHelper extends JObject
 	{
 		// Load the com_media language files, default to the admin file and fall back to site if one isn't found
 		
-		$params = JComponentHelper::getParams('com_media');
+		$params = JComponentHelper::getParams('com_media'); 
 	
 		if (empty($file['name']))
 		{

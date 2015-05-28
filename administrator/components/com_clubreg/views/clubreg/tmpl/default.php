@@ -36,6 +36,7 @@ line-height:24px;
 		# Technical Support:  email - <a mailto="joomla@deltastateonline.com">joomla@deltastateonline.com</a><br />
 		# Demo:  <a href="http://demo3.deltastateonline.com">http://demo3.deltastateonline.com</a><br />
 		# Twitter: <a href="https://twitter.com/ejiroesiri">@ejiroesiri</a><br />
+		# Video tutorials : <a href="http://screencast-o-matic.com/channels/c2XY0kipr" target="_blank">Video tutorials</a>
 		
 		</div>
 		</div>
@@ -46,7 +47,38 @@ line-height:24px;
 			<div class="row-fluid">The Team Leader and Team members are  made up of registered users of the joomla installation. These users have to be linked to this component for them to manage players within Clubreg</div>
 			<div class="row-fluid">ClubReg uses a configurable list of form controls, to collect and render the details about <strong>Coaches , Assistants and Club Officials</strong>. These details can be updated by either the site administrator or the Club officials themselves</div>		
 			<div class="row-fluid">ClubReg allows the club to take expression of interest from the public regarding joining the various groups or divisions within the club. These EOIs can then be converted into registered members or discarded.</div>
-			<div class="row-fluid"><h3 class="alert alert-info">This Update. 3.0.14</h3>
+			<div class="row-fluid"><h3 class="alert alert-info">This Update. 3.0.16 - Attendance Feature</h3>
+				<ol>
+					<li>
+						<p><b><a href="http://app.deltastateonline.com/index.php/2-site-frontpage/30-attendance-feature">Attendance Feature.</a></b> Ditch the use of paper to keep track of who attended training or a game.<p>
+							This feature is simple to use. Select the date, and then select <div class="btn-group">	
+			  				<a class="btn btn-mini btn-stats-btn" href="javascript:void(0);">Yes</a>
+			  				<a class="btn btn-mini btn-stats-btn" href="javascript:void(0);">No</a>
+			  			</div>. Thats is it.
+			  			<div class="clearfix"></div>
+					</li>
+					<li>
+						Add configuration setting which enables the listing of birthdays and most recent registrations with profile pictures, rather than the default listing.
+						<ol>
+							<li><a href="http://app.deltastateonline.com/index.php/2-site-frontpage/29-recent-registrations-2">Recent Registrations with Profile Pixs</a></li>
+							<li><a href="http://app.deltastateonline.com/index.php/2-site-frontpage/20-recent-registrations">Recent Registrations with simple list.</a></li>
+						</ol>
+						<h3>Setup</h3>
+						<ol>
+							<li>Select the System Menu option on the admin menu bar.</li>
+							<li>Select the Club Registions Manager, menu option from the side menu.</li>
+							<li>Make a selection from the Render New Members item.</li>
+							<li>Save then preview in extension.</li>						
+						</ol>
+						
+					</li>
+					<li>Styling change to the manage registered players page.</li>
+					<li>Using more Jquery than mootools</li>
+					
+				<ol>			
+			</div>	
+			
+			<div class="row-fluid"><h3 class="alert alert-info">Update. 3.0.15</h3>
 				<ol>
 					<li><p>Add a <b>Batch Update</b> function, which allows club officials to update multiple properties of more than one club member in a single operation.</p>
 						<p>For example at the end of the year, if the club officials wanted to promote some club members from Under 7 to Unde 8 then the batch update function can be used. See site for demo</p>

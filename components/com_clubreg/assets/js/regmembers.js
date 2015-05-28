@@ -55,7 +55,7 @@ window.addEvent('domready', function () {
 	
 	
 	
-	if($('group')){
+	if($('group')){	
 		
 		if($("subgroup").value > 0){
 			var c_sgroup = $("subgroup").value;

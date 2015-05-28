@@ -26,7 +26,6 @@ window.addEvent('domready', function () {
 			},
 			onComplete: function(response){				
 				var proceedData = JSON.decode(response);
-				console.log(response);
 				if(proceedData["proceed"]){									
 					 s_or_f = 1;
 					 render_msg(proceedData["msg"]);					

@@ -177,8 +177,7 @@ class ClubRegFiltersHelper extends JObject
 			<div style="margin-bottom:4px;">
 				<button class="btn btn-mini btn-primary show-filters" type="button" rel='0'>Show Filters</button>
 				<div id="reg-filter-selected" class="pull-right"></div>	
-			</div>
-			
+			</div>	
 				
 			<div class="reg-filters"  id="all_filters">			
 				<div class="shadowed-div" style="margin-right:10px;">			
