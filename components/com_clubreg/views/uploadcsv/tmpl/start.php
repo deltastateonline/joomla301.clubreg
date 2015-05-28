@@ -19,6 +19,7 @@ $Itemid = $uri->getVar('Itemid');
 $in_type = "hidden";
 ClubregHelper::writePageHeader($this->pageTitle);?>
 <div id='loading-div'></div>
+<?php echo $this->loadTemplate("data"); ?>
 <form action="index.php" method="post" name="attachmentForm" id="attachment-form" class="form-horizontal form-clubreg form-validate" enctype='multipart/form-data' >
 	<?php foreach($this->uploadForm->getFieldset('csvAttachment')  as $field){ ?>
 			<div class="control-group">					
@@ -44,15 +45,16 @@ ClubregHelper::writePageHeader($this->pageTitle);?>
 	<ol>
 		<li><strong>Surname <span class="text-error">(Required)</span></strong></li>
 		<li><strong>Givenname <span class="text-error">(Required)</span></strong></li>
+		<li><strong>Playertype <span class="text-error">(Required)</span></strong><br /><span class="small text-info">(Possible values are [junior|senior]. Any thing else will be ignored.)</span></li>
 		<li>Mobile</li>
 		<li>Address</li>
 		<li>Suburb</li>
 		<li>Postcode</li>
 		<li>Phoneno</li>
 		<li>Emailaddress</li>
-		<li>Gender <span class="small text-info">(Possible values [male|female]. Any thing else will be ignored.)</span></li>
+		<li>Gender <br /><span class="small text-info">(Possible values [male|female]. Any thing else will be ignored.)</span></li>
 		<li>Year_registered</li>
-		<li>Playertype <span class="small text-info">(Possible values are [junior|senior|guardian]. Any thing else will be ignored.)</span></li>		
+				
 	</ol>
 </div>
 <br />
