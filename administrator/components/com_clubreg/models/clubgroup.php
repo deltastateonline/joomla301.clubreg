@@ -33,8 +33,9 @@ class ClubRegModelClubgroup extends JModelAdmin
 	
 	public function getForm($data = array(), $loadData = true)
 	{
-		// Get the form.
-		$form = $this->loadForm('com_clubreg.clubgroup', 'clubgroup', array('control' => 'jform', 'load_data' => $loadData));
+		// Get the form.		
+		$form = $this->loadForm('com_clubreg.clubgroup', 'clubgroup', array('control' => 'jform', 'load_data' => $loadData));		
+		
 		if (empty($form)) {
 			return false;
 		}
@@ -44,6 +45,9 @@ class ClubRegModelClubgroup extends JModelAdmin
 	
 	protected function loadFormData()
 	{
+		
+	
+		
 		$data = JFactory::getApplication()->getUserState('com_clubreg.edit.clubgroup.data', array());
 		
 		if (empty($data)) {
@@ -155,6 +159,7 @@ class ClubRegModelClubgroup extends JModelAdmin
 	
 	}
 	public function getItem($pk = null){
+		
 	
 		if ($result = parent::getItem($pk))
 		{

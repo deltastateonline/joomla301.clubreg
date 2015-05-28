@@ -67,7 +67,7 @@ require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.profilethumbs.php';
 }else{
 	foreach($this->items as $a_player){  $profile_pix = $thumbrenderer->renderMemberThumb($a_player->member_id,TRUE);	
 		$drop_caps = "<span class='introduction'>".substr($a_player->surname,0,1).substr($a_player->givenname,0,1)."</span>";
-		//write_debug($a_player);
+		
 	?>
 	<div class="row cgroup-div" style="margin:7px 5px 7px 10px;">
 		<div class="pull-left cgroup-pix"><?php echo ($profile_pix)?$profile_pix:$drop_caps; ?></div>

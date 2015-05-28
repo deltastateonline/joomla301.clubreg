@@ -530,6 +530,7 @@ class ClubregControllerAjax extends JControllerLegacy
 	
 	}
 	
+	
 	function error_from_model(&$d_model){
 		
 		$errors	= $d_model->getErrors();
