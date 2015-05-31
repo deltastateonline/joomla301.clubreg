@@ -20,7 +20,7 @@ $in_type = "hidden";
 ClubregHelper::writePageHeader($this->pageTitle);?>
 <div id='loading-div'></div>
 <?php echo $this->loadTemplate("data"); ?>
-<form action="index.php" method="post" name="attachmentForm" id="attachment-form" class="form-horizontal form-clubreg form-validate" enctype='multipart/form-data' >
+<form action="index.php" method="post" name="uploadcsvForm" id="uploadcsv-form" class="form-horizontal form-clubreg form-validate" enctype='multipart/form-data' >
 	<?php foreach($this->uploadForm->getFieldset('csvAttachment')  as $field){ ?>
 			<div class="control-group">					
 				<div class="control-label"><?php echo $field->label; ?></div>
@@ -52,6 +52,7 @@ ClubregHelper::writePageHeader($this->pageTitle);?>
 		<li>Postcode</li>
 		<li>Phoneno</li>
 		<li>Emailaddress</li>
+		<li>Memberid</li>		
 		<li>Gender <br /><span class="small text-info">(Possible values [male|female]. Any thing else will be ignored.)</span></li>
 		<li>Year_registered</li>
 				
@@ -59,11 +60,9 @@ ClubregHelper::writePageHeader($this->pageTitle);?>
 </div>
 <br />
 </div>
-<div class="loading1" id="profile-attachments" rel=<?php echo json_encode($rel_string)?>></div>
-
-
 <?php 
 $document = JFactory::getDocument();
-//ClubregHelper::writeTabAssets($document, "uploadcsv",array("js"));
+ClubregHelper::writeTabAssets($document, "common",array("css"));
+ClubregHelper::writeTabAssets($document, "uploadcsv",array("js"));
 //ClubregHelper::writeTabAssets($document, "iFrameFormRequest",array("js"));
 ClubregHelper::write_footer();

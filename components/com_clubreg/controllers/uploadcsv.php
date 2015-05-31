@@ -99,21 +99,17 @@ class ClubregControllerUploadcsv extends JControllerLegacy
 			
 					$return_array["data"] = $csv_upload->get_array();
 					$return_array["msg"] =  array_merge($return_array["msg"],$csv_upload->get_message());
+					$return_array["show_importform"] = TRUE;
 				}else{
 					throw new Exception(JText::sprintf('JLIB_FILESYSTEM_ERROR_UPLOAD',$attachment['name']));					
 				}			
 			
 		} catch (Exception $e) {
-			$return_array["proceed"] = FALSE;
-			$return_array["msg"][] = JText::_($e->getMessage());	
 			
+			$return_array["proceed"] = $return_array["show_importform"] =  FALSE;
+			$return_array["msg"][] = JText::_($e->getMessage());			
 		}
 		
-		
-		
-		
-		
-	
 		
 		
 		$uploadCsvView = $this->getView("uploadcsv","html");
@@ -125,6 +121,61 @@ class ClubregControllerUploadcsv extends JControllerLegacy
 	}
 	
 	public function finishcsv(){
+		
+		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		
+		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
+		require_once(JPATH_COMPONENT.DS."logic".DS."csvupload.php");
+		
+		$app    = JFactory::getApplication();
+		$user		= JFactory::getUser();
+		$return_array = array();
+		
+		unset($current_model);
+		$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
+		$current_model->setState('joomla_id',$user->get('id'));		
+		
+		$params = JComponentHelper::getParams('com_clubreg');
+		$media_params = JComponentHelper::getParams('com_media');
+			
+		$folder_path = $params->get("attachment_folder");
+		
+		$media_path = $media_params->get('file_path').DS.$folder_path.DS;
+		$media_path = sprintf("%s%s%s",$media_path,"csv_upload",DS);
+		$media_path = JPATH_ROOT.DS.$media_path;
+		
+		$file_name = 	"upload.csv";
+		$final_dest	= $media_path.$file_name;
+		
+		$uKeyObject = new ClubRegUniqueKeysHelper(10);
+		
+		$return_array["msg"] = array();		
+		$return_array["proceed"] = TRUE;
+		
+		try{
+			
+			if(!$current_model->getPermissions('manageusers')){
+				throw new Exception(JText::_('CLUBREG_NOTAUTH'));
+			}
+			
+			unset($current_model);
+			$current_model = JModelLegacy::getInstance('uploadcsv', 'ClubregModel', array('ignore_request' => true));
+		
+			$csv_upload = new CsvUpload($final_dest);
+			$return_array["proceed"] = $csv_upload->import($current_model,$uKeyObject);			
+			$return_array["msg"] =  array_merge($return_array["msg"],$csv_upload->get_message());
+			$return_array["show_importform"] =  FALSE;
+			
+		} catch (Exception $e) {
+			$return_array["proceed"] = $return_array["show_importform"] =  FALSE; 
+			$return_array["msg"][] = JText::_($e->getMessage());
+		}
+		
+		$uploadCsvView = $this->getView("uploadcsv","html");
+		$uploadCsvView->setLayout("start");
+		$uploadCsvView->set('return_array', $return_array);	
+		
+		return parent::display();	
 		
 	}
 	

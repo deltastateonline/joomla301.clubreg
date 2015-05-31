@@ -21,6 +21,12 @@ class ClubregModelUploadcsv extends JModelForm
 	
 	//public $uploaded_data = "";
 	
+	// import data to this table;
+	public function getTable($type = 'Regmember', $prefix = 'ClubregTable', $config = array())
+	{
+		return JTable::getInstance($type, $prefix, $config);
+	}
+	
 	public function getForm($data = array(), $loadData = true)
 	{
 		// Get the form.		
@@ -29,11 +35,6 @@ class ClubregModelUploadcsv extends JModelForm
 			return false;
 		}
 		return $form;
-	}
-	
-	public function getTable($type = 'uploadcsv', $prefix = 'ClubregTable', $config = array())
-	{
-		return JTable::getInstance($type, $prefix, $config);
 	}
 	
 	protected function loadFormData()
@@ -49,6 +50,40 @@ class ClubregModelUploadcsv extends JModelForm
 	
 	protected function getItem($pk = null){
 		
+	}
+	
+	/**
+	 *
+	 * @param object $import_obj
+	 * @param array  $imported
+	 */
+	public function importMember($import_obj){
+	
+		$imported = FALSE;
+		$newMember = $this->getTable();
+		$user		= JFactory::getUser();
+	
+		$created_when = date('Y-m-d H:i:s');
+			
+		foreach($newMember as $t_key => $t_value){
+			if($t_key[0] == "_") continue;
+			$newMember->$t_key = $import_obj->$t_key;
+		}
+	
+		$newMember->eoi_id = NULL;
+			
+		$newMember->created_by =  $user->id;
+		$newMember->created = $newMember->approved = $created_when;
+		$newMember->member_status = "registered";
+		
+		$newMember->member_id = null;
+	
+		if($newMember->store()){
+			$imported = $newMember->member_id;
+		}
+		
+		return $imported;
+
 	}
 	
 	
