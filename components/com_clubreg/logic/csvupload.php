@@ -133,7 +133,7 @@ class CsvUpload extends JObject
 					$currentRow["gender"] = "-1";
 				}
 			
-				if(!isset($currentRow["year_registered"])){				
+				if(!isset($currentRow["year_registered"])){
 					$currentRow["year_registered"] = date('Y');
 				}else{
 					$currentRow["year_registered"] = date('Y',strtotime($currentRow["year_registered"]));
@@ -156,8 +156,7 @@ class CsvUpload extends JObject
 						if(isset($found_group->group_type)){
 							$currentRow["playertype"] = $found_group->group_type;
 						}					
-					}
-					
+					}				
 					
 					// try get group by name
 				}else{

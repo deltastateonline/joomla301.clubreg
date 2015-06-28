@@ -158,6 +158,10 @@ class ClubregControllerUploadcsv extends JControllerLegacy
 				throw new Exception(JText::_('CLUBREG_NOTAUTH'));
 			}
 			
+			if(!LIVE_SITE){
+				throw new Exception(JText::_('This feature has been disabled.'));
+			}
+			
 			unset($current_model);
 			$current_model = JModelLegacy::getInstance('uploadcsv', 'ClubregModel', array('ignore_request' => true));
 		

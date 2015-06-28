@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-  <layout title="Start Upload Process">
+  <layout title="COM_CLUBREG_CSV_UPLOAD_LABEL">
     <message>
-      <![CDATA[Start Upload csv]]>
+      <![CDATA[COM_CLUBREG_CSV_UPLOAD_DESC]]>
     </message>
   </layout>	
 </metadata>
