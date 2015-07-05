@@ -20,7 +20,7 @@ $in_type = "hidden";
 ClubregHelper::writePageHeader($this->pageTitle);?>
 <div id='loading-div'></div>
 <?php echo $this->loadTemplate("data"); ?>
-<form action="index.php" method="post" name="uploadcsvForm" id="uploadcsv-form" class="form-horizontal form-clubreg form-validate" enctype='multipart/form-data' >
+<form action="<?php echo JRoute::_($this->formaction); ?>" method="post" name="uploadcsvForm" id="uploadcsv-form" class="form-horizontal form-clubreg form-validate" enctype='multipart/form-data' >
 	<?php foreach($this->uploadForm->getFieldset('csvAttachment')  as $field){ ?>
 			<div class="control-group">					
 				<div class="control-label"><?php echo $field->label; ?></div>
@@ -32,6 +32,7 @@ ClubregHelper::writePageHeader($this->pageTitle);?>
 ?>
 <input type="<?php echo $in_type;?>" name="Itemid" value="<?php echo $Itemid; ?>" />
 <input type="<?php echo $in_type;?>" name="option" value="com_clubreg" />
+<input type="<?php echo $in_type;?>" name="view" value="uploadcsv" />
 <input type="<?php echo $in_type;?>" name="task" value="uploadcsv.startcsv" />
 <input type="<?php echo $in_type;?>" name="layout" value="start" />
 <?php echo JHtml::_('form.token'); ?>

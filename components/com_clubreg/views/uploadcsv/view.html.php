@@ -34,6 +34,9 @@ class ClubRegViewuploadcsv extends ClubRegViews
 			$proceed = TRUE;		
 			
 			unset($currentModel);
+			$this->formaction = 'index.php?option=com_clubreg&view=uploadcsv';
+			
+			
 			$currentModel = JModelLegacy::getInstance('uploadcsv', 'ClubregModel', array('ignore_request' => false));			
 			$currentModel->setState('com_clubreg.uploadcsv.link_type',"members"); // use the note type in the model			
 			$this->uploadForm = $currentModel->getForm();			

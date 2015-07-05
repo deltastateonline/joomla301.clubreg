@@ -19,7 +19,7 @@ if(!empty($return_data)){?>
 	?></div>
 <?php if($return_data["proceed"] && $return_data["show_importform"] ){ ?>
 
-<form action="index.php" method="post" name="uploadcsvFForm" id="uploadcsvf-form" class="form-horizontal form-clubreg form-validate" enctype='multipart/form-data' >
+<form action="<?php echo JRoute::_($this->formaction); ?>" method="post" name="uploadcsvFForm" id="uploadcsvf-form" class="form-horizontal form-clubreg form-validate" enctype='multipart/form-data' >
 <?php
 $uri = JURI::getInstance();
 $Itemid = $uri->getVar('Itemid');
@@ -45,8 +45,9 @@ $in_type = "hidden";
 				  </tr>
 			  <?php } ?>
 			</table>			
-		<input type="<?php echo $in_type;?>" name="Itemid" value="<?php echo $Itemid; ?>" />
+		<input type="<?php echo $in_type;?>" name="Itemid" value="<?php echo $Itemid; ?>" />		
 		<input type="<?php echo $in_type;?>" name="option" value="com_clubreg" />
+		<input type="<?php echo $in_type;?>" name="view" value="uploadcsv" />
 		<input type="<?php echo $in_type;?>" name="task" value="uploadcsv.finishcsv" />
 		<input type="<?php echo $in_type;?>" name="layout" value="start" />
 		<?php echo JHtml::_('form.token'); ?>

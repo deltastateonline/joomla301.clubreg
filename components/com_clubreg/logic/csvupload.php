@@ -45,22 +45,27 @@ class CsvUpload extends JObject
 
 		while(! feof($file)) {
 			$currentRow = fgetcsv($file);
-			$currentRow = array_map("trim", $currentRow);
-		
-			if($idx == 0){
-				$currentRow = array_map("strtolower", $currentRow);
-				$head = $currentRow;
-				
-				if(! $this->validate($head)){					
-					throw new Exception(JText::_('Not enough required headings found on first line of csv file.<br />Min Required Headers include '.ucwords(implode(', ',$this->required))));
-					return FALSE;
+			
+			if(is_array($currentRow)){
+			
+				$currentRow = array_map("trim", $currentRow);
+			
+				if($idx == 0){
+					$currentRow = array_map("strtolower", $currentRow);
+					$head = $currentRow;
+					
+					if(! $this->validate($head)){					
+						throw new Exception(JText::_('Not enough required headings found on first line of csv file.<br />Min Required Headers include '.ucwords(implode(', ',$this->required))));
+						return FALSE;
+					}
+					$idx++;
+					continue;
 				}
+				$currentRow = array_combine($head, $currentRow);		
+				$finalArray[] = $currentRow;		
 				$idx++;
-				continue;
+				
 			}
-			$currentRow = array_combine($head, $currentRow);		
-			$finalArray[] = $currentRow;		
-			$idx++;
 		}
 		
 		$this->messages[] = "Csv file processed and enough headings found.";
@@ -99,81 +104,86 @@ class CsvUpload extends JObject
 	
 		while(! feof($file)) {
 			$currentRow = fgetcsv($file);
-			$currentRow = array_map("trim", $currentRow);
-	
-			if($idx == 0){
-				$currentRow = array_map("strtolower", $currentRow);
-				$head = $currentRow;
-	
-				if(! $this->validate($head)){
-					throw new Exception(JText::_('Not enough required headings found on first line of csv file.<br />Min Required Headers include '.ucwords(implode(', ',$this->required))));
-					return FALSE;
-				}
-				$idx++;
-				continue;
-			}			
-			$currentRow = array_combine($head, $currentRow);
 			
-			if(!empty($currentRow["surname"]) && !empty($currentRow["givenname"]) && !empty($currentRow["playertype"])){
+			if(is_array($currentRow)){
+				
 			
-				if(isset($currentRow["playertype"])){
-					$currentRow["playertype"] = strtolower($currentRow["playertype"]);
-					
-					if(!in_array($currentRow["playertype"], array("junior","senior"))){
-						$currentRow["playertype"] = "senior";
+				$currentRow = array_map("trim", $currentRow);
+		
+				if($idx == 0){
+					$currentRow = array_map("strtolower", $currentRow);
+					$head = $currentRow;
+		
+					if(! $this->validate($head)){
+						throw new Exception(JText::_('Not enough required headings found on first line of csv file.<br />Min Required Headers include '.ucwords(implode(', ',$this->required))));
+						return FALSE;
 					}
-				}
-			
-				if(isset($currentRow["gender"])){
-					$currentRow["gender"] = strtolower($currentRow["gender"]);
-					if(!in_array($currentRow["gender"], array("male","female"))){
+					$idx++;
+					continue;
+				}			
+				$currentRow = array_combine($head, $currentRow);
+				
+				if(!empty($currentRow["surname"]) && !empty($currentRow["givenname"]) && !empty($currentRow["playertype"])){
+				
+					if(isset($currentRow["playertype"])){
+						$currentRow["playertype"] = strtolower($currentRow["playertype"]);
+						
+						if(!in_array($currentRow["playertype"], array("junior","senior"))){
+							$currentRow["playertype"] = "senior";
+						}
+					}
+				
+					if(isset($currentRow["gender"])){
+						$currentRow["gender"] = strtolower($currentRow["gender"]);
+						if(!in_array($currentRow["gender"], array("male","female"))){
+							$currentRow["gender"] = "-1";
+						}
+					}else{
 						$currentRow["gender"] = "-1";
 					}
-				}else{
-					$currentRow["gender"] = "-1";
-				}
-			
-				if(!isset($currentRow["year_registered"])){
-					$currentRow["year_registered"] = date('Y');
-				}else{
-					$currentRow["year_registered"] = date('Y',strtotime($currentRow["year_registered"]));
-				}			
-			
-				if(isset($currentRow["group"])){
-					$currentRow["group"] = strtolower($currentRow["group"]);
-					$found_group = FALSE;
-					if(isset($index_groups["group_name"][$currentRow["group"]])){
-						$found_group = $index_groups["group_name"][$currentRow["group"]];
-					}else if(isset($index_groups["group_short"][$currentRow["group"]])){
-						$found_group = $index_groups["group_short"][$currentRow["group"]];
-					}else if(isset($index_groups["group_id"][$currentRow["group"]])){
-						$found_group = $index_groups["group_id"][$currentRow["group"]];
+				
+					if(!isset($currentRow["year_registered"])){
+						$currentRow["year_registered"] = date('Y');
+					}else{
+						$currentRow["year_registered"] = date('Y',strtotime($currentRow["year_registered"]));
+					}			
+				
+					if(isset($currentRow["group"])){
+						$currentRow["group"] = strtolower($currentRow["group"]);
+						$found_group = FALSE;
+						if(isset($index_groups["group_name"][$currentRow["group"]])){
+							$found_group = $index_groups["group_name"][$currentRow["group"]];
+						}else if(isset($index_groups["group_short"][$currentRow["group"]])){
+							$found_group = $index_groups["group_short"][$currentRow["group"]];
+						}else if(isset($index_groups["group_id"][$currentRow["group"]])){
+							$found_group = $index_groups["group_id"][$currentRow["group"]];
+						}
+						
+						if(!empty($found_group)){
+							$currentRow["group"] = $found_group->group_id;
+		
+							if(isset($found_group->group_type)){
+								$currentRow["playertype"] = $found_group->group_type;
+							}					
+						}				
+						
+						// try get group by name
+					}else{
+						$currentRow["group"] = '-1';
 					}
+				
+					$currentRow = $this->processAKA("phoneno",$currentRow);
+					$currentRow = $this->processAKA("emailaddress",$currentRow);
 					
-					if(!empty($found_group)){
-						$currentRow["group"] = $found_group->group_id;
-	
-						if(isset($found_group->group_type)){
-							$currentRow["playertype"] = $found_group->group_type;
-						}					
-					}				
+					$currentRow["member_key"] =  $uKeyObject->getUniqueKey();			
+				
+					$upload_object = (object)$currentRow;
+					$imported_array[] = $uploadcsv_model->importMember($upload_object);
 					
-					// try get group by name
-				}else{
-					$currentRow["group"] = '-1';
-				}
-			
-				$currentRow = $this->processAKA("phoneno",$currentRow);
-				$currentRow = $this->processAKA("emailaddress",$currentRow);
-				
-				$currentRow["member_key"] =  $uKeyObject->getUniqueKey();			
-			
-				$upload_object = (object)$currentRow;
-				$imported_array[] = $uploadcsv_model->importMember($upload_object);
-				
-				$idx++;
-				
-			} // end empty 
+					$idx++;
+					
+				} // end empty 
+			}
 		}		
 		
 		$this->messages[] = "Csv file Imported.";
