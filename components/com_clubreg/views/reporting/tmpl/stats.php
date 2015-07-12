@@ -44,10 +44,12 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 </script>
 <form action="<?php echo JRoute::_($this->formaction); ?>" method="post" name="adminForm" id="adminForm">
 <?php 
-		$tableFilters = new ClubRegFiltersStatsHelper();		
+		$tableFilters = new ClubRegFiltersStatsReportingHelper();		
 		$tableFilters->set('stats_date',$this->stats_date);
+		$tableFilters->set('end_date',$this->end_date);
 		
-		$tableRender = new ClubRegRenderDivsStatsHelper();
+		$tableRender = new ClubRegRenderTablesStatsReportingHelper($this->stats_date,$this->end_date,$this->stats_reporting );
+		
 		$tableFilters->renderFilters($this->entity_filters);		
 		$tableRender->render($this);		
 		echo $this->pagination->getListFooter();
