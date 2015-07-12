@@ -33,31 +33,6 @@ class ClubregModelReporting extends JModelList
 		$this->setState('limitstart', $app->input->get('limitstart', 0, 'uint'));
 		
 	}
-	public function getUnApproved($which = NULL){
-		
-		if(isset($which) && strlen($which)> 0 ) {			
-			$db = JFactory::getDbo();
-			$d_var = "count(a.member_id) as howmany";
-			
-			$query	= $db->getQuery(true);
-			
-			$query->select($d_var);
-			$query->from($db->quoteName(CLUB_REGISTEREDMEMBERS_TABLE).' AS a');
-			
-			$query->where("a.member_status = 'eoi'");
-			$query->where(sprintf(" a.playertype in (%s) ",$db->quote($which)));
-			
-			$db->setQuery($query);
-			
-			return $db->loadResult();
-			
-			
-		}else{			
-			JError::raiseWarning( 500, "Method not called with the right arguments!!!" );	
-			return 0;
-		}
-		
-	}
 	
 	protected function getListQuery()
 	{
@@ -151,13 +126,12 @@ class ClubregModelReporting extends JModelList
 								$back_url[$skey] = $filter_value;
 								$filter_value = sprintf('%%%s%%',$filter_value); $quoute_value = $db->quote($filter_value);
 								if(is_array($a_col['filter_col'])){										
-									$where_[] = "(". implode(sprintf(" like %s or ",$quoute_value ),$a_col['filter_col']). " like ".$quoute_value.")"; // multiple items to be searched
+									$where_[] = "(". implode(sprintf(" like %s or ",$quoute_value ),$a_col['filter_col']). " like ".$quoute_value.")"; // multiple items to be searched									
 								}else{								
 									$where_[] = sprintf(" %s like %s ",$a_col['filter_col'],$quoute_value );  // simple like clause
 								}
 								
-							}	
-															
+							}															
 					break;
 				}
 				
@@ -177,9 +151,7 @@ class ClubregModelReporting extends JModelList
 		$query->group('a.member_id');		
 		
 		$session = JFactory::getSession();		
-		$session->set("com_clubreg.back_url", $back_url);// save the back url	
-		
-		//write_debug($query->__toString());
+		$session->set("com_clubreg.back_url", $back_url);// save the back url		
 		
 		return $query;
 		
@@ -272,6 +244,48 @@ class ClubregModelReporting extends JModelList
 		return $this->_pagination;
 	}
 	
+	public function getStatsReporting($filteredResults){
+		
+		$db		= $this->getDbo();
+		$query	= $db->getQuery(true);
+			
+		$where_ = array();
+		
+		//$where_[] = sprintf("(a.surname like %s or a.givenname like %s) ", $db->quote($search_value),$db->quote($search_value));
+		$where_[] = sprintf("a.stats_detail = 'stats_attendance' ");  // Only Eoi Members
+		
+		$all_string[] = "a.*";
+		
+		$d_var =implode(",", $all_string);
+		
+		$member_ids = array();
+		foreach($filteredResults as $aResult){				
+			$member_ids[] = $aResult->member_id;	
+		}
+		
+		$where_[]  = "a.member_id in (".implode(",", $member_ids).")";
+		
+		$query->select($d_var);
+		$query->from($db->quoteName(CLUB_STATS_TABLE).' AS a');
+		
+		foreach($where_ as $a_where){			
+			$query->where($a_where);
+		}
+		try {	
+		
+			$db->setQuery($query);
+			$tmp_data = $db->loadObjectList();
+			foreach($tmp_data as $a_stats){
+				$all_data[$a_stats->member_id][$a_stats->stats_date] = $a_stats->stats_value;
+			}
+		} catch (Exception $e) {			
+			$all_data = array();
+		}
+		
+		return $all_data;
+		
+	}
+	
 	public function getGuardians(){
 		
 		$db		= $this->getDbo();
@@ -308,59 +322,6 @@ class ClubregModelReporting extends JModelList
 		$db->setQuery($query, 0,20);
 		$all_data = $db->loadObjectList();	
 		return 	$all_data;		
-	}
-	
-	public function getMembersByGroups($group_ids,$comm_type="email"){
-		
-		$final_recipients = array();
-		
-		$db		= $this->getDbo();
-		$query	= $db->getQuery(true);
-		
-		$group_str = implode(",",$group_ids);
-		
-		$params = JComponentHelper::getParams('com_clubreg');
-		$sms_suffix = $params->get("sms_suffix");
-		
-		$d_var = "a.emailaddress,concat(a.surname,' ',a.givenname) as sending_name,
-		a.parent_id,a.playertype, if(a.parent_id > 0,b.emailaddress ,a.emailaddress) as sending_email,
-		if(a.parent_id > 0,b.phoneno ,a.phoneno) as sending_phone";
-		
-		$query->select($d_var);
-		
-		$query->from($db->quoteName(CLUB_REGISTEREDMEMBERS_TABLE).' AS a');
-		$query->join('LEFT', CLUB_REGISTEREDMEMBERS_TABLE.' AS b ON (a.parent_id = b.member_id)');		
-		
-		$query->where(sprintf("a.`group` in (%s) or a.`subgroup` in (%s)",$group_str,$group_str));
-		
-		
-		$query->order($db->escape('a.emailaddress ASC '));
-		
-		$db->setQuery($query);
-		$all_recipients = $db->loadObjectList();		
-		
-		if(count($all_recipients) > 0){
-			foreach($all_recipients as $a_member){
-				
-				if($comm_type == "email"){				
-					if(JMailHelper::isEmailAddress($a_member->sending_email)){						
-						
-						$final_recipients["emails"][] = $a_member->sending_email;
-						$final_recipients["names"][] = $a_member->sending_name;						
-					}
-				}else if($comm_type == "sms"){
-					if(!empty($a_member->sending_phone) && is_numeric($a_member->sending_phone)){
-						$final_recipients["names"][] = $a_member->sending_name;
-						$final_recipients["sms"][] = $a_member->sending_phone.$sms_suffix;
-					}
-				}
-			}
-		}
-		unset($all_recipients);
-		
-		return $final_recipients;		
-		
-	}
-	
+	}	
 	
 }

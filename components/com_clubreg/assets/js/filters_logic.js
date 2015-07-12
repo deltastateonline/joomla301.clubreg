@@ -24,7 +24,7 @@ window.addEvent('domready', function () {
 	var empty_str = /^\s*$/;
 	
 	var all_filters =  $('adminForm').getElements('input[type=text]');	
-	var ignore_these = ["stats_date"];
+	var ignore_these = ["stats_date","end_date"];
 	all_filters.each(function(a_filter){		
 			var s_item = a_filter.value;
 			

@@ -66,3 +66,42 @@
 	 left:0;
 	 bottom:0;
 }
+#reporting-stats th.rotate {
+
+	height:100px;
+	font-size:0.9em;
+	vertical-align:bottom;
+	font-weight:bold;
+
+}
+
+#reporting-stats th.rotate >div {
+	white-space:nowrap;
+	width:20px;
+
+	/* Safari */
+	-webkit-transform: rotate(-90deg);
+	
+	/* Firefox */
+	-moz-transform: rotate(-90deg);
+	
+	/* IE */
+	-ms-transform: rotate(-90deg);
+	
+	/* Opera */
+	-o-transform: rotate(-90deg);
+	
+	/* Internet Explorer */
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+
+}
+
+#reporting-stats small{
+	font-size:0.8em;
+	font-weight:bold;
+}
+#reporting-stats td.stats{
+	font-size:0.9em;
+	text-align:center;
+	vertical-align:middle;
+}
