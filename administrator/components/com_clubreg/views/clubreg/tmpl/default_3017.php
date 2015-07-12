@@ -1,4 +1,4 @@
-<?php echo JHtml::_('bootstrap.addSlide', 'slide-updates', JText::_('This Update. 3.0.17 - Upload CSV'), 'version-3017'); ?>
+<?php echo JHtml::_('bootstrap.addSlide', 'slide-updates', JText::_('Update. 3.0.17 - Upload CSV'), 'version-3017'); ?>
 This feature allows the site administrator to upload a csv file containing player details. These details are imported and used to create new players. 
 <h4>You can upload a csv with the following headings.</h4>
 	<ol>
