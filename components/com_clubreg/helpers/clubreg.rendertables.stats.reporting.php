@@ -90,7 +90,7 @@ class ClubRegRenderTablesStatsReportingHelper extends ClubRegRenderTablesHelper
 			    <tr data-member_key='<?php echo $fkey; ?>'>	    
 			      	<td><?php echo $id+1; ?></td>			    
 				  	<td><div class="thumbnail"><?php echo ($profile_pix)?$profile_pix:$defaultImg; ?></div></td>			  
-				  	<td><a href="javascript:void(0);" onclick="Joomla.sbutton('<?php echo $fkey;?>')"><?php echo ucwords($an_item->surname); ?></a>
+				  	<td><a href="javascript:void(0);" onclick="Joomla.sbutton('<?php echo $fkey;?>')" ><?php echo ucwords($an_item->surname); ?></a>
 				  		<br /><small><?php echo $an_item->group; ?><br /><?php if($an_item->subgroup){ echo "|".$an_item->subgroup; } ?></small>
 				  	</td>			  		
 			  		<?php foreach($date_array as $aDate){ ?>

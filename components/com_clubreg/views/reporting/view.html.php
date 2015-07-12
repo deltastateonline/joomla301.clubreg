@@ -149,8 +149,8 @@ class ClubRegViewreporting extends ClubRegViews
 				$end_date = JHtml::date(strtotime($end_date),'Y-m-d');
 			}			
 	
-			if($end_date < $stats_date ){
-				
+			if($end_date < $stats_date ){				
+				$app->enqueueMessage("Start Date Must be less than the end date!", 'warning');
 			}
 			
 			$this->stats_date = $stats_date;
@@ -170,7 +170,7 @@ class ClubRegViewreporting extends ClubRegViews
 			$current_model = JModelLegacy::getInstance('reporting', 'ClubregModel', array('ignore_request' => false));
 	
 			$this->formaction = 'index.php?option=com_clubreg&view=reporting';
-			//$this->formaction_edit = 'index.php?option=com_clubreg&view=reporting&layout=payments';
+			$this->formaction_edit = 'index.php?option=com_clubreg&view=regmember&layout=viewonly';
 	
 			$this->state		= $current_model->getState();
 	
@@ -196,14 +196,11 @@ class ClubRegViewreporting extends ClubRegViews
 	
 			$this->entity_filters = $tmp_filters;
 	
-			$this->uKeyObject = new ClubRegUniqueKeysHelper();
-				
-			unset($tmp_filters);
-	
-				
+			$this->uKeyObject = new ClubRegUniqueKeysHelper();				
+			unset($tmp_filters);				
 		}
 	
-	
+		$this->pageTitle = $active->title;
 	
 		return $proceed;
 	}
