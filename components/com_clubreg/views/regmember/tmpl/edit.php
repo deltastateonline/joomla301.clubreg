@@ -32,7 +32,7 @@ if($this->tmpl == "html"){
 $playertype = $this->regmemberForm->getField("playertype")->value;
 $session = JFactory::getSession();
 $back_url = $session->get("com_clubreg.back_url");// save the back url
-
+/*
 ?>
 <style>
 <!--
@@ -59,7 +59,7 @@ select{
 
 
 -->
-</style>
+</style>*/?>
 <script type="text/javascript">
 	var token = '<?php echo JSession::getFormToken() ;?>';	
 </script>
@@ -71,7 +71,8 @@ select{
 			<?php			
 				$fieldSets = $this->regmemberForm->getFieldsets();	
 				$current_sets = "playerDetails";				
-				ClubRegHelper::writeFieldText($fieldSets[$current_sets]->description,'first-fikkeld-div');			
+				ClubRegHelper::writeFieldText($fieldSets[$current_sets]->description,'first-fikkeld-div');		
+				$nokAlreadyShown = TRUE;	
 			?>
 			<?php foreach($this->regmemberForm->getFieldset($current_sets) as $field): ?>				
 					<div class="control-group span5"> 				
@@ -102,8 +103,10 @@ select{
 					</div>
 				<?php endforeach; ?>
 			</div>
+			<div><?php echo $this->loadTemplate("nok"); ?></div>
 			</div>	
-			<?php } 
+			
+			<?php $nokAlreadyShown = FALSE; } 
 			
 			$current_sets = "divisionDetails";
 			if(isset($fieldSets[$current_sets]->showonly) && preg_match("/$playertype/", $fieldSets[$current_sets]->showonly) ){			
@@ -122,9 +125,12 @@ select{
 							<?php echo $field->input; ?>
 						</div>
 				</div>
-			<?php endforeach; ?>			
+			<?php endforeach; ?>
+			
+						
 			</div><?php 
 			}
+			
 			if($playertype == "junior"){
 				?></div><div class="span5"><?php 
 			}			 
@@ -145,9 +151,10 @@ select{
 					</div>
 				<?php endforeach; ?>
 				</div>
-			
+			<div><?php if($nokAlreadyShown) echo $this->loadTemplate("nok"); ?></div>
 			</div>
-		<?php } ?>
+		<?php } ?>	
+			
 		</div> <?php // 2 ?>
 		
 		<hr  class='profile-hr'/>
