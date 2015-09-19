@@ -32,7 +32,7 @@ if($this->tmpl == "html"){
 $playertype = $this->regmemberForm->getField("playertype")->value;
 $session = JFactory::getSession();
 $back_url = $session->get("com_clubreg.back_url");// save the back url
-
+/*
 ?>
 <style>
 <!--
@@ -59,7 +59,7 @@ select{
 
 
 -->
-</style>
+</style>*/?>
 <script type="text/javascript">
 	var token = '<?php echo JSession::getFormToken() ;?>';	
 </script>
