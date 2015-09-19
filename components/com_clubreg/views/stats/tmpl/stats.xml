@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-  <layout title="Manage Stats">
+  <layout title="Manage Attendance">
     <message>
-      <![CDATA[Manage Stats Label]]>
+      <![CDATA[Manage Attendance Label]]>
     </message>
   </layout>	
 </metadata>
