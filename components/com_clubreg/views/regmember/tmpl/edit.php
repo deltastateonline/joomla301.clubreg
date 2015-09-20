@@ -112,10 +112,8 @@ select{
 			if(isset($fieldSets[$current_sets]->showonly) && preg_match("/$playertype/", $fieldSets[$current_sets]->showonly) ){			
 			?>		
 			<div class="span5">
-			<?php 
-				
-				ClubRegHelper::writeFieldText($fieldSets[$current_sets]->description);
-			?><div style="padding-left:10px;"><?php
+			<?php ClubRegHelper::writeFieldText($fieldSets[$current_sets]->description); ?>
+			<div style="padding-left:10px;"><?php
 			foreach($this->regmemberForm->getFieldset($current_sets) as $field): ?>
 				<div class="control-group"> 				
 						<div class="control-label">

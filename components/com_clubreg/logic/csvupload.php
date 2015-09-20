@@ -146,7 +146,12 @@ class CsvUpload extends JObject
 						$currentRow["year_registered"] = date('Y');
 					}else{
 						$currentRow["year_registered"] = date('Y',strtotime($currentRow["year_registered"]));
-					}			
+					}
+
+					if(isset($currentRow["dob"])){
+						$currentRow["dob"] = str_replace("/", "-", $currentRow["dob"]);
+						$currentRow["dob"] = date('Y-m-d',strtotime($currentRow["dob"]));
+					}
 				
 					if(isset($currentRow["group"])){
 						$currentRow["group"] = strtolower($currentRow["group"]);
