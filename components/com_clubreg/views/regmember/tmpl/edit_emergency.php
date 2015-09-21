@@ -11,6 +11,7 @@
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 $current_sets = "emergency";
+$playertype = $this->regmemberForm->getField("playertype")->value;
 $fieldSets = $this->regmemberForm->getFieldsets();
 if(isset($fieldSets[$current_sets]->showonly) && preg_match("/$playertype/", $fieldSets[$current_sets]->showonly) ){
 		
