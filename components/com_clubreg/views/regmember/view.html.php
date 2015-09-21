@@ -145,13 +145,11 @@ class ClubRegViewregmember extends JViewLegacy
 			$this->formbaction = 'index.php?option=com_clubreg&view=regmember'; // back to profile
 			$this->formbackaction = 'index.php?option=com_clubreg&view=regmembers'; // back to list
 			
-			$this->tmpl = $app->input->getString('tmpl', "html");		// determine if you are calling from add child 
+			$this->tmpl = $app->input->getString('tmpl', "html");		// determine if you are calling from add child 					
 			
 			$currentModel = $this->getModel();		
 			$currentModel->setState('com_clubreg.regmember.member_key',$key_data->string_key); // use the key in the model		
-			$currentModel->setState('com_clubreg.regmember.member_id',$key_data->pk_id); // use the key in the model	
-
-			
+			$currentModel->setState('com_clubreg.regmember.member_id',$key_data->pk_id); // use the key in the model		
 			
 			$playertype = $app->input->getString('playertype', null);
 			if(isset($playertype)){
@@ -164,7 +162,22 @@ class ClubRegViewregmember extends JViewLegacy
 				$currentModel->setState('com_clubreg.regmember.parent_id',$parent_key_data->pk_id); // use the key in the model
 			}		
 			
-			$this->regmemberForm = $currentModel->getForm();	
+			$this->regmemberForm = $currentModel->getForm();
+
+			
+			$params = JComponentHelper::getParams('com_clubreg');
+			$this->loademergecy = $params->get("emergency");
+			
+			if($this->loademergecy){
+				unset($currentModel);
+				$currentModel = JModelLegacy::getInstance('emergency', 'ClubregModel', array('ignore_request' => false));
+				$currentModel->setState('com_clubreg.emergency.member_id',$key_data->pk_id); // use the key in the model
+				$currentModel->setState('com_clubreg.emergency.member_key',$key_data->full_key); // use the key in the model
+				
+				$this->emergencyForm = $currentModel->getForm();
+			}
+			
+			
 		
 		}
 		

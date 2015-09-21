@@ -63,7 +63,14 @@
 	</fieldset>	
 	<fieldset name="guardianDetails"	addfieldpath="/administrator/components/com_clubreg/models/fields">		
 	
-	</fieldset>		
+	</fieldset>	
+	<fields name="emergency">
+	<fieldset name="emergency" description="COM_CLUBREG_EM_DETAILS" showonly="junior-senior">				
+						
+	</fieldset>	
+	</fields>
+	
+		
 	<fieldset name="hiddenControls"	>			
 		<field name="playertype" type="hidden" default="" readonly="true" class="readonly" label="Player Type" description ="Player Type"/>
 		<field name="member_id" type="hidden" default="0" readonly="true" class="readonly" label="PK" description ="PK"/>

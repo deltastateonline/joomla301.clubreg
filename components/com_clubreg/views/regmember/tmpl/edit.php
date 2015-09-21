@@ -71,7 +71,8 @@ select{
 			<?php			
 				$fieldSets = $this->regmemberForm->getFieldsets();	
 				$current_sets = "playerDetails";				
-				ClubRegHelper::writeFieldText($fieldSets[$current_sets]->description,'first-fikkeld-div');			
+				ClubRegHelper::writeFieldText($fieldSets[$current_sets]->description,'first-fikkeld-div');		
+				$emergencyAlreadyShown = TRUE;	
 			?>
 			<?php foreach($this->regmemberForm->getFieldset($current_sets) as $field): ?>				
 					<div class="control-group span5"> 				
@@ -102,8 +103,10 @@ select{
 					</div>
 				<?php endforeach; ?>
 			</div>
+			<div><?php if($this->loademergecy){echo $this->loadTemplate("emergency");} ?></div>
 			</div>	
-			<?php } 
+			
+			<?php $emergencyAlreadyShown = FALSE; } 
 			
 			$current_sets = "divisionDetails";
 			if(isset($fieldSets[$current_sets]->showonly) && preg_match("/$playertype/", $fieldSets[$current_sets]->showonly) ){			
@@ -120,9 +123,12 @@ select{
 							<?php echo $field->input; ?>
 						</div>
 				</div>
-			<?php endforeach; ?>			
+			<?php endforeach; ?>
+			
+						
 			</div><?php 
 			}
+			
 			if($playertype == "junior"){
 				?></div><div class="span5"><?php 
 			}			 
@@ -143,9 +149,10 @@ select{
 					</div>
 				<?php endforeach; ?>
 				</div>
-			
+			<div><?php if($emergencyAlreadyShown){ if($this->loademergecy){ echo $this->loadTemplate("emergency");} }?></div>
 			</div>
-		<?php } ?>
+		<?php } ?>	
+			
 		</div> <?php // 2 ?>
 		
 		<hr  class='profile-hr'/>

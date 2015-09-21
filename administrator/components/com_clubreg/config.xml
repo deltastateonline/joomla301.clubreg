@@ -108,6 +108,19 @@
 			<option
 				value="members.profile">Member Profile</option>
 		</field>
+		
+		<field
+				name="emergency"
+				type="radio"
+			class="btn-group btn-group-yesno"
+			default="0"
+			label="COM_CLUBREG_EMERGENCYINPROFILE_LABEL"
+			description="COM_CLUBREG_EMERGENCYINPROFILE_DESC">
+			<option
+				value="1">JYES</option>
+			<option
+				value="0">JNO</option>
+		</field>
 
 	</fieldset>
 	<!--
