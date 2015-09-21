@@ -35,7 +35,7 @@ class ClubregControllerRegmember extends JControllerLegacy
 		$data = $this->input->post->get('jform', array(), 'array');
 		$key_data = new stdClass();
 		
-		$nokData = $data["nok"];
+		
 		
 		
 		
@@ -85,9 +85,12 @@ class ClubregControllerRegmember extends JControllerLegacy
 			}
 			
 			unset($current__em_model);
-			$current__em_model = JModelLegacy::getInstance('emergency', 'ClubregModel', array('ignore_request' => true));
-			$current__em_model->setState('com_clubreg.emergency.member_id',$current_model->get("member_id") );
-			$proceed = $current__em_model->save($nokData);
+			$emergencyData = isset($data["emergency"])?$data["emergency"]:FALSE;
+			if(is_array($emergencyData)){
+				$current__em_model = JModelLegacy::getInstance('emergency', 'ClubregModel', array('ignore_request' => true));
+				$current__em_model->setState('com_clubreg.emergency.member_id',$current_model->get("member_id") );
+				$proceed = $current__em_model->save($emergencyData);
+			}
 			
 		}else{
 			$return_array["msg"][] =  JText::_('CLUBREG_NOTAUTH');
