@@ -32,34 +32,7 @@ if($this->tmpl == "html"){
 $playertype = $this->regmemberForm->getField("playertype")->value;
 $session = JFactory::getSession();
 $back_url = $session->get("com_clubreg.back_url");// save the back url
-/*
 ?>
-<style>
-<!--
-.form-horizontal .control-group, .control-group {
-    margin-bottom: 5px;
-}
-select, textarea, 
-input[type="text"],input[type="email"]
- {    
-    display: inline-block;
-    font-size: 12px;
-    height: 15px;
-    line-height: 15px;
-    margin-bottom: 2px;
-    padding: 3px 4px;
-}
-select{
- 	height: 25px;
-    line-height: 25px;
-}
-#jform_dob_img, #jform_joining_date_img {
-	padding:1px 10px;
-}
-
-
--->
-</style>*/?>
 <script type="text/javascript">
 	var token = '<?php echo JSession::getFormToken() ;?>';	
 </script>
@@ -123,8 +96,7 @@ select{
 							<?php echo $field->input; ?>
 						</div>
 				</div>
-			<?php endforeach; ?>
-			
+			<?php endforeach; ?>		
 						
 			</div><?php 
 			}
@@ -153,18 +125,14 @@ select{
 			</div>
 		<?php } ?>	
 			
-		</div> <?php // 2 ?>
-		
-		<hr  class='profile-hr'/>
-	
-	
+		</div>		
+		<hr  class='profile-hr'/>	
 		<?php 
 			foreach($this->regmemberForm->getFieldset('hiddenControls') as $field){
 				echo $field->input;
 			}
 			?>
-			<input type="<?php echo $in_type; ?>" name="Itemid" value="<?php echo $clubreg_Itemid; ?>" />	
-			
+			<input type="<?php echo $in_type; ?>" name="Itemid" value="<?php echo $clubreg_Itemid; ?>" />			
 			<input type="<?php echo $in_type; ?>" name="option" value="com_clubreg" />
 			<input type="<?php echo $in_type; ?>" name="task" value="regmember.savemember" />
 			<input type="<?php echo $in_type; ?>" name="pk" value="<?php echo $this->member_key; ?>" />
