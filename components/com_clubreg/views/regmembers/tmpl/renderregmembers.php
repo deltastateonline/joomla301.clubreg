@@ -36,7 +36,7 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 
 		if(document.adminForm.layout.value == "exportregmembers"){
 			document.adminForm.target='_blank';
-			document.adminForm.action='<?php echo JRoute::_($this->formaction_comp,false); ?>';
+			document.adminForm.action='<?php echo $this->formaction_comp ; ?>';
 		}else{
 			document.adminForm.target='';
 			document.adminForm.action='<?php echo JRoute::_($this->formaction,false); ?>';
