@@ -46,9 +46,9 @@ class ClubRegViewregmembers extends JViewLegacy
 			$proceed = TRUE;
 			
 			require_once CLUBREG_CONFIGS.'config.regmembers.php';
-			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.filters.regmembers.php';			
-			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.exporttable.php';	
 			require_once CLUBREG_CONFIGS.'regmember.csv.php';
+			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.filters.regmembers.php';			
+			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.exporttable.php';				
 				
 			$group_type			= $app->input->post->get('playertype');	
 			$all_groups = $current_model->getMyGroups($group_type);
