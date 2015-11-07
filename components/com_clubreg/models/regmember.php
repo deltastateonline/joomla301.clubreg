@@ -356,6 +356,13 @@ class ClubregModelRegmember extends JModelForm
 	}
 	
 	public function save($data){
+		
+		$form = $this->getForm();
+		
+		$validate = $this->validate($form, $data);		
+		if($validate === FALSE){			
+			return FALSE;
+		}
 	
 		$memberTable = $this->getTable();	
 	
