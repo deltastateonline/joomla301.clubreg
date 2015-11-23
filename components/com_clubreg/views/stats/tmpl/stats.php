@@ -9,8 +9,8 @@
 # Technical Support:  email - joomla@deltastateonline.com
 -------------------------------------------------------------------------*/
 defined('_JEXEC') or die;
-jimport('joomla.html.html.bootstrap');
-//JHtml::_('formbehavior.chosen', 'select');
+JHtml::_('behavior.framework',true);
+
 JHTML::_('behavior.calendar');
 JHtml::_('behavior.tooltip');
 
@@ -39,8 +39,24 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 		
 		document.adminForm.pk.value = pk;
 		form.submit();
-	}	
-	
+	}
+	Joomla.orderTable = function()
+	{
+		table = document.getElementById("sortTable");
+		direction = document.getElementById("directionTable");
+		order = table.options[table.selectedIndex].value;
+		var cForm = document.getElementById('adminForm');
+		if (order != '<?php echo $listOrder; ?>')
+		{
+			dirn = 'asc';
+		}
+		else
+		{
+			dirn = direction.options[direction.selectedIndex].value;
+		}
+		Joomla.tableOrdering(order, dirn, '',cForm);
+	}
+
 </script>
 <form action="<?php echo JRoute::_($this->formaction); ?>" method="post" name="adminForm" id="adminForm">
 <?php 
@@ -60,7 +76,7 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 	<input type="<?php echo $in_type; ?>" name="pk" value="" />
 	
 	<input type="<?php echo $in_type; ?>" name="boxchecked" value="0" />
-	<input type="<?php echo $in_type; ?>" name="filter_order" id="filter_order" value="<?php echo $this->escape($this->state->get('list.ordering'));; ?>" />
+	<input type="<?php echo $in_type; ?>" name="filter_order" id="filter_order" value="<?php echo $this->escape($this->state->get('list.ordering')); ?>" />
 	<input type="<?php echo $in_type; ?>" name="filter_order_Dir" id="filter_order_Dir" value="<?php echo $this->escape($this->state->get('list.direction')); ?>" />
 	<?php echo JHTML::_( 'form.token' ); ?>
 </form>
