@@ -7,9 +7,10 @@
 			<field name="givenname" type="text" label="COM_CLUBREG_GIVENNAME_LABEL"
 					description="COM_CLUBREG_GIVENNAME_LABEL" class="inputbox input-large" size="30" required="true"/>					
 	</fieldset>
+
 	<fieldset name="contactDetails"	addfieldpath="/administrator/components/com_clubreg/models/fields" description="COM_CLUBREG_CONTACTDETAILS" showonly="senior-guardian">			
 			<field name="emailaddress" type="email" label="JGLOBAL_EMAIL"
-			description="JGLOBAL_EMAIL" class="inputbox input-large" required="true"/>
+			description="JGLOBAL_EMAIL" class="inputbox input-large"/>
 			
 			<field name="mobile" type="text" label="COM_CLUBREG_MOBILE"
 			description="COM_CLUBREG_MOBILE" class="inputbox input-large"/>
@@ -65,9 +66,9 @@
 	
 	</fieldset>	
 	<fields name="emergency">
-	<fieldset name="emergency" description="COM_CLUBREG_EM_DETAILS" showonly="junior-senior">				
+		<fieldset name="emergency" description="COM_CLUBREG_EM_DETAILS" showonly="junior-senior">				
 						
-	</fieldset>	
+		</fieldset>	
 	</fields>
 	
 		

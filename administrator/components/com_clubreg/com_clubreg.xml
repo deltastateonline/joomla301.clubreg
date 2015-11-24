@@ -87,6 +87,9 @@
 			<language tag="en-GB">language/en-GB.com_clubreg.ini</language>
 			<language tag="en-GB">language/en-GB.com_clubreg.sys.ini</language>
 		</languages>
-	</administration>
+	</administration>	
+	<updateservers>		
+		<server type="extension" name="Clubreg 3.0! Update Clubreg 3.X!">http://joomla301.local/updates/com_clubreg.xml</server>
+	</updateservers>
 </extension>
 

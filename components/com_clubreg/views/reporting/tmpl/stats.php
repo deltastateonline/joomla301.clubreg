@@ -40,6 +40,26 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 		document.adminForm.pk.value = pk;
 		form.submit();
 	}	
+
+	Joomla.orderTable = function()
+	{
+		console.log(1);
+		table = document.getElementById("sortTable");
+		direction = document.getElementById("directionTable");
+		order = table.options[table.selectedIndex].value;
+		var cForm = document.getElementById('adminForm');
+		if (order != '<?php echo $listOrder; ?>')
+		{
+			dirn = 'asc';
+		}
+		else
+		{
+			dirn = direction.options[direction.selectedIndex].value;
+		}
+		
+		Joomla.tableOrdering(order, dirn, '',cForm);
+	}	
+	
 	
 </script>
 <form action="<?php echo JRoute::_($this->formaction); ?>" method="post" name="adminForm" id="adminForm">
