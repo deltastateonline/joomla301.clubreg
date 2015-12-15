@@ -20,6 +20,27 @@ global $clubreg_Itemid;
 $rel_string = array("Itemid"=>$clubreg_Itemid);
 
 $in_type = "hidden";
+	$chart_string = array();
+	foreach($this->group_breakdown["bygroups"] as $abreakdown){
+		$chart_string[] = sprintf("['%s',%d]",$abreakdown['groupname'],$abreakdown['howmany']);
+	}
+	
+	$chart_string_sub = array();
+	foreach($this->group_breakdown["bysubgroups"] as $abreakdown){
+		$chart_string_sub[] = sprintf("['%s',%d]",$abreakdown['subgroupname'],$abreakdown['howmany']);
+	}
+	
+	$chart_string_player = array();
+	$labels['guardian'] = JText::_('COM_CLUBREG_PT_GUARDIAN');
+	$labels['junior'] = JText::_('COM_CLUBREG_PT_JUNIOR');
+	$labels['senior'] = JText::_('COM_CLUBREG_PT_SENIOR');
+	
+	foreach($this->group_breakdown["byplayertype"] as $abreakdown){
+		$abreakdown['playertype'] = isset($labels[$abreakdown['playertype']])?$labels[$abreakdown['playertype']]:$abreakdown['playertype'];
+		$chart_string_player[] = sprintf("['%s',%d]",$abreakdown['playertype'],$abreakdown['howmany']);
+	}
+	
+	
 ?>
 <script type="text/javascript">
 <!--
@@ -32,6 +53,78 @@ Joomla.sbutton = function(pk)
 	document.adminForm.pk.value = pk;
 	form.submit();
 }
+//-->
+</script>
+
+<script type="text/javascript">
+<!--
+	//Load the Visualization API and the piechart package.
+	google.load('visualization', '1.0', {'packages':['corechart']});
+	
+	// Set a callback to run when the Google Visualization API is loaded.
+	google.setOnLoadCallback(drawChart);
+	
+	// Callback that creates and populates a data table,
+	// instantiates the pie chart, passes in the data and
+	// draws it.
+	function drawChart() {
+		
+	  // Create the data table.
+	  var data = new google.visualization.DataTable();
+	  data.addColumn('string', '<?php echo JText::_('COM_CLUBREG_GROUPN_LABEL'); ?>');
+	  data.addColumn('number', '<?php echo JText::_('COM_CLUBREG_GROUPN_LABEL'); ?>');
+	  data.addRows([	  
+	   <?php echo implode(",",$chart_string)?>
+	  ]);
+	
+	  // Set chart options
+	  var options = {'title':'<?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_BREAKDOWN'),  " - " , JText::_('COM_CLUBREG_GROUPSN_LABEL')?>',
+			  		 'titlePosition':'out',
+	                 'width':600,
+	                 'height':300,
+	                 'legend':{position:'bottom'}};
+	  // Instantiate and draw our chart, passing in some options.
+	  var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+	  chart.draw(data, options);
+
+
+	  var dataSub = new google.visualization.DataTable();
+	  dataSub.addColumn('string', '<?php echo JText::_('COM_CLUBREG_SUBGROUPSN_LABEL'); ?>');
+	  dataSub.addColumn('number', '<?php echo JText::_('COM_CLUBREG_SUBGROUPSN_LABEL'); ?>');
+	  dataSub.addRows([	  
+	   <?php echo implode(",",$chart_string_sub)?>
+	  ]);
+	
+	  // Set chart options
+	  var options = {'title':'<?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_BREAKDOWN'),  " - " , JText::_('COM_CLUBREG_SUBGROUPSN_LABEL')?>',
+	                 'width':600,
+	                 'height':300,
+	                 'legend':{position:'bottom'}};
+	
+	  // Instantiate and draw our chart, passing in some options.
+	  var chartSub = new google.visualization.BarChart(document.getElementById('chart_div_sub'));
+	  chartSub.draw(dataSub, options);
+
+
+
+	  var dataPlayer = new google.visualization.DataTable();
+	  dataPlayer.addColumn('string', '<?php echo JText::_('COM_CLUBREG_PT'); ?>');
+	  dataPlayer.addColumn('number', '<?php echo JText::_('COM_CLUBREG_PT'); ?>');
+	  dataPlayer.addRows([	  
+	   <?php echo implode(",",$chart_string_player)?>
+	  ]);
+	
+	  // Set chart options
+	  var options = {'title':'<?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_BREAKDOWN'),  " - " , JText::_('COM_CLUBREG_PT')?>',
+	                 'width':600,
+	                 'height':300,
+	                 'legend':{position:'bottom'}};
+	
+	  // Instantiate and draw our chart, passing in some options.
+	  var chartPlayer = new google.visualization.PieChart(document.getElementById('chart_div_player'));
+	  chartPlayer.draw(dataPlayer, options);	  
+	}
+
 //-->
 </script>
 
@@ -139,12 +232,21 @@ if($this->canedit){
 			$render_sections = $this->render_sections; ?>
 			<div class="tab-pane active" id="tabDashboard">				
 				<div class="alert alert-info"><img alt="" src="components/com_clubreg/assets/images/groups.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_MEMBERS'); ?></strong></div>
-				<div class="loading1" id="profileMembers" rel=<?php echo json_encode($rel_string)?>></div>		
-			
+				<div class="loading1" id="profileMembers" rel=<?php echo json_encode($rel_string)?>></div>	
+							
 				<?php if($render_sections["showeoi"]) { ?>
 				<div class="alert alert-info"><img alt="" src="components/com_clubreg/assets/images/groups.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_EOI'); ?></strong></div>
 				<div class="loading1" id="profileEoi" rel=<?php echo json_encode($rel_string)?>></div>				
-				<?php } 
+				<?php } ?>
+				<?php if($render_sections["showeoi"]) { ?>
+				<div class="alert alert-info"><img alt="" src="components/com_clubreg/assets/images/stats.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_BREAKDOWN'); ?></strong> </div>
+					<span class="pull-left">Experimental :</span>	<a href="mailto:joomla@deltastateonline.com" class="pull-right"> <b>Want This ??</b> Send Us an email</a><span class="clearfix"></span>
+					<div class="dashboard-div">				
+						<div id="chart_div"></div>				
+						<div id="chart_div_sub"></div>	
+						<div id="chart_div_player"></div>	
+					</div>		
+				<?php } 									
 				if($render_sections["showbday"]){ ?>
 				<div class="alert alert-info"><img alt="" src="components/com_clubreg/assets/images/groups.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_BDAY'); ?></strong></div>
 				<div class="loading1" id="profileBirthday" rel=<?php echo json_encode($rel_string)?>></div>				
@@ -172,4 +274,7 @@ if($this->canedit){
 $document = JFactory::getDocument();
 ClubregHelper::writeTabAssets($document, "common",array("css"));
 ClubregHelper::writeTabAssets($document, "official");
-ClubregHelper::write_footer(); ?>
+ClubregHelper::write_footer(); 
+$document->addScript('https://www.google.com/jsapi');
+
+?>

@@ -69,7 +69,9 @@ class ClubRegViewOfficial extends JViewLegacy
 				$this->official_details = $current_model->getDetails();
 				$render_sections["showeoi"] =  $current_model->getPermissions("showeoi");
 				$render_sections["showbday"] =  $current_model->getPermissions("showbday");				
-				$this->render_sections = $render_sections;			
+				$this->render_sections = $render_sections;		
+
+				$this->group_breakdown  = $current_model->getGroupCount();			
 				
 				unset($current_model);
 				
