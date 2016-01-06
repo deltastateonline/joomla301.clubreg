@@ -105,5 +105,29 @@ class ClubRegViewAjax extends JViewLegacy
 		}		
 		return $proceed;		
 	}
+	
+	private function breakdown(){
+		
+		JSession::checkToken('get') or die(JText::_('JINVALID_TOKEN'));
+		
+		$user		= JFactory::getUser();
+		$app			= JFactory::getApplication();
+		$Itemid			= $app->input->post->get('Itemid');
+		
+		$proceed = FALSE;
+		if($user->get('id') > 0){
+			
+			$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));				
+			$group_breakdown  = $current_model->getGroupCount();
+			
+			unset($current_model);	
+			$group_breakdown["proceed"] = TRUE;
+			echo json_encode($group_breakdown);
+				
+			$proceed = TRUE;
+		}
+		return $proceed;
+		
+	}
 		
 }
