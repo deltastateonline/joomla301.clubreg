@@ -108,7 +108,7 @@ class ClubregModelOfficialfrn extends JModelForm
 				count(IF(`gender`='female',1,NULL)) as women,
 				count(IF(`gender` = '-1' OR `gender` = '0' ,1,NULL)) as noset";
 		
-		$d_var = "IFNULL(cg.group_name,'No Group') as groupname, IFNULL(scg.group_name,'No Subgroup') as subgroupname, count(member_id) as howmany";
+		$d_var = "IFNULL(cg.group_name,'No Group') as chartLabel, IFNULL(scg.group_name,'No Subgroup') as subgroupname, count(member_id) as howmany";
 		
 		$query->select($d_var);
 		$query->select($sexgroup);
@@ -122,7 +122,7 @@ class ClubregModelOfficialfrn extends JModelForm
 		
 		$query	= $db->getQuery(true);
 		
-		$d_var = "IFNULL(cg.group_name,'No Group') as groupname, IFNULL(scg.group_name,'No Subgroup') as subgroupname, count(member_id) as howmany";
+		$d_var = "IFNULL(cg.group_name,'No Group') as groupname, IFNULL(scg.group_name,'No Subgroup') as chartLabel, count(member_id) as howmany";
 		
 		$query->select($d_var);
 		$query->select($sexgroup);
@@ -137,7 +137,7 @@ class ClubregModelOfficialfrn extends JModelForm
 		
 		
 		$query	= $db->getQuery(true);		
-		$d_var = " IFNULL(cr.playertype,'No Playertype') as playertype, count(member_id) as howmany";		
+		$d_var = " IFNULL(cr.playertype,'No Playertype') as chartLabel, count(member_id) as howmany";		
 		$query->select($d_var);
 		$query->select($sexgroup);
 		$query->from($db->quoteName(CLUB_REGISTEREDMEMBERS_TABLE).' AS cr');
