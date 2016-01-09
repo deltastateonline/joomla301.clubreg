@@ -66,8 +66,6 @@ class ClubRegViewAjax extends JViewLegacy
 				$save_ids[$a_group->group_id] = $a_group->group_id;
 			}
 				
-			
-				
 			echo json_encode($tmp);
 				
 			unset($all_groups);
@@ -117,12 +115,22 @@ class ClubRegViewAjax extends JViewLegacy
 		$proceed = FALSE;
 		if($user->get('id') > 0){
 			
-			$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));				
-			$group_breakdown  = $current_model->getGroupCount();
+			$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
+
+			$current_model->setState('joomla_id',$user->get('id'));			
+			$render_sections["breakdown"] =  $current_model->getPermissions("breakdown");
 			
-			unset($current_model);	
-			$group_breakdown["proceed"] = TRUE;
-			echo json_encode($group_breakdown);
+			if($render_sections["breakdown"]){			
+				$group_breakdown  = $current_model->getGroupCount();				
+				unset($current_model);	
+				$group_breakdown["proceed"] = TRUE;
+			}else{
+				$group_breakdown["proceed"] = $proceed;
+				ob_start();
+					ClubRegUnAuthHelper::unAuthorised();					
+				$group_breakdown["msg_content"] = ob_get_clean() ;
+			}
+				echo json_encode($group_breakdown);
 				
 			$proceed = TRUE;
 		}

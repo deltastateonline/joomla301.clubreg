@@ -19,30 +19,7 @@ JHtml::_('behavior.tooltip');
 global $clubreg_Itemid;
 $rel_string = array("Itemid"=>$clubreg_Itemid);
 
-$in_type = "hidden";
-	$chart_string = array();
-	foreach($this->group_breakdown["bygroups"] as $abreakdown){
-		//$chart_string[] = sprintf("['%s',%d]",$abreakdown['groupname'],$abreakdown['howmany']);
-		$chart_string[] = sprintf("['%s',%d,%d,%d]",$abreakdown['groupname'],$abreakdown['men'],$abreakdown['women'],$abreakdown['noset']);
-	}
-	
-	$chart_string_sub = array();
-	foreach($this->group_breakdown["bysubgroups"] as $abreakdown){
-		$chart_string_sub[] = sprintf("['%s',%d,%d,%d]",$abreakdown['subgroupname'],$abreakdown['men'],$abreakdown['women'],$abreakdown['noset']);
-	}
-	
-	$chart_string_player = array();
-	$labels['guardian'] = JText::_('COM_CLUBREG_PT_GUARDIAN');
-	$labels['junior'] = JText::_('COM_CLUBREG_PT_JUNIOR');
-	$labels['senior'] = JText::_('COM_CLUBREG_PT_SENIOR');
-	
-	foreach($this->group_breakdown["byplayertype"] as $abreakdown){
-		$abreakdown['playertype'] = isset($labels[$abreakdown['playertype']])?$labels[$abreakdown['playertype']]:$abreakdown['playertype'];
-		$chart_string_player[] = sprintf("['%s',%d]",$abreakdown['playertype'],$abreakdown['howmany']);
-	}
-	
-	
-?>
+$in_type = "hidden"; ?>
 <script type="text/javascript">
 <!--
 Joomla.sbutton = function(pk)
@@ -56,133 +33,113 @@ Joomla.sbutton = function(pk)
 }
 
 Joomla.formToken = '<?php echo JSession::getFormToken() ;?>';	
-
 //-->
 </script>
 
-<script type="text/javascript">
-<!--
-	//Load the Visualization API and the piechart package.
-	google.load('visualization', '1.0', {'packages':['corechart']});
-	
-	// Set a callback to run when the Google Visualization API is loaded.
-	//google.setOnLoadCallback(drawChart);
-	
-	// Callback that creates and populates a data table,
-	// instantiates the pie chart, passes in the data and
-	// draws it.
-	
-	
-	
-	
-	function drawChart1() {
+<?php if($this->render_sections["breakdown"]) { ?>
+	<script type="text/javascript">
+	<!--
+		//Load the Visualization API and the piechart package.
+		google.load('visualization', '1.0', {'packages':['corechart']});
 		
-	  // Create the data table.
-	  var data = new google.visualization.DataTable();
-	  data.addColumn('string', '<?php echo JText::_('COM_CLUBREG_GROUPN_LABEL'); ?>');
-	  data.addColumn('number', '<?php echo JText::_('COM_CLUBREG_MALE'); ?>');
-	  data.addColumn('number', '<?php echo JText::_('COM_CLUBREG_FEMALE'); ?>');  
-	  data.addColumn('number', '<?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_NORESULTS'); ?>');
-	  data.addRows([	  
-	   <?php echo implode(",",$chart_string)?>
-	  ]);
+		// Set a callback to run when the Google Visualization API is loaded.
+		//google.setOnLoadCallback(drawChart);
+		
+		// Callback that creates and populates a data table,
+		// instantiates the pie chart, passes in the data and
+		// draws it.
+		
 	
-	  // Set chart options
-	  var options = {'title':'<?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_BREAKDOWN'),  " - " , JText::_('COM_CLUBREG_GROUPSN_LABEL')?>',
-			  		 'titlePosition':'out',
-	                 'width':600,
-	                 'height':300,
-	                 isStacked: true,
-	                 'legend':{position:'bottom'}};
-	  // Instantiate and draw our chart, passing in some options.
-	  var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
-	  chart.draw(data, options);
-
-
-	  var dataSub = new google.visualization.DataTable();
-	  dataSub.addColumn('string', '<?php echo JText::_('COM_CLUBREG_SUBGROUPSN_LABEL'); ?>');
-	  dataSub.addColumn('number', '<?php echo JText::_('COM_CLUBREG_MALE'); ?>');
-	  dataSub.addColumn('number', '<?php echo JText::_('COM_CLUBREG_FEMALE'); ?>');
-	  dataSub.addColumn('number', '<?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_NORESULTS'); ?>');
-	  dataSub.addRows([	  
-	   <?php echo implode(",",$chart_string_sub)?>
-	  ]);
+		ClubregObjectDefinition.prototype.drawChart  = function (ajaxData,configData) {
 	
-	  // Set chart options
-	  var options = {'title':'<?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_BREAKDOWN'),  " - " , JText::_('COM_CLUBREG_SUBGROUPSN_LABEL')?>',
-	                 'width':600,
-	                 'height':300,
-	                 isStacked: true,
-	                 'legend':{position:'bottom'}};
+			  // Create the data table.
+			var data = new google.visualization.DataTable();
 	
-	  // Instantiate and draw our chart, passing in some options.
-	  var chartSub = new google.visualization.BarChart(document.getElementById('chart_div_sub'));
-	  chartSub.draw(dataSub, options);
-
-
-
-	  var dataPlayer = new google.visualization.DataTable();
-	  dataPlayer.addColumn('string', '<?php echo JText::_('COM_CLUBREG_PT'); ?>');
-	  dataPlayer.addColumn('number', '<?php echo JText::_('COM_CLUBREG_PT'); ?>');
-	  dataPlayer.addRows([	  
-	   <?php echo implode(",",$chart_string_player)?>
-	  ]);
+			var howmanyColumns = configData.columns.length;
+				
+	 		for(var i = 0; i < howmanyColumns ; i++){
+	 			var b = configData.columns[i]; 				
+	 			data.addColumn(b.ty,b.vl);
+	 		}
+			//[abreakdown['chartLabel'],abreakdown['men'],abreakdown['women'],abreakdown['noset'] ]
+			var dataArray = Array();
+	 		for(var i = 0;i < ajaxData.length; i++){
+	 	 		
+	 	 		var b = Array(); // mt array 					
+	 			for(var j = 0; j < howmanyColumns ;j++){  // use the columns passed in
+	 	 			var labelElement = configData.columns[j].labelElement; 	
+					if(labelElement == "chartLabel" && configData.labels != undefined ){	// pass in extra labels				
+						var aLabel = ajaxData[i][labelElement];
+						ajaxData[i][labelElement] = configData.labels[aLabel];					
+					}
+	 	 			
+	 	 			if(configData.columns[j].ty == "number"){
+	 	 				b.push(Number(ajaxData[i][labelElement])); // format numbers
+	 	 			}else{
+						b.push(ajaxData[i][labelElement]);
+	 	 			}
+				}
+	 			dataArray.push(b) 				
+	 		} 		
+	 		data.addRows(dataArray); // add all the data into an array 		
+	 		
+			  // Instantiate and draw our chart, passing in some options.
+			  if(configData.chartType == "bar-chart"){
+				  var chart = new google.visualization.BarChart(document.getElementById(configData.container));
+			  }else if(configData.chartType == "pie-chart"){
+				  var chart = new google.visualization.PieChart(document.getElementById(configData.container));
+			  }
+			  
+			  chart.draw(data, configData.options);  
+		}
+		
+		ClubregObjectDefinition.prototype.groupData = {
+		  options :{'title':'<?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_BREAKDOWN'),  " - " , JText::_('COM_CLUBREG_GROUPSN_LABEL')?>',
+			  		 'titlePosition':'out','width':600,'height':300,isStacked: true,'legend':{position:'bottom'}
+	 		 		},
+		  columns:[ 
+			  {ty: 'string', vl:'<?php echo JText::_('COM_CLUBREG_GROUPN_LABEL'); ?>','labelElement':'chartLabel'},
+			  {ty: 'number', vl:'<?php echo JText::_('COM_CLUBREG_MALE'); ?>','labelElement':'men'},
+			  {ty: 'number', vl:'<?php echo JText::_('COM_CLUBREG_FEMALE'); ?>','labelElement':'women'},
+			  {ty: 'number', vl:'<?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_NORESULTS'); ?>','labelElement':'noset'}
+			],
+		  container: 'chart_div',
+		  chartType : 'bar-chart'
+		};
 	
-	  // Set chart options
-	  var options = {'title':'<?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_BREAKDOWN'),  " - " , JText::_('COM_CLUBREG_PT')?>',
-	                 'width':600,
-	                 'height':300,
-	                 'legend':{position:'bottom'}};
+		ClubregObjectDefinition.prototype.subGroupData = {
+			options : {'title':'<?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_BREAKDOWN'),  " - " , JText::_('COM_CLUBREG_SUBGROUPSN_LABEL')?>',
+		                 'width':600, 'height':300, isStacked: true, 'legend':{position:'bottom'}
+	            	},
+			columns:[ 
+	        	{ty: 'string', vl:'<?php echo JText::_('COM_CLUBREG_SUBGROUPSN_LABEL'); ?>','labelElement':'chartLabel'},
+	          	{ty: 'number', vl:'<?php echo JText::_('COM_CLUBREG_MALE'); ?>','labelElement':'men'},
+	          	{ty: 'number', vl:'<?php echo JText::_('COM_CLUBREG_FEMALE'); ?>','labelElement':'women'},
+				{ty: 'number', vl:'<?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_NORESULTS'); ?>','labelElement':'noset'}
+	   		],
+	  	  container: 'chart_div_sub',
+	  	  chartType : 'bar-chart'
+		};
 	
-	  // Instantiate and draw our chart, passing in some options.
-	  var chartPlayer = new google.visualization.PieChart(document.getElementById('chart_div_player'));
-	  chartPlayer.draw(dataPlayer, options);	  
-	}
-
-
-	function drawChart() {
-
-	}
-
-	ClubregObjectDefinition.prototype.groupData = {
-		options :{'title':'<?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_BREAKDOWN'),  " - " , JText::_('COM_CLUBREG_GROUPSN_LABEL')?>',
-		  		 'titlePosition':'out','width':600,'height':300,isStacked: true,'legend':{position:'bottom'}
- 		 		},
-	  columns:[ 
-		  {ty: 'string', vl:'<?php echo JText::_('COM_CLUBREG_GROUPN_LABEL'); ?>'},
-		  {ty: 'number', vl:'<?php echo JText::_('COM_CLUBREG_MALE'); ?>'},
-		  {ty: 'number', vl:'<?php echo JText::_('COM_CLUBREG_FEMALE'); ?>'},
-		  {ty: 'number', vl:'<?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_NORESULTS'); ?>'}
-		]
-	};
-
-	ClubregObjectDefinition.prototype.subGroupData = {
-		options : {'title':'<?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_BREAKDOWN'),  " - " , JText::_('COM_CLUBREG_SUBGROUPSN_LABEL')?>',
-	                 'width':600, 'height':300, isStacked: true, 'legend':{position:'bottom'}
-            	},
-		columns:[ 
-        	{ty: 'string', vl:'<?php echo JText::_('COM_CLUBREG_SUBGROUPSN_LABEL'); ?>'},
-          	{ty: 'number', vl:'<?php echo JText::_('COM_CLUBREG_MALE'); ?>'},
-          	{ty: 'number', vl:'<?php echo JText::_('COM_CLUBREG_FEMALE'); ?>'},
-			{ty: 'number', vl:'<?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_NORESULTS'); ?>'}
-   		]
-	};
-
-	ClubregObjectDefinition.prototype.playerTypeData = {
-		options : {'title':'<?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_BREAKDOWN'),  " - " , JText::_('COM_CLUBREG_PT')?>',
-                 'width':600,'height':300,'legend':{position:'bottom'}
-        		},
-		columns:[ 
-        	{ty: 'string', vl:'<?php echo JText::_('COM_CLUBREG_PT'); ?>'},
-			{ty: 'number', vl:'<?php echo JText::_('COM_CLUBREG_PT'); ?>'}
-			]
-	};
-
-	
-
-//-->
-</script>
-
+		ClubregObjectDefinition.prototype.playerTypeData = {
+			options : {'title':'<?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_BREAKDOWN'),  " - " , JText::_('COM_CLUBREG_PT')?>',
+	                 'width':600,'height':300,'legend':{position:'bottom'}
+	        		},
+			columns:[ 
+	        	{ty: 'string', vl:'<?php echo JText::_('COM_CLUBREG_PT'); ?>','labelElement':'chartLabel'},
+				{ty: 'number', vl:'<?php echo JText::_('COM_CLUBREG_PT'); ?>','labelElement':'howmany'}
+				],
+			container: 'chart_div_player',
+			chartType : 'pie-chart',
+			labels:{
+				'guardian': '<?php echo JText::_('COM_CLUBREG_PT_GUARDIAN');?>',
+				'junior' : '<?php echo JText::_('COM_CLUBREG_PT_JUNIOR');?>',
+				'senior': '<?php echo JText::_('COM_CLUBREG_PT_SENIOR');?>'
+			}
+		};
+	//-->
+	</script>
+<?php } ?>
 <div class="profile <?php echo $this->pageclass_sfx?>">
 <?php 
 $renderTab["group"] = $renderTab["dashboard"] = FALSE;
@@ -296,7 +253,7 @@ if($this->canedit){
 				<?php if($render_sections["breakdown"]) { ?>
 				<div class="alert alert-info"><img alt="" src="components/com_clubreg/assets/images/stats.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_BREAKDOWN'); ?></strong> </div>
 					<span class="pull-left">Experimental :</span>	<a href="mailto:joomla@deltastateonline.com" class="pull-right"> <b>Want This ??</b> Send Us an email</a><span class="clearfix"></span>
-					<div class="dashboard-div" id="breakdownTab">				
+					<div class="dashboard-div loading1" id="breakdownTab">				
 						<div id="chart_div"></div>				
 						<div id="chart_div_sub"></div>	
 						<div id="chart_div_player"></div>	

@@ -140,4 +140,26 @@ jQuery( document ).ready(function() {
 		});
 	
 	});
+	
+	if(jQuery('#breakdownTab')){
+
+		var params = "option=com_clubreg&view=ajax&layout=breakdown&tmpl=component&format=json&"+Joomla.formToken+"=1";		
+		var durl = "index.php?"+params;	
+		
+		jQuery.get(durl,function(data){		
+			
+			if(data.proceed){	
+				jQuery('#breakdownTab').removeClass('loading1');
+				ClubRegObject.drawChart(data.bygroups,ClubRegObject.groupData);
+				ClubRegObject.drawChart(data.bysubgroups,ClubRegObject.subGroupData);
+				ClubRegObject.drawChart(data.byplayertype,ClubRegObject.playerTypeData);
+			}else{
+				jQuery('#breakdownTab').removeClass('loading1');
+				jQuery('#breakdownTab').html(data.msg_content);		
+			}	
+			
+		},'json').fail(function(){
+			alert("Unable to process request! Generating Breakdown Charts.");
+		});
+	}
 });
