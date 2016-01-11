@@ -32,34 +32,7 @@ if($this->tmpl == "html"){
 $playertype = $this->regmemberForm->getField("playertype")->value;
 $session = JFactory::getSession();
 $back_url = $session->get("com_clubreg.back_url");// save the back url
-
 ?>
-<style>
-<!--
-.form-horizontal .control-group, .control-group {
-    margin-bottom: 5px;
-}
-select, textarea, 
-input[type="text"],input[type="email"]
- {    
-    display: inline-block;
-    font-size: 12px;
-    height: 15px;
-    line-height: 15px;
-    margin-bottom: 2px;
-    padding: 3px 4px;
-}
-select{
- 	height: 25px;
-    line-height: 25px;
-}
-#jform_dob_img, #jform_joining_date_img {
-	padding:1px 10px;
-}
-
-
--->
-</style>
 <script type="text/javascript">
 	var token = '<?php echo JSession::getFormToken() ;?>';	
 </script>
@@ -71,7 +44,8 @@ select{
 			<?php			
 				$fieldSets = $this->regmemberForm->getFieldsets();	
 				$current_sets = "playerDetails";				
-				ClubRegHelper::writeFieldText($fieldSets[$current_sets]->description,'first-fikkeld-div');			
+				ClubRegHelper::writeFieldText($fieldSets[$current_sets]->description,'first-fikkeld-div');		
+				$emergencyAlreadyShown = TRUE;	
 			?>
 			<?php foreach($this->regmemberForm->getFieldset($current_sets) as $field): ?>				
 					<div class="control-group span5"> 				
@@ -102,17 +76,17 @@ select{
 					</div>
 				<?php endforeach; ?>
 			</div>
+			<div><?php if($this->loademergecy){echo $this->loadTemplate("emergency");} ?></div>
 			</div>	
-			<?php } 
+			
+			<?php $emergencyAlreadyShown = FALSE; } 
 			
 			$current_sets = "divisionDetails";
 			if(isset($fieldSets[$current_sets]->showonly) && preg_match("/$playertype/", $fieldSets[$current_sets]->showonly) ){			
 			?>		
 			<div class="span5">
-			<?php 
-				
-				ClubRegHelper::writeFieldText($fieldSets[$current_sets]->description);
-			?><div style="padding-left:10px;"><?php
+			<?php ClubRegHelper::writeFieldText($fieldSets[$current_sets]->description); ?>
+			<div style="padding-left:10px;"><?php
 			foreach($this->regmemberForm->getFieldset($current_sets) as $field): ?>
 				<div class="control-group"> 				
 						<div class="control-label">
@@ -122,9 +96,11 @@ select{
 							<?php echo $field->input; ?>
 						</div>
 				</div>
-			<?php endforeach; ?>			
+			<?php endforeach; ?>		
+						
 			</div><?php 
 			}
+			
 			if($playertype == "junior"){
 				?></div><div class="span5"><?php 
 			}			 
@@ -145,21 +121,18 @@ select{
 					</div>
 				<?php endforeach; ?>
 				</div>
-			
+			<div><?php if($emergencyAlreadyShown){ if($this->loademergecy){ echo $this->loadTemplate("emergency");} }?></div>
 			</div>
-		<?php } ?>
-		</div> <?php // 2 ?>
-		
-		<hr  class='profile-hr'/>
-	
-	
+		<?php } ?>	
+			
+		</div>		
+		<hr  class='profile-hr'/>	
 		<?php 
 			foreach($this->regmemberForm->getFieldset('hiddenControls') as $field){
 				echo $field->input;
 			}
 			?>
-			<input type="<?php echo $in_type; ?>" name="Itemid" value="<?php echo $clubreg_Itemid; ?>" />	
-			
+			<input type="<?php echo $in_type; ?>" name="Itemid" value="<?php echo $clubreg_Itemid; ?>" />			
 			<input type="<?php echo $in_type; ?>" name="option" value="com_clubreg" />
 			<input type="<?php echo $in_type; ?>" name="task" value="regmember.savemember" />
 			<input type="<?php echo $in_type; ?>" name="pk" value="<?php echo $this->member_key; ?>" />

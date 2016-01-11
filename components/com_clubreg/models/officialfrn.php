@@ -93,6 +93,74 @@ class ClubregModelOfficialfrn extends JModelForm
 		
 		return $proceed;		
 	}
+	
+	
+	public function getGroupCount($group_type = null){
+		
+		$joomla_id = (int)$this->getState("joomla_id");
+		
+		$breakdown = array();
+		
+		$db		= $this->getDbo();
+		$query	= $db->getQuery(true);
+		
+		$sexgroup = "count(IF(`gender`='male',1,NULL)) as men, 
+				count(IF(`gender`='female',1,NULL)) as women,
+				count(IF(`gender` = '-1' OR `gender` = '0' ,1,NULL)) as noset";
+		
+		$d_var = "IFNULL(cg.group_name,'No Group') as chartLabel, IFNULL(scg.group_name,'No Subgroup') as subgroupname, count(member_id) as howmany";
+		
+		$query->select($d_var);
+		$query->select($sexgroup);
+		$query->from($db->quoteName(CLUB_REGISTEREDMEMBERS_TABLE).' AS cr');
+		$query->join('LEFT',  CLUB_GROUPS_TABLE.' AS cg ON cr.`group` = cg.group_id');
+		$query->join('LEFT',  CLUB_GROUPS_TABLE.' AS scg ON cr.`subgroup` = scg.group_id');
+		$query->where('cr.playertype in (\'junior\', \'senior\') ');
+		$query->group("cr.`group`");
+		$db->setQuery($query);
+		$breakdown["bygroups"] = $db->loadAssocList();	 // get all groups that you are a member of
+		
+		$query	= $db->getQuery(true);
+		
+		$d_var = "IFNULL(cg.group_name,'No Group') as groupname, IFNULL(scg.group_name,'No Subgroup') as chartLabel, count(member_id) as howmany";
+		
+		$query->select($d_var);
+		$query->select($sexgroup);
+		$query->from($db->quoteName(CLUB_REGISTEREDMEMBERS_TABLE).' AS cr');
+		$query->join('LEFT',  CLUB_GROUPS_TABLE.' AS cg ON cr.`group` = cg.group_id');
+		$query->join('LEFT',  CLUB_GROUPS_TABLE.' AS scg ON cr.`subgroup` = scg.group_id');
+		$query->where('cr.playertype in (\'junior\', \'senior\') ');
+		
+		$query->group("scg.`group_id`");
+		$db->setQuery($query);
+		$breakdown['bysubgroups'] = $db->loadAssocList();	 // get all groups that you are a member of
+		
+		
+		$query	= $db->getQuery(true);		
+		$d_var = " IFNULL(cr.playertype,'No Playertype') as chartLabel, count(member_id) as howmany";		
+		$query->select($d_var);
+		$query->select($sexgroup);
+		$query->from($db->quoteName(CLUB_REGISTEREDMEMBERS_TABLE).' AS cr');
+		
+		$query->group("cr.`playertype`");
+		$db->setQuery($query);
+		$breakdown['byplayertype'] = $db->loadAssocList();	 // get all player
+		
+		
+		$query	= $db->getQuery(true);
+		$d_var = " IFNULL(cr.year_registered,'Not Set') as playertype, count(member_id) as howmany";
+		$query->select($d_var);
+		$query->select($sexgroup);
+		$query->from($db->quoteName(CLUB_REGISTEREDMEMBERS_TABLE).' AS cr');
+		$query->where('cr.playertype in (\'junior\', \'senior\') ');
+		$query->group("cr.`year_registered`");
+		$db->setQuery($query);
+		$breakdown['byyear'] = $db->loadAssocList();	 // get all player
+			
+		return $breakdown;		
+	}
+	
+	
 	/**
 	 * 
 	 * @param unknown_type $group_type
@@ -162,6 +230,9 @@ class ClubregModelOfficialfrn extends JModelForm
 			$query->where('a.group_type =  '. $db->quote($group_type));
 		}			
 		
+		
+		// if there are groups that I am a leader of
+		// get all subgroups under me, also get subgroup a
 		if(count($my_groups["group_leader"]) > 0){
 			$all_mysubgroups = sprintf("(a.group_parent > 0 or a.group_parent in (%s))",implode(",",array_keys($my_groups["group_leader"])));
 			$query->where($all_mysubgroups);
