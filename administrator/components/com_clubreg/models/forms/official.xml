@@ -75,6 +75,10 @@
 			<field name="showbday" type="radio" class="btn-group" default="0" label="COM_CLUBREG_OFFICIAL_DASHBOARD_BDAYS" description="COM_CLUBREG_OFFICIAL_DASHBOARD_BDAYS_DESC">				
 				<option value="0">JHIDE</option>
 				<option value="yes">JSHOW</option>								
+			</field>
+			<field name="breakdown" type="radio" class="btn-group" default="0" label="COM_CLUBREG_OFFICIAL_DASHBOARD_BREAKDOWN" description="COM_CLUBREG_OFFICIAL_DASHBOARD_BREAKDOWN_DESC">				
+				<option value="0">JHIDE</option>
+				<option value="yes">JSHOW</option>								
 			</field>			
 		</fieldset>	
 				
