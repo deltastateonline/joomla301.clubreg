@@ -1,0 +1,9 @@
+@CHARSET "ISO-8859-1";
+
+#contactlistFormDiv {	
+	overflow:auto;	
+}
+#profile-contactlist{		
+	/* margin-left:10px; */	
+	overflow:auto;
+}
