@@ -27,7 +27,7 @@ class ClubRegContactlistsConfig extends JObject
 		$filterConfig = array();		
 		if(method_exists($this, $method)){			
 			$headings = array(); // will have to use some form of ordering
-			$headings["idx"] = array("label"=>JText::_('#'),'csvonly'=>TRUE);			
+			$headings["idx"] = array("label"=>JText::_('#'),'csvonly'=>FALSE);			
 			$filterConfig =  $this->$method($headings);						
 			$filterConfig["headings"] = $headings;			
 			$filterConfig["otherconfigs"] = array();
@@ -39,14 +39,13 @@ class ClubRegContactlistsConfig extends JObject
 	private function getContactlists(&$headings = array()){
 		$entity_filters = $group_where =  array();	
 		
-		$headings["property_make"] = array("label"=>JText::_('COM_CLUBREG_PROPERTY_MAKE'),'label_class'=>'reg-label');		
-		$headings["property_model"] = array("label"=>JText::_('COM_CLUBREG_PROPERTY_MODEL'), "clearfix"=>true);
+		$headings["contactlist_sname"] = array("label"=>JText::_('COM_CLUBREG_EM_SNAME'),'label_class'=>'reg-label' , "transform"=>array("ucfirst"));		
+		$headings["contactlist_fname"] = array("label"=>JText::_('COM_CLUBREG_EM_FNAME'), "clearfix"=>true , "transform"=>array("ucfirst"));
 		
-		$headings["property_serial"] = array("label"=>JText::_('COM_CLUBREG_PROPERTY_SERIAL'),'label_class'=>'reg-label', "clearfix"=>true);
-		$headings["property_checked_out"] = array("label"=>JText::_('COM_CLUBREG_PROPERTY_CHECKOUT'),'label_class'=>'reg-label');
-		$headings["property_checked_in"] = array("label"=>JText::_('COM_CLUBREG_PROPERTY_CHECKIN'), "clearfix"=>true);
+		$headings["contactlist_email"] = array("label"=>JText::_('COM_CLUBREG_EM_EMAIL'),'label_class'=>'reg-label', "clearfix"=>true);
+		$headings["contactlist_phoneno"] = array("label"=>JText::_('COM_CLUBREG_EM_MOBILE'),'label_class'=>'reg-label');
+		$headings["contactlist_notify"] = array("label"=>JText::_('COM_CLUBREG_EM_NOTIFY'), "clearfix"=>true, "transform"=>array("sendnews"));
 	
-		$headings["property_notes"] = array("label"=>JText::_('COM_CLUBREG_PROPERTY_NOTES'),'transform'=>"nl2br"); // use array
 		
 		return array("filters"=>$entity_filters, "group_where"=>$group_where);
 	}

@@ -12,8 +12,8 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 global $clubreg_Itemid;
 
-if(count($this->items)>0){
-	$tableRender = new ClubRegRenderTablesPropertysHelper();
+if(count($this->items)>0){						
+	$tableRender = new ClubRegRenderDivContactlistsHelper();
 	$tableRender->render($this);	
-}else{ echo ClubRegUnAuthHelper::noResults('COM_CLUBREG_PROFILE_PROPERTYS'); }
+}else{ echo ClubRegUnAuthHelper::noResults('COM_CLUBREG_PROFILE_CONTACTLISTS'); }
 
