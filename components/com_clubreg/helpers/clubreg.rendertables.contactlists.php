@@ -107,7 +107,7 @@ class ClubRegRenderDivContactlistsHelper extends ClubRegRenderTablesHelper
 		<div class="profile-new-div" id='contactlistdata_<?php echo $an_item->contactlist_id; ?>' rel=<?php echo $an_item->rel_string ?>>
 			<div class="profile-sub-head-div">
 				<div class="pull-left">
-				<a href="javascript:void(0);"  rel=<?php echo $an_item->rel_string ?> class='profile-contactlist-button' title=<?php echo JText::_('COM_CLUBREG_PAYMENT_EDIT');?>>
+				<a href="javascript:void(0);"  rel=<?php echo $an_item->rel_string ?> class='profile-contactlist-button' >
 			<?php $akey = "contactlist_sname";$aheading = $this->headings[$akey];
 					echo $this->itemRenderer->render($an_item->$akey,$aheading);
 					$akey = "contactlist_sname";$aheading = $this->headings[$akey];

@@ -11,7 +11,7 @@ jQuery(document).ready(function() {
 		jQuery('#contactlistFormDiv').fadeToggle();
 		jQuery('#profile-contactlist').fadeToggle();
 		jQuery("a.profile-contactlist-button").fadeToggle();
-		ClubRegObject.editContacts(contactEditRequestConfig);					
+		ClubRegObject.editContacts(contactEditRequestConfig,jQuery(this));					
 	});	
 	
 	
@@ -108,9 +108,9 @@ ClubregObjectDefinition.prototype.listContacts= function(requestConfig){
 }
 
 
-ClubregObjectDefinition.prototype.editContacts= function(requestConfig){	
+ClubregObjectDefinition.prototype.editContacts= function(requestConfig,linkControl){	
 	self = this;	
-	requestConfig.rData = JSON.decode(jQuery("#contactlistFormDiv").attr('rel'));	
+	requestConfig.rData = JSON.decode(linkControl.attr('rel'));	
 	self.loadAjaxRequestHTML(requestConfig);  
 
 }
