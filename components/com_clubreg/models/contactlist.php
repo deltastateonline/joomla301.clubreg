@@ -113,4 +113,34 @@ class ClubregModelContactlist extends JModelForm
 		return $proceed;
 	}
 	
+	public function changeStatus($status){
+	
+		$db = JFactory::getDbo();
+		$error_ = 0;
+	
+		$contactlist_id = $this->getState("com_clubreg.contactlist.contactlist_id");
+		$contactlist_key = $this->getState("com_clubreg.contactlist.contactlist_key");
+	
+		$d_qry = sprintf("update %s set contactlist_status = %s where contactlist_id = %s and contactlist_key = %s",
+				$db->quoteName(CLUB_CONTACTLIST_TABLE),$db->quote($status), $db->quote($contactlist_id),$db->quote($contactlist_key));
+	
+		$db->setQuery($d_qry);
+		try
+		{
+			$db->query();
+		}
+		catch (RuntimeException $e)
+		{
+			$this->setError($e->getMessage());
+			$error_++;
+		}
+	
+		if($error_ > 0){
+			return FALSE;
+		}else{
+			return TRUE;
+		}
+	
+	}
+	
 }

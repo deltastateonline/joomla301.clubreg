@@ -31,8 +31,9 @@ class ClubregControllerAjax extends JControllerLegacy
 		$this->registerTask('lockattachment', 'processattachment');	
 		
 		$this->registerTask('saveproperty', 'saveproperty');
-		$this->registerTask('savecontactlist', 'savecontactlist');
 		
+		$this->registerTask('savecontactlist', 'savecontactlist');	
+		$this->registerTask('deletecontactlist', 'processcontactlist');
 		
 		$this->uKeyObject = new ClubRegUniqueKeysHelper(10);
 		
@@ -586,6 +587,57 @@ class ClubregControllerAjax extends JControllerLegacy
 		echo json_encode($return_array);
 	
 		
+		$app->close();
+	}
+	
+	public function processcontactlist(){
+	
+		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		$app    = JFactory::getApplication();
+		$user		= JFactory::getUser();
+		$key_data = new stdClass();
+	
+		$c_task = $this->getTask();
+	
+		$return_array = array();
+		$return_array["proceed"] = FALSE;
+	
+		$key_data->full_key = $app->input->post->getString('contactlist_key', NULL);
+		$this->uKeyObject->deconstructKey($key_data);
+	
+		if($key_data->pk_id > 0 && strlen($key_data->string_key) > 0){
+			unset($current_model);
+			$current_model = JModelLegacy::getInstance('contactlist', 'ClubregModel', array('ignore_request' => true));
+			$current_model->setState('com_clubreg.contactlist.contactlist_id',$key_data->pk_id);
+			$current_model->setState('com_clubreg.contactlist.contactlist_key',$key_data->string_key);
+				
+			if(in_array($c_task,array("deletecontactlist"))){
+	
+				switch($c_task){
+					case "lockcontactlist":
+						$n_status = 2;
+						$return_array["msg"] = JText::_("COM_CLUBREG_PROFILE_PRIVATE_RESPONSE");
+						break;
+					case "deletecontactlist":
+						$n_status = 99;
+						$return_array["msg"] = JText::_("COM_CLUBREG_PROFILE_DELETE_RESPONSE");
+						break;
+					default:
+						$n_status = 1;
+						break;
+				}
+	
+				$return_array["proceed"] = $current_model->changeStatus($n_status);
+			}
+	
+			if($return_array["proceed"]){
+				$return_array["contactlist_id"] = $key_data->pk_id;
+			}else{
+				$return_array["msg"] =  $current_model->getError();
+			}
+		}
+	
+		echo json_encode($return_array);
 		$app->close();
 	}
 	

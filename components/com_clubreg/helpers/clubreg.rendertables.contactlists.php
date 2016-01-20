@@ -110,13 +110,13 @@ class ClubRegRenderDivContactlistsHelper extends ClubRegRenderTablesHelper
 				<a href="javascript:void(0);"  rel=<?php echo $an_item->rel_string ?> class='profile-contactlist-button' >
 			<?php $akey = "contactlist_sname";$aheading = $this->headings[$akey];
 					echo $this->itemRenderer->render($an_item->$akey,$aheading);
-					$akey = "contactlist_sname";$aheading = $this->headings[$akey];
+					$akey = "contactlist_fname";$aheading = $this->headings[$akey];
 					echo "&nbsp;" , $this->itemRenderer->render($an_item->$akey,$aheading);
 			?></a>
 				</div>
 				<div class="clearfix"></div>
 			</div>
-			<div class="profile-reg-well">
+			<div class="profile-reg-well contact-list-item">
 				<?php $akey = "contactlist_email"; $aheading = $this->headings[$akey]; ?>
 				<div  class="pull-left reg-label"><?php echo $aheading['label']; ?></div>
 				<div class="pull-left reg-colon">:&nbsp;</div>
@@ -131,11 +131,30 @@ class ClubRegRenderDivContactlistsHelper extends ClubRegRenderTablesHelper
 				<div class="pull-left reg-label"><?php echo $aheading['label']; ?></div>
 				<div class="pull-left reg-colon">:&nbsp;</div>				
 				<div class="pull-left reg-value"><?php echo $this->itemRenderer->render($an_item->$akey,$aheading);?></div>
+				<a class="pull-right img_hidden contactlist-delete" rel=<?php echo $an_item->rel_string ?>><img src="<?php echo CLUBREG_ASSETS; ?>/images/delete.png" /></a>
 				<div class="clearfix"></div>
 			</div>	
 		</div>
 		<div class="clearfix"></div>
 <?php 			
+	}
+	protected function rendererItems5($an_item){		
+		?>
+		<div class="contact-list-item">
+			<div class="contact-title"><a href="">Player Name Here</a></div>
+			<div class="contact-phone">
+				<div class="pull-left reg-label">Email</div>
+				<div class="pull-left reg-colon">:</div>
+				<div class="pull-left reg-value">sample@hotmail.com.au</div> 
+				<div class="pull-left reg-label1">Phone:</div><div class="pull-left reg-value">0413923009</div>
+			</div><span class="clearfix"></span>
+			<div class="contact-notify"><div class="pull-left reg-label">Notify Contact?</div>
+			<div class="pull-left reg-colon">:</div>
+			<div class="pull-left reg-value">Yes </div>
+			<span class="pull-right"><img src="<?php echo CLUBREG_ASSETS; ?>/images/delete.png" /></a></span></div>
+			<span class="clearfix"></span>
+		</div>
+		<?php 
 	}
 	/**
 	 *  renders the wrapper around the item

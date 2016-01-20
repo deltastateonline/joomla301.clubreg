@@ -15,7 +15,7 @@ ClubregObjectDefinition.prototype.loadAjaxRequest = function(reqConfig){
 		beforeSend: reqConfig.rBefore,
 		success: function( response, textStatus, XMLHttpRequest ) {
 			
-			if(response.proceed){	
+			if(response.proceed){
 				Joomla.removeMessages();
 				reqConfig.useResults(response);
 			}else{
@@ -64,8 +64,7 @@ ClubregObjectDefinition.prototype.loadAjaxRequestHTML = function(reqConfig){
 		cache: false,
 		data:reqConfig.rData,
 		beforeSend: reqConfig.rBefore,
-		success: function( response, textStatus, XMLHttpRequest ) {
-					
+		success: function( response, textStatus, XMLHttpRequest ) {			
 			Joomla.removeMessages();
 			reqConfig.useResults(response);			
 

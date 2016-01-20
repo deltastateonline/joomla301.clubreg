@@ -30,6 +30,14 @@ jQuery(document).ready(function() {
 		ClubRegObject.saveContactlist(contactSaveRequestConfig);
 		
 	});
+	
+	jQuery(document).on('click','a.contactlist-delete',function(event){		
+		if(confirm(deleteMessage)){
+			ClubRegObject.deleteContactlist(contactDeleteRequestConfig,jQuery(this));
+		}
+		
+	});	
+	
 
 	ClubRegObject.listContacts(contactListRequestConfig);
 	
@@ -47,16 +55,9 @@ function contactSaveRequestDef(){
 
 contactSaveRequestDef.prototype.useResults  = function(response){	
 	
-	 s_or_f = 1;
+	s_or_f = 1;
 	render_msg(response.msg);
-	
-	if(response.isNew){
-		
-	}else{
-		
-	}
-	
-	
+	ClubRegObject.listContacts(contactListRequestConfig);
 }
 
 /**
@@ -71,11 +72,6 @@ function contactEditRequestDef(){
 };
 contactEditRequestDef.prototype.useResults  = function(response){	
 	jQuery("#contactlistFormDiv").html(response);
-	
-//	jQuery('#contactlistFormDiv').fadeToggle();
-//	jQuery('#profile-contactlist').fadeToggle();
-//	
-//	jQuery("a.profile-contactlist-button").fadeToggle();
 }
 
 /**
@@ -94,11 +90,29 @@ contactListRequestDef.prototype.useResults  = function(response){
 }
 
 /**
+ * Config for editing contact
+ */
+function contactDeleteRequestDef(){	
+		 
+	self = this;
+	self.rUrl  =  "index.php?option=com_clubreg&task=ajax.deletecontactlist&tmpl=component";
+	self.rMethod  = "post";
+	self.rData  = {}	;	
+};
+
+contactDeleteRequestDef.prototype.useResults  = function(response){
+	render_msg(response.msg);
+	ClubRegObject.listContacts(contactListRequestConfig);
+}
+
+
+/**
  * Config for button click request
  */
 var contactEditRequestConfig = new contactEditRequestDef();
 var contactSaveRequestConfig = new contactSaveRequestDef();
 var contactListRequestConfig = new contactListRequestDef();
+var contactDeleteRequestConfig = new contactDeleteRequestDef();
 
 
 ClubregObjectDefinition.prototype.listContacts= function(requestConfig){	
@@ -107,17 +121,18 @@ ClubregObjectDefinition.prototype.listContacts= function(requestConfig){
 	self.loadAjaxRequestHTML(requestConfig);  
 }
 
-
 ClubregObjectDefinition.prototype.editContacts= function(requestConfig,linkControl){	
 	self = this;	
 	requestConfig.rData = JSON.decode(linkControl.attr('rel'));	
 	self.loadAjaxRequestHTML(requestConfig);  
-
 }
 
-ClubregObjectDefinition.prototype.saveContactlist= function(requestConfig){
-	
+ClubregObjectDefinition.prototype.saveContactlist= function(requestConfig){	
 	self = this;	
 	self.loadAjaxRequest(requestConfig);  
-
+}
+ClubregObjectDefinition.prototype.deleteContactlist= function(requestConfig,linkControl){	
+	self = this;		
+	requestConfig.rData = JSON.decode(linkControl.attr('rel'));	
+	self.loadAjaxRequest(requestConfig); 
 }

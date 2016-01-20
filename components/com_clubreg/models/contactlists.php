@@ -38,14 +38,14 @@ class ClubregModelContactlists extends JModelList
 			$where_[] = sprintf(" member_id = %d",$member_id) ;
 		}
 		
+		$where_[] = " contactlist_status = 1 " ;
+		
 		$data_["contactlist_id"] = intval($this->getState("com_clubreg.contactlists.contactlist_id"));
 		$data_["contactlist_key"] = trim(strval($this->getState("com_clubreg.contactlists.contactlist_key")));
 		if($data_["contactlist_id"] > 0  && strlen($data_["contactlist_key"]) > 0 ){			
 			$where_[] = ' contactlist_id = '.$db->quote($data_["contactlist_id"]);
 			$where_[] = ' contactlist_key = '.$db->quote($data_["contactlist_key"]);			
-		}	
-		
-		$where_str = implode(" and ", $where_);		
+		}		
 		
 		$query	= $db->getQuery(true);
 		

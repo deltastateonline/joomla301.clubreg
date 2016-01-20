@@ -7,3 +7,23 @@
 	/* margin-left:10px; */	
 	overflow:auto;
 }
+div.contact-list-item{
+	margin-bottom:0px;
+}
+div.contact-list-item a.img_hidden{
+	visibility:hidden;
+}
+div.contact-list-item:hover a.img_hidden{
+	visibility:visible;
+}
+
+.img_hidden{
+/* 	border-top:solid 0px #EDEDED;
+	border-right:solid 1px #ADADAD;
+	border-bottom:solid 1px #ADADAD;
+	margin:0px 2px 0px 2px;
+	width:16px;
+	-moz-border-radius: 5px;
+  	border-radius: 5px; */
+}
+
