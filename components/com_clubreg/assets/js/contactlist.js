@@ -6,7 +6,7 @@ jQuery(document).ready(function() {
 	
 	var isOn = 0;
 	
-	jQuery(document).on('click','a.profile-contactlist-button',function(event){	
+	jQuery(document).on('click','a.profile-contactlist-button, a.profile-contactlist-link',function(event){	
 		
 		jQuery('#contactlistFormDiv').fadeToggle();
 		jQuery('#profile-contactlist').fadeToggle();
@@ -37,11 +37,7 @@ jQuery(document).ready(function() {
 		}
 		
 	});	
-	
-
 	ClubRegObject.listContacts(contactListRequestConfig);
-	
-
 });
 
 
@@ -51,13 +47,18 @@ function contactSaveRequestDef(){
 	self.rUrl  =  "index.php";
 	self.rMethod  = "post";
 	self.rData  = {}	;	
+	
+	self.rBefore = beforeAction;
 };
 
 contactSaveRequestDef.prototype.useResults  = function(response){	
 	
 	s_or_f = 1;
 	render_msg(response.msg);
+	jQuery("a.profile-contactlist-button" ).trigger( "click" );
 	ClubRegObject.listContacts(contactListRequestConfig);
+	
+	
 }
 
 /**
@@ -69,8 +70,10 @@ function contactEditRequestDef(){
 	self.rUrl  =  "index.php?option=com_clubreg&view=contactlist&layout=edit&tmpl=component&format=raw";
 	self.rMethod  = "post";
 	self.rData  = {}	;	
+	self.rBefore = beforeAction;
 };
-contactEditRequestDef.prototype.useResults  = function(response){	
+contactEditRequestDef.prototype.useResults  = function(response){
+	afterAction();
 	jQuery("#contactlistFormDiv").html(response);
 }
 
@@ -98,6 +101,7 @@ function contactDeleteRequestDef(){
 	self.rUrl  =  "index.php?option=com_clubreg&task=ajax.deletecontactlist&tmpl=component";
 	self.rMethod  = "post";
 	self.rData  = {}	;	
+	self.rBefore = beforeAction ;
 };
 
 contactDeleteRequestDef.prototype.useResults  = function(response){
@@ -123,6 +127,8 @@ ClubregObjectDefinition.prototype.listContacts= function(requestConfig){
 
 ClubregObjectDefinition.prototype.editContacts= function(requestConfig,linkControl){	
 	self = this;	
+	jQuery('#contactlistFormDiv').html("");
+	afterAction(); 
 	requestConfig.rData = JSON.decode(linkControl.attr('rel'));	
 	self.loadAjaxRequestHTML(requestConfig);  
 }
@@ -135,4 +141,11 @@ ClubregObjectDefinition.prototype.deleteContactlist= function(requestConfig,link
 	self = this;		
 	requestConfig.rData = JSON.decode(linkControl.attr('rel'));	
 	self.loadAjaxRequest(requestConfig); 
+}
+
+function beforeAction(jqXHR){	
+	jQuery('#loading-div').addClass('loading-small');
+}
+function afterAction(){
+	jQuery('#loading-div').removeClass('loading-small');
 }
