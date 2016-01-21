@@ -117,11 +117,11 @@ class ClubRegRenderDivContactlistsHelper extends ClubRegRenderTablesHelper
 				<div class="clearfix"></div>
 			</div>
 			<div class="profile-reg-well contact-list-item">
-				<?php $akey = "contactlist_email"; $aheading = $this->headings[$akey]; ?>
+				<?php $akey = "contactlist_phoneno"; $aheading = $this->headings[$akey]; ?>
 				<div  class="pull-left reg-label"><?php echo $aheading['label']; ?></div>
 				<div class="pull-left reg-colon">:&nbsp;</div>
 				<div class="pull-left reg-value"><?php echo $this->itemRenderer->render($an_item->$akey,$aheading);?>&nbsp;</div>
-				<?php $akey = "contactlist_phoneno";$aheading = $this->headings[$akey]; ?>				
+				<?php $akey = "contactlist_email";$aheading = $this->headings[$akey]; ?>				
 				<div class="pull-left reg-label1"><?php echo $aheading['label']; ?></div>	
 				<div class="pull-left reg-colon">&nbsp;:&nbsp;</div>			
 				<div class="pull-left reg-value"><?php echo $this->itemRenderer->render($an_item->$akey,$aheading);?></div>

@@ -63,7 +63,7 @@ class ClubregModelContactlists extends JModelList
 			$query->where($a_where);
 		}		
 		
-		$query->order('a.contactlist_id asc');
+		$query->order('a.contactlist_sname asc');
 		
 		$db->setQuery($query);
 		$contactlistList = $db->loadObjectList();
