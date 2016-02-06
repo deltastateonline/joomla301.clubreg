@@ -74,4 +74,39 @@ class ClubregModelContactlists extends JModelList
 			return array();
 		
 	}
+	
+	public function getContactlistsByMemberId($member_id = null){
+		$db		= $this->getDbo();
+		if(isset($member_id) && intval($member_id) > 0){
+			$where_[] = sprintf(" member_id = %d",$member_id) ;
+		}
+		
+		$where_[] = " contactlist_status = 1 " ;
+		$where_[] = " contactlist_notify = 1 " ;
+		
+		
+		$query	= $db->getQuery(true);
+		
+		$all_string[] = "`contactlist_id`, `contactlist_key`, `member_id`,
+		`contactlist_email`, `contactlist_phoneno`, `contactlist_fname`,`contactlist_sname`,contactlist_notify";
+		
+		
+		$d_var = implode(",", $all_string);
+		$query->select($d_var);
+		$query->from($db->quoteName(CLUB_CONTACTLIST_TABLE).' AS a');		
+		
+		foreach($where_ as $a_where){
+			$query->where($a_where);
+		}
+		
+		$query->order('a.contactlist_email asc');
+		
+		$db->setQuery($query);
+		$contactlistList = $db->loadObjectList();
+		
+		if(count($contactlistList) > 0){
+			return $contactlistList;
+		}else
+			return array();
+	}
 }

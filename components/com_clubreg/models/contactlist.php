@@ -94,6 +94,10 @@ class ClubregModelContactlist extends JModelForm
 		
 		if($isNew || $update_me){
 			$contactlistTable = $this->getTable();
+			
+			if(empty($data["contactlist_notify"])){
+				$data["contactlist_notify"] = '0';
+			}		
 		
 			$contactlistTable->bind($data);
 			if($isNew){
