@@ -15,7 +15,7 @@ ClubregObjectDefinition.prototype.loadAjaxRequest = function(reqConfig){
 		beforeSend: reqConfig.rBefore,
 		success: function( response, textStatus, XMLHttpRequest ) {
 			
-			if(response.proceed){	
+			if(response.proceed){
 				Joomla.removeMessages();
 				reqConfig.useResults(response);
 			}else{
@@ -27,6 +27,46 @@ ClubregObjectDefinition.prototype.loadAjaxRequest = function(reqConfig){
 					}
 				}
 			} 				
+
+		},
+		error: function( XMLHttpRequest, textStatus, errorThrown ) {			
+			var fatalError = ['warning'];
+			
+			fatalError = {};
+			fatalError.error = [];			
+			fatalError.error[0] = "Unable to Process Request ";
+			fatalError.error[1] = errorThrown;			
+			Joomla.renderMessages(fatalError);	
+			
+			if(reqConfig.useFailedResults !== undefined){
+				reqConfig.useFailedResults(response);
+			}
+			
+		},
+		complete:function(XMLHttpRequest, textStatus){		
+			// where requestObject is a string, which is used as the trigger
+			// tabName can be a string or an object
+			if(reqConfig.requestObject !== undefined){				
+				jQuery(document).trigger(reqConfig.requestObject,[reqConfig.tabName]);
+			}
+		}
+	});	
+	
+};
+
+ClubregObjectDefinition.prototype.loadAjaxRequestHTML = function(reqConfig){
+	
+	
+	jQuery.ajax({
+		url: reqConfig.rUrl,
+		type: reqConfig.rMethod,
+		dataType: 'html',
+		cache: false,
+		data:reqConfig.rData,
+		beforeSend: reqConfig.rBefore,
+		success: function( response, textStatus, XMLHttpRequest ) {			
+			Joomla.removeMessages();
+			reqConfig.useResults(response);			
 
 		},
 		error: function( XMLHttpRequest, textStatus, errorThrown ) {			

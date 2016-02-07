@@ -139,14 +139,15 @@ class ClubRegProfileConfig extends JObject
 		$tabs["children"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_CHILDREN'),"css"=>"class='active'",'default'=>TRUE,'img'=>array('fname'=>'groups.png','attr'=>$attr), 'applies'=>array("guardian"));			
 		$tabs["guardian"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_GUARDIAN'),"css"=>"class='active'",'default'=>TRUE,'img'=>array('fname'=>'parentsicon.png','attr'=>$attr), 'applies'=>array("junior"));
 		$tabs["emergency"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_EMERGENCY'),"css"=>"class='active'",'default'=>TRUE,'img'=>array('fname'=>'emergency.png','attr'=>$attr), 'applies'=>array("senior","junior"));
+		$tabs["contactlist"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_CONTACTLIST'),"css"=>"class='active'",'default'=>TRUE,'img'=>array('fname'=>'contactlist.png','attr'=>$attr), 'applies'=>array("senior","junior"));
+		
 		$tabs["notes"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_NOTES'),'img'=>array('fname'=>'notes.png','attr'=>$attr), 'applies'=>array("senior","junior","guardian"));
 	//	$tabs["stats"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_STATS'),'img'=>array('fname'=>'stats.png','attr'=>$attr), 'applies'=>array("senior","junior"));
 		$tabs["payments"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_PAYMENTS'),'img'=>array('fname'=>'payment.png','attr'=>$attr), 'applies'=>array("senior","junior"));
 		$tabs["other"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_OTHER'),'img'=>array('fname'=>'other.png','attr'=>$attr), 'applies'=>array("senior","junior"));
 		$tabs["attachments"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_ATTACHMENTS'),'img'=>array('fname'=>'attachments.png','attr'=>$attr), 'applies'=>array("senior","junior"));
 		$tabs["property"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_PROPERTYS'),'img'=>array('fname'=>'property.png','attr'=>$attr) , 'applies'=>array("senior","junior"));
-		$tabs["contactList"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_CONTACTLIST'),'img'=>array('fname'=>'groups.png','attr'=>$attr) , 'applies'=>array("senior","junior"));
-	
+			
 		return $tabs;		
 	}
 	private function configuredTabs($player_type = NULL, $all_tabs){

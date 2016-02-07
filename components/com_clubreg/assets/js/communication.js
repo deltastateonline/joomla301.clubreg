@@ -6,7 +6,9 @@ jQuery( document ).ready(function() {
 		this.groupControl = gControl;
 		this.selectedGroups = [];		
 		this.addGroup = function(gId){	
-			var found = this.selectedGroups.indexOf(gId);			
+			var found = this.selectedGroups.indexOf(gId);	
+			
+			
 
 			if(found == -1){
 				this.selectedGroups.push(gId);
@@ -31,7 +33,10 @@ jQuery( document ).ready(function() {
 			if(this.groupControl.val() == 0){
 				this.selectedGroups = [];
 			}else{
-				this.selectedGroups = jQuery.parseJSON(this.groupControl.val());
+				var tmp = jQuery.parseJSON(this.groupControl.val());				
+				this.selectedGroups = tmp;
+				
+				 
 			}
 		};
 	}

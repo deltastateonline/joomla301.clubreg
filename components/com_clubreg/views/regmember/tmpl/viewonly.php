@@ -140,6 +140,7 @@ $hasClubProfile = isset($this->profileConfigs["headings"]['club'])?TRUE:FALSE;
 <?php 
 $document = JFactory::getDocument();
 ClubregHelper::writeTabAssets($document, "common");
+ClubregHelper::writeTabAssets($document, "clubreg",array("js"));
 ClubregHelper::writeTabAssets($document, "profile");
 
 foreach($headingConfigs["tab"] as $a_key =>$an_asset){

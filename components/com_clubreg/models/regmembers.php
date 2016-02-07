@@ -321,7 +321,7 @@ class ClubregModelRegmembers extends JModelList
 		return 	$all_data;		
 	}
 	
-	public function getMembersByGroups($group_ids,$comm_type="email"){
+	public function getMembersByGroups($group_ids,$comm_type="email",$contactlist_model=NULL){
 		
 		$final_recipients = array();
 		
@@ -335,7 +335,7 @@ class ClubregModelRegmembers extends JModelList
 		
 		$d_var = "a.emailaddress,concat(a.surname,' ',a.givenname) as sending_name,
 		a.parent_id,a.playertype, if(a.parent_id > 0,b.emailaddress ,a.emailaddress) as sending_email,
-		if(a.parent_id > 0,b.phoneno ,a.phoneno) as sending_phone";
+		if(a.parent_id > 0,b.phoneno ,a.phoneno) as sending_phone,a.member_id";
 		
 		$query->select($d_var);
 		
@@ -353,25 +353,43 @@ class ClubregModelRegmembers extends JModelList
 		if(count($all_recipients) > 0){
 			foreach($all_recipients as $a_member){
 				
-				if($comm_type == "email"){				
+				if($contactlist_model){
+					$contactList = $contactlist_model->getContactlistsByMemberId($a_member->member_id);				
+				}
+				
+				if($comm_type == "email"){					
 					if(JMailHelper::isEmailAddress($a_member->sending_email)){						
 						
 						$final_recipients["emails"][] = $a_member->sending_email;
 						$final_recipients["names"][] = $a_member->sending_name;						
+					}
+					if(count($contactList) > 0){
+						foreach($contactList as $aContact){
+							if(JMailHelper::isEmailAddress($aContact->contactlist_email)){
+								$final_recipients["emails"][] = $aContact->contactlist_email;
+								$final_recipients["names"][] = $aContact->contactlist_fname ." ". $aContact->contactlist_sname;
+							}
+						}
 					}
 				}else if($comm_type == "sms"){
 					if(!empty($a_member->sending_phone) && is_numeric($a_member->sending_phone)){
 						$final_recipients["names"][] = $a_member->sending_name;
 						$final_recipients["sms"][] = $a_member->sending_phone.$sms_suffix;
 					}
+					
+					if(count($contactList) > 0){
+						foreach($contactList as $aContact){
+							if(!empty($aContact->contactlist_phoneno) && is_numeric($aContact->contactlist_phoneno)){								
+								$final_recipients["names"][] = $aContact->contactlist_fname ." ". $aContact->contactlist_sname;
+								$final_recipients["sms"][] = $aContact->contactlist_phoneno;
+							}
+						}
+					}					
 				}
 			}
 		}
-		unset($all_recipients);
-		
+		unset($all_recipients);		
 		return $final_recipients;		
-		
 	}
-	
 	
 }

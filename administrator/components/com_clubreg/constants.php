@@ -45,6 +45,7 @@ define('CLUB_CONTACT_TABLE','#__clubreg_contact_details'); // contact  table
 define('CLUB_STATS_TABLE','#__clubreg_stats_details'); // Stats  table
 
 define('CLUB_PROPERTY_TABLE','#__clubreg_property_sheet'); // Property sheet  table
+define('CLUB_CONTACTLIST_TABLE','#__clubreg_contactlist'); // Contact List  table
 
 
 

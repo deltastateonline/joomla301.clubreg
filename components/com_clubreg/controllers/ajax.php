@@ -32,6 +32,8 @@ class ClubregControllerAjax extends JControllerLegacy
 		
 		$this->registerTask('saveproperty', 'saveproperty');
 		
+		$this->registerTask('savecontactlist', 'savecontactlist');	
+		$this->registerTask('deletecontactlist', 'processcontactlist');
 		
 		$this->uKeyObject = new ClubRegUniqueKeysHelper(10);
 		
@@ -528,6 +530,115 @@ class ClubregControllerAjax extends JControllerLegacy
 	
 		$app->close();
 	
+	}
+	
+	public function savecontactlist(){
+		
+		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		
+		$app    = JFactory::getApplication();
+		$user		= JFactory::getUser();
+		
+		$proceed = FALSE;
+		$data = $this->input->post->get('jform', array(), 'array');
+		
+		unset($current_model);
+		$key_data = new stdClass();
+		$current_model = JModelLegacy::getInstance('regmember', 'ClubregModel', array('ignore_request' => true));
+		$key_data->full_key = $data['member_key'];
+		$current_model->processKey($key_data);
+		$data["member_id"] = $key_data->member_id;
+		$data["created_by"] = $user->get('id');
+	
+		unset($current_model);unset($key_data);
+		$key_data = new stdClass();
+		$current_model = JModelLegacy::getInstance('contactlist', 'ClubregModel', array('ignore_request' => true));
+		$key_data->full_key = $data['contactlist_key'];
+		$this->uKeyObject->deconstructKey($key_data);
+	
+		$isNew = FALSE;
+		$data["contactlist_key"] = $key_data->string_key;
+		$data["contactlist_id"] = $key_data->pk_id;
+	
+		if($key_data->pk_id > 0 && strlen($key_data->string_key) == 0){
+			$data["contactlist_key"] =  $this->uKeyObject->getUniqueKey();
+		}else if($key_data->pk_id == 0){
+			$data["contactlist_key"] =  $this->uKeyObject->getUniqueKey();
+			$data["contactlist_id"] = NULL;
+			$isNew = TRUE;
+		}
+	
+		
+		$current_model->setState('com_clubreg.contactlist.isnew',$isNew);
+		$proceed = $current_model->save($data);
+	
+		$return_array = array();
+		$return_array["proceed"] = $proceed;		
+	
+		if($proceed){
+			$return_array["isNew"] = $isNew;
+			$return_array["contactlist_id"] = $current_model->get("contactlist_id");
+			$return_array["msg"][] = JText::_('COM_CLUBREG_DETAILS_UPDATE');
+		}else{
+			$return_array["msg"] = $this->error_from_model($current_model);				
+		}
+			
+		unset($current_model);unset($key_data);
+		echo json_encode($return_array);
+	
+		
+		$app->close();
+	}
+	
+	public function processcontactlist(){
+	
+		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		$app    = JFactory::getApplication();
+		$user		= JFactory::getUser();
+		$key_data = new stdClass();
+	
+		$c_task = $this->getTask();
+	
+		$return_array = array();
+		$return_array["proceed"] = FALSE;
+	
+		$key_data->full_key = $app->input->post->getString('contactlist_key', NULL);
+		$this->uKeyObject->deconstructKey($key_data);
+	
+		if($key_data->pk_id > 0 && strlen($key_data->string_key) > 0){
+			unset($current_model);
+			$current_model = JModelLegacy::getInstance('contactlist', 'ClubregModel', array('ignore_request' => true));
+			$current_model->setState('com_clubreg.contactlist.contactlist_id',$key_data->pk_id);
+			$current_model->setState('com_clubreg.contactlist.contactlist_key',$key_data->string_key);
+				
+			if(in_array($c_task,array("deletecontactlist"))){
+	
+				switch($c_task){
+					case "lockcontactlist":
+						$n_status = 2;
+						$return_array["msg"] = JText::_("COM_CLUBREG_PROFILE_PRIVATE_RESPONSE");
+						break;
+					case "deletecontactlist":
+						$n_status = 99;
+						$return_array["msg"] = JText::_("COM_CLUBREG_PROFILE_DELETE_RESPONSE");
+						break;
+					default:
+						$n_status = 1;
+						break;
+				}
+	
+				$return_array["proceed"] = $current_model->changeStatus($n_status);
+			}
+	
+			if($return_array["proceed"]){
+				$return_array["contactlist_id"] = $key_data->pk_id;
+			}else{
+				$return_array["msg"] =  $current_model->getError();
+			}
+		}
+	
+		echo json_encode($return_array);
+		$app->close();
 	}
 	
 	
