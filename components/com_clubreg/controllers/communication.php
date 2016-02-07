@@ -231,8 +231,7 @@ class ClubregControllerCommunication extends JControllerLegacy
 				$mail->setSubject($sending_['sitename'] . ': ' . $sending_["comm_subject"]);
 				$mail->setBody($sending_["comm_message"]);
 				$mail->isHtml();
-				die(0);
-				//$sent = $mail->Send();
+				
 				$sent = $mail->Send();	
 				
 				if (!($sent instanceof Exception)){
