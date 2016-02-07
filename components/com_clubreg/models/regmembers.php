@@ -354,8 +354,7 @@ class ClubregModelRegmembers extends JModelList
 			foreach($all_recipients as $a_member){
 				
 				if($contactlist_model){
-					$contactList = $contactlist_model->getContactlistsByMemberId($a_member->member_id);
-					print_r($contactList);
+					$contactList = $contactlist_model->getContactlistsByMemberId($a_member->member_id);				
 				}
 				
 				if($comm_type == "email"){					
@@ -385,16 +384,12 @@ class ClubregModelRegmembers extends JModelList
 								$final_recipients["sms"][] = $aContact->contactlist_phoneno;
 							}
 						}
-					}
-					
-					
+					}					
 				}
 			}
 		}
-		unset($all_recipients);
-		
+		unset($all_recipients);		
 		return $final_recipients;		
-		
 	}
 	
 }
