@@ -15,7 +15,7 @@ require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.filters.php';
  * Render the controls used to filter the stats reporting
  *
  */
-class ClubRegFiltersStatsReportingHelper extends ClubRegFiltersHelper{
+class ClubRegFiltersPaymentReportingHelper extends ClubRegFiltersHelper{
 
 	protected  $stats_date = NULL;
 	protected  $end_date = NULL;

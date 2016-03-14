@@ -86,11 +86,7 @@ class ClubRegViewstats extends ClubRegViews
 			$tmp_filters["group_where"] = $regmembersConfigs["group_where"];
 			$tmp_filters["headings"] = $regmembersConfigs["headings"];
 			$tmp_filters["otherconfigs"] = $regmembersConfigs["otherconfigs"];
-			
-		
-			
-			
-			
+					
 			$this->entity_filters = $tmp_filters;
 			
 			$this->uKeyObject = new ClubRegUniqueKeysHelper();			

@@ -32,24 +32,13 @@ class ClubRegViewreporting extends ClubRegViews
 			
 			require_once CLUBREG_CONFIGS.'config.regmembers.php';
 				
-			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.filters.stats.php';
+			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.filters.payment.reporting.php';
 			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.rendertables.stats.php';
 			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.pagination.php';
 			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
 				
 			$group_type			= $app->input->post->get('playertype');
-			$subgroup			= (int) $app->input->post->get('subgroup');
-				
-			$stats_date =  $app->input->post->get('stats_date',NULL,'string');
-				
-			if(!isset($stats_date)){
-				$stats_date = JHtml::date('now','Y-m-d');
-			}else{
-				$stats_date = str_replace("/", "-", $stats_date); // replace / with a -  so that you can perform a strtotime properly
-				$stats_date = JHtml::date(strtotime($stats_date),'Y-m-d');
-			}
-				
-			$this->stats_date = $stats_date;
+			$subgroup			= (int) $app->input->post->get('subgroup');		
 				
 			if(!isset($group_type)){
 				$params = JComponentHelper::getParams('com_clubreg');
@@ -62,7 +51,7 @@ class ClubRegViewreporting extends ClubRegViews
 			}
 			
 			unset($current_model);
-			$current_model = JModelLegacy::getInstance('reporting', 'ClubregModel', array('ignore_request' => false));
+			$current_model = JModelLegacy::getInstance('paymentreporting', 'ClubregModel', array('ignore_request' => false));
 				
 			$this->formaction = 'index.php?option=com_clubreg&view=reporting';
 			//$this->formaction_edit = 'index.php?option=com_clubreg&view=reporting&layout=payments';
@@ -87,7 +76,8 @@ class ClubRegViewreporting extends ClubRegViews
 			$tmp_filters["headings"] = $regmembersConfigs["headings"];
 			$tmp_filters["otherconfigs"] = $regmembersConfigs["otherconfigs"];
 				
-			
+			var_dump($this->items);
+			var_dump($tmp_filters);
 				
 				
 				
@@ -100,7 +90,7 @@ class ClubRegViewreporting extends ClubRegViews
 			
 		}
 		
-		
+		$this->pageTitle = $active->title;
 		
 		return $proceed;
 	}
@@ -112,7 +102,7 @@ class ClubRegViewreporting extends ClubRegViews
 		$proceed = FALSE;
 	
 		unset($current_model);
-		//$current_model = JModelLegacy::getInstance('reporting', 'ClubregModel', array('ignore_request' => false));
+		
 		$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
 		$current_model->setState('joomla_id',$user->get('id'));
 	
