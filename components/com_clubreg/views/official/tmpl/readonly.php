@@ -251,8 +251,7 @@ if($this->canedit){
 				<div class="loading1" id="profileEoi" rel=<?php echo json_encode($rel_string)?>></div>				
 				<?php } ?>
 				<?php if($render_sections["breakdown"]) { ?>
-				<div class="alert alert-info"><img alt="" src="components/com_clubreg/assets/images/stats.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_BREAKDOWN'); ?></strong> </div>
-					<span class="pull-left">Experimental :</span>	<a href="mailto:joomla@deltastateonline.com" class="pull-right"> <b>Want This ??</b> Send Us an email</a><span class="clearfix"></span>
+				<div class="alert alert-info"><img alt="" src="components/com_clubreg/assets/images/stats.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_BREAKDOWN'); ?></strong> </div>				
 					<div class="dashboard-div loading1" id="breakdownTab">				
 						<div id="chart_div"></div>				
 						<div id="chart_div_sub"></div>	

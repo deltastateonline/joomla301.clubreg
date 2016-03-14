@@ -11,8 +11,13 @@
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
+
 JHtml::_('behavior.framework',true);
 JHtml::_('behavior.keepalive');
+JHtml::_('jquery.framework');
+
+
+
 
 global $clubreg_Itemid;
 $in_type = "hidden";
@@ -130,11 +135,10 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 	<?php echo JHTML::_( 'form.token' ); ?>
 </form>
 <?php 
-ClubregHelper::write_footer();
 $document = JFactory::getDocument();
 ClubregHelper::writeTabAssets($document, "common",array("css"));
-
+ClubregHelper::writeTabAssets($document, "filters_logic",array("js"));
 ClubregHelper::writeTabAssets($document, "clubreggroups",array("js"));
 ClubregHelper::writeTabAssets($document, "regmembers",array("css","js"));
-ClubregHelper::writeTabAssets($document, "filters_logic",array("js"));
+ClubregHelper::write_footer();
 ?>

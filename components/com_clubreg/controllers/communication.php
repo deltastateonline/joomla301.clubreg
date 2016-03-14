@@ -193,8 +193,11 @@ class ClubregControllerCommunication extends JControllerLegacy
 					$comm_key = "sms";
 				}			
 				
+				$contactlist_model = JModelLegacy::getInstance('contactlists', 'ClubregModel', array('ignore_request' => true));
+					
+				
 				$current_model = JModelLegacy::getInstance('regmembers', 'ClubregModel', array('ignore_request' => true));
-				$validEmails = $current_model->getMembersByGroups($comm_sendto,$comm_key);				
+				$validEmails = $current_model->getMembersByGroups($comm_sendto,$comm_key,$contactlist_model);				
 	
 				if($data["comm_type"] == "sms"){
 					$validEmails["emails"] = $validEmails["sms"];					
@@ -228,6 +231,7 @@ class ClubregControllerCommunication extends JControllerLegacy
 				$mail->setSubject($sending_['sitename'] . ': ' . $sending_["comm_subject"]);
 				$mail->setBody($sending_["comm_message"]);
 				$mail->isHtml();
+				
 				$sent = $mail->Send();	
 				
 				if (!($sent instanceof Exception)){

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="contactlist">				
+			<field name="contactlist_sname" type="text" label="COM_CLUBREG_EM_SNAME" description="COM_CLUBREG_EM_SNAME_DESC"
+			class="inputbox input-large"  required="true" />	
+			
+			<field name="contactlist_fname" type="text" 	label="COM_CLUBREG_EM_FNAME" description="COM_CLUBREG_EM_FNAME_DESC"
+			class="inputbox input-large"   />	
+			
+			<field name="contactlist_email" type="email" label="COM_CLUBREG_EM_EMAIL" description="COM_CLUBREG_EM_EMAIL_DESC"
+			class="inputbox input-large" required="true"  />	
+			
+			<field name="contactlist_phoneno" type="text" label="COM_CLUBREG_EM_MOBILE" description="COM_CLUBREG_EM_MOBILE_DESC"
+			class="inputbox input-large"  />		
+			
+			<field name="contactlist_notify" type="checkbox" label="COM_CLUBREG_EM_NOTIFY" description="COM_CLUBREG_EM_NOTIFY_DESC"
+			class="inputbox input-large"  size="1" default="0" value="1" />		
+					
+	</fieldset>		
+	<fieldset name="hiddenControls"	>	
+		<field name="contactlist_id" type="hidden" default="0" readonly="true" class="readonly" label="PK" description ="PK"/>
+		<field name="contactlist_key" type="hidden" default="0" readonly="true" class="readonly" label="Contactlist key" description ="Contactlist key"/>	
+		<field name="member_key" type="hidden" default="0" readonly="true" class="readonly" label="Member key" description ="Member key"/>			
+	</fieldset>	
+</form>

@@ -68,6 +68,7 @@ class ClubRegRegmembersBatchConfig extends JObject
 		$entity_filters["subgroup"] = array("filter_col"=>"a.`subgroup`","control"=>"select.genericlist", "class"=>$class_ ,"clearfix"=>true);
 		
 		$class_ = "span4";
+		$entity_filters["year_registered"] = array("filter_col"=>"a.`year_registered`","control"=>"select.genericlist", "class"=>$class_);
 		$entity_filters["memberlevel"] = array("filter_col"=>"a.`memberlevel`","control"=>"select.genericlist", "class"=>$class_);
 		$entity_filters["gender"] = array("filter_col"=>"a.`gender`","control"=>"select.genericlist", "class"=>$class_ );
 		
