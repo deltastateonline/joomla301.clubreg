@@ -29,7 +29,7 @@ class ClubRegPaymentsDisplayConfig extends JObject
 			$headings = array(); // will have to use some form of ordering
 				
 			$headingConfig = $this->$method($headings);					
-			$headings[$headingConfig[lastIndex]]["t_created_date"] = array("label"=>JText::_('COM_CLUBREG_REGISTERED_LABEL'),'csvonly'=>TRUE);	
+			//$headings["t_created_date"] = array("label"=>JText::_('COM_CLUBREG_REGISTERED_LABEL'),'csvonly'=>TRUE);	
 			
 			$filterConfig["headings"] = $headings;					
 		}		
@@ -38,18 +38,17 @@ class ClubRegPaymentsDisplayConfig extends JObject
 	}
 					 
 	private function getGuardian(&$headings = array()){
-				
-		$i= 0;
-		$headings[$i]["emailaddress"] = array("label"=>JText::_('JGLOBAL_EMAIL'), "clearfix"=>true);
-		$headings[$i]["t_phone"] = array("label"=>JText::_('COM_CLUBREG_MOBILE'),"sep"=>"/", "clearfix"=>true);
-		$i++;
-		$headings[$i]["t_address"] = array("label"=>JText::_('COM_CLUBREG_ADDRESS'), "clearfix"=>true);			
-		$i++;
-		$headings[$i]["my_children"] = array("label"=>JText::_('COM_CLUBREG_JUNIOR_LABEL'));	
-		$i++;
-		$headings[$i]["send_news"] = array("label"=>JText::_('COM_CLUBREG_SENDNEWS'), "clearfix"=>true, "transform"=>"sendnews"); 
-		$headings[$i]["member_status"] = array("label"=>JText::_('COM_CLUBREG_MEMBERSTATUS_LABEL'),'transform'=>"ucfirst");
-		$i++;
+			
+		$headings["emailaddress"] = array("label"=>JText::_('JGLOBAL_EMAIL'), "clearfix"=>true);
+		$headings["t_phone"] = array("label"=>JText::_('COM_CLUBREG_MOBILE'),"sep"=>"/", "clearfix"=>true);
+		
+		$headings["t_address"] = array("label"=>JText::_('COM_CLUBREG_ADDRESS'), "clearfix"=>true);			
+		
+		$headings["my_children"] = array("label"=>JText::_('COM_CLUBREG_JUNIOR_LABEL'));	
+		
+	//	$headings["send_news"] = array("label"=>JText::_('COM_CLUBREG_SENDNEWS'), "clearfix"=>true, "transform"=>"sendnews"); 
+		$headings["member_status"] = array("label"=>JText::_('COM_CLUBREG_MEMBERSTATUS_LABEL'),'transform'=>"ucfirst");
+		
 		return array("lastIndex"=>$i);
 	}
 	
@@ -57,46 +56,59 @@ class ClubRegPaymentsDisplayConfig extends JObject
 		
 		$i= 0;
 		
-		$headings[$i]["emailaddress"] = array("label"=>JText::_('JGLOBAL_EMAIL'), "clearfix"=>true);
-		$i++;
-		$headings[$i]["t_phone"] = array("label"=>JText::_('COM_CLUBREG_MOBILE'),"sep"=>" / ", "clearfix"=>true);
-		$i++;
+		$headings["emailaddress"] = array("label"=>JText::_('JGLOBAL_EMAIL'), "clearfix"=>true);
 		
-		$headings[$i]["t_address"] = array("label"=>JText::_('COM_CLUBREG_ADDRESS'), "clearfix"=>true);
-		$i++;
-		$headings[$i]["group"] = array("label"=>JText::_('COM_CLUBREG_GROUPN_LABEL'));
-		$headings[$i]["subgroup"] = array("label"=>JText::_('COM_CLUBREG_SUBGROUPN_LABEL'), "clearfix"=>true);
-		$i++;
-		$headings[$i]["joining_date"] = array("label"=>JText::_('COM_CLUBREG_JOINING_LABEL'), 'transform'=>"clubregdate");
-		$headings[$i]["year_registered"] = array("label"=>JText::_('COM_CLUBREG_SEASON_LABEL') , "clearfix"=>true);
-		$i++;
-		$headings[$i]["gender"] = array("label"=>JText::_('COM_CLUBREG_GENDER_LABEL'),'transform'=>"ucfirst");
-		$headings[$i]["memberlevel"] = array("label"=>JText::_('COM_CLUBREG_SKILLLEVEL_LABEL'),'transform'=>"ucfirst", "clearfix"=>true);
-		$i++;
-		$headings[$i]["send_news"] = array("label"=>JText::_('COM_CLUBREG_SENDNEWS'), "transform"=>"sendnews");		
-		$headings[$i]["member_status"] = array("label"=>JText::_('COM_CLUBREG_MEMBERSTATUS_LABEL'),'transform'=>"ucfirst");
-		$i++;
+		$headings["t_phone"] = array("label"=>JText::_('COM_CLUBREG_MOBILE'),"sep"=>" / ", "clearfix"=>true);
+		
+		
+		$headings["t_address"] = array("label"=>JText::_('COM_CLUBREG_ADDRESS'), "clearfix"=>true);
+		
+		$headings["group"] = array("label"=>JText::_('COM_CLUBREG_GROUPN_LABEL'));
+		//$headings["subgroup"] = array("label"=>JText::_('COM_CLUBREG_SUBGROUPN_LABEL'), "clearfix"=>true);
+		
+		$headings["payment_transact_no"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_TRANSACT'),'label_class'=>'reg-label');
+		$headings["payment_amount"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_AMOUNT').'('.CURRENCY.')', "clearfix"=>true,'transform'=>'applyFactor'); // use array
+				
+		$headings["payment_method"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_METHOD'),'label_class'=>'reg-label');		
+		$headings["payment_status"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_STATUS'), "clearfix"=>true);
+		
+		$headings["payment_date"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_DATE'),'label_class'=>'reg-label');
+		$headings["payment_season"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_SEASON'),'transform'=>"ucfirst", "clearfix"=>true);
+	
+	//	$headings["payment_notes"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_NOTES'),'transform'=>"nl2br",'label_class'=>'reg-label'); // use array
+			
+		
+		
+	//	$headings["joining_date"] = array("label"=>JText::_('COM_CLUBREG_JOINING_LABEL'), 'transform'=>"clubregdate");
+		//$headings["year_registered"] = array("label"=>JText::_('COM_CLUBREG_SEASON_LABEL') , "clearfix"=>true);
+		
+	//	$headings["gender"] = array("label"=>JText::_('COM_CLUBREG_GENDER_LABEL'),'transform'=>"ucfirst");
+	//	$headings["memberlevel"] = array("label"=>JText::_('COM_CLUBREG_SKILLLEVEL_LABEL'),'transform'=>"ucfirst", "clearfix"=>true);
+		
+		//$headings["send_news"] = array("label"=>JText::_('COM_CLUBREG_SENDNEWS'), "transform"=>"sendnews");		
+		//$headings["member_status"] = array("label"=>JText::_('COM_CLUBREG_MEMBERSTATUS_LABEL'),'transform'=>"ucfirst");
+		
 		return array("lastIndex"=>$i);
 	}
 	private function getJunior(&$headings = array()){
 		
 		$i= 0;
-		$headings[$i]["guardian"] = array("label"=>JText::_('COM_CLUBREG_GUARDIAN_LABEL'),'transform'=>"ucwords", "clearfix"=>true); // one line
-		$i++;
-		$headings[$i]["t_address"] = array("label"=>JText::_('COM_CLUBREG_ADDRESS'), "cols" => array("gaddress", "gsuburb","gpostcode"), "clearfix"=>true);
-		$i++;
-		$headings[$i]["group"] = array("label"=>JText::_('COM_CLUBREG_GROUPN_LABEL'));
-		$headings[$i]["subgroup"] = array("label"=>JText::_('COM_CLUBREG_SUBGROUPN_LABEL'), "clearfix"=>true); // two per line		
-		$i++;
-		$headings[$i]["joining_date"] = array("label"=>JText::_('COM_CLUBREG_JOINING_LABEL'), 'transform'=>"clubregdate"); 
-		$headings[$i]["year_registered"] = array("label"=>JText::_('COM_CLUBREG_SEASON_LABEL'), "clearfix"=>true); // two per line
-		$i++;
-		$headings[$i]["memberlevel"] = array("label"=>JText::_('COM_CLUBREG_SKILLLEVEL_LABEL'),'transform'=>array("ucfirst","removeUnderscore"));		
-		$headings[$i]["gender"] = array("label"=>JText::_('COM_CLUBREG_GENDER_LABEL'),'transform'=>"ucfirst");
-		$i++;
-		$headings[$i]["dob"] = array("label"=>JText::_('COM_CLUBREG_DOB_LABEL'), "clearfix"=>true); // two per line		
-		$headings[$i]["member_status"] = array("label"=>JText::_('COM_CLUBREG_MEMBERSTATUS_LABEL'),'transform'=>"ucfirst");
-		$i++;
+		$headings["guardian"] = array("label"=>JText::_('COM_CLUBREG_GUARDIAN_LABEL'),'transform'=>"ucwords", "clearfix"=>true); // one line
+		
+		$headings["t_address"] = array("label"=>JText::_('COM_CLUBREG_ADDRESS'), "cols" => array("gaddress", "gsuburb","gpostcode"), "clearfix"=>true);
+		
+		$headings["group"] = array("label"=>JText::_('COM_CLUBREG_GROUPN_LABEL'));
+		$headings["subgroup"] = array("label"=>JText::_('COM_CLUBREG_SUBGROUPN_LABEL'), "clearfix"=>true); // two per line		
+		
+	//	$headings["joining_date"] = array("label"=>JText::_('COM_CLUBREG_JOINING_LABEL'), 'transform'=>"clubregdate"); 
+	//	$headings["year_registered"] = array("label"=>JText::_('COM_CLUBREG_SEASON_LABEL'), "clearfix"=>true); // two per line
+		
+	//	$headings["memberlevel"] = array("label"=>JText::_('COM_CLUBREG_SKILLLEVEL_LABEL'),'transform'=>array("ucfirst","removeUnderscore"));		
+	//	$headings["gender"] = array("label"=>JText::_('COM_CLUBREG_GENDER_LABEL'),'transform'=>"ucfirst");
+		
+	//	$headings["dob"] = array("label"=>JText::_('COM_CLUBREG_DOB_LABEL'), "clearfix"=>true); // two per line		
+	//	$headings["member_status"] = array("label"=>JText::_('COM_CLUBREG_MEMBERSTATUS_LABEL'),'transform'=>"ucfirst");
+		
 		
 		return array("lastIndex"=>$i);
 	}

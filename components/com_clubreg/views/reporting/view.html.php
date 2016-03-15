@@ -34,7 +34,7 @@ class ClubRegViewreporting extends ClubRegViews
 			require_once CLUBREG_CONFIGS.'payments.display.php';
 				
 			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.filters.payment.reporting.php';
-			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.rendertables.stats.php';
+			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.rendertables.payments.reporting.php';
 			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.pagination.php';
 			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
 				
