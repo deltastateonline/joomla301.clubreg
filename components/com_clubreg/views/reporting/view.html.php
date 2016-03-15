@@ -31,6 +31,7 @@ class ClubRegViewreporting extends ClubRegViews
 			$proceed = TRUE;
 			
 			require_once CLUBREG_CONFIGS.'config.regmembers.php';
+			require_once CLUBREG_CONFIGS.'payments.display.php';
 				
 			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.filters.payment.reporting.php';
 			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.rendertables.stats.php';
@@ -66,6 +67,11 @@ class ClubRegViewreporting extends ClubRegViews
 			$current_model->setMoreStates($regmembersConfigs["filters"],$all_groups); // set more states
 				
 			unset($configObj);
+			
+			//get the headings to display from  the display configs
+			$configObj = new ClubRegPaymentsDisplayConfig();
+			$headingConfigs =  $configObj->getConfig($this->state->get('filter.playertype')); // return headings and filters
+			unset($configObj);
 				
 			$this->items		= $current_model->getItems();
 			$this->pagination	= $current_model->getPagination();
@@ -73,13 +79,9 @@ class ClubRegViewreporting extends ClubRegViews
 			$tmp_filters["request_data"] = $this->state;
 			$tmp_filters["filter_heading"] = $regmembersConfigs["filters"];
 			$tmp_filters["group_where"] = $regmembersConfigs["group_where"];
-			$tmp_filters["headings"] = $regmembersConfigs["headings"];
-			$tmp_filters["otherconfigs"] = $regmembersConfigs["otherconfigs"];
-				
-			var_dump($this->items);
-			var_dump($tmp_filters);
-				
-				
+			//$tmp_filters["headings"] = $regmembersConfigs["headings"];
+			$tmp_filters["otherconfigs"] = $regmembersConfigs["otherconfigs"];			
+			$tmp_filters["headingsConfig"] = $headingConfigs["headings"];						
 				
 			$this->entity_filters = $tmp_filters;
 				
