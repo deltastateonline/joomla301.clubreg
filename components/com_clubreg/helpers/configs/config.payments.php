@@ -55,6 +55,4 @@ class ClubRegPaymentsConfig extends JObject
 		
 		return array("filters"=>$entity_filters, "group_where"=>$group_where);
 	}
-	
-	
 }

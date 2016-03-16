@@ -102,13 +102,6 @@ jQuery( document ).ready(function() {
 			
 		},'json').fail(function(){
 			alert("Unable to process request!");
-		});
-		
-		
-		
-	});
-	
-	
-	
-	
+		});		
+	});	
 });

@@ -20,7 +20,7 @@ class ClubRegViewreporting extends ClubRegViews
 		$proceed = FALSE;
 		
 		unset($current_model);
-		//$current_model = JModelLegacy::getInstance('reporting', 'ClubregModel', array('ignore_request' => false));
+		
 		$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
 		$current_model->setState('joomla_id',$user->get('id'));
 		
@@ -30,10 +30,11 @@ class ClubRegViewreporting extends ClubRegViews
 		if($current_model->getPermissions('manageusers')){
 			$proceed = TRUE;
 			
-			require_once CLUBREG_CONFIGS.'config.regmembers.php';
+			require_once CLUBREG_CONFIGS.'config.regmembers.php'; // used this
 			require_once CLUBREG_CONFIGS.'payments.display.php';
+			require_once CLUBREG_CONFIGS.'config.payments.reporting.php'; // get the filters to render
 				
-			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.filters.payment.reporting.php';
+			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.filters.payments.reporting.php';
 			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.rendertables.payments.reporting.php';
 			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.pagination.php';
 			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
@@ -55,7 +56,7 @@ class ClubRegViewreporting extends ClubRegViews
 			$current_model = JModelLegacy::getInstance('paymentreporting', 'ClubregModel', array('ignore_request' => false));
 				
 			$this->formaction = 'index.php?option=com_clubreg&view=reporting';
-			//$this->formaction_edit = 'index.php?option=com_clubreg&view=reporting&layout=payments';
+			$this->formaction_edit = 'index.php?option=com_clubreg&view=regmember&layout=viewonly';			
 				
 			$this->state		= $current_model->getState();
 				
@@ -72,6 +73,10 @@ class ClubRegViewreporting extends ClubRegViews
 			$configObj = new ClubRegPaymentsDisplayConfig();
 			$headingConfigs =  $configObj->getConfig($this->state->get('filter.playertype')); // return headings and filters
 			unset($configObj);
+			
+			$configObj = new ClubRegPaymentsConfig();
+			$paymentsConfigs =  $configObj->getConfig("Payments"); // return headings and filters
+		
 				
 			$this->items		= $current_model->getItems();
 			$this->pagination	= $current_model->getPagination();
@@ -79,9 +84,11 @@ class ClubRegViewreporting extends ClubRegViews
 			$tmp_filters["request_data"] = $this->state;
 			$tmp_filters["filter_heading"] = $regmembersConfigs["filters"];
 			$tmp_filters["group_where"] = $regmembersConfigs["group_where"];
-			//$tmp_filters["headings"] = $regmembersConfigs["headings"];
+			
 			$tmp_filters["otherconfigs"] = $regmembersConfigs["otherconfigs"];			
-			$tmp_filters["headingsConfig"] = $headingConfigs["headings"];						
+			$tmp_filters["headingsConfig"] = $headingConfigs["headings"];	
+
+			$tmp_filters["paymentConfigs"] = $paymentsConfigs ; //holds the controls filters
 				
 			$this->entity_filters = $tmp_filters;
 				

@@ -56,14 +56,12 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 </script>
 <form action="<?php echo JRoute::_($this->formaction); ?>" method="post" name="adminForm" id="adminForm">
 <?php 
-	//	$tableFilters = new ClubRegFiltersStatsHelper();		
-		//$tableFilters->set('stats_date',$this->stats_date);
+		$tableFilters = new ClubRegFiltersPaymentsReportingHelper();		
+		$tableRender = new ClubRegRenderTablesPaymentsReportingHelper();		
 		
-		$tableRender = new ClubRegRenderTablesPaymentsReportingHelper();
-		
-		
-		//$tableFilters->renderFilters($this->entity_filters);		
-		$tableRender->render($this);		
+		$tableFilters->renderFilters($this->entity_filters);
+		$tableFilters->render_payments_filters($this->entity_filters);
+		//$tableRender->render($this);		
 		echo $this->pagination->getListFooter();
 ?>
 	<input type="<?php echo $in_type; ?>" name="Itemid" value="<?php echo $clubreg_Itemid; ?>" />	
@@ -78,3 +76,15 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 	<input type="<?php echo $in_type; ?>" name="filter_order_Dir" id="filter_order_Dir" value="<?php echo $this->escape($this->state->get('list.direction')); ?>" />
 	<?php echo JHTML::_( 'form.token' ); ?>
 </form>
+<?php 
+
+
+$document = JFactory::getDocument();
+ClubregHelper::writeTabAssets($document, "regmembers",array("css"));
+ClubregHelper::writeTabAssets($document, "clubreg",array("js"));
+ClubregHelper::writeTabAssets($document, "common",array("css"));
+ClubregHelper::writeTabAssets($document, "filters_logic",array("js"));
+ClubregHelper::writeTabAssets($document, "payments.reporting",array("js"));
+ClubregHelper::writeTabAssets($document, "clubreggroups",array("js"));
+//ClubregHelper::write_footer(); 
+?>

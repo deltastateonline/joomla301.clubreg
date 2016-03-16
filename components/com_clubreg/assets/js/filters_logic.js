@@ -36,14 +36,14 @@ window.addEvent('domready', function () {
 	});
 	
 	var all_filters =  $('adminForm').getElements('select');
-	var ignore_these = ["playertype","directionTable","sortTable"];
+	var ignore_these = ["playertype","directionTable","sortTable","limit"];
 	all_filters.each(function(a_filter){	
 		
 		var s_item = a_filter.getSelected();
 		
 		if(a_filter.value == -1 || (ignore_these.indexOf(a_filter.name) > -1)){
 			
-		}else{			
+		}else{			console.log(s_item);
 			all_selected = all_selected +  "<span class='label label-info'>"+s_item[0].get('text')+"</span> <span class='divider'>&nbsp;</span>";			
 		}
 		
