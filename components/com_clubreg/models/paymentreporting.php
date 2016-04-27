@@ -89,7 +89,18 @@ class ClubregModelPaymentReporting extends JModelList
 			}else{
 				if(is_array($allowed_groups) && count($allowed_groups) > 0)
 				$where_[] = sprintf(" a.group in (%s) ",implode(",",$allowed_groups));  // Only Eoi Members
-			}			
+			}
+
+			
+			if($cfilter == "junior"){
+				$all_string["guardian"] = "concat(d.`surname`,' ' ,d.`givenname`) as guardian";
+				//$all_string["gaddress"] = "d.`address` as address";
+				//$all_string["gsuburb"] = "d.`suburb` as suburb";
+				//$all_string["gpostcode"] = "d.`postcode` as postcode";
+				$query->join('LEFT', $db->quoteName(CLUB_REGISTEREDMEMBERS_TABLE).' AS d on (a.parent_id = d.member_id)');
+					
+			}
+			
 		}		
 		
 		if($cfilter){
@@ -100,6 +111,8 @@ class ClubregModelPaymentReporting extends JModelList
 		
 		$s_key = "search.columns";
 		$search_columns = $this->getState($s_key);	// get the list of passed columns for filtering
+		
+		//write_debug($search_columns);
 		
 		$d_var =implode(",", $all_string);
 		
@@ -154,6 +167,7 @@ class ClubregModelPaymentReporting extends JModelList
 			$query->where($a_where);
 		}
 				
+		//write_debug($query->__toString());
 		// Add the list ordering clause.
 		$orderCol	= $this->state->get('list.ordering', 'a.created');
 		$orderDirn	= $this->state->get('list.direction', 'DESC');
