@@ -10,6 +10,11 @@
 -------------------------------------------------------------------------*/
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
+/**
+ * @desc
+ * 	get the list of heading for each player type to be rendered
+ * 	on the payment reporting table.
+ */
 class ClubRegPaymentsDisplayConfig extends JObject
 {
 	/**
@@ -93,11 +98,10 @@ class ClubRegPaymentsDisplayConfig extends JObject
 		$i= 0;
 		$headings["guardian"] = array("label"=>JText::_('COM_CLUBREG_GUARDIAN_LABEL'),'transform'=>"ucwords", "clearfix"=>true); // one line
 		
-		$headings["t_address"] = array("label"=>JText::_('COM_CLUBREG_ADDRESS'), "cols" => array("gaddress", "gsuburb","gpostcode"), "clearfix"=>true);
+		//$headings["t_address"] = array("label"=>JText::_('COM_CLUBREG_ADDRESS'), "cols" => array("gaddress", "gsuburb","gpostcode"), "clearfix"=>true);
 		
 		$headings["group"] = array("label"=>JText::_('COM_CLUBREG_GROUPN_LABEL'));
-		//$headings["subgroup"] = array("label"=>JText::_('COM_CLUBREG_SUBGROUPN_LABEL'), "clearfix"=>true); // two per line		
-
+	
 		$headings["payment_desc"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_DESCRIPTION'),'label_class'=>'reg-label'); // use array
 		$headings["payment_transact_no"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_TRANSACT'),'label_class'=>'reg-label');
 		$headings["payment_amount"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_AMOUNT').'('.CURRENCY.')', 'transform'=>'applyFactor'); // use array
