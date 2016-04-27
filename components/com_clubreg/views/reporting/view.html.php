@@ -65,7 +65,6 @@ class ClubRegViewreporting extends ClubRegViews
 			$configObj->setOfficialSubGroups($all_groups["sub_groups_ids"]);
 				
 			$regmembersConfigs =  $configObj->getConfig($this->state->get('filter.playertype')); // return headings and filters
-			$current_model->setMoreStates($regmembersConfigs["filters"],$all_groups); // set more states
 				
 			unset($configObj);
 			
@@ -74,10 +73,14 @@ class ClubRegViewreporting extends ClubRegViews
 			$headingConfigs =  $configObj->getConfig($this->state->get('filter.playertype')); // return headings and filters
 			unset($configObj);
 			
+			
+			
 			$configObj = new ClubRegPaymentsConfig();
-			$paymentsConfigs =  $configObj->getConfig("Payments"); // return headings and filters
-		
-				
+			$paymentsConfigs =  $configObj->getConfig("Payments"); // return headings and filters		
+			// combine the member filters with the payment filters
+			$all_filters = array_merge($regmembersConfigs["filters"],$paymentsConfigs["filters"]);
+			$current_model->setMoreStates($all_filters,$all_groups); // set more states					
+			
 			$this->items		= $current_model->getItems();
 			$this->pagination	= $current_model->getPagination();
 				
