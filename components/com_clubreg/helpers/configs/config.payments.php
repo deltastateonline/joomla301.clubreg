@@ -37,7 +37,11 @@ class ClubRegPaymentsConfig extends JObject
 	}
 					 
 
-	
+	/**
+	 * 
+	 * @param unknown $headings
+	 * @return multitype:multitype:
+	 */
 	private function getPayments(&$headings = array()){
 		$entity_filters = $group_where =  array();	
 		
