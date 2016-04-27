@@ -61,7 +61,7 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 		
 		$tableFilters->renderFilters($this->entity_filters);
 		$tableFilters->render_payments_filters($this->entity_filters);
-		//$tableRender->render($this);		
+		$tableRender->render($this);		
 		echo $this->pagination->getListFooter();
 ?>
 	<input type="<?php echo $in_type; ?>" name="Itemid" value="<?php echo $clubreg_Itemid; ?>" />	
