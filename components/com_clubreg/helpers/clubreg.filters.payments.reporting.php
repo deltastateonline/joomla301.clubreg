@@ -61,6 +61,7 @@ class ClubRegFiltersPaymentsReportingHelper extends ClubRegFiltersHelper{
 									<div class="row-fluid">
 										<?php foreach($headingRow as $fkey => $aHeading){ $control_type = $all_filters[$fkey]["control"];   ?>
 										<div class="control-group span<?php echo $howmany;?>">
+											<?php if($fkey == "hide"){ continue ; }?>
 											<div class="control-label"><strong><?php echo $aHeading["label"]?></strong></div>																					
 											<div class="controls">
 											 <?php $attr = isset($aHeading["class"])?$aHeading["class"]:""; $nfkey = "filter.".$fkey;  $default =  $request_data->get($nfkey);	switch($control_type){ 

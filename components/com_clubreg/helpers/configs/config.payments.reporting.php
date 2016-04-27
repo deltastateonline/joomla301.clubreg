@@ -42,13 +42,15 @@ class ClubRegPaymentsConfig extends JObject
 		$headings[$i]["payment_desc"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_DESCRIPTION'),"class"=>"class='inputbox input-large'"); // use array
 		$headings[$i]["payment_method"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_METHOD'),"class"=>"class='inputbox input-large'");
 		$headings[$i]["payment_status"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_STATUS'), "clearfix"=>true,"class"=>"class='inputbox input-large'");
+		$headings[$i]["payment_season"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_SEASON'),'transform'=>"ucfirst", "clearfix"=>true,"class"=>"class='inputbox input-large'");
+		
 		$i++;
 		
 		$headings[$i]["payment_transact_no"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_TRANSACT'),"class"=>"class='inputbox input-large'");
 		$headings[$i]["payment_amount"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_AMOUNT').'('.CURRENCY.')', "clearfix"=>true,'transform'=>'applyFactor'); // use array
 		$headings[$i]["payment_notes"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_NOTES'),'transform'=>"nl2br","class"=>"class='inputbox input-large'"); // use array
-		$headings[$i]["payment_season"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_SEASON'),'transform'=>"ucfirst", "clearfix"=>true,"class"=>"class='inputbox input-large'");
 		
+		$headings[$i]["hide"] = array("label"=>JText::_(''),"class"=>"class='inputbox input-large'");
 		$i++;
 		//$headings[$i]["payment_date"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_DATE'),"class"=>"class='inputbox input-large'");
 		$i++;
