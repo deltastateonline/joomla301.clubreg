@@ -53,18 +53,17 @@ class ClubRegPaymentsConfig extends JObject
 		//$headings[$i]["payment_date"] = array("label"=>JText::_('COM_CLUBREG_PAYMENT_DATE'),"class"=>"class='inputbox input-large'");
 		$i++;
 					
-		$entity_filters["payment_desc"] = array("filter_col"=>"a.`year_registered`","control"=>"select.genericlist");		
-		$entity_filters["payment_method"] = array("filter_col"=>"a.`memberlevel`","control"=>"select.genericlist");
-		$entity_filters["payment_status"] = array("filter_col"=>"a.`year_registered`","control"=>"select.genericlist");
+		$entity_filters["payment_desc"] = array("filter_col"=>"pt.`payment_desc`","control"=>"select.genericlist");		
+		$entity_filters["payment_method"] = array("filter_col"=>"pt.`payment_method`","control"=>"select.genericlist");
+		$entity_filters["payment_status"] = array("filter_col"=>"pt.`payment_status`","control"=>"select.genericlist");
 		
 		
-		$entity_filters["payment_transact_no"] = array("filter_col"=>"a.`memberlevel`","control"=>"text");		
-		$entity_filters["payment_amount"] = array("filter_col"=>"a.`year_registered`","control"=>"text");	
-		$entity_filters["payment_date"] = array("filter_col"=>"a.`year_registered`","control"=>"date");
-		$entity_filters["payment_season"] = array("filter_col"=>"a.`memberlevel`","control"=>"select.genericlist");		
-		$entity_filters["payment_notes"] = array("filter_col"=>"a.`memberlevel`","control"=>"text");
-		
-		
+		$entity_filters["payment_transact_no"] = array("filter_col"=>"pt.`payment_transact_no`","control"=>"text");		
+		$entity_filters["payment_amount"] = array("filter_col"=>"pt.`payment_amount`","control"=>"text");	
+		$entity_filters["payment_date"] = array("filter_col"=>"pt.`payment_date`","control"=>"date");
+		$entity_filters["payment_season"] = array("filter_col"=>"pt.`payment_season`","control"=>"select.genericlist");		
+		$entity_filters["payment_notes"] = array("filter_col"=>"pt.`payment_notes`","control"=>"text");
+				
 		
 		require_once CLUBREG_ADMINPATH.'/helpers/clubreg.php';
 		require_once JPATH_COMPONENT.DS.'helpers'.DS."clubreg.seasons.php";
@@ -73,8 +72,7 @@ class ClubRegPaymentsConfig extends JObject
 		$tList =  ClubRegHelper::configOptions('club_payment_desc'); // controls		
 		array_unshift($tList, new JObject(array("value"=>"-1","text"=>"- ".JText::_('COM_CLUBREG_PAYMENT_DESCRIPTION')." -")));		
 		$entity_filters["payment_desc"]["values"] = $tList;
-		unset($tList);
-		
+		unset($tList);		
 		
 		$tList =  ClubRegHelper::configOptions('club_payment_method'); // controls	
 		array_unshift($tList, new JObject(array("value"=>"-1","text"=>"- ".JText::_('COM_CLUBREG_PAYMENT_METHOD')." -")));
