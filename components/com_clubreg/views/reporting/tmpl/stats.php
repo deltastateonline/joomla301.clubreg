@@ -100,8 +100,6 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 	<?php echo JHTML::_( 'form.token' ); ?>
 </form>
 <?php 
-
-
 $document = JFactory::getDocument();
 ClubregHelper::writeTabAssets($document, "regmembers",array("css"));
 ClubregHelper::writeTabAssets($document, "clubreg",array("js"));

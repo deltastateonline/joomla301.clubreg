@@ -20,7 +20,7 @@ class ClubRegViewreporting extends ClubRegViews
 		$proceed = FALSE;
 		
 		unset($current_model);
-		//$current_model = JModelLegacy::getInstance('reporting', 'ClubregModel', array('ignore_request' => false));
+		
 		$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
 		$current_model->setState('joomla_id',$user->get('id'));
 		
@@ -30,26 +30,17 @@ class ClubRegViewreporting extends ClubRegViews
 		if($current_model->getPermissions('manageusers')){
 			$proceed = TRUE;
 			
-			require_once CLUBREG_CONFIGS.'config.regmembers.php';
+			require_once CLUBREG_CONFIGS.'config.regmembers.php'; // used this
+			require_once CLUBREG_CONFIGS.'payments.display.php';
+			require_once CLUBREG_CONFIGS.'config.payments.reporting.php'; // get the filters to render
 				
-			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.filters.stats.php';
-			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.rendertables.stats.php';
+			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.filters.payments.reporting.php';
+			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.rendertables.payments.reporting.php';
 			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.pagination.php';
 			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
 				
 			$group_type			= $app->input->post->get('playertype');
-			$subgroup			= (int) $app->input->post->get('subgroup');
-				
-			$stats_date =  $app->input->post->get('stats_date',NULL,'string');
-				
-			if(!isset($stats_date)){
-				$stats_date = JHtml::date('now','Y-m-d');
-			}else{
-				$stats_date = str_replace("/", "-", $stats_date); // replace / with a -  so that you can perform a strtotime properly
-				$stats_date = JHtml::date(strtotime($stats_date),'Y-m-d');
-			}
-				
-			$this->stats_date = $stats_date;
+			$subgroup			= (int) $app->input->post->get('subgroup');		
 				
 			if(!isset($group_type)){
 				$params = JComponentHelper::getParams('com_clubreg');
@@ -62,10 +53,10 @@ class ClubRegViewreporting extends ClubRegViews
 			}
 			
 			unset($current_model);
-			$current_model = JModelLegacy::getInstance('reporting', 'ClubregModel', array('ignore_request' => false));
+			$current_model = JModelLegacy::getInstance('paymentreporting', 'ClubregModel', array('ignore_request' => false));
 				
 			$this->formaction = 'index.php?option=com_clubreg&view=reporting';
-			//$this->formaction_edit = 'index.php?option=com_clubreg&view=reporting&layout=payments';
+			$this->formaction_edit = 'index.php?option=com_clubreg&view=regmember&layout=viewonly';			
 				
 			$this->state		= $current_model->getState();
 				
@@ -74,22 +65,33 @@ class ClubRegViewreporting extends ClubRegViews
 			$configObj->setOfficialSubGroups($all_groups["sub_groups_ids"]);
 				
 			$regmembersConfigs =  $configObj->getConfig($this->state->get('filter.playertype')); // return headings and filters
-			$current_model->setMoreStates($regmembersConfigs["filters"],$all_groups); // set more states
 				
 			unset($configObj);
-				
+			
+			//get the headings to display from  the display configs
+			$configObj = new ClubRegPaymentsDisplayConfig();
+			$headingConfigs =  $configObj->getConfig($this->state->get('filter.playertype')); // return headings and filters
+			unset($configObj);
+			
+			
+			
+			$configObj = new ClubRegPaymentsConfig();
+			$paymentsConfigs =  $configObj->getConfig("Payments"); // return headings and filters		
+			// combine the member filters with the payment filters
+			$all_filters = array_merge($regmembersConfigs["filters"],$paymentsConfigs["filters"]);
+			$current_model->setMoreStates($all_filters,$all_groups); // set more states					
+			
 			$this->items		= $current_model->getItems();
 			$this->pagination	= $current_model->getPagination();
 				
 			$tmp_filters["request_data"] = $this->state;
 			$tmp_filters["filter_heading"] = $regmembersConfigs["filters"];
 			$tmp_filters["group_where"] = $regmembersConfigs["group_where"];
-			$tmp_filters["headings"] = $regmembersConfigs["headings"];
-			$tmp_filters["otherconfigs"] = $regmembersConfigs["otherconfigs"];
-				
 			
-				
-				
+			$tmp_filters["otherconfigs"] = $regmembersConfigs["otherconfigs"];			
+			$tmp_filters["headingsConfig"] = $headingConfigs["headings"];	
+
+			$tmp_filters["paymentConfigs"] = $paymentsConfigs ; //holds the controls filters
 				
 			$this->entity_filters = $tmp_filters;
 				
@@ -100,7 +102,7 @@ class ClubRegViewreporting extends ClubRegViews
 			
 		}
 		
-		
+		$this->pageTitle = $active->title;
 		
 		return $proceed;
 	}
@@ -112,7 +114,7 @@ class ClubRegViewreporting extends ClubRegViews
 		$proceed = FALSE;
 	
 		unset($current_model);
-		//$current_model = JModelLegacy::getInstance('reporting', 'ClubregModel', array('ignore_request' => false));
+		
 		$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
 		$current_model->setState('joomla_id',$user->get('id'));
 	

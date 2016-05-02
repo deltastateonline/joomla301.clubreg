@@ -91,7 +91,7 @@ class ClubRegViewregmembers extends JViewLegacy
 
 			unset($configObj);
 			
-			
+			//get the headings to display from  the display configs
 			$configObj = new ClubRegRegmembersDisplayConfig();			
 			$headingConfigs =  $configObj->getConfig($this->state->get('filter.playertype')); // return headings and filters			
 			unset($configObj);

@@ -13,7 +13,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.filters.php';
 /**
  * 
- * @author omo
+ * Render the controls used to filter the stats page
  *
  */
 class ClubRegFiltersStatsHelper extends ClubRegFiltersHelper{
