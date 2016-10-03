@@ -15,5 +15,9 @@ To use ajax, you must execute app->close() before the display is called
 
 To use the popup calendar, the view must have a format = html.
 
+# To Use the ClubRegViews.
+	Method name in the class should be
+	protected function layout_view(){ 
+
 
 

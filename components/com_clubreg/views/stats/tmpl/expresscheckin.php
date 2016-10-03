@@ -22,20 +22,27 @@ global $clubreg_Itemid,$option;
 $in_type = "hidden";
 
 ?>
-<form action="<?php echo JRoute::_($this->formaction); ?>" method="post" name="adminForm" id="adminForm" class="form-inline">
+
+<script type="text/javascript">
+<!--
+	var token = '<?php echo JSession::getFormToken() ;?>';
+//-->
+</script>
+<form action="<?php echo JRoute::_($this->formaction); ?>" method="post" name="adminForm" id="expresscheckin-adminForm" class="form-inline">
 	
-	<div class="control-group">
+	<div class="control-group" id="express-checkin-div">
 		<label class="control-label" for="<?php echo JText::_('COM_CLUBREG_PLAYERNAME_LABEL'); ?>"><?php echo JText::_('COM_CLUBREG_PLAYERNAME_LABEL'); ?></label> : 
 		<div class="input-append" >		 	
-	  		<input type="text" placeholder="<?php echo JText::_('COM_CLUBREG_PLAYERNAME_LABEL'); ?>" class="inputbox input-large" />
-	  		<button href="javascript:void(0);" class="btn" data-statsvalue="search"><span class="icon-search"></span ></span></button>
+	  		<input type="text" placeholder="<?php echo JText::_('COM_CLUBREG_PLAYERNAME_LABEL'); ?>" class="inputbox input-xlarge" />
+	  		<a href="javascript:void(0);" class="btn"><span class="icon-search"></span ></span></a>
 	  	</div>
 	</div>
 	<input type="<?php echo $in_type; ?>" name="Itemid" value="<?php echo $clubreg_Itemid; ?>" />	
 	<input type="<?php echo $in_type; ?>" name="option" value="com_clubreg" />
 	
 	<input type="<?php echo $in_type; ?>" name="layout" value="<?php echo $this->layout; ?>" />
-	<input type="<?php echo $in_type; ?>" name="task" value="" />
+	
+	<input type="<?php echo $in_type; ?>" name="task" value="stats.expresscheckin" />
 	<input type="<?php echo $in_type; ?>" name="pk" value="" />
 	
 	<input type="<?php echo $in_type; ?>" name="boxchecked" value="0" />
@@ -54,5 +61,7 @@ $in_type = "hidden";
 $document = JFactory::getDocument();
 ClubregHelper::writeTabAssets($document, "regmembers",array("css"));
 ClubregHelper::writeTabAssets($document, "clubreg",array("js"));
+ClubregHelper::writeTabAssets($document, "expresscheckin",array("js"));
 ClubregHelper::writeTabAssets($document, "common",array("css"));
-ClubregHelper::write_footer(); ?>
+//ClubregHelper::write_footer(); 
+?>
