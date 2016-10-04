@@ -36,7 +36,6 @@ class ClubRegViews extends JViewLegacy
 		if($proceed){		
 			parent::display($tpl);					
 		}else{
-
 			ClubRegUnAuthHelper::unAuthorised();
 		}
 	}

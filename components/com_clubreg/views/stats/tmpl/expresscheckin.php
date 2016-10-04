@@ -33,7 +33,7 @@ $in_type = "hidden";
 	<div class="control-group" id="express-checkin-div">
 		<label class="control-label" for="<?php echo JText::_('COM_CLUBREG_PLAYERNAME_LABEL'); ?>"><?php echo JText::_('COM_CLUBREG_PLAYERNAME_LABEL'); ?></label> : 
 		<div class="input-append" >		 	
-	  		<input type="text" placeholder="<?php echo JText::_('COM_CLUBREG_PLAYERNAME_LABEL'); ?>" class="inputbox input-xlarge" />
+	  		<input type="text" placeholder="<?php echo JText::_('COM_CLUBREG_PLAYERNAME_LABEL'); ?>" class="inputbox input-xlarge"  required name="search_value" id="search_value" />
 	  		<a href="javascript:void(0);" class="btn"><span class="icon-search"></span ></span></a>
 	  	</div>
 	</div>
@@ -41,8 +41,9 @@ $in_type = "hidden";
 	<input type="<?php echo $in_type; ?>" name="option" value="com_clubreg" />
 	
 	<input type="<?php echo $in_type; ?>" name="layout" value="<?php echo $this->layout; ?>" />
-	
-	<input type="<?php echo $in_type; ?>" name="task" value="stats.expresscheckin" />
+	<input type="<?php echo $in_type; ?>" name="stats_date" id="stats_date" value="<?php echo $this->stats_date; ?>" />
+	<input type="<?php echo $in_type; ?>" name="view" value="stats" />
+	<input type="<?php echo $in_type; ?>" name="format" value="json" />
 	<input type="<?php echo $in_type; ?>" name="pk" value="" />
 	
 	<input type="<?php echo $in_type; ?>" name="boxchecked" value="0" />
