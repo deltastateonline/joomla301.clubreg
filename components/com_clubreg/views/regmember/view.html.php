@@ -16,8 +16,7 @@ jimport( 'joomla.application.component.view');
 class ClubRegViewregmember extends JViewLegacy
 {
 	function display($tpl = null)
-	{
-		
+	{			
 		$this->layout  = $renderer =  $this->getLayout();
 		$proceed = FALSE;
 		 
@@ -116,7 +115,9 @@ class ClubRegViewregmember extends JViewLegacy
 			$this->profiles_pix = str_replace("\\", "/", $this->profiles_pix );
 		}else{
 			$this->profiles_pix = CLUBREG_ASSETS."/images/clublogo.png";
-		}		
+		}
+
+	
 		return $proceed;
 	}
 	
