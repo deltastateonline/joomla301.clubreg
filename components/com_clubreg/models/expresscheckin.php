@@ -69,10 +69,35 @@ class ClubregModelExpresscheckin extends JModelList
 		
 		$all_string[] = "a.*";
 		
+		$all_string["member_name"] = "concat(UCASE(a.`surname`),' ' ,LCASE(a.`givenname`)) as surname";
+		
+		$all_string["t_group"] = "b.group_name as `group`";
+		$all_string["subgroup"] = "sg.group_name as `subgroup`";
+		
+		
+		$all_string["dob"] = " (if(a.dob = '0000-00-00' , '-' , date_format(a.dob,'%d/%m/%Y'))) as dob";
+		$all_string["gender"] = " (if(a.gender in ('0','-1') , '' , a.gender)) as gender";
+		
+		
+		$all_string["address"] = " (if(a.address in ('0','-1') , 'N/A' , a.address)) as address";		
+		$all_string["suburb"] = " (if(a.suburb in ('0','-1') , '' , a.suburb)) as suburb";
+		$all_string["postcode"] = " (if(a.postcode in ('0','-1') , '' , a.postcode)) as postcode";		
+		
+	 	$all_string["guardian"] = "concat(d.`surname`,' ' ,d.`givenname`) as guardian";	
+		
+		$all_string["gaddress"] = " (if(d.address in ('0','-1') , 'N/A' , d.address)) as g_address";
+		$all_string["gsuburb"] = " (if(d.suburb in ('0','-1') , '' , d.suburb)) as g_suburb";
+		$all_string["gpostcode"] = " (if(d.postcode in ('0','-1') , '' , d.postcode)) as g_postcode";
+		
+		
 		$d_var =implode(",", $all_string);
 		
 		$query->select($d_var);
 		$query->from($db->quoteName(CLUB_REGISTEREDMEMBERS_TABLE).' AS a');
+		$query->join('LEFT', CLUB_GROUPS_TABLE.' AS b ON a.group = b.group_id');
+		$query->join('LEFT', CLUB_GROUPS_TABLE.' AS sg ON a.subgroup = sg.group_id');
+		
+		$query->join('LEFT', $db->quoteName(CLUB_REGISTEREDMEMBERS_TABLE).' AS d on (a.parent_id = d.member_id)');
 		
 		foreach($where_ as $a_where){
 			$query->where($a_where);
