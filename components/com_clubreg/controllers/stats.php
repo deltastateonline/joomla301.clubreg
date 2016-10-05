@@ -118,26 +118,7 @@ class ClubregControllerStats extends JControllerLegacy
 		
 		$app->close();
 	}
-	
-	public function expresscheckin(){
 		
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
-		$app    = JFactory::getApplication();
-		$user		= JFactory::getUser();
-		
-		$return_array =  array();
-		$all_errors = array();
-		
-		$input_ids = array();
-		
-		
-		echo json_encode($return_array);
-		
-		$app->close();
-		
-	}
-		
-	
 	function error_from_model(&$d_model){
 		
 		$errors	= $d_model->getErrors();
