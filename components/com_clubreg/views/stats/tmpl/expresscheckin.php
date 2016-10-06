@@ -30,7 +30,7 @@ $in_type = "hidden";
 	Joomla.sbutton = function(pk,playerType)
 	{
 		var form = document.getElementById('adminForm');		
-		document.adminForm.target='';
+		document.adminForm.target='_blank';
 		document.adminForm.playertype.value= playerType;
 		
 		document.adminForm.pk.value = pk;
@@ -45,7 +45,7 @@ $in_type = "hidden";
 		<label class="control-label" for="search_value"><?php echo JText::_('COM_CLUBREG_PLAYERNAME_LABEL'); ?></label> : 
 		<div class="input-append" >		 	
 	  		<input type="text" placeholder="<?php echo JText::_('COM_CLUBREG_PLAYERNAME_LABEL'); ?>" class="inputbox input-large"  required name="search_value" id="search_value" />
-	  		<a href="javascript:void(0);" class="btn"><span class="icon-search"></span ></span></a>
+	  		<a href="javascript:void(0);" class="btn btn-expresscheckin-search"><span class="icon-search"></span></a>
 	  	</div>
 	  	<?php  $attribs = array("class"=>"inputbox input-small","onchange"=>"expressCheckinDateChanged();"); ?>	  	
 	  	<?php  echo JHtml::calendar($this->stats_date, "stats_date", 'stats_date','%d/%m/%Y',$attribs) ?>
@@ -84,6 +84,21 @@ $in_type = "hidden";
 	<?php echo JHTML::_( 'form.token' ); ?>
 </form>
 
+<form action="<?php echo JRoute::_($this->formaction); ?>" method="post" name="expresscheckinForm" id="expresscheckinForm" class="form-inline">
+	
+	<input type="<?php echo $in_type; ?>" name="Itemid" value="<?php echo $clubreg_Itemid; ?>" />	
+	<input type="<?php echo $in_type; ?>" name="option" value="com_clubreg" />
+	
+	<input type="<?php echo $in_type; ?>" name="task" value="stats.savestats" />	
+	<input type="<?php echo $in_type; ?>" name="statsform[stats_detail]" id="stats_detail" value="stats_attendance" />	
+	<input type="<?php echo $in_type; ?>" name="statsform[pk]" id="pk" value="" />
+	<input type="<?php echo $in_type; ?>" name="statsform[stats_value]" id="stats_value" value="" />
+	<input type="<?php echo $in_type; ?>" name="statsform[stats_date]" id="stats_date" value="<?php echo $this->stats_date; ?>" />
+	
+	
+	<?php echo JHTML::_( 'form.token' ); ?>
+</form>
+
 <div id="express-checkin-list">
 	<div class="alert alert-success">Search for <?php echo JText::_('COM_CLUBREG_PLAYERNAME_LABEL')?></div>
 </div>
@@ -94,8 +109,7 @@ $in_type = "hidden";
 $document = JFactory::getDocument();
 ClubregHelper::writeTabAssets($document, "regmembers",array("css"));
 ClubregHelper::writeTabAssets($document, "clubreg",array("js"));
-ClubregHelper::writeTabAssets($document, "expresscheckin",array("js"));
+ClubregHelper::writeTabAssets($document, "expresscheckin",array("js","css"));
 ClubregHelper::writeTabAssets($document, "common",array("css"));
-ClubregHelper::writeTabAssets($document, "statslist",array('css'));
 //ClubregHelper::write_footer(); 
 ?>

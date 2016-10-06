@@ -59,7 +59,7 @@ if(count($this->items)> 0){ $i=1; ?>
 		//if($an_item->subgroup){ $an_item->group = $an_item->group."|".$an_item->subgroup; }		
 		
 		?>	
-			<div class="row cgroup-div-stats" style="margin:7px 5px 7px 10px;" data-member_key='<?php echo $fkey; ?>'>		    
+			<div class="row cgroup-div-expresscheckin" style="margin:7px 5px 7px 10px;" data-member_key='<?php echo $fkey; ?>'>		    
 		      <div class="pull-left"><?php echo $i;$i++; ?></div>			    
 			  <div class="thumbnail pull-left" style="margin-left:5px;"><?php echo ($profile_pix)?$profile_pix:$defaultImg; ?></div>			  
 			  	<div class="p-thumbnail pull-left" >
@@ -72,9 +72,10 @@ if(count($this->items)> 0){ $i=1; ?>
 		  			<?php echo $an_item->t_address; ?>
 		  		</div>
 		  		<div class="pull-right">
-		  			<button class="btn btn-success btn-mini">Checkin</button>&nbsp;
-		  		</div>
-		  				   	
+		  			<a href="javascript:void(0);" class="btn btn-success btn-mini btn-expresscheckin" data-statsvalue='yes'><?php echo JText::_('Checkin'); ?></a>
+		  			<a href="javascript:void(0);" class="hide btn btn-danger btn-mini btn-expresscheckin" data-statsvalue='no'><?php echo JText::_('Checkout'); ?></a>
+		  			&nbsp;
+		  		</div>		  				   	
 			   <div class="clearfix"></div>		    	
 		    </div>		
 	<?php 
