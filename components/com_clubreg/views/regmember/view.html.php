@@ -59,7 +59,7 @@ class ClubRegViewregmember extends JViewLegacy
 		
 		
 		$this->member_key = $app->input->getString('pk', null);
-		
+		$key_data = new stdClass();
 		unset($current_model);
 		$currentModel = $this->getModel();
 		$currentModel->setState('com_clubreg.regmember.member_key',$this->member_key); // use the key in the model
