@@ -22,6 +22,8 @@ class ClubRegViewstats extends ClubRegViews{
 		$user		= JFactory::getUser();
 		$app			= JFactory::getApplication();
 		$Itemid			= $app->input->post->get('Itemid');
+			
+		$stats_date = $app->input->post->get('stats_date', JHtml::date('now','Y-m-d'),'string');
 		
 		$group_breakdown = array();
 		
@@ -50,7 +52,18 @@ class ClubRegViewstats extends ClubRegViews{
 			$this->items		=  $current_model->getItems();
 			$this->pagination	= $current_model->getPagination();		
 			
-			$this->uKeyObject = new ClubRegUniqueKeysHelper();			
+			$this->uKeyObject = new ClubRegUniqueKeysHelper();
+			$this->stats_array = array();
+			
+			if(count($this->items) > 0 ){				
+				foreach($this->items as $anPlayer){
+					$input_ids[$anPlayer->member_id] = $anPlayer->member_key;
+				}				
+				unset($current_model);
+				$current_model = JModelLegacy::getInstance('regmemberstats', 'ClubregModel', array('ignore_request' => true));
+				$this->stats_array = $current_model->getStats($input_ids,$stats_date);
+							
+			}			
 			
 		}
 		return $proceed;
