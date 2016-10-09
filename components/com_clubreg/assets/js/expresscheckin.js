@@ -58,21 +58,14 @@ expressCheckinButtonRequestDef.prototype.useResults = function(response){
 	if(response.proceed){
 		
 		if(response.pk){
-			var cDiv = jQuery("div.cgroup-div-expresscheckin").filter("[data-member_key=\""+response.pk+"\"]");			
+			var cDiv = jQuery("div.cgroup-div-expresscheckin").filter("[data-member_key=\""+response.pk+"\"]");		
 			
-			//var statsButton = cDiv.find('a.btn-mini');	
-			//statsButton.removeClass('btn-success').addClass('btn-danger'); // remove the styles
-			
-			//statsButton.html("Chekout")
-			if(self.currentValue == "yes"){
 				cDiv.find('a.btn-danger').toggle();	
-				cDiv.find('a.btn-success').toggle()
-			}else if(self.currentValue == "no"){
-				cDiv.find('a.btn-danger').toggle();	
-				cDiv.find('a.btn-success').toggle()
-			}			
+				cDiv.find('a.btn-success').toggle();					
 		}
 	}
+	
+	jQuery('#expresscheckinAdminForm #expresscheckin_loading').removeClass('loading-small');
 }
 
 
@@ -94,9 +87,13 @@ jQuery(document).ready(function(){
 		},250)		
 	);	
 	
+	/**
+	 * Checkin  or checkout button has been clicked
+	 */
 	jQuery('#express-checkin-list').on('click','a.btn-expresscheckin',function(){
 		var self = this;
 		
+		//
 		expresscheckinButtonRequestConfig.currentValue = jQuery(this).data('statsvalue');  
     	var proceed = true;
     	
@@ -109,7 +106,9 @@ jQuery(document).ready(function(){
     	jQuery('#expresscheckinForm #stats_date').val(statsDate);
     	
     	// set the stats value        	
-    	jQuery('#expresscheckinForm #stats_value').val(expresscheckinButtonRequestConfig.currentValue);        	
+    	jQuery('#expresscheckinForm #stats_value').val(expresscheckinButtonRequestConfig.currentValue);    
+    	
+    	jQuery('#expresscheckinAdminForm #expresscheckin_loading').addClass('loading-small');  
    
     	expresscheckinButtonRequestConfig.rData = jQuery('#expresscheckinForm').serialize();   	
     	ClubRegObject.loadAjaxRequest(expresscheckinButtonRequestConfig);
