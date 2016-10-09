@@ -49,15 +49,15 @@ $in_type = "hidden";
 	  	</div>
 	  	<?php  $attribs = array("class"=>"inputbox input-small","onchange"=>"expressCheckinDateChanged();"); ?>	  	
 	  	<?php  echo JHtml::calendar($this->stats_date, "stats_date", 'stats_date','%d/%m/%Y',$attribs) ?>
-  		
 	  	
-	  	
+	  	<div class="pull-right" id="expresscheckin_loading" style="width:32px;">&nbsp;</div>
 	</div>
+		
+	
 	<input type="<?php echo $in_type; ?>" name="Itemid" value="<?php echo $clubreg_Itemid; ?>" />	
 	<input type="<?php echo $in_type; ?>" name="option" value="com_clubreg" />
 	
 	<input type="<?php echo $in_type; ?>" name="layout" value="<?php echo $this->layout; ?>" />
-	<input type="<?php echo $in_type; ?>" name="stats_date" id="stats_date" value="<?php echo $this->stats_date; ?>" />
 	<input type="<?php echo $in_type; ?>" name="view" value="stats" />
 	<input type="<?php echo $in_type; ?>" name="format" value="raw" />
 	
