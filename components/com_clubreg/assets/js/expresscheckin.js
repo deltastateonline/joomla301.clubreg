@@ -118,5 +118,5 @@ jQuery(document).ready(function(){
  * Stats date has been changed
  */
 function expressCheckinDateChanged(){	 
-	//ClubRegObject.getStats(statsListRequestConfig,ClubRegObject.currentProfiles);
+	ClubRegObject.runExpressCheckin();
 }
