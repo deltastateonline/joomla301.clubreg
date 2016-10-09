@@ -59,6 +59,31 @@ class ClubregModelRegmemberstats extends JModelForm
 		
 	}
 	
+	/**
+	 * Get stats by date
+	 * @param array(int => string, int => string ) $member_keys
+	 * @param string format 'dd/mm/yyyy' $stats_date
+	 * @return boolean|mixed
+	 * 
+	 * array(2) {
+			  [member_id]=>
+			  object(stdClass)#674 (2) {
+			    ["member_id"]=>
+			    string(2) "int"
+			    ["stats_value"]=>
+			    string(3) "yes|no"
+			  }
+			  [member_id]=>
+			  object(stdClass)#673 (2) {
+			    ["member_id"]=>
+			    string(2) "int"
+			    ["stats_value"]=>
+			    string(3) "yes|no"
+			  }
+			}
+	 * 
+	 * 
+	 */
 	public function getStats($member_keys , $stats_date){
 		
 		$member_ids = array_keys($member_keys);	
