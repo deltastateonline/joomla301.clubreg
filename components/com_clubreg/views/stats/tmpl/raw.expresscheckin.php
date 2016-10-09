@@ -56,7 +56,23 @@ if(count($this->items)> 0){ $i=1; ?>
 		$profile_pix = $thumbrenderer->renderMemberThumb($an_item->member_id,FALSE,FALSE);
 		
 		$an_item->group = "<b class='small-group'>".strtoupper($an_item->playertype)."</b><br/>".$an_item->group;
-		//if($an_item->subgroup){ $an_item->group = $an_item->group."|".$an_item->subgroup; }		
+		//if($an_item->subgroup){ $an_item->group = $an_item->group."|".$an_item->subgroup; }	
+
+		$hiding["checkin"] = "";
+		$hiding["checkout"] = "hide";		
+					
+		if(isset($this->stats_array[$an_item->member_id])){
+			$found_stats = $this->stats_array[$an_item->member_id];
+			
+			$found_stats->stats_value= strtolower($found_stats->stats_value);
+			if($found_stats->stats_value == "yes"){
+				$hiding["checkin"] = "hide";
+				$hiding["checkout"] = "";
+			}else if($found_stats->stats_value == "no"){
+				$hiding["checkin"] = "";
+				$hiding["checkout"] = "hide";
+			}
+		}
 		
 		?>	
 			<div class="row cgroup-div-expresscheckin" style="margin:7px 5px 7px 10px;" data-member_key='<?php echo $fkey; ?>'>		    
@@ -72,8 +88,8 @@ if(count($this->items)> 0){ $i=1; ?>
 		  			<?php echo $an_item->t_address; ?>
 		  		</div>
 		  		<div class="pull-right">
-		  			<a href="javascript:void(0);" class="btn btn-success btn-mini btn-expresscheckin" data-statsvalue='yes'><?php echo JText::_('Checkin'); ?></a>
-		  			<a href="javascript:void(0);" class="hide btn btn-danger btn-mini btn-expresscheckin" data-statsvalue='no'><?php echo JText::_('Checkout'); ?></a>
+		  			<a href="javascript:void(0);" class="<?php echo $hiding["checkin"];?> btn btn-success btn-mini btn-expresscheckin" data-statsvalue='yes'><?php echo JText::_('Checkin'); ?></a>
+		  			<a href="javascript:void(0);" class="<?php echo $hiding["checkout"];?> btn btn-danger btn-mini btn-expresscheckin" data-statsvalue='no'><?php echo JText::_('Checkout'); ?></a>
 		  			&nbsp;
 		  		</div>		  				   	
 			   <div class="clearfix"></div>		    	
