@@ -52,8 +52,9 @@ $in_type = "hidden";
 	  	
 	  	<div class="pull-right" id="expresscheckin_loading" style="width:32px;">&nbsp;</div>
 	</div>
-		
 	
+	<div class="alert alert-info">You can view records of all checkins by accessing the Attendance Reporting menu option</div>
+		
 	<input type="<?php echo $in_type; ?>" name="Itemid" value="<?php echo $clubreg_Itemid; ?>" />	
 	<input type="<?php echo $in_type; ?>" name="option" value="com_clubreg" />
 	
@@ -85,17 +86,13 @@ $in_type = "hidden";
 </form>
 
 <form action="<?php echo JRoute::_($this->formaction); ?>" method="post" name="expresscheckinForm" id="expresscheckinForm" class="form-inline">
-	
 	<input type="<?php echo $in_type; ?>" name="Itemid" value="<?php echo $clubreg_Itemid; ?>" />	
 	<input type="<?php echo $in_type; ?>" name="option" value="com_clubreg" />
-	
 	<input type="<?php echo $in_type; ?>" name="task" value="stats.savestats" />	
 	<input type="<?php echo $in_type; ?>" name="statsform[stats_detail]" id="stats_detail" value="stats_attendance" />	
 	<input type="<?php echo $in_type; ?>" name="statsform[pk]" id="pk" value="" />
 	<input type="<?php echo $in_type; ?>" name="statsform[stats_value]" id="stats_value" value="" />
 	<input type="<?php echo $in_type; ?>" name="statsform[stats_date]" id="stats_date" value="<?php echo $this->stats_date; ?>" />
-	
-	
 	<?php echo JHTML::_( 'form.token' ); ?>
 </form>
 
