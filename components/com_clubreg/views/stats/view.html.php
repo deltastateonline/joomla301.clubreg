@@ -119,12 +119,7 @@ class ClubRegViewstats extends ClubRegViews
 		if($current_model->getPermissions('manageusers')){
 			$proceed = TRUE;
 			
-	/* 		require_once CLUBREG_CONFIGS.'config.regmembers.php';
-				
-			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.filters.stats.php';
-			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.rendertables.stats.php';
-			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.pagination.php';
-			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php'; */
+			JLog::add("Express Checkin", JLog::INFO);
 				
 			$group_type			= $app->input->post->get('playertype');
 			$subgroup			= (int) $app->input->post->get('subgroup');

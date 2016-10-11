@@ -46,6 +46,9 @@ class ClubRegViewstats extends ClubRegViews{
 			$search_value = $app->input->post->getString('search_value', null);			
 			$current_model = JModelLegacy::getInstance('expresscheckin', 'ClubregModel', array('ignore_request' => true));
 			
+			
+			JLog::add("Express Checkin Search Term - {$search_value}");
+			
 			$current_model->setState('com_clubreg.expresscheckin.search_value',trim($search_value));
 			$current_model->setState('com_clubreg.expresscheckin.group_ids',$all_groups);			
 			
