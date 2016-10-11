@@ -101,6 +101,59 @@ class ClubRegViewstats extends ClubRegViews
 		return $proceed;
 		
 	}
+	/**
+	 * layout _ stats
+	 * @return boolean
+	 */
+	protected function expresscheckin_stats(){
+		
+		$user		= JFactory::getUser();
+		$proceed = FALSE;
+		
+		$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
+		$current_model->setState('joomla_id',$user->get('id'));
+		
+		$app		= JFactory::getApplication();
+		$active	= $app->getMenu()->getActive(); // if logged in
+		
+		if($current_model->getPermissions('manageusers')){
+			$proceed = TRUE;
+			
+			JLog::add("Express Checkin", JLog::INFO);
+				
+			$group_type			= $app->input->post->get('playertype');
+			$subgroup			= (int) $app->input->post->get('subgroup');
+				
+			$stats_date =  $app->input->post->get('stats_date',NULL,'string');
+				
+			if(!isset($stats_date)){
+				$stats_date = JHtml::date('now','Y-m-d');
+			}else{
+				$stats_date = str_replace("/", "-", $stats_date); // replace / with a -  so that you can perform a strtotime properly
+				$stats_date = JHtml::date(strtotime($stats_date),'Y-m-d');
+			}
+				
+			$this->stats_date = $stats_date;
+			
+			
+			unset($current_model);
+			$current_model = JModelLegacy::getInstance('regmembers', 'ClubregModel', array('ignore_request' => false));
+				
+			$this->formaction = 'index.php?option=com_clubreg&view=stats';
+			$this->formaction_edit = 'index.php?option=com_clubreg&view=regmember&layout=viewonly';
+				
+			$this->state		= $current_model->getState();
+			
+			
+		}
+		unset($current_model);
+		
+		
+		$this->pageTitle = $active->title;
+		unset($current_model);
+				
+		return $proceed;
+	}
 	
 	public function getSortFields()
 	{

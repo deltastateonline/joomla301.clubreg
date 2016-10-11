@@ -16,8 +16,7 @@ jimport( 'joomla.application.component.view');
 class ClubRegViewregmember extends JViewLegacy
 {
 	function display($tpl = null)
-	{
-		
+	{			
 		$this->layout  = $renderer =  $this->getLayout();
 		$proceed = FALSE;
 		 
@@ -60,7 +59,7 @@ class ClubRegViewregmember extends JViewLegacy
 		
 		
 		$this->member_key = $app->input->getString('pk', null);
-		
+		$key_data = new stdClass();
 		unset($current_model);
 		$currentModel = $this->getModel();
 		$currentModel->setState('com_clubreg.regmember.member_key',$this->member_key); // use the key in the model
@@ -116,7 +115,9 @@ class ClubRegViewregmember extends JViewLegacy
 			$this->profiles_pix = str_replace("\\", "/", $this->profiles_pix );
 		}else{
 			$this->profiles_pix = CLUBREG_ASSETS."/images/clublogo.png";
-		}		
+		}
+
+	
 		return $proceed;
 	}
 	

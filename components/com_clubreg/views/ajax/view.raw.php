@@ -140,6 +140,10 @@ class ClubRegViewAjax extends JViewLegacy
 		return $proceed;
 		
 	}
+	/**
+	 * Render all members who have a birthday in the next 7 days
+	 * @return boolean
+	 */
 	private function bday(){
 		
 		$proceed = FALSE;
@@ -179,7 +183,11 @@ class ClubRegViewAjax extends JViewLegacy
 		
 		return $proceed;
 	}
-	
+	/**
+	 * Render all the new members, on the your clubreg official profile.
+	 * Can either use the member list only or member profile pix
+	 * @return boolean
+	 */
 	private function members(){
 		$proceed = FALSE;
 		

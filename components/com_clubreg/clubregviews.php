@@ -19,7 +19,6 @@ class ClubRegViews extends JViewLegacy
 	
 	function display($tpl = null)
 	{			
-		
 		$app		= JFactory::getApplication();
 		$user		= JFactory::getUser();
 		
@@ -27,8 +26,13 @@ class ClubRegViews extends JViewLegacy
 		
 		$renderer =  sprintf("%s_%s",$this->layout,$this->getName());
 		
-		$proceed = FALSE;		
+		$proceed = FALSE;
 		
+		$options = array();
+		$options['format'] = '{DATE}\t{TIME}\t{LEVEL}\t{CODE}\t{MESSAGE}';
+		$options["text_file"] = "clubreg.{$this->getName()}.error.php";
+		JLog::addLogger($options);
+				
 		if(method_exists($this, $renderer)){			
 			$proceed =  $this->$renderer();			
 		}		
@@ -36,7 +40,6 @@ class ClubRegViews extends JViewLegacy
 		if($proceed){		
 			parent::display($tpl);					
 		}else{
-
 			ClubRegUnAuthHelper::unAuthorised();
 		}
 	}

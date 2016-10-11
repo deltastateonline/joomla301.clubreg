@@ -146,6 +146,10 @@ class ClubRegModelActivity extends JModelLegacy
 		
 		return $activity;
 	}
+	/**
+	 * Get a list of players who have a birthday in the next 7 days
+	 * @return mixed
+	 */
 	public function getBirthdays(){
 		
 		$db		= JFactory::getDbo();

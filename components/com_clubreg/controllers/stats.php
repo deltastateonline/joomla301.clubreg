@@ -21,8 +21,7 @@ class ClubregControllerStats extends JControllerLegacy
 		$this->registerTask('savestats', 'savestats');
 		$this->registerTask('getstats', 'getstats');
 		
-		$this->uKeyObject = new ClubRegUniqueKeysHelper(10);
-		
+		$this->uKeyObject = new ClubRegUniqueKeysHelper(10);		
 	}	
 	
 	public function savestats(){
@@ -119,7 +118,6 @@ class ClubregControllerStats extends JControllerLegacy
 		$app->close();
 	}
 		
-	
 	function error_from_model(&$d_model){
 		
 		$errors	= $d_model->getErrors();
