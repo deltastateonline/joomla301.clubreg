@@ -116,7 +116,5 @@ function render_msg(msg_text){
 	    	$('loading-div').removeClass('alert'+alert_style);	 
 	    	$('loading-div').set('tween',{duration:10}).fade('in');
 	    }		
-	}).fade('out');
-	
-	
+	}).fade('out');	
 }
