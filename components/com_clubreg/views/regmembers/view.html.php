@@ -132,4 +132,40 @@ class ClubRegViewregmembers extends JViewLegacy
 	
 		);
 	}	
+	private function findplayers(){
+		$user		= JFactory::getUser();
+		$proceed = FALSE;
+		
+		$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
+		$current_model->setState('joomla_id',$user->get('id'));
+		
+		$app		= JFactory::getApplication();
+		$active	= $app->getMenu()->getActive(); // if logged in
+		
+		if($current_model->getPermissions('manageusers')){
+			$proceed = TRUE;
+			
+			JLog::add("Find Player Search", JLog::INFO);
+				
+			$group_type			= $app->input->post->get('playertype');
+			$subgroup			= (int) $app->input->post->get('subgroup');			
+			
+			unset($current_model);
+			$current_model = JModelLegacy::getInstance('regmembers', 'ClubregModel', array('ignore_request' => false));
+				
+			$this->formaction = 'index.php?option=com_clubreg&view=regmembers';
+			$this->formaction_edit = 'index.php?option=com_clubreg&view=regmember&layout=viewonly';
+				
+			$this->state		= $current_model->getState();
+			
+			
+		}
+		unset($current_model);
+		
+		
+		$this->pageTitle = $active->title;
+		unset($current_model);
+				
+		return $proceed;
+	}
 }
