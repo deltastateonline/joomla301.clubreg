@@ -33,9 +33,8 @@ class ClubRegRenderDivsFindplayersHelper extends ClubRegRenderTablesHelper
 		
 		$defaultImg = "<img src='".JURI::base().CLUBREG_ASSETS."/images/clublogo32.png' >";
 		
-		$i = 0;
-		
-		$this->headings =  $viewObject->headingsConfig;	
+		$i = 0;		
+		$this->headings =  $viewObject->headingsConfig;
 		?>		
 		<div class="row-fluid">		 
 			  <?php			  
@@ -74,7 +73,7 @@ class ClubRegRenderDivsFindplayersHelper extends ClubRegRenderTablesHelper
 				  <div class="span10">
 				  	<div class="pull-left h21" style="border:0px;">
 			  			<a href="javascript:void(0);" onclick="Joomla.sbutton('<?php echo $fkey;?>')"><?php echo ucwords($an_item->surname); ?></a>
-			  		</div>	
+			  		</div>
 				    <?php $this->rendererItems($an_item); ?>
 				    <div class="clearfix"></div>
 				    <p class=" pull-right small"><?php echo JText::_('COM_CLUBREG_REGISTERED_LABEL');?> :<?php echo $an_item->t_created_by;?> on  <?php echo $an_item->t_created_date;?></p>
@@ -83,16 +82,25 @@ class ClubRegRenderDivsFindplayersHelper extends ClubRegRenderTablesHelper
 			  <?php $i++; }
 		?></div><?php 	 
 	}	
-	
+	/**
+	 * $this->headings structure
+	 * 		[playertype][headings] = array(
+	 * 			array(label1=>array(),label2=>array)
+	 * 			array(label3=>array(),
+	 * 			array(label4=>array(),label5=>array(),label6=>()) 
+	 * 		)
+	 * @see ClubRegRenderTablesHelper::rendererItems()
+	 */
 	protected function rendererItems($an_item){?>
 	<div class="clearfix"></div>
-			<div class="reg-well" id='regdata_<?php echo $an_item->member_id; ?>'>	
-			<?php foreach($this->headings as $curIndex =>$aheading){ ?>
+			<div class="reg-well" id='regdata_<?php echo $an_item->member_id; ?>'>			
+			<?php 
+			
+			foreach($this->headings[$an_item->playertype]["headings"] as $curIndex =>$aheading){ ?>
 				<div class="row each-row">
-				<?php $howmany = count($aheading);
-				
+				<?php $howmany = count($aheading);				
 				$each = 12 / $howmany;
-				$eachSpan = "span".$each;
+				$eachSpan = "span".$each;		
 								
 				foreach($aheading as $akey => $aHead){ ?>
 						<div class="<?php echo $eachSpan?>" >							

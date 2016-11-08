@@ -75,6 +75,8 @@ class ClubregModelFindplayer extends JModelList
 		$all_string[] = "a.*";
 		
 		$all_string["member_name"] = "concat(UCASE(a.`surname`),' ' ,LCASE(a.`givenname`)) as surname";
+		$all_string["t_created_date"] = "date_format(a.created,'%d/%m/%Y') as t_created_date";
+		$all_string["t_created_by"] = "usert.name as `t_created_by`";
 		
 		$all_string["t_group"] = "b.group_name as `group`";
 		$all_string["subgroup"] = "sg.group_name as `subgroup`";
@@ -103,6 +105,7 @@ class ClubregModelFindplayer extends JModelList
 		$query->join('LEFT', CLUB_GROUPS_TABLE.' AS sg ON a.subgroup = sg.group_id');
 		
 		$query->join('LEFT', $db->quoteName(CLUB_REGISTEREDMEMBERS_TABLE).' AS d on (a.parent_id = d.member_id)');
+		$query->join('LEFT', '#__users AS usert ON a.created_by = usert.id');
 		
 		foreach($where_ as $a_where){
 			$query->where($a_where);
