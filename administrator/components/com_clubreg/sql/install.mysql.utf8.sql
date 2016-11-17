@@ -540,3 +540,47 @@ INSERT INTO `#__clubreg_templates` (`template_id`, `template_name`, `template_su
 (4, 'Expression Of Interest', 'Expression Of Interest For Player', '<p>Thank you for registering your expression of interest.</p>\r\n<p>One of our team leaders will get back to you in due course.</p>\r\n<p>If you have further enquiries please feel free to contact us, using our contact form.</p>\r\n<p>Yours Truly</p>\r\n<p>Site Administrator</p>', 'Thank you for registering your expression of interest.\r\nOne of our team leaders will get back to you in due course.\r\nIf you have further enquiries please feel free to contact us, using our contact form.\r\nYours Truly\r\nSite Administrator', 'active_template', 0, 'everyone', '2011-10-04 06:40:33', 62, 0, '0000-00-00 00:00:00', 1, 4, ''),
 (5, 'Urgent Email', 'URGENT MESSAGE RE PRESENTATION', '<h1>ATTENTION ALL SQUIRTZ & SSG PLAYERS</h1>\r\n<h2>WE REGRET TO INFORM YOU THAT THE RESCHEDULED PRESENTATION/ROUND ROBIN EVENT SET DOWN FOR THE 28TH AUGUST IS TO BE CANCELLED DUE TO THE PRESENT & FORECASTED WEEKEND WEATHER CONDITIONS.</h2>\r\n<p>We understand how difficult & frustrating these changes are & therefore, to avoid any further disappointment, we are seeking to organise an indoor venue to hold the presentation regardless of the weather.</p>\r\n<p>These details will be posted as soon as we are able to finalise them.</p>\r\n<p>Again, we apologise for the inconvenience caused.</p>', 'ATTENTION ALL SQUIRTZ & SSG PLAYERS\r\nWE REGRET TO INFORM YOU THAT THE RESCHEDULED PRESENTATION/ROUND ROBIN EVENT SET DOWN FOR THE 28TH AUGUST IS TO BE CANCELLED DUE TO THE PRESENT & FORECASTED WEEKEND WEATHER CONDITIONS.\r\nWe understand how difficult & frustrating these changes are & therefore, to avoid any further disappointment, we are seeking to organise an indoor venue to hold the presentation regardless of the weather.\r\nThese details will be posted as soon as we are able to finalise them.\r\nAgain, we apologise for the inconvenience caused.', 'active_template', 0, 'everyone', '2012-03-01 05:00:19', 62, 0, '0000-00-00 00:00:00', 1, 5, '');
 
+
+
+CREATE TABLE IF NOT EXISTS `#__clubreg_stats_details` (
+  `member_id` int(11) NOT NULL,
+  `stats_date` date NOT NULL,
+  `stats_detail` varchar(64) NOT NULL,
+  `stats_value` varchar(512) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Stats details';
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `#__clubreg_stats_details`
+--
+ALTER TABLE `#__clubreg_stats_details`
+ ADD PRIMARY KEY (`member_id`,`stats_date`,`stats_detail`);
+
+CREATE TABLE IF NOT EXISTS `#__clubreg_contactlist` (
+`contactlist_id` int(11) NOT NULL,
+  `contactlist_key` varchar(30) NOT NULL,
+  `member_id` int(11) DEFAULT NULL,
+  `contactlist_email` varchar(64) DEFAULT NULL,
+  `contactlist_phoneno` varchar(64) DEFAULT NULL,
+  `contactlist_fname` varchar(64) DEFAULT NULL,
+  `contactlist_sname` varchar(64) DEFAULT NULL,
+  `contactlist_notify` int(11) DEFAULT NULL,
+  `contactlist_status` int(11) DEFAULT '1',
+  `created` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+ALTER TABLE `#__clubreg_contactlist`
+ ADD PRIMARY KEY (`contactlist_id`), ADD KEY `member_id` (`member_id`);
+
+--
+
+--
+-- AUTO_INCREMENT for table `#__clubreg_contactlist`
+--
+ALTER TABLE `#__clubreg_contactlist`
+MODIFY `contactlist_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
