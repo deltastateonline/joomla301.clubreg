@@ -32,24 +32,26 @@ line-height:24px;
 					# Author: Omokhoa Agbagbara<br />
 					# Copyright: (C) 2013 applications.deltastateonline.com. All Rights Reserved.<br />
 					# License: http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL<br />
-					# Website:- <a href="http://app.deltastateonline.com">http://app.deltastateonline.com</a><br />
-					# Technical Support:  email - <a mailto="joomla@deltastateonline.com">joomla@deltastateonline.com</a><br />
+					# Website:- <a href="http://app.deltastateonline.com">http://app.deltastateonline.com</a>&nbsp;&nbsp;&nbsp;
 					# Demo:  <a href="http://demo3.deltastateonline.com">http://demo3.deltastateonline.com</a><br />
+					# Technical Support:  email - <a mailto="joomla@deltastateonline.com">joomla@deltastateonline.com</a>&nbsp;&nbsp;&nbsp;				
 					# Twitter: <a href="https://twitter.com/ejiroesiri">@ejiroesiri</a><br />
 					# Video tutorials : <a href="http://screencast-o-matic.com/channels/c2XY0kipr" target="_blank">Video tutorials</a>				
 				</div>
 		</div>
 		<div class="row-fluid">
-		<div class="span8 row-striped">		
+		<div class="span12 row-striped">		
 			<div class="row-fluid">The Club Registration Component is an extension for Joomla 3.0. it can be used to manage almost any social/sporting club or group 
-				which has team leaders(Coaches, Officials) , Team members (assistants) and club members (players, swimmers, driver, paying members etc).</div>
-			<div class="row-fluid">The Team Leader and Team members are  made up of registered users of the joomla installation. These users have to be linked to this component for them to manage players within Clubreg</div>
-			<div class="row-fluid">ClubReg uses a configurable list of form controls, to collect and render the details about <strong>Coaches , Assistants and Club Officials</strong>. These details can be updated by either the site administrator or the Club officials themselves</div>		
-			<div class="row-fluid">ClubReg allows the club to take expression of interest from the public regarding joining the various groups or divisions within the club. These EOIs can then be converted into registered members or discarded.</div>
+				which has team leaders(Coaches, Officials) , Team members (assistants) and club members (players, swimmers, driver, paying members etc).<br />
+				The Team Leader and Team members are  made up of registered users of the joomla installation. These users have to be linked to this component for them to manage players within Clubreg.<br />
+				ClubReg uses a configurable list of form controls, to collect and render the details about <strong>Coaches , Assistants and Club Officials</strong>. These details can be updated by either the site administrator or the Club officials themselves.<br />		
+				ClubReg allows the club to take expression of interest from the public regarding joining the various groups or divisions within the club. These EOIs can then be converted into registered members or discarded.
+			</div>
 			<br />
 			<?php 
 			echo JHtml::_('bootstrap.startAccordion', 'slide-updates', array('active' => 'version-3020'));				
 				echo $this->loadTemplate('3020');
+				echo $this->loadTemplate('3019');
 				echo $this->loadTemplate('3018');
 				echo $this->loadTemplate('3017');
 				echo $this->loadTemplate('3016');
