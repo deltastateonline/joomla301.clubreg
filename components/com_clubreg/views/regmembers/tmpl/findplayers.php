@@ -40,14 +40,13 @@ $in_type = "hidden";
 //-->
 </script>
 <form action="<?php echo JRoute::_($this->formaction); ?>" method="post" name="findplayerAdminForm" id="findplayerAdminForm" class="form-inline">
-	
 	<div class="control-group" id="find-player-div">
-		<label class="control-label" for="search_value"><?php echo JText::_('COM_CLUBREG_SEARCHPARAMS_LABEL'); ?></label> : 
+		<label class="control-label" for="search_value"><b><?php echo JText::_('COM_CLUBREG_SEARCHPARAMS_LABEL'); ?> :</b></label>  
 		<div class="input-append" >		 	
 	  		<input type="text" placeholder="<?php echo JText::_('COM_CLUBREG_SEARCHPARAMS_LABEL'); ?>" class="inputbox input-large"  required name="search_value" id="search_value" />
 	  		<a href="javascript:void(0);" class="btn btn-findplayer-search"><span class="icon-search"></span></a>
 	  	</div>
-	 
+	  	<span class=""><b><i><?php echo JText::_('COM_CLUBREG_SEARCHPARAMS_TXT');?></i></b></span>	 
 	  	<div class="pull-right" id="findplayer_loading" style="width:32px;">&nbsp;</div>
 	</div>
 	
@@ -105,5 +104,5 @@ ClubregHelper::writeTabAssets($document, "regmembers",array("css"));
 ClubregHelper::writeTabAssets($document, "clubreg",array("js"));
 ClubregHelper::writeTabAssets($document, "findplayer",array("js","css"));
 ClubregHelper::writeTabAssets($document, "common",array("css"));
-//ClubregHelper::write_footer(); 
+ClubregHelper::write_footer(); 
 ?>
