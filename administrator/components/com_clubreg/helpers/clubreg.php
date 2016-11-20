@@ -50,11 +50,11 @@ class ClubRegHelper
 				$vName == 'templates'
 		);
 		
-		/*JHtmlSidebar::addEntry(
-				JText::_('COM_CLUBREG_SUBMENU_REPORTS'),
-				'index.php?option=com_clubreg&view=reports',
-				$vName == 'reports'
-		);	*/	
+		JHtmlSidebar::addEntry(
+				JText::_('COM_CLUBREG_SUBMENU_VALIDATEAPP'),
+				'index.php?option=com_clubreg&layout=validateapp',
+				$vName == 'validateapp'
+		);	
 		
 	}
 	/**
@@ -359,20 +359,30 @@ class ClubRegHelper
 		return $t_array;
 	}
 	static function write_footer(){
-		?>		
+				
+			if(!COM_CLUBREG_COMMERCIAL){
+				self::write_advert();
+			}
+			self::write_analytics();
+			if(!COM_CLUBREG_COMMERCIAL){?>	
+				<small><?php echo JText::_("Designed By ")?><a href="http://<?php echo  OUR_WEBSITE; ?>">http://<?phP echo DESIGNED_BY ?></a></small>
+			<?php } 
+	}
+	static function write_advert(){?>
 		<div style="text-align:center">
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-		<!-- app_deltastateonline -->
-		<ins class="adsbygoogle"
-			 style="display:inline-block;width:468px;height:60px"
-			 data-ad-client="ca-pub-0692375547011702"
-			 data-ad-slot="3497672953"></ins>
-		<script>
-		(adsbygoogle = window.adsbygoogle || []).push({});
-		</script>
-		</div>
-		<small><?php echo JText::_("Designed By ")?><a href="http://<?php echo  OUR_WEBSITE; ?>">http://<?phP echo DESIGNED_BY ?></a></small>
-		<script>
+			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<!-- app_deltastateonline -->
+			<ins class="adsbygoogle"
+				 style="display:inline-block;width:468px;height:60px"
+				 data-ad-client="ca-pub-0692375547011702"
+				 data-ad-slot="3497672953"></ins>
+			<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
+		</div><?php 
+	}
+	static function write_analytics(){
+		?><script>
 		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
