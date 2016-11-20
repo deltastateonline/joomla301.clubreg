@@ -21,8 +21,7 @@ line-height:24px;
 </style>
 	<div id="j-sidebar-container" class="span2">
 		<?php echo $this->sidebar; ?>
-	</div>
-	
+	</div>	
 	<div id="j-main-container" class="span10">		
 		<div class="well">
 			<img src="<?php echo str_replace("administrator/", "", JURI::base()).CLUBREG_ASSETS; ?>/images/clublogo.png" width=256  class="pull-right"/>
