@@ -111,5 +111,6 @@ define('LIVE_SITE',TRUE);
 define('ATTACHMENT_LIMIT',5);
 define('CLUBREG_COMM_SENTSTATUS', 30);
 define('CLUBREG_COMM_DELETESTATUS', 99);
+define('COM_CLUBREG_COMMERCIAL',FALSE);
 
 include_once("debugger.php");
