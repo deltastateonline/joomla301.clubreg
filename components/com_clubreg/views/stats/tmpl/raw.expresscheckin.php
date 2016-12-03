@@ -34,6 +34,7 @@ if(count($this->items)> 0){ $i=1; ?>
 			$an_item->address = $an_item->g_address;
 			$an_item->suburb = $an_item->g_suburb;
 			$an_item->postcode = $an_item->g_postcode;
+			$an_item->ausstate = $an_item->g_ausstate;
 		}
 		
 		if($an_item->address){
@@ -41,6 +42,9 @@ if(count($this->items)> 0){ $i=1; ?>
 		}
 		if($an_item->suburb || $an_item->postcode){
 			$an_item->t_address = $an_item->t_address.ucwords($an_item->suburb)." ";
+		}
+		if($an_item->ausstate){
+			$an_item->t_address = $an_item->t_address.", ".$an_item->ausstate." ";
 		}
 		if($an_item->postcode){
 			$an_item->t_address = $an_item->t_address.$an_item->postcode;

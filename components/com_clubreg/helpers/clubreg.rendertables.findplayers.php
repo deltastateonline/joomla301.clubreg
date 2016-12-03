@@ -65,7 +65,7 @@ class ClubRegRenderDivsFindplayersHelper extends ClubRegRenderTablesHelper
 
 			  	$profile_pix = $thumbrenderer->renderMemberThumb($an_item->member_id,FALSE,FALSE);
 			  	?>			 
-			    <div class="row cgroup-div" style="margin:7px 5px 7px 10px;">		    
+			    <div class="row cgroup-div" style="margin:7px 5px 7px 10px;">	    
 			     <div class="pull-left">			     	
 			     	<span class="pull-right numbering"><?php echo $i+1 ; ?>	</span>
 				    <div style="margin-top:5px;">				    	

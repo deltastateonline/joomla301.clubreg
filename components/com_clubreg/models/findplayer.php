@@ -86,16 +86,19 @@ class ClubregModelFindplayer extends JModelList
 		$all_string["gender"] = " (if(a.gender in ('0','-1') , '' , a.gender)) as gender";
 		
 		
-		$all_string["address"] = " (if(a.address in ('0','-1') , 'N/A' , a.address)) as address";		
-		$all_string["suburb"] = " (if(a.suburb in ('0','-1') , '' , a.suburb)) as suburb";
-		$all_string["postcode"] = " (if(a.postcode in ('0','-1') , '' , a.postcode)) as postcode";		
 		
-	 	$all_string["guardian"] = "concat(d.`surname`,' ' ,d.`givenname`) as guardian";	
+		//if(a.playertype='junior',parentt.`postal_address`,a.`postal_address`)
+			
+			
+		$all_string["address"] = " (if(a.playertype='junior' , d.address , a.address)) as address";		
+		$all_string["suburb"] = " (if(a.playertype='junior' , d.suburb , a.suburb)) as address";
+		$all_string["postcode"] = " (if(a.playertype='junior' , d.postcode , a.postcode)) as postcode";
 		
-		$all_string["gaddress"] = " (if(d.address in ('0','-1') , 'N/A' , d.address)) as g_address";
-		$all_string["gsuburb"] = " (if(d.suburb in ('0','-1') , '' , d.suburb)) as g_suburb";
-		$all_string["gpostcode"] = " (if(d.postcode in ('0','-1') , '' , d.postcode)) as g_postcode";
+		$all_string["ausstate"] = " (if(a.playertype='junior' , d.ausstate , a.ausstate)) as ausstate";
 		
+		$all_string["postal_address"] = " (if(a.playertype='junior' , d.postal_address , a.postal_address)) as postal_address";
+			
+	 	$all_string["guardian"] = "concat(d.`surname`,' ' ,d.`givenname`) as guardian";		
 		
 		$d_var =implode(",", $all_string);
 		
