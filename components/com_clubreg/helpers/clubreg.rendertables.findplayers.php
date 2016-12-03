@@ -46,6 +46,11 @@ class ClubRegRenderDivsFindplayersHelper extends ClubRegRenderTablesHelper
 			  	if($an_item->suburb || $an_item->postcode){
 			  		$an_item->t_address = $an_item->t_address.ucwords($an_item->suburb)." ";
 			  	}
+			  	
+			  	if($an_item->ausstate){
+			  		$an_item->t_address = $an_item->t_address.", ".$an_item->ausstate." ";
+			  	}
+			  	
 			  	if($an_item->postcode){
 			  		$an_item->t_address = $an_item->t_address.$an_item->postcode;
 			  	}

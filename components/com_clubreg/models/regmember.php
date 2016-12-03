@@ -206,6 +206,10 @@ class ClubregModelRegmember extends JModelForm
 		
 	}
 	
+	/**
+	 * 
+	 * @return boolean|multitype:mixed
+	 */
 	function getMemberDetails(){
 		global $overRide;
 		
@@ -249,6 +253,9 @@ class ClubregModelRegmember extends JModelForm
 		$all_string["gaddress"] = "if(a.playertype='junior',parentt.`address`,a.`address`) as address";
 		$all_string["gsuburb"] = "if(a.playertype='junior',parentt.`suburb`,a.`suburb`)  as suburb";
 		$all_string["gpostcode"] = "if(a.playertype='junior',parentt.`postcode`,a.`postcode`) as postcode";
+		
+		$all_string["gausstate"] = "if(a.playertype='junior',parentt.`ausstate`,a.`ausstate`) as ausstate";
+		$all_string["gpostal_address"] = "if(a.playertype='junior',parentt.`postal_address`,a.`postal_address`) as postal_address";
 		
 		$all_string["gmobile"] = "if(a.playertype='junior',parentt.`mobile`,a.`mobile`) as mobile";
 		$all_string["gphones"] = "if(a.playertype='junior',parentt.`phoneno`,a.`phoneno`) as phoneno";

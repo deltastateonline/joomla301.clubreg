@@ -88,6 +88,8 @@ class ClubregModelRegmembers extends JModelList
 			$all_string["gaddress"] = "d.`address` as address";
 			$all_string["gsuburb"] = "d.`suburb` as suburb";
 			$all_string["gpostcode"] = "d.`postcode` as postcode";
+			$all_string["gausstate"] = "d.`ausstate` as ausstate";
+			$all_string["gpostal_address"] = "d.`postal_address` as postal_address";
 			$query->join('LEFT', $db->quoteName(CLUB_REGISTEREDMEMBERS_TABLE).' AS d on (a.parent_id = d.member_id)');			
 			
 		}	

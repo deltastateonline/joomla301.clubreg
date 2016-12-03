@@ -43,8 +43,9 @@ class ClubRegRegmembersDisplayConfig extends JObject
 		$headings[$i]["emailaddress"] = array("label"=>JText::_('JGLOBAL_EMAIL'), "clearfix"=>true);
 		$headings[$i]["t_phone"] = array("label"=>JText::_('COM_CLUBREG_MOBILE'),"sep"=>"/", "clearfix"=>true);
 		$i++;
-		$headings[$i]["t_address"] = array("label"=>JText::_('COM_CLUBREG_ADDRESS'), "clearfix"=>true);			
-		$i++;
+		$headings[$i]["t_address"] = array("label"=>JText::_('COM_CLUBREG_ADDRESS'), "clearfix"=>true);		
+		$headings[$i]["postal_address"] = array("label"=>JText::_('COM_CLUBREG_POSTAL_ADDRESS'), "clearfix"=>true,'transform'=>"nl2br" );
+		$i++;		
 		$headings[$i]["my_children"] = array("label"=>JText::_('COM_CLUBREG_JUNIOR_LABEL'));	
 		$i++;
 		$headings[$i]["send_news"] = array("label"=>JText::_('COM_CLUBREG_SENDNEWS'), "clearfix"=>true, "transform"=>"sendnews"); 
@@ -62,7 +63,8 @@ class ClubRegRegmembersDisplayConfig extends JObject
 		$headings[$i]["t_phone"] = array("label"=>JText::_('COM_CLUBREG_MOBILE'),"sep"=>" / ", "clearfix"=>true);
 		$i++;
 		
-		$headings[$i]["t_address"] = array("label"=>JText::_('COM_CLUBREG_ADDRESS'), "clearfix"=>true);
+		$headings[$i]["t_address"] = array("label"=>JText::_('COM_CLUBREG_ADDRESS'), "clearfix"=>true);		
+		$headings[$i]["postal_address"] = array("label"=>JText::_('COM_CLUBREG_POSTAL_ADDRESS'), "clearfix"=>true,'transform'=>"nl2br" );
 		$i++;
 		$headings[$i]["group"] = array("label"=>JText::_('COM_CLUBREG_GROUPN_LABEL'));
 		$headings[$i]["subgroup"] = array("label"=>JText::_('COM_CLUBREG_SUBGROUPN_LABEL'), "clearfix"=>true);
@@ -83,7 +85,9 @@ class ClubRegRegmembersDisplayConfig extends JObject
 		$i= 0;
 		$headings[$i]["guardian"] = array("label"=>JText::_('COM_CLUBREG_GUARDIAN_LABEL'),'transform'=>"ucwords", "clearfix"=>true); // one line
 		$i++;
-		$headings[$i]["t_address"] = array("label"=>JText::_('COM_CLUBREG_ADDRESS'), "cols" => array("gaddress", "gsuburb","gpostcode"), "clearfix"=>true);
+		$headings[$i]["t_address"] = array("label"=>JText::_('COM_CLUBREG_ADDRESS'), "cols" => array("gaddress", "gsuburb","gausstate","gpostcode"), "clearfix"=>true);
+		$headings[$i]["postal_address"] = array("label"=>JText::_('COM_CLUBREG_POSTAL_ADDRESS'), "clearfix"=>true,'transform'=>"nl2br" );
+		
 		$i++;
 		$headings[$i]["group"] = array("label"=>JText::_('COM_CLUBREG_GROUPN_LABEL'));
 		$headings[$i]["subgroup"] = array("label"=>JText::_('COM_CLUBREG_SUBGROUPN_LABEL'), "clearfix"=>true); // two per line		

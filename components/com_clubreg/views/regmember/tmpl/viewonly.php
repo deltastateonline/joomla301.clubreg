@@ -58,7 +58,7 @@ $back_url = $session->get("com_clubreg.back_url");// save the back url
 
 $headingConfigs = $this->profileConfigs["headings"];
 
-$hasClubProfile = true ;//isset($this->profileConfigs["headings"]['club'])?TRUE:FALSE;
+$hasClubProfile = isset($this->profileConfigs["headings"]['club'])?TRUE:FALSE; // ignore the profile tab for guardians
 
 ?>
 <script type="text/javascript">
