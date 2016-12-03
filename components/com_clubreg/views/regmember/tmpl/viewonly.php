@@ -44,6 +44,8 @@ ClubregHelper::writePageHeader($this->pageTitle);
 	}
 	$member_data->t_phone = $t_phone ;
 	/** some preprocessing*/
+	
+	$this->all_data["member_data"] = $member_data;
 
 	$itemRenderer = $this->itemRenderer;
 global $clubreg_Itemid;
