@@ -24,6 +24,19 @@
 			<field name="suburb" type="text" label="COM_CLUBREG_SUBURB"
 					description="COM_CLUBREG_SUBURB" class="inputbox input-large"/>
 					
+			<field name="ausstate" type="list" label="COM_CLUBREG_AUSSTATE"
+					description="COM_CLUBREG_AUSSTATE" class="inputbox input-large">
+					<option value="0">COM_CLUBREG_AUSSTATE</option>
+					<option value="ACT">ACT</option>
+					<option value="NSW">New South Wales</option>
+					<option value="NT">Northern Territory</option>
+					<option value="QLD">Queensland</option>					
+					<option value="SA">South Australia</option>
+					<option value="TAS">Tasmania</option>
+					<option value="VIC">Victoria</option>
+					<option value="WA">Western Australia</option>				
+			</field>
+					
 			<field name="postcode" type="text" label="COM_CLUBREG_POSTCODE"
 					description="COM_CLUBREG_POSTCODE" class="inputbox input-small"/>
 			

@@ -21,7 +21,10 @@ $headingConfigs = $this->profileConfigs["headings"];
 	  	$member_data->t_address = ucwords($member_data->address)."<br />";
 	  }
 	  if($member_data->suburb || $member_data->postcode){
-	  	$member_data->t_address = $member_data->t_address.ucwords($member_data->suburb)." ";
+	  	$member_data->t_address = $member_data->t_address.ucwords($member_data->suburb).", ";
+	  }
+	  if($member_data->ausstate){
+	  	$member_data->t_address = $member_data->t_address.$member_data->ausstate." ";
 	  }
 	  if($member_data->postcode){
 	  	$member_data->t_address = $member_data->t_address.$member_data->postcode;

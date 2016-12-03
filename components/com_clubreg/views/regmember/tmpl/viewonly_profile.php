@@ -23,9 +23,14 @@ $headingConfigs = $this->profileConfigs["headings"];
 	  if($member_data->suburb || $member_data->postcode){
 	  	$member_data->t_address = $member_data->t_address.ucwords($member_data->suburb)." ";
 	  }
+	 
+	  if($member_data->ausstate){
+	  	$member_data->t_address = $member_data->t_address.$member_data->ausstate." ";
+	  }	  
 	  if($member_data->postcode){
 	  	$member_data->t_address = $member_data->t_address.$member_data->postcode;
 	  }
+	  
 	  if($member_data->phoneno){
 	  	$t_phone[] = $member_data->phoneno;
 	  }

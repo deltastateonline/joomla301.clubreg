@@ -33,6 +33,9 @@ ClubregHelper::writePageHeader($this->pageTitle);
 	if($member_data->suburb || $member_data->postcode){
 		$member_data->t_address = $member_data->t_address.ucwords($member_data->suburb)." ";
 	}
+	if($member_data->ausstate){
+		$member_data->t_address = $member_data->t_address.$member_data->ausstate." ";
+	}
 	if($member_data->postcode){
 		$member_data->t_address = $member_data->t_address.$member_data->postcode;
 	}
@@ -53,7 +56,7 @@ $back_url = $session->get("com_clubreg.back_url");// save the back url
 
 $headingConfigs = $this->profileConfigs["headings"];
 
-$hasClubProfile = isset($this->profileConfigs["headings"]['club'])?TRUE:FALSE;
+$hasClubProfile = true ;//isset($this->profileConfigs["headings"]['club'])?TRUE:FALSE;
 
 ?>
 <script type="text/javascript">
