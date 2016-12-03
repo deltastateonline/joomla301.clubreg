@@ -38,8 +38,7 @@ $back_url = $session->get("com_clubreg.back_url");// save the back url
 </script>
 <div class="clugreg-div">
 	<form action="<?php echo JRoute::_($this->formbaction)?> " method="post" name="adminForm_" id="edit-form" class="form-validate">	
-		<div class="row-fluid <?php echo $div_class?>">
-		
+		<div class="row-fluid <?php echo $div_class?>">	
 			<div class="row-fluid">
 			<?php			
 				$fieldSets = $this->regmemberForm->getFieldsets();	
