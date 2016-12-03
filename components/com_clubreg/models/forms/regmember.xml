@@ -40,6 +40,12 @@
 			<field name="postcode" type="text" label="COM_CLUBREG_POSTCODE"
 					description="COM_CLUBREG_POSTCODE" class="inputbox input-small"/>
 			
+			<field name="useaddress" type="checkbox" label="COM_CLUBREG_USEADDRESS" 
+			description="COM_CLUBREG_USEADDRESS" class="checkbox inline"/>
+					
+			<field name="postal_address" type="textarea" label="COM_CLUBREG_POSTAL_ADDRESS" description="COM_CLUBREG_POSTAL_ADDRESS"
+			class="inputbox input-xlarge"  rows="5" cols="80" />	
+			
 			<field name="send_news" type="checkbox" label="COM_CLUBREG_SENDNEWS" 
 			description="COM_CLUBREG_SENDNEWS" class="checkbox inline"/>
 				

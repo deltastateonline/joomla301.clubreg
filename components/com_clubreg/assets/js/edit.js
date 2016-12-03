@@ -66,3 +66,18 @@ window.addEvent('domready', function () {
 		
 	})
 });
+jQuery(document).ready(function(){
+	if(jQuery('#jform_useaddress') && jQuery('#jform_postal_address')){
+		
+		jQuery('#jform_useaddress').on('click',function(){
+			if(jQuery('#jform_useaddress').is(':checked')){
+				var pAddress = jQuery('#jform_address').val();
+				pAddress = pAddress + "\n"+ jQuery('#jform_suburb').val();
+				pAddress = pAddress + "\n"+ jQuery('#jform_ausstate').val();
+				pAddress = pAddress + " "+ jQuery('#jform_postcode').val();
+				
+				jQuery('#jform_postal_address').val(pAddress);
+			}
+		});
+	}
+})

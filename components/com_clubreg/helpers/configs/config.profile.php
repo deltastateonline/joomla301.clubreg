@@ -45,6 +45,7 @@ class ClubRegProfileConfig extends JObject
 		$headings["bio"]["emailaddress"] = array("label"=>JText::_('JGLOBAL_EMAIL'));
 		$headings["bio"]["t_phone"] = array("label"=>JText::_('COM_CLUBREG_MOBILE'),"sep"=>"/", "clearfix"=>true);
 		$headings["bio"]["t_address"] = array("label"=>JText::_('COM_CLUBREG_ADDRESS'), "clearfix"=>true);
+		$headings["bio"]["postal_address"] = array("label"=>JText::_('COM_CLUBREG_POSTAL_ADDRESS'), "clearfix"=>true,'transform'=>"nl2br");
 		$headings["bio"]["send_news"] = array("label"=>JText::_('COM_CLUBREG_SENDNEWS'), "clearfix"=>true, 'transform'=>"sendnews"); // use array
 		
 		$headings["children"] = array("label"=>JText::_('COM_CLUBREG_JUNIOR_LABEL'));	
@@ -77,6 +78,7 @@ class ClubRegProfileConfig extends JObject
 		$headings["bio"]["gender"] = array("label"=>JText::_('COM_CLUBREG_GENDER_LABEL'),'transform'=>"ucfirst", "clearfix"=>true);	
 		$headings["bio"]["dob"] = array("label"=>JText::_('COM_CLUBREG_DOB_LABEL')); // two per line
 		$headings["bio"]["t_address"] = array("label"=>JText::_('COM_CLUBREG_ADDRESS'), "clearfix"=>true);
+		$headings["bio"]["postal_address"] = array("label"=>JText::_('COM_CLUBREG_POSTAL_ADDRESS'), "clearfix"=>true,'transform'=>"nl2br");
 		$headings["bio"]["send_news"] = array("label"=>JText::_('COM_CLUBREG_SENDNEWS'), "clearfix"=>true, 'transform'=>"sendnews"); // use array
 		
 		$headings["club"]["member_status"] = array("label"=>JText::_('COM_CLUBREG_MEMBERSTATUS_LABEL'),'transform'=>"ucfirst");
@@ -129,6 +131,7 @@ class ClubRegProfileConfig extends JObject
 		$headings["bio"]["emailaddress"] = array("label"=>JText::_('JGLOBAL_EMAIL'));
 		$headings["bio"]["t_phone"] = array("label"=>JText::_('COM_CLUBREG_MOBILE'),"sep"=>" / ", "clearfix"=>true);
 		$headings["bio"]["t_address"] = array("label"=>JText::_('COM_CLUBREG_ADDRESS'), "clearfix"=>true);
+		$headings["bio"]["postal_address"] = array("label"=>JText::_('COM_CLUBREG_POSTAL_ADDRESS'), "clearfix"=>true);
 		$headings["bio"]["send_news"] = array("label"=>JText::_('COM_CLUBREG_SENDNEWS'), "clearfix"=>true, 'transform'=>"sendnews"); // use array
 		
 	}
