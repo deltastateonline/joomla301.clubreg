@@ -10,35 +10,9 @@
 -------------------------------------------------------------------------*/ 
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' ); 
-$headingConfigs = $this->profileConfigs["headings"]; 
-	  $itemRenderer = $this->itemRenderer;
-	  
-	  $member_data = $this->all_data["member_data"];  
-	  
-	  /** some preprocessing*/
-	  $member_data->t_address = "";$t_phone =  array();
-	  if($member_data->address){
-	  	$member_data->t_address = ucwords($member_data->address)."<br />";
-	  }
-	  if($member_data->suburb || $member_data->postcode){
-	  	$member_data->t_address = $member_data->t_address.ucwords($member_data->suburb).", ";
-	  }
-	  if($member_data->ausstate){
-	  	$member_data->t_address = $member_data->t_address.$member_data->ausstate." ";
-	  }
-	  if($member_data->postcode){
-	  	$member_data->t_address = $member_data->t_address.$member_data->postcode;
-	  }
-	  if($member_data->phoneno){
-	  	$t_phone[] = $member_data->phoneno;
-	  }
-	  if($member_data->mobile){
-	  	$t_phone[] = $member_data->mobile;
-	  }
-	  $member_data->t_phone = $t_phone ;
-	  /** some preprocessing*/	  
-
-	  
+	$headingConfigs = $this->profileConfigs["headings"];
+	$itemRenderer = $this->itemRenderer;
+	$member_data = $this->all_data["member_data"];
 ?>
 	<div class="row-fluid" style="max-width:97%;">
 	<div class="span3">&nbsp;</div>
