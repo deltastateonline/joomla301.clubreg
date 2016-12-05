@@ -49,6 +49,8 @@ line-height:24px;
 			<?php 
 			echo JHtml::_('bootstrap.startAccordion', 'slide-updates', array('active' => 'version-3101'));	
 				echo $this->loadTemplate('3101');
+				echo $this->loadTemplate('3020');
+				echo $this->loadTemplate('3019');
 				echo $this->loadTemplate('3018');
 				echo $this->loadTemplate('3017');
 				echo $this->loadTemplate('3016');
