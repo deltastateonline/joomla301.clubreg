@@ -50,13 +50,13 @@ class ClubregModelExpresscheckin extends JModelList
 		//$member_id  = $this->getState('com_clubreg.expresscheckin.member_id');
 		$search_value = sprintf('%%%s%%',$this->getState('com_clubreg.expresscheckin.search_value'));
 		
-		$groupIds = $this->getState('com_clubreg.expresscheckin.group_ids');
+		$groupIds = $this->getState('com_clubreg.expresscheckin.group_ids');		
 		
+		$where_ = array();		
+			
+		$where_[] = sprintf("(a.surname like %s or a.givenname like %s or a.phoneno like %s or a.emailaddress like %s) ",
+				$db->quote($search_value),$db->quote($search_value),$db->quote($search_value),$db->quote($search_value));
 		
-		$where_ = array();
-		
-		$where_[] = sprintf("(a.surname like %s or a.givenname like %s) ", $db->quote($search_value),$db->quote($search_value));
-		//$where_[] = sprintf("a.playertype = 'guardian' ");  // Only Eoi Members
 		
 		if(!empty($groupIds["sub_groups_ids"])){
 			$where_[] = sprintf("( a.group in (%s) or  a.subgroup in (%s) )",

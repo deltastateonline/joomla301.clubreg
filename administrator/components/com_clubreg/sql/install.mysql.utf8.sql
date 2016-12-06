@@ -19,7 +19,47 @@ SET time_zone = "+00:00";
 --
 -- Database: `joomla_301`
 --
+DROP TABLE IF EXISTS `#__clubreg_attachments`;
 
+DROP TABLE IF EXISTS `#__clubreg_configs`;
+
+DROP TABLE IF EXISTS `#__clubreg_contact_details`;
+
+DROP TABLE IF EXISTS `#__clubreg_details_audit`;
+
+DROP TABLE IF EXISTS `#__clubreg_eoimembers`;
+
+DROP TABLE IF EXISTS `#__clubreg_groups`;
+
+DROP TABLE IF EXISTS `#__clubreg_notes`;
+
+DROP TABLE IF EXISTS `#__clubreg_payments`;
+
+DROP TABLE IF EXISTS `#__clubreg_payments_setup`;
+
+DROP TABLE IF EXISTS `#__clubreg_property_sheet`;
+
+DROP TABLE IF EXISTS `#__clubreg_registeredmembers`;
+
+DROP TABLE IF EXISTS `#__clubreg_saved_comms`;
+
+DROP TABLE IF EXISTS `#__clubreg_stats_details`;
+
+DROP TABLE IF EXISTS `#__clubreg_tags`;
+
+DROP TABLE IF EXISTS `#__clubreg_tags_players`;
+
+DROP TABLE IF EXISTS `#__clubreg_teammembers`;
+
+DROP TABLE IF EXISTS `#__clubreg_teammembers_details`;
+
+DROP TABLE IF EXISTS `#__clubreg_teammembers_groups`;
+
+DROP TABLE IF EXISTS `#__clubreg_templates`;
+
+DROP TABLE IF EXISTS `#__clubreg_saved_comms_groups`;
+
+DROP TABLE IF EXISTS `#__clubreg_contactlist`;
 -- --------------------------------------------------------
 
 --
@@ -418,18 +458,6 @@ CREATE TABLE IF NOT EXISTS `#__clubreg_saved_comms_groups` (
 	  PRIMARY KEY (`comm_id`,`joomla_id`,`group_id`)
 	) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 -- --------------------------------------------------------
-
---
--- Table structure for table `#__clubreg_stats_details`
---
-
-CREATE TABLE IF NOT EXISTS `#__clubreg_stats_details` (
-  `member_id` int(11) NOT NULL,
-  `stats_date` date NOT NULL,
-  `stats_detail` varchar(64) NOT NULL,
-  `stats_value` varchar(512) NOT NULL,
-  PRIMARY KEY  (`member_id`,`stats_date`,`stats_detail`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Stats details';
 
 -- --------------------------------------------------------
 
