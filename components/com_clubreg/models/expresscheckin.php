@@ -57,6 +57,7 @@ class ClubregModelExpresscheckin extends JModelList
 		$where_[] = sprintf("(a.surname like %s or a.givenname like %s or a.phoneno like %s or a.emailaddress like %s) ",
 				$db->quote($search_value),$db->quote($search_value),$db->quote($search_value),$db->quote($search_value));
 		
+		$where_[] = sprintf("a.member_status = %s",$db->quote("registered") );
 		
 		if(!empty($groupIds["sub_groups_ids"])){
 			$where_[] = sprintf("( a.group in (%s) or  a.subgroup in (%s) )",
