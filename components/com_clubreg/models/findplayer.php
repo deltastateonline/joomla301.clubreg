@@ -70,7 +70,9 @@ class ClubregModelFindplayer extends JModelList
 		}else{
 			if(!empty($groupIds["allowed_groups"]))
 				$where_[] = sprintf(" a.group in (%s) ",implode(",",$groupIds["allowed_groups"]));  // Only Eoi Members
-		}		
+		}	
+
+	
 		
 		$all_string[] = "a.*";
 		
@@ -91,7 +93,7 @@ class ClubregModelFindplayer extends JModelList
 			
 			
 		$all_string["address"] = " (if(a.playertype='junior' , d.address , a.address)) as address";		
-		$all_string["suburb"] = " (if(a.playertype='junior' , d.suburb , a.suburb)) as address";
+		$all_string["suburb"] = " (if(a.playertype='junior' , d.suburb , a.suburb)) as suburb";
 		$all_string["postcode"] = " (if(a.playertype='junior' , d.postcode , a.postcode)) as postcode";
 		
 		$all_string["ausstate"] = " (if(a.playertype='junior' , d.ausstate , a.ausstate)) as ausstate";
