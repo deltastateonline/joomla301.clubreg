@@ -50,6 +50,10 @@ class ClubregModelFindplayer extends JModelList
 		//$member_id  = $this->getState('com_clubreg.findplayer.member_id');
 		$search_value = sprintf('%%%s%%',$this->getState('com_clubreg.findplayer.search_value'));
 		
+		$registered_value = sprintf('%s',$this->getState('com_clubreg.findplayer.registered_value','registered'));
+		
+		
+		
 		$groupIds = $this->getState('com_clubreg.findplayer.group_ids');
 		
 		
@@ -71,6 +75,8 @@ class ClubregModelFindplayer extends JModelList
 			if(!empty($groupIds["allowed_groups"]))
 				$where_[] = sprintf(" a.group in (%s) ",implode(",",$groupIds["allowed_groups"]));  // Only Eoi Members
 		}		
+		
+		$where_[] = sprintf("a.member_status = %s",$db->quote($registered_value) );
 		
 		$all_string[] = "a.*";
 		
@@ -111,7 +117,7 @@ class ClubregModelFindplayer extends JModelList
 			$query->where($a_where);
 		}		
 		$query->order($db->escape($orderCol.' '.$orderDirn));		
-		
+		//write_debug($query->__toString());
 		return $query;		
 	}
 }
