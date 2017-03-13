@@ -1,10 +1,8 @@
 jQuery( document ).ready(function() {
 
-	jQuery('#noteFormDiv').fadeOut();
+	jQuery('#noteFormDiv').fadeOut();	
 	
-	
-	jQuery(document).on('click','a.profile-note-button',function(event){	
-		
+	jQuery(document).on('click','a.profile-note-button',function(event){
 		
 		jQuery('#noteFormDiv').fadeToggle();
 		jQuery('#profile-notes').fadeToggle();
@@ -25,8 +23,7 @@ jQuery( document ).ready(function() {
 		
 		event.preventDefault();			
 		noteSaveRequestConfig.rData = jQuery(this).serialize();
-		ClubRegObject.saveNote(noteSaveRequestConfig);
-		
+		ClubRegObject.saveNote(noteSaveRequestConfig);	
 		
 	});
 	
@@ -40,14 +37,16 @@ jQuery( document ).ready(function() {
 		 if(confirm(lockMessage)){
 			ClubRegObject.processNote(noteProcessRequestConfig,jQuery(this),"ajax.locknote");
 		}		
-	});
-	
-	
+	});	
 	ClubRegObject.listNotes(notesListRequestConfig);
-
 });
 
-
+var failedResponse = {		
+	useFailedResults: function(response){
+		s_or_f = 0;
+		render_msg(response.errors);
+	}
+}
 
 /**
  * Config Request for listing notes
@@ -97,19 +96,21 @@ function noteProcessRequestDef(){
 	self.rBefore = beforeAction ;
 };
 
-noteProcessRequestDef.prototype.useResults  = function(response){	
+noteProcessRequestDef.prototype.useResults  = function(response){
+	s_or_f = 1;
 	render_msg(response.msg); // renxder messages
 	ClubRegObject.listNotes(notesListRequestConfig);	// render list
 };
 
-noteProcessRequestDef.prototype.useFailedResults = function(response){	
+/*noteProcessRequestDef.prototype.useFailedResults = function(response){
+	s_or_f = 0;
 	render_msg(response.errors);
-}
+}*/
 
 
-var notesListRequestConfig = new notesListRequestDef();
-var noteSaveRequestConfig = new noteSaveRequestDef();
-var noteProcessRequestConfig = new noteProcessRequestDef();
+var notesListRequestConfig = jQuery.extend(new notesListRequestDef(),failedResponse) ;
+var noteSaveRequestConfig = jQuery.extend(new noteSaveRequestDef(),failedResponse) ;
+var noteProcessRequestConfig = jQuery.extend( new noteProcessRequestDef(),failedResponse) ;
 
 ClubregObjectDefinition.prototype.listNotes= function(requestConfig){	
 	self = this;	
