@@ -52,13 +52,10 @@ function contactSaveRequestDef(){
 };
 
 contactSaveRequestDef.prototype.useResults  = function(response){	
-	
 	s_or_f = 1;
 	render_msg(response.msg);
 	jQuery("a.profile-contactlist-button" ).trigger( "click" );
-	ClubRegObject.listContacts(contactListRequestConfig);
-	
-	
+	ClubRegObject.listContacts(contactListRequestConfig);	
 }
 
 /**
@@ -141,11 +138,4 @@ ClubregObjectDefinition.prototype.deleteContactlist= function(requestConfig,link
 	self = this;		
 	requestConfig.rData = JSON.decode(linkControl.attr('rel'));	
 	self.loadAjaxRequest(requestConfig); 
-}
-
-function beforeAction(jqXHR){	
-	jQuery('#loading-div').addClass('loading-small');
-}
-function afterAction(){
-	jQuery('#loading-div').removeClass('loading-small');
 }
