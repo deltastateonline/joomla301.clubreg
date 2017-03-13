@@ -133,3 +133,10 @@ ClubregObjectDefinition.prototype.debounce = function debounce(func, wait, immed
 
 
 var ClubRegObject = new ClubregObjectDefinition();
+
+function beforeAction(jqXHR){	
+	jQuery('#loading-div').addClass('loading-small');
+}
+function afterAction(){
+	jQuery('#loading-div').removeClass('loading-small');
+}
