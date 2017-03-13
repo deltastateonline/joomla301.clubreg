@@ -89,6 +89,7 @@ class ClubRegModelActivity extends JModelLegacy
 				left join %s as e on (d.primary_id = e.member_id)			
 				where d.created_by = %d 
 				and lcase(d.note_type) = 'member'
+				and note_status != 99
 
 				union
 				
