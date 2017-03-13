@@ -31,4 +31,4 @@ if(count($this->notes)>0){
 	</div>
 <?php 
 	}	
-}else{ echo ClubRegUnAuthHelper::noResults('COM_CLUBREG_PROFILE_NOTES');  }
+}else{ echo "<br />"; echo ClubRegUnAuthHelper::noResults('COM_CLUBREG_PROFILE_NOTES');  }
