@@ -1,3 +1,6 @@
+/**
+ * Need to watch out for the click
+ */
 jQuery( document ).ready(function() {
 
 	jQuery('#noteFormDiv').fadeOut();	
@@ -40,13 +43,6 @@ jQuery( document ).ready(function() {
 	});	
 	ClubRegObject.listNotes(notesListRequestConfig);
 });
-
-var failedResponse = {		
-	useFailedResults: function(response){
-		s_or_f = 0;
-		render_msg(response.errors);
-	}
-}
 
 /**
  * Config Request for listing notes

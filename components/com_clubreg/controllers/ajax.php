@@ -641,7 +641,8 @@ class ClubregControllerAjax extends JControllerLegacy
 			if($return_array["proceed"]){
 				$return_array["contactlist_id"] = $key_data->pk_id;
 			}else{
-				$return_array["msg"] =  $current_model->getError();
+				$return_array["msg"] = JText::_('COM_CLUBREG_NOUPDATE');
+				$return_array["errors"] =  $this->error_from_model($current_model);
 			}
 		}
 	

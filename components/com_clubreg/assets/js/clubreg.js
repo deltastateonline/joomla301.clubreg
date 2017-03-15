@@ -130,6 +130,12 @@ ClubregObjectDefinition.prototype.debounce = function debounce(func, wait, immed
     };
 };
 
+var failedResponse = {		
+	useFailedResults: function(response){
+		s_or_f = 0;
+		render_msg(response.errors);
+	}
+}
 
 
 var ClubRegObject = new ClubregObjectDefinition();
