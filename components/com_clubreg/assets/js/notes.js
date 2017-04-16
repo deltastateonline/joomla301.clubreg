@@ -50,9 +50,10 @@ jQuery( document ).ready(function() {
 function notesListRequestDef(){	
 	
 	self = this;
-	self.rUrl  =  "index.php?option=com_clubreg&view=note&layout=list&tmpl=component&format=raw";
+	//self.rUrl  =  "index.php?option=com_clubreg&view=note&layout=list&tmpl=component&format=raw";
+	self.rUrl  =  "index.php";
 	self.rMethod  = "post";
-	self.rData  = {}	;	
+	self.rData  = {"option":"com_clubreg","view":"note","layout":"list","tmpl":"component","format":"raw"};	
 };
 notesListRequestDef.prototype.useResults  = function(response){	
 	jQuery("#profile-notes").removeClass('loading1');
@@ -100,13 +101,9 @@ function noteProcessRequestDef(){
 noteProcessRequestDef.prototype.useResults  = function(response){
 	s_or_f = 1;
 	render_msg(response.msg); // renxder messages
+	
 	ClubRegObject.listNotes(notesListRequestConfig);	// render list
 };
-
-/*noteProcessRequestDef.prototype.useFailedResults = function(response){
-	s_or_f = 0;
-	render_msg(response.errors);
-}*/
 
 
 var notesListRequestConfig = jQuery.extend(new notesListRequestDef(),failedResponse) ;
@@ -115,7 +112,7 @@ var noteProcessRequestConfig = jQuery.extend( new noteProcessRequestDef(),failed
 
 ClubregObjectDefinition.prototype.listNotes= function(requestConfig){	
 	self = this;	
-	requestConfig.rData = JSON.decode(jQuery("#profile-notes").attr('rel'));	
+	jQuery.extend(requestConfig.rData, JSON.decode(jQuery("#profile-notes").attr('rel')));
 	self.loadAjaxRequestHTML(requestConfig);  
 }
 
