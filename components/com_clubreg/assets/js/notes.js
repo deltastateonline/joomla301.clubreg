@@ -75,8 +75,13 @@ function noteSaveRequestDef(){
 noteSaveRequestDef.prototype.useResults  = function(response){		
 	s_or_f = 1;
 	render_msg(response.msg);
-	jQuery("a.profile-note-button" ).trigger( "click" );
-	ClubRegObject.listNotes(notesListRequestConfig);
+	
+	jQuery("#noteFormDiv #jform_notes" ).val(""); // set the value to null 
+	jQuery("#noteFormDiv #jform_note_status" ).attr('checked',false); // set the value to null 
+	
+	
+	jQuery("a.profile-note-button" ).trigger( "click" ); // trigger a click to hide the form
+	ClubRegObject.listNotes(notesListRequestConfig); // try lis the notes again
 }
 
 
