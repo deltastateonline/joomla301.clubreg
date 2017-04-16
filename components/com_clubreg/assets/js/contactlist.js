@@ -4,16 +4,14 @@ jQuery(document).ready(function() {
 	
 	jQuery('#contactlistFormDiv').fadeOut();
 	
-	var isOn = 0;
-	
 	jQuery(document).on('click','a.profile-contactlist-button, a.profile-contactlist-link',function(event){	
 		
 		jQuery('#contactlistFormDiv').fadeToggle();
 		jQuery('#profile-contactlist').fadeToggle();
 		jQuery("a.profile-contactlist-button").fadeToggle();
-		ClubRegObject.editContacts(contactEditRequestConfig,jQuery(this));					
-	});	
 	
+		ClubRegObject.editContacts(contactEditRequestConfig,jQuery(this));		
+	});		
 	
 	jQuery(document).on('click','#toggle-contactlist-div',function(event){		
 		
@@ -53,8 +51,13 @@ function contactSaveRequestDef(){
 
 contactSaveRequestDef.prototype.useResults  = function(response){	
 	s_or_f = 1;
-	render_msg(response.msg);
-	jQuery("a.profile-contactlist-button" ).trigger( "click" );
+	render_msg(response.msg);	
+	
+	jQuery('#contactlistFormDiv').fadeToggle();
+	jQuery('#profile-contactlist').fadeToggle();
+	jQuery("a.profile-contactlist-button").fadeToggle();
+	
+	//jQuery("a.profile-contactlist-button" ).trigger( "click" );
 	ClubRegObject.listContacts(contactListRequestConfig);	
 }
 
@@ -102,6 +105,7 @@ function contactDeleteRequestDef(){
 };
 
 contactDeleteRequestDef.prototype.useResults  = function(response){
+	s_or_f = 1;
 	render_msg(response.msg);
 	ClubRegObject.listContacts(contactListRequestConfig);
 }
@@ -113,7 +117,7 @@ contactDeleteRequestDef.prototype.useResults  = function(response){
 var contactEditRequestConfig = new contactEditRequestDef();
 var contactSaveRequestConfig = new contactSaveRequestDef();
 var contactListRequestConfig = new contactListRequestDef();
-var contactDeleteRequestConfig = new contactDeleteRequestDef();
+var contactDeleteRequestConfig = jQuery.extend(new contactDeleteRequestDef(),failedResponse);
 
 
 ClubregObjectDefinition.prototype.listContacts= function(requestConfig){	

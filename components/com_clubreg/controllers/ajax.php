@@ -67,7 +67,7 @@ class ClubregControllerAjax extends JControllerLegacy
 		if($proceed){
 			$return_array["msg"] = "Notes Added."; 
 		}else{
-			$return_array["msg"] =  $current_model->getError();
+			$return_array["msg"] = $this->error_from_model($current_model);
 		}
 		$return_array["proceed"] = $proceed;
 		echo json_encode($return_array);
@@ -436,7 +436,7 @@ class ClubregControllerAjax extends JControllerLegacy
 		
 		$c_task = $this->getTask();
 		
-		$return_array = array();
+		$return_array = $all_errors = array(); 
 		$return_array["proceed"] = FALSE;
 		$key_data->note_key = $app->input->post->getString('note_key', NULL);		
 		
@@ -465,7 +465,15 @@ class ClubregControllerAjax extends JControllerLegacy
 			}	
 		
 			if(!$return_array["proceed"]){
-				$return_array["msg"] = $this->error_from_model($current_model);	 
+				$return_array["msg"] = JText::_('COM_CLUBREG_NOUPDATE'); 
+				
+				
+				$all_errors_ = array();
+				$all_errors_ = $this->error_from_model($current_model);
+				$all_errors = array_merge($all_errors,$all_errors_);
+				
+				$return_array["errors"] = $all_errors;
+				
 			}
 		}
 		
@@ -633,7 +641,8 @@ class ClubregControllerAjax extends JControllerLegacy
 			if($return_array["proceed"]){
 				$return_array["contactlist_id"] = $key_data->pk_id;
 			}else{
-				$return_array["msg"] =  $current_model->getError();
+				$return_array["msg"] = JText::_('COM_CLUBREG_NOUPDATE');
+				$return_array["errors"] =  $this->error_from_model($current_model);
 			}
 		}
 	
