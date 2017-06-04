@@ -82,13 +82,15 @@ class ClubregModelExpresscheckin extends JModelList
 		
 		$all_string["address"] = " (if(a.address in ('0','-1') , 'N/A' , a.address)) as address";		
 		$all_string["suburb"] = " (if(a.suburb in ('0','-1') , '' , a.suburb)) as suburb";
-		$all_string["postcode"] = " (if(a.postcode in ('0','-1') , '' , a.postcode)) as postcode";		
+		$all_string["postcode"] = " (if(a.postcode in ('0','-1') , '' , a.postcode)) as postcode";	
+		$all_string["emailaddress"] = " (if(a.emailaddress in ('0','-1') , '' , a.emailaddress)) as emailaddress";
 		
 	 	$all_string["guardian"] = "concat(d.`surname`,' ' ,d.`givenname`) as guardian";	
 		
 		$all_string["gaddress"] = " (if(d.address in ('0','-1') , 'N/A' , d.address)) as g_address";
 		$all_string["gsuburb"] = " (if(d.suburb in ('0','-1') , '' , d.suburb)) as g_suburb";
 		$all_string["gpostcode"] = " (if(d.postcode in ('0','-1') , '' , d.postcode)) as g_postcode";
+		$all_string["gemailaddress"] = " (if(d.emailaddress in ('0','-1') , '' , d.emailaddress)) as g_emailaddress";
 		
 		
 		$d_var =implode(",", $all_string);
