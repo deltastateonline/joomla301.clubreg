@@ -102,4 +102,15 @@ jQuery(document).ready(function(){
     	findplayerButtonRequestConfig.rData = jQuery('#findplayerForm').serialize();   	
     	ClubRegObject.loadAjaxRequest(findplayerButtonRequestConfig);
 	});
+	
+	jQuery("[rel=anniversary]").popover({
+		  trigger: 'click',
+	      placement : 'bottom', //placement of the popover. also can use top, bottom, left or right
+	      title : '<div style="text-align:center; color:red; text-decoration:underline; font-size:14px;"> Muah ha ha</div>', //this is the top title bar of the popover. add some basic css
+	      html: 'true', //needed to show html of course
+	      content : '<div id="popOverBox"><img src="http://www.hd-report.com/wp-content/uploads/2008/08/mr-evil.jpg" width="251" height="201" /></div>' //this is the content of the html box. add the image here or anything you want really.
+	});
+	
+	
+	
 });

@@ -76,7 +76,7 @@ class ClubRegRenderDivsFindplayersHelper extends ClubRegRenderTablesHelper
 				  	<div class="pull-left h21" style="border:0px;">
 			  			<a href="javascript:void(0);" onclick="Joomla.sbutton('<?php echo $fkey;?>')"><?php echo ucwords($an_item->surname); ?></a>
 			  		</div>
-			  		<div class="pull-right"><a href="javascript:void(0);" title="Add Anniversary" class="btn btn-mini"><i class="fa fa-bell" aria-hidden="true"></i></a></div>
+			  		<div class="pull-right"><a href="javascript:void(0);"  title="Add Anniversary" class="btn btn-mini" rel='anniversary'><i class="fa fa-bell" aria-hidden="true"></i></a></div>
 				    <?php $this->rendererItems($an_item); ?>
 				    <div class="clearfix"></div>
 				    <p class=" pull-right small"><?php echo JText::_('COM_CLUBREG_REGISTERED_LABEL');?> :<?php echo $an_item->t_created_by;?> on  <?php echo $an_item->t_created_date;?></p>
