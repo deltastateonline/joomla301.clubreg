@@ -88,6 +88,9 @@ class ClubregModelReporting extends JModelList
 		
 		$s_key = "search.columns";
 		$search_columns = $this->getState($s_key);	// get the list of passed columns for filtering
+			
+		$start_date = $this->getState('attendance.start_date');
+		$end_date = $this->getState('attendance.end_date');		
 		
 		$d_var =implode(",", $all_string);
 		
@@ -95,6 +98,8 @@ class ClubregModelReporting extends JModelList
 		$query->from($db->quoteName(CLUB_REGISTEREDMEMBERS_TABLE).' AS a');
 		$query->join('LEFT', CLUB_GROUPS_TABLE.' AS b ON a.group = b.group_id');	
 		$query->join('LEFT', '#__users AS usert ON a.created_by = usert.id');
+		
+		$query->join('LEFT', CLUB_STATS_TABLE.' AS cst ON a.member_id = cst.member_id and cst.stats_detail = \'stats_attendance\'');
 		
 		
 		
@@ -138,6 +143,9 @@ class ClubregModelReporting extends JModelList
 			}
 		}	
 		
+		$where_[] = sprintf("date_format(stats_date ,'%%Y-%%m-%%d' ) >= '%s'",$start_date);
+		$where_[] = sprintf("date_format(stats_date ,'%%Y-%%m-%%d' ) <= '%s'",$end_date);
+			
 		foreach($where_ as $a_where){
 			$query->where($a_where);
 		}
@@ -148,7 +156,7 @@ class ClubregModelReporting extends JModelList
 		
 		$query->order($db->escape($orderCol.' '.$orderDirn));
 		
-		$query->group('a.member_id');		
+		$query->group('a.member_id');
 		
 		$session = JFactory::getSession();		
 		$session->set("com_clubreg.back_url", $back_url);// save the back url		
@@ -227,6 +235,25 @@ class ClubregModelReporting extends JModelList
 		}
 	}
 	
+	
+	public function setMoreDate($start_date,$end_date){
+	
+		$reset = TRUE;
+		$app = JFactory::getApplication();
+			
+		if (isset($start_date)){
+			$this->setState("attendance.start_date", $start_date);
+		}else{
+			$this->setState("attendance.start_date", date('Y-m-d'));
+		}
+	
+		if (isset($end_date)){
+			$this->setState("attendance.end_date", $end_date);
+		}else{
+			$this->setState("attendance.end_date", date('Y-m-d'));
+		}
+	}
+	
 	/**
 	 * Method to get a pagination object of the weblink items for the category
 	 *
@@ -275,6 +302,7 @@ class ClubregModelReporting extends JModelList
 		
 			$db->setQuery($query);
 			$tmp_data = $db->loadObjectList();
+		
 			foreach($tmp_data as $a_stats){
 				$all_data[$a_stats->member_id][$a_stats->stats_date] = $a_stats->stats_value;
 			}
