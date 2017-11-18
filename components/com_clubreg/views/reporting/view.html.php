@@ -105,8 +105,7 @@ class ClubRegViewreporting extends ClubRegViews
 		$this->pageTitle = $active->title;
 		
 		return $proceed;
-	}
-	
+	} 	
 	
 	protected function stats_reporting (){
 	
@@ -182,6 +181,8 @@ class ClubRegViewreporting extends ClubRegViews
 	
 			$regmembersConfigs =  $configObj->getConfig($this->state->get('filter.playertype')); // return headings and filters
 			$current_model->setMoreStates($regmembersConfigs["filters"],$all_groups); // set more states
+			
+			$current_model->setMoreDate($stats_date,$end_date); // Pass the start and end date to the query
 	
 			unset($configObj);
 	

@@ -51,6 +51,20 @@ if(count($this->items)> 0){ $i=1; ?>
 		if($an_item->mobile && $an_item->mobile != "-1"){
 			$t_phone[] = $an_item->mobile;
 		}
+		if($an_item->emailaddress && $an_item->emailaddress != "-1"){
+			$sp = "";
+			if(count($t_phone) > 0)
+					$sp = "<br />";
+			$t_phone[] = $sp.$an_item->emailaddress;
+		}
+		
+		if($an_item->g_emailaddress && $an_item->g_emailaddress != "-1"){
+			$sp = "";
+			if(count($t_phone) > 0)
+				$sp = "<br />";
+			$t_phone[] = $sp.$an_item->g_emailaddress;
+		}
+		
 		$an_item->t_phone = $t_phone ;
 		
 		$profile_pix = $thumbrenderer->renderMemberThumb($an_item->member_id,FALSE,FALSE);
