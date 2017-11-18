@@ -101,6 +101,7 @@ administrator/templates/
 
 #Components Both admin and frontend
 com_admin/
+com_associations/
 com_banners/
 com_cache/
 com_categories/
@@ -110,6 +111,7 @@ com_contact/
 com_content/
 com_cpanel/
 com_finder/
+com_fields/
 com_installer/
 com_joomlaupdate/
 com_languages/
