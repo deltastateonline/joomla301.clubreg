@@ -61,6 +61,8 @@ class ClubRegRenderDivsFindplayersHelper extends ClubRegRenderTablesHelper
 			  	$fkey = $viewObject->uKeyObject->constructKey($an_item->member_id,$an_item->member_key);	
 
 			  	$profile_pix = $thumbrenderer->renderMemberThumb($an_item->member_id,FALSE,FALSE);
+			  	
+			  	$alertdata = json_encode(array("member_key"=>$fkey));
 			  	?>			 
 			    <div class="row cgroup-div" style="margin:7px 5px 7px 10px;">		    
 			     <div class="pull-left">			     	
@@ -68,15 +70,14 @@ class ClubRegRenderDivsFindplayersHelper extends ClubRegRenderTablesHelper
 				    <div style="margin-top:5px;">				    	
 				    	<div class="thumbnail">
 				    		<?php echo ($profile_pix)?$profile_pix:$defaultImg; ?>		
-				    	</div>	   
-				    	
+				    	</div>				    	
 				    </div>		
 				  </div>
 				  <div class="span10">
 				  	<div class="pull-left h21" style="border:0px;">
 			  			<a href="javascript:void(0);" onclick="Joomla.sbutton('<?php echo $fkey;?>')"><?php echo ucwords($an_item->surname); ?></a>
 			  		</div>
-			  		<div class="pull-right"><a href="javascript:void(0);"  title="Add Anniversary" class="btn btn-mini" rel='anniversary'><i class="fa fa-bell" aria-hidden="true"></i></a></div>
+			  		<div class="pull-right"><a href="javascript:void(0);"  title="Add Anniversary" class="btn btn-mini" rel='anniversary' data-alertdata='<?php echo $alertdata ;?>' data-memberid='<?php echo $an_item->member_id; ?>'><i class="fa fa-bell" aria-hidden="true"></i></a></div>
 				    <?php $this->rendererItems($an_item); ?>
 				    <div class="clearfix"></div>
 				    <p class=" pull-right small"><?php echo JText::_('COM_CLUBREG_REGISTERED_LABEL');?> :<?php echo $an_item->t_created_by;?> on  <?php echo $an_item->t_created_date;?></p>
@@ -97,8 +98,7 @@ class ClubRegRenderDivsFindplayersHelper extends ClubRegRenderTablesHelper
 	protected function rendererItems($an_item){?>
 	<div class="clearfix"></div>
 			<div class="reg-well" id='regdata_<?php echo $an_item->member_id; ?>'>			
-			<?php 
-			
+			<?php 			
 			foreach($this->headings[$an_item->playertype]["headings"] as $curIndex =>$aheading){ ?>
 				<div class="row each-row">
 				<?php $howmany = count($aheading);				
@@ -115,6 +115,9 @@ class ClubRegRenderDivsFindplayersHelper extends ClubRegRenderTablesHelper
 				</div>
 			<?php }  ?>
 			</div>	
+			<div class="reg-well" id='regdiv_<?php echo $an_item->member_id; ?>' style="display:none">			
+			
+			</div>
 			<?php
 	}
 }

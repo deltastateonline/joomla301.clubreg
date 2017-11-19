@@ -13,6 +13,24 @@ findplayerSearchRequestDef.prototype.useResults = function(response){
 }
 
 /**
+ * create an empty object, which we can set values later on
+ */
+function alertsRequestDef(){
+	self = this;
+	self.rUrl  =  "";
+	self.rMethod  = "post";
+	self.rData  = {}	;	
+};
+
+alertsRequestDef.prototype.useResults = function(response){
+	
+	self = this;	
+	
+	jQuery(self.whereTo).removeClass("loading1");	
+	jQuery(self.whereTo).html(response);
+}
+
+/**
  * 
  */
 ClubregObjectDefinition.prototype.runFindPlayer = function(){
@@ -64,6 +82,8 @@ findPlayerButtonRequestDef.prototype.useResults = function(response){
 var findplayerSearchRequestConfig = new findplayerSearchRequestDef();
 var findplayerButtonRequestConfig = new findPlayerButtonRequestDef();
 
+var alertRequestConfig = new alertsRequestDef();
+
 jQuery(document).ready(function(){
 	
 	jQuery('#find-player-div').on('click','a.btn-findplayer-search',function(){
@@ -74,43 +94,37 @@ jQuery(document).ready(function(){
 		function(){
 			ClubRegObject.runFindPlayer();
 		},250)		
-	);	
+	);		
 	
-	/**
-	 * Checkin  or checkout button has been clicked
-	 */
-	jQuery('#find-player-list').on('click','a.btn-findplayer',function(){
-		var self = this;
+	jQuery('#find-player-list').on('click','[rel=anniversary]',function(){
 		
-		//
-		findplayerButtonRequestConfig.currentValue = jQuery(this).data('statsvalue');  
-    	var proceed = true;
-    	
-    	var memberKey = jQuery(this).parents('div.cgroup-div-findplayer').data('member_key');
-    	
-    	jQuery('#findplayerForm #pk').val(memberKey);	
-    	
-    	// set the stats date        	
-    	var statsDate = jQuery("#findplayerAdminForm #stats_date").val();
-    	jQuery('#findplayerForm #stats_date').val(statsDate);
-    	
-    	// set the stats value        	
-    	jQuery('#findplayerForm #stats_value').val(findplayerButtonRequestConfig.currentValue);    
-    	
-    	jQuery('#findplayerAdminForm #findplayer_loading').addClass('loading-small');  
-   
-    	findplayerButtonRequestConfig.rData = jQuery('#findplayerForm').serialize();   	
-    	ClubRegObject.loadAjaxRequest(findplayerButtonRequestConfig);
+		var memberId = jQuery(this).data('memberid');
+		jQuery('#regdiv_'+memberId).addClass("loading1");
+		jQuery('#regdata_'+memberId).fadeOut('slow',function(){
+			jQuery('#regdiv_'+memberId).fadeIn();
+		});
+		
+		var alertdata = jQuery(this).data('alertdata');
+		
+		alertdata[token] = 1;
+		
+		var params = "option=com_clubreg&view=alert&layout=edit&tmpl=component&format=raw";		
+		alertRequestConfig.rUrl =  "index.php?"+params;	
+		alertRequestConfig.rData = alertdata;
+		alertRequestConfig.whereTo = '#regdiv_'+memberId;		
+		ClubRegObject.loadAjaxRequestHTML(alertRequestConfig);	
+		
 	});
 	
-	jQuery("[rel=anniversary]").popover({
-		  trigger: 'click',
-	      placement : 'bottom', //placement of the popover. also can use top, bottom, left or right
-	      title : '<div style="text-align:center; color:red; text-decoration:underline; font-size:14px;"> Muah ha ha</div>', //this is the top title bar of the popover. add some basic css
-	      html: 'true', //needed to show html of course
-	      content : '<div id="popOverBox"><img src="http://www.hd-report.com/wp-content/uploads/2008/08/mr-evil.jpg" width="251" height="201" /></div>' //this is the content of the html box. add the image here or anything you want really.
+	jQuery('#find-player-list').on('click','a.anniversary',function(){
+		
+		var memberId = jQuery(this).data('memberid');
+		jQuery('#regdiv_'+memberId).fadeOut('slow', function(){
+			jQuery('#regdata_'+memberId).fadeIn();		
+		});
+		
+		
 	});
-	
 	
 	
 });
