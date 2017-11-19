@@ -11,6 +11,8 @@
 defined('_JEXEC') or die;
 JHtml::_('behavior.framework',true);
 
+jimport('joomla.html.html.bootstrap');
+JHtml::_('behavior.formvalidation');
 JHTML::_('behavior.calendar');
 JHtml::_('behavior.tooltip');
 
@@ -78,17 +80,6 @@ $in_type = "hidden";
 	<input type="<?php echo $in_type; ?>" name="boxchecked" value="0" />
 	<input type="<?php echo $in_type; ?>" name="filter_order" id="filter_order" value="<?php echo $this->escape($this->state->get('list.ordering')); ?>" />
 	<input type="<?php echo $in_type; ?>" name="filter_order_Dir" id="filter_order_Dir" value="<?php echo $this->escape($this->state->get('list.direction')); ?>" />
-	<?php echo JHTML::_( 'form.token' ); ?>
-</form>
-
-<form action="<?php echo JRoute::_($this->formaction); ?>" method="post" name="findplayerForm" id="findplayerForm" class="form-inline">
-	<input type="<?php echo $in_type; ?>" name="Itemid" value="<?php echo $clubreg_Itemid; ?>" />	
-	<input type="<?php echo $in_type; ?>" name="option" value="com_clubreg" />
-	<input type="<?php echo $in_type; ?>" name="task" value="stats.savestats" />	
-	<input type="<?php echo $in_type; ?>" name="statsform[stats_detail]" id="stats_detail" value="stats_attendance" />	
-	<input type="<?php echo $in_type; ?>" name="statsform[pk]" id="pk" value="" />
-	<input type="<?php echo $in_type; ?>" name="statsform[stats_value]" id="stats_value" value="" />
-	<input type="<?php echo $in_type; ?>" name="statsform[stats_date]" id="stats_date" value="<?php echo $this->stats_date; ?>" />
 	<?php echo JHTML::_( 'form.token' ); ?>
 </form>
 
