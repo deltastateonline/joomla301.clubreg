@@ -17,11 +17,29 @@ $in_type = "hidden";?>
 <!--
 .form-horizontal .control-group {
     margin-bottom: 10px;
-    padding-left:5px;
-   
+    padding-left:5px;   
 }
 -->
 </style>
+<script type="text/javascript">
+<!--
+
+    jQuery(document).ready(function($) {
+        Calendar.setup({
+        // Id of the input field
+        inputField: 'jform_payment_date',
+        // Format of the input field
+        ifFormat: '%Y-%m-%d',
+        // Trigger for the calendar (button ID)
+        button: 'jform_payment_date_btn',
+        // Alignment (defaults to "Bl")
+        align: 'Tl',
+        singleClick: true,
+        firstDay: '0'
+        });
+    });
+//-->
+</script>
 <form action="index.php" method="post" name="PaymentForm" id="payment-form" class="form-validate form-horizontal form-clubreg">	
 		<div class="fieldSetDiv"><?php echo JText::_('COM_CLUBREG_PAYMENT_DETAILS');?></div>
 		<?php foreach($this->paymentForm->getFieldset('paymentDetails') as $field){ ?>

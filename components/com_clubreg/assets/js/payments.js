@@ -92,7 +92,7 @@ window.addEvent('domready', function () {
 function addPayment(dObject){
 	
 	var json_data = JSON.decode(dObject.get('rel'));		
-	var params = "option=com_clubreg&view=payment&layout=edit&tmpl=component";		
+	var params = "option=com_clubreg&view=payment&layout=edit&tmpl=component&format=raw";		
 	var durl = "index.php?"+params;	
 	
 	var a = new Request.HTML({

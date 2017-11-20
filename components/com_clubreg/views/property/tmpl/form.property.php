@@ -11,6 +11,7 @@
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 global $clubreg_Itemid;
+JHtml::_('behavior.formvalidation');
 $in_type = "hidden";?>
 <style>
 <!--
@@ -21,6 +22,32 @@ $in_type = "hidden";?>
 }
 -->
 </style>
+
+<script type="text/javascript">
+<!--
+
+    jQuery(document).ready(function($) {
+
+        Calendar.setup({	       
+	        inputField: 'jform_property_checked_in',	        
+	        ifFormat: '%Y-%m-%d',	        
+	        button: 'jform_property_checked_in_btn',	       
+	        align: 'Tl',
+	        singleClick: true,
+	        firstDay: '0'
+        });
+
+        Calendar.setup({    	   
+    	    inputField: 'jform_property_checked_out',    	   
+    	    ifFormat: '%Y-%m-%d',    	   
+    	    button: 'jform_property_checked_out_btn',    	    
+    	    align: 'Tl',
+    	    singleClick: true,
+    	    firstDay: '0'
+        });
+    });
+//-->
+</script>
 <form action="index.php" method="post" name="PropertyForm" id="property-form" class="form-validate form-horizontal form-clubreg">	
 		<div class="fieldSetDiv"><?php echo JText::_('COM_CLUBREG_PROPERTY_DETAILS');?></div>
 		<?php foreach($this->propertyForm->getFieldset('propertyDetails') as $field){ ?>
