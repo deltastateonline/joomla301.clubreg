@@ -90,7 +90,7 @@ window.addEvent('domready', function () {
 function addProperty(dObject){
 	
 	var json_data = JSON.decode(dObject.get('rel'));		
-	var params = "option=com_clubreg&view=property&layout=edit&tmpl=component";		
+	var params = "option=com_clubreg&view=property&layout=edit&tmpl=component&format=raw";		
 	var durl = "index.php?"+params;	
 	
 	var a = new Request.HTML({
