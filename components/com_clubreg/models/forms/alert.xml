@@ -11,7 +11,7 @@
 			<option value="monthly">COM_CLUBREG_ALERT_MONTHLY</option>			
 		</field>
 			
-		<field name="alert_date" type="calendar"  required="true"
+		<field name="alert_date_clubregPlaceholder" type="calendar" required="true"
 			label="COM_CLUBREG_ALERT_DATE" description="COM_CLUBREG_ALERT_DATE_DESC"
 			class="inputbox input-small"   size="10" format="%Y-%m-%d" />
 			

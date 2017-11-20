@@ -116,15 +116,16 @@ jQuery(document).ready(function(){
 		
 	});
 	
-	jQuery('#find-player-list').on('click','a.anniversary',function(){
+	
+	jQuery('#find-player-list').on('click','.toggle-alerts-div',function(){
 		
 		var memberId = jQuery(this).data('memberid');
 		jQuery('#regdiv_'+memberId).fadeOut('slow', function(){
 			jQuery('#regdata_'+memberId).fadeIn();		
 		});
 		
-		
 	});
+	
 	
 	
 });

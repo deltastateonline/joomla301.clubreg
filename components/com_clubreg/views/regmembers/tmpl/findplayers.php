@@ -38,7 +38,7 @@ $in_type = "hidden";
 		document.adminForm.pk.value = pk;
 		form.submit();
 	}
-	
+
 //-->
 </script>
 <form action="<?php echo JRoute::_($this->formaction); ?>" method="post" name="findplayerAdminForm" id="findplayerAdminForm" class="form-inline">

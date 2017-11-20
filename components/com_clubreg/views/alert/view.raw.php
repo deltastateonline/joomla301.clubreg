@@ -34,8 +34,13 @@ class ClubRegViewAlert extends ClubRegViews
 			$key_data = new stdClass();
 			unset($current_model);
 			$current_model = JModelLegacy::getInstance('regmember', 'ClubregModel', array('ignore_request' => true));
-			$key_data->full_key = $app->input->post->getString('member_key', null);
+			$this->member_key =  $key_data->full_key = $app->input->post->getString('member_key', null);
 		
+			$uKeyObject = new ClubRegUniqueKeysHelper();
+			$uKeyObject->deconstructKey($key_data);
+			$this->member_id = $key_data->pk_id;
+			
+			
 			unset($currentModel);
 			$currentModel = JModelLegacy::getInstance('alert', 'ClubregModel', array('ignore_request' => false));
 			
