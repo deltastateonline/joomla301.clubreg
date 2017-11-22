@@ -33,10 +33,17 @@ class ClubregModelAlerts extends JModelList
 		
 		$where_ = array();
 		
-		$where_[] = "date_format(alert_date,'%m-%d') >= date_format(CURDATE(),'%m-%d')";
-		$where_[] = "date_format(alert_date,'%m-%d') <= date_format(DATE_ADD(CURDATE(), INTERVAL 7 DAY), '%m-%d')";
-		$where_[] = "a.alert_interval = 'yearly'";
+		if($type == "yearly"){
+			$where_[] = "date_format(alert_date,'%m-%d') >= date_format(CURDATE(),'%m-%d')";
+			$where_[] = "date_format(alert_date,'%m-%d') <= date_format(DATE_ADD(CURDATE(), INTERVAL 7 DAY), '%m-%d')";
+			$where_[] = "a.alert_interval = 'yearly'";
+		}else if($type == "monthly"){
+			$where_[] = "date_format(alert_date,'%d') >= date_format(CURDATE(),'%d')";
+			$where_[] = "date_format(alert_date,'%d') <= date_format(DATE_ADD(CURDATE(), INTERVAL 7 DAY), '%d')";
+			$where_[] = "a.alert_interval = 'monthly'";
+		}
 		
+	
 		
 		$all_string[] = " member_id, member_key, date_format(alert_date,'%a %D %M') as alertDate, surname, givenname ";
 		$all_string[] = "c.config_name ";		

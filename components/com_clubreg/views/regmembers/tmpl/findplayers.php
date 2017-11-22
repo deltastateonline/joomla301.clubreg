@@ -98,6 +98,7 @@ $document->addScript('https://use.fontawesome.com/9a293d9ea0.js');
 ClubregHelper::writeTabAssets($document, "regmembers",array("css"));
 ClubregHelper::writeTabAssets($document, "clubreg",array("js"));
 ClubregHelper::writeTabAssets($document, "findplayer",array("js","css"));
+ClubregHelper::writeTabAssets($document, "alert",array("js"));
 ClubregHelper::writeTabAssets($document, "common",array("css"));
 ClubregHelper::write_footer(); 
 ?>
