@@ -85,3 +85,23 @@ class ClubRegUniqueKeysHelper extends JObject
 		return str_replace("-", "", $uuid);		
 	}
 }
+
+class ClubRegErrorHelper extends JObject
+{	
+	static function error_from_model(&$d_model){
+	
+		$errors	= $d_model->getErrors();
+	
+		$error_str = array();
+		for ($i = 0, $n = count($errors); $i < $n; $i++){
+			if ($errors[$i] instanceof Exception)
+			{
+				$error_str[] = $errors[$i]->getMessage();
+			} else {
+				$error_str[] = $errors[$i];
+			}
+		}
+	
+		return $error_str;
+	}
+}

@@ -96,12 +96,17 @@ jQuery(document).ready(function(){
 		},250)		
 	);		
 	
+	/**
+	 * regdiv_{id} alerts are written into this container
+	 * regdata_{id} member information are stored in here
+	 * 
+	 */
 	jQuery('#find-player-list').on('click','[rel=anniversary]',function(){
 		
 		var memberId = jQuery(this).data('memberid');
 		jQuery('#regdiv_'+memberId).addClass("loading1");
-		jQuery('#regdata_'+memberId).fadeOut('slow',function(){
-			jQuery('#regdiv_'+memberId).fadeIn();
+		jQuery('#regdata_'+memberId).fadeOut('slow',function(){ //
+			jQuery('#regdiv_'+memberId).fadeIn(); //
 		});
 		
 		var alertdata = jQuery(this).data('alertdata');
@@ -125,7 +130,6 @@ jQuery(document).ready(function(){
 		});
 		
 	});
-	
 	
 	
 });

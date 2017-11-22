@@ -80,6 +80,14 @@ class ClubregModelAlert extends JModelForm
 		$isNew = $this->getState("com_clubreg.alert.isnew");	
 		$update_me = FALSE;
 		
+		$form = $this->getForm();
+		
+		$validate = $this->validate($form, $data);
+		
+		if($validate === FALSE){
+			return FALSE;
+		}
+		
 		if(!$isNew){			
 			$update_me = TRUE;		
 		}
@@ -93,8 +101,7 @@ class ClubregModelAlert extends JModelForm
 				$created_when = date('Y-m-d H:i:s');
 				$alertTable->created = $created_when;
 			}			
-			
-			if(!$alertTable->store()){
+			 if(!$alertTable->store()){
 				$proceed =  FALSE;
 				$this->setError($alertTable->getError());
 			}else{

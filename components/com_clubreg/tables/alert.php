@@ -16,7 +16,7 @@ class ClubregTableAlert extends JTable{
 	
 	public function __construct(&$_db)
 	{
-		parent::__construct(CLUB_PAYMENTS_TABLE, 'alert_id', $_db);		
+		parent::__construct(CLUB_ALERTS_TABLE, 'alert_id', $_db);		
 		JTableObserverAudit::createObserver($this, array('typeAlias' => 'com_clubreg.alert'));
 	}
 }

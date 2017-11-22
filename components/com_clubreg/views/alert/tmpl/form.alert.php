@@ -32,6 +32,7 @@ $in_type = "hidden";?>
     });
 //-->
 </script>
+<div class="" id="message_<?php $this->member_key; ?>"></div>
 <form action="index.php" method="post" name="AlertForm" id="alert-form" class="form-validate form-horizontal form-clubreg">	
 		<div class="fieldSetDiv"><?php echo JText::_('COM_CLUBREG_ALERT_DETAILS');?></div>
 		<?php foreach($this->alertForm->getFieldset('alertDetails') as $field){	?>
@@ -56,7 +57,7 @@ $in_type = "hidden";?>
 		 ?>
 	<input type="<?php echo $in_type;?>" name="Itemid" value="<?php echo $clubreg_Itemid; ?>" />
 	<input type="<?php echo $in_type;?>" name="option" value="com_clubreg" />
-	<input type="<?php echo $in_type;?>" name="task" value="ajax.savealert" />
+	<input type="<?php echo $in_type;?>" name="task" value="alert.save" />
 	<?php echo JHtml::_('form.token'); ?>		
 	<div class="clearfix" ></div>	
 		<div class="form-actions">			 
