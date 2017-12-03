@@ -51,11 +51,9 @@ $in_type = "hidden";
 	  	<span class=""><b><i><?php echo JText::_('COM_CLUBREG_SEARCHPARAMS_TXT');?></i></b></span>	 
 	  	<div class="pull-right" id="findplayer_loading" style="width:32px;">&nbsp;</div>
 	</div>
-	
 		
 	<input type="<?php echo $in_type; ?>" name="Itemid" value="<?php echo $clubreg_Itemid; ?>" />	
-	<input type="<?php echo $in_type; ?>" name="option" value="com_clubreg" />
-	
+	<input type="<?php echo $in_type; ?>" name="option" value="com_clubreg" />	
 	<input type="<?php echo $in_type; ?>" name="layout" value="<?php echo $this->layout; ?>" />
 	<input type="<?php echo $in_type; ?>" name="view" value="regmembers" />
 	<input type="<?php echo $in_type; ?>" name="format" value="raw" />
@@ -88,10 +86,7 @@ $in_type = "hidden";
 </div>
 <?php 
 
-
-
 $document = JFactory::getDocument();
-
 
 $document->addScript('https://use.fontawesome.com/9a293d9ea0.js');
 

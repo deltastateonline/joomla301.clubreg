@@ -37,6 +37,27 @@ window.addEvent('domready', function () {
 	
 });
 
+/**
+ * create an empty object, which we can set values later on
+ */
+function alertsRequestDef(){
+	self = this;
+	self.rUrl  =  "";
+	self.rMethod  = "post";
+	self.rData  = {}	;	
+};
+
+alertsRequestDef.prototype.useResults = function(response){
+	
+	self = this;	
+	
+	jQuery(self.whereTo).removeClass("loading1");	
+	jQuery(self.whereTo).html(response);
+}
+
+
+var alertRequestConfig = new alertsRequestDef();
+
 jQuery(document).ready(function() {
 	
 	
@@ -101,6 +122,44 @@ jQuery(document).ready(function() {
 			
 			Joomla.submitbutton('regmembers.batchUpdate');
 			
-		});		
+		});	
+	
+	/**
+	 * regdiv_{id} alerts are written into this container
+	 * regdata_{id} member information are stored in here
+	 * '[rel=anniversary]'
+	 */
+	/*
+	jQuery('#find-player-list').on('click','[rel=anniversary]',function(){
+		
+		var memberId = jQuery(this).data('memberid');
+		jQuery('#regdiv_'+memberId).addClass("loading1");
+		jQuery('#regdata_'+memberId).fadeOut('slow',function(){ //
+			jQuery('#regdiv_'+memberId).fadeIn(); //
+		});
+		
+		var alertdata = jQuery(this).data('alertdata');
+		
+		alertdata[token] = 1;
+		
+		var params = "option=com_clubreg&view=alert&layout=edit&tmpl=component&format=raw";		
+		alertRequestConfig.rUrl =  "index.php?"+params;	
+		alertRequestConfig.rData = alertdata;
+		alertRequestConfig.whereTo = '#regdiv_'+memberId;		
+		ClubRegObject.loadAjaxRequestHTML(alertRequestConfig);
+		
+	});
+	
+	
+	jQuery('#find-player-list').on('click','.toggle-alerts-div',function(){
+		
+		var memberId = jQuery(this).data('memberid');
+		jQuery('#regdiv_'+memberId).fadeOut('slow', function(){
+			jQuery('#regdata_'+memberId).fadeIn();		
+		});
+		
+	});
+	*/
+	
 	
 });

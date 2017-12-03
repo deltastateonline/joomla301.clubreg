@@ -41,7 +41,7 @@ class ClubRegRenderDivsRegMembersHelper extends ClubRegRenderTablesHelper
 		<table class="table table-bordered table-striped table-hover table-condensed">
 			<?php $this->renderHead($viewObject);?>
 		</table>
-		<div class="row-fluid">		 
+		<div class="row-fluid" id="find-player-list">		 
 			  <?php 
 			  if(count($viewObject->items) > 0){
 			  	foreach($viewObject->items as $an_item){ 
@@ -65,6 +65,7 @@ class ClubRegRenderDivsRegMembersHelper extends ClubRegRenderTablesHelper
 			  	$fkey = $viewObject->uKeyObject->constructKey($an_item->member_id,$an_item->member_key);	
 
 			  	$profile_pix = $thumbrenderer->renderMemberThumb($an_item->member_id,FALSE,FALSE);
+			  	$alertdata = json_encode(array("member_key"=>$fkey));
 			  	?>			 
 			    <div class="row cgroup-div" style="margin:7px 5px 7px 10px;">		    
 			     <div class="pull-left">
@@ -82,6 +83,7 @@ class ClubRegRenderDivsRegMembersHelper extends ClubRegRenderTablesHelper
 				  	<div class="pull-left h21" style="border:0px;">
 			  			<a href="javascript:void(0);" onclick="Joomla.sbutton('<?php echo $fkey;?>')"><?php echo ucwords($an_item->surname); ?></a>
 			  		</div>	
+			  		<div class="pull-right"><a href="javascript:void(0);"  title="Add Anniversary" class="btn btn-mini" rel='anniversary' data-alertdata='<?php echo $alertdata ;?>' data-memberid='<?php echo $an_item->member_id; ?>'><i class="fa fa-bell" aria-hidden="true"></i></a></div>
 				    <?php $this->rendererItems($an_item); ?>
 				    <div class="clearfix"></div>
 				    <p class=" pull-right small"><?php echo JText::_('COM_CLUBREG_REGISTERED_LABEL');?> :<?php echo $an_item->t_created_by;?> on  <?php echo $an_item->t_created_date;?></p>
@@ -115,8 +117,9 @@ class ClubRegRenderDivsRegMembersHelper extends ClubRegRenderTablesHelper
 						</div>
 			<?php 	} ?>
 				</div>
-			<?php }  ?>
+			<?php }  ?>			
 			</div>	
+			<div class="reg-well" id='regdiv_<?php echo $an_item->member_id; ?>' style="display:block"></div>
 			<?php
 	}
 }

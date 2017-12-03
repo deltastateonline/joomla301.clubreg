@@ -115,9 +115,7 @@ class ClubRegRenderDivsFindplayersHelper extends ClubRegRenderTablesHelper
 				</div>
 			<?php }  ?>
 			</div>	
-			<div class="reg-well" id='regdiv_<?php echo $an_item->member_id; ?>' style="display:none">			
-			
-			</div>
+			<div class="reg-well" id='regdiv_<?php echo $an_item->member_id; ?>' style="display:none"></div>
 			<?php
 	}
 }
