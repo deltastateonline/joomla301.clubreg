@@ -139,9 +139,10 @@ $document = JFactory::getDocument();
 $document->addScript('https://use.fontawesome.com/9a293d9ea0.js');
 
 ClubregHelper::writeTabAssets($document, "common",array("css"));
+//ClubregHelper::writeTabAssets($document, "clubreg",array("js"));
 ClubregHelper::writeTabAssets($document, "filters_logic",array("js"));
 ClubregHelper::writeTabAssets($document, "clubreggroups",array("js"));
 ClubregHelper::writeTabAssets($document, "regmembers",array("css","js"));
-ClubregHelper::writeTabAssets($document, "alert",array("js"));
+//ClubregHelper::writeTabAssets($document, "alert",array("js"));
 ClubregHelper::write_footer();
 ?>
