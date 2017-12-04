@@ -22,8 +22,11 @@ class ClubRegViewAlert extends ClubRegViews
 		$user		= JFactory::getUser();
 		$app			= JFactory::getApplication();
 		$Itemid			= $app->input->post->get('Itemid');
+		$formType	= "";
 		
-		$this->setLayout("form.alert");	
+		$source_page = $app->input->post->getString('source_page', null);
+		
+		$this->setLayout("form.alert");
 		
 		$proceed = FALSE;
 		if($user->get('id') > 0){
@@ -46,6 +49,8 @@ class ClubRegViewAlert extends ClubRegViews
 			
 			
 			$currentModel->setState('com_clubreg.alert.member_key',$key_data->full_key); // use the key in the model
+			
+			$this->member_key = $key_data->full_key;
 		
 			unset($key_data);$key_data = new stdClass();
 			$key_data->full_key = $app->input->post->getString('alert_key', null);
@@ -55,10 +60,10 @@ class ClubRegViewAlert extends ClubRegViews
 			$currentModel->setState('com_clubreg.alert.full_key',$key_data->full_key); // use the key in the model
 			$currentModel->setState('com_clubreg.alert.alert_key',$key_data->string_key); // use the key in the model
 			$currentModel->setState('com_clubreg.alert.alert_id',$key_data->pk_id); // use the key in the model
+			
+			$currentModel->setState('com_clubreg.alert.form_type',$formType); // use the key in the model		
 					
-			$this->alertForm = $currentModel->getForm();
-			
-			
+			$this->alertForm = $currentModel->getForm();			
 		}
 		
 		return $proceed;

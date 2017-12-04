@@ -10,7 +10,7 @@
 -------------------------------------------------------------------------*/
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
-JHtml::_('behavior.formvalidation');
+//JHtml::_('behavior.formvalidation');
 global $clubreg_Itemid;
 $in_type = "hidden";?>
 <script type="text/javascript">
@@ -32,7 +32,7 @@ $in_type = "hidden";?>
     });
 //-->
 </script>
-<div class="" id="message_<?php $this->member_key; ?>"></div>
+<div class="" id="message_<?php echo $this->member_key; ?>"></div>
 <form action="index.php" method="post" name="AlertForm" id="alert-form" class="form-validate form-horizontal form-clubreg">	
 		<div class="fieldSetDiv"><?php echo JText::_('COM_CLUBREG_ALERT_DETAILS');?></div>
 		<?php foreach($this->alertForm->getFieldset('alertDetails') as $field){	?>
@@ -60,8 +60,8 @@ $in_type = "hidden";?>
 	<input type="<?php echo $in_type;?>" name="task" value="alert.save" />
 	<?php echo JHtml::_('form.token'); ?>		
 	<div class="clearfix" ></div>	
-		<div class="form-actions">			 
-			<button type="submit" class="btn btn-primary validate"><span><?php echo JText::_('JSUBMIT'); ?></span></button>	
+		<div class="form-actions">					 
+			 <button type="submit" class="btn btn-primary validate"><span><?php echo JText::_('JSUBMIT'); ?></span></button>					
 			<button type="button" class="btn toggle-alerts-div" data-memberid='<?php echo $this->member_id; ?>'><?php echo JText::_('JCANCEL'); ?></button>				
 		</div>			
 </form>

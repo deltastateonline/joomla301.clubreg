@@ -68,9 +68,13 @@ class ClubregControllerRegmembers extends JControllerLegacy
 		$reg_ids = $app->input->post->get('cid',array(),'array');
 		$batchProperties = $app->input->post->get('batch',array(),'array');
 		
+		$clubreg_boxes = $app->input->post->get('clubreg_boxes',"",'string');
+		
 		$return_array["msg"] = array();
 		
 		$count = 0;
+		
+		$reg_ids = json_decode($clubreg_boxes);		
 		
 		if($user->get('id') > 0 ){
 			$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));

@@ -84,13 +84,20 @@ jQuery(document).ready(function() {
 	});
 	
 	
-	
 	jQuery(document).on('click',".btn-batch-update",function(event){		
 			
 			event.stopPropagation();
 			event.preventDefault();		
-				
-			if(document.adminForm.boxchecked.value == 0){
+			var counted = 0;
+			var checkBoxes = [];
+			jQuery('input[name^=cid]').each(function(){
+				if(jQuery(this).attr("checked")){
+					counted++;						
+					checkBoxes.push(jQuery(this).val());// add this to the array			
+				}
+			});			
+					
+			if(counted == 0){
 				alert(selectOneString);		
 				return;
 			}
@@ -120,6 +127,7 @@ jQuery(document).ready(function() {
 				}
 			}
 			
+			jQuery("#adminForm [name=clubreg_boxes]").val(JSON.stringify(checkBoxes));// update the checkbox control	
 			Joomla.submitbutton('regmembers.batchUpdate');
 			
 		});	
@@ -127,9 +135,9 @@ jQuery(document).ready(function() {
 	/**
 	 * regdiv_{id} alerts are written into this container
 	 * regdata_{id} member information are stored in here
-	 * '[rel=anniversary]'
+	 * 
 	 */
-	/*
+	
 	jQuery('#find-player-list').on('click','[rel=anniversary]',function(){
 		
 		var memberId = jQuery(this).data('memberid');
@@ -141,6 +149,7 @@ jQuery(document).ready(function() {
 		var alertdata = jQuery(this).data('alertdata');
 		
 		alertdata[token] = 1;
+		alertdata['source_page'] = 'regmembers';
 		
 		var params = "option=com_clubreg&view=alert&layout=edit&tmpl=component&format=raw";		
 		alertRequestConfig.rUrl =  "index.php?"+params;	
@@ -159,7 +168,5 @@ jQuery(document).ready(function() {
 		});
 		
 	});
-	*/
-	
 	
 });

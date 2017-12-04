@@ -13,10 +13,11 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 
 JHtml::_('behavior.framework',true);
+jimport('joomla.html.html.bootstrap');
 JHtml::_('behavior.keepalive');
-//JHtml::_('jquery.framework');
-JHtml::_('behavior.formvalidation');
+JHtml::_('behavior.formvalidator');
 JHTML::_('behavior.calendar');
+JHtml::_('behavior.tooltip');
 
 global $clubreg_Itemid;
 $in_type = "hidden";
@@ -30,7 +31,7 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 
 	Joomla.submitbutton = function(pressbutton)
 	{
-		var form = document.getElementById('adminForm');	
+		var form = document.getElementById('adminForm');
 		
 		if(pressbutton == "regmembers.delete"){
 			if(!confirm("Are You sure you want to delete Items")){
@@ -118,9 +119,12 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 		
 		$tableFilters->renderFilters($this->entity_filters);
 		$tableFilters->render_batch_filters($this->entity_filters);
-		$tableRender->render($this);
-		echo $this->pagination->getListFooter();
+		//$tableRender->render($this);
+		//echo $this->pagination->getListFooter();
 ?>
+
+
+	<input type="<?php echo $in_type; ?>" name="clubreg_boxes" value="" />
 	<input type="<?php echo $in_type; ?>" name="Itemid" value="<?php echo $clubreg_Itemid; ?>" />	
 	<input type="<?php echo $in_type; ?>" name="option" value="com_clubreg" />
 	
@@ -134,15 +138,20 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 	<?php echo JHTML::_( 'form.token' ); ?>
 </form>
 <?php 
+
+$tableRender->render($this);
+echo $this->pagination->getListFooter();
+
+
 $document = JFactory::getDocument();
 
 $document->addScript('https://use.fontawesome.com/9a293d9ea0.js');
 
 ClubregHelper::writeTabAssets($document, "common",array("css"));
-//ClubregHelper::writeTabAssets($document, "clubreg",array("js"));
+ClubregHelper::writeTabAssets($document, "clubreg",array("js"));
 ClubregHelper::writeTabAssets($document, "filters_logic",array("js"));
 ClubregHelper::writeTabAssets($document, "clubreggroups",array("js"));
 ClubregHelper::writeTabAssets($document, "regmembers",array("css","js"));
-//ClubregHelper::writeTabAssets($document, "alert",array("js"));
+ClubregHelper::writeTabAssets($document, "alert",array("js"));
 ClubregHelper::write_footer();
 ?>

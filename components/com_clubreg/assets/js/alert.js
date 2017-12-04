@@ -47,7 +47,6 @@ var alertSaveRequestConfig = new alertSaveRequestDef() ; //jQuery.extend(new ale
 jQuery(document).ready(function(){
 	
 	jQuery(document).on('submit','#alert-form',function(event){	
-		
 		event.preventDefault();			
 		alertSaveRequestConfig.rData = jQuery(this).serialize();
 		

@@ -20,11 +20,8 @@ class ClubregModelAlert extends JModelForm
 	protected $_context = 'com_clubreg.alert';
 	
 	public function getForm($data = array(), $loadData = true)
-	{
-		// Get the form.	
-
-		
-		$form = $this->loadForm('com_clubreg.alert', 'alert', array('control' => 'jform', 'load_data' => true));		
+	{		
+		$form = $this->loadForm('com_clubreg.alert', "alert", array('control' => 'jform', 'load_data' => true));		
 		if (empty($form)) {
 			return false;
 		}

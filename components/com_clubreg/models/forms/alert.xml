@@ -5,10 +5,10 @@
 			label="COM_CLUBREG_ALERT_DESCRIPTION" description="COM_CLUBREG_ALERT_DESCRIPTION_DESC"
 			class="inputbox input-large"  configwhich = "clubreg_alerts" required="true" />	
 			
-		<field name="alert_interval" type="list" required="true" class="inputbox" default="" label="COM_CLUBREG_ALERT_INTERVAL" description="COM_CLUBREG_ALERT_INTERVAL_DESC">
+		<field name="alert_interval" type="list" required="true" class="inputbox" default="yearly" label="COM_CLUBREG_ALERT_INTERVAL" description="COM_CLUBREG_ALERT_INTERVAL_DESC">
 			<option value="">COM_CLUBREG_ALERT_INTERVAL_SELECT</option>
 			<option value="yearly">COM_CLUBREG_ALERT_YEARLY</option>
-			<option value="monthly">COM_CLUBREG_ALERT_MONTHLY</option>			
+			<!-- <option value="monthly">COM_CLUBREG_ALERT_MONTHLY</option>	 -->		
 		</field>
 			
 		<field name="alert_date_clubregPlaceholder" type="calendar" required="true"
