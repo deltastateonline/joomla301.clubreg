@@ -26,12 +26,7 @@ alertSaveRequestDef.prototype.useResults = function(response){
 	
 }
 
-alertSaveRequestDef.prototype.useFailedResults = function(response){
-	
-	/*var cDiv = jQuery("div.cgroup-div-stats").filter("[data-member_key=\""+response.pk+"\"]");	
-	var statsButton = cDiv.find('a.btn-mini');	
-	statsButton.removeClass('btn-danger').removeClass('btn-success'); // remove the styles
-	*/	
+alertSaveRequestDef.prototype.useFailedResults = function(response){	
 	if(response.error){		
 		Joomla.renderMessages({error:response.error});					
 	}
@@ -42,11 +37,12 @@ ClubregObjectDefinition.prototype.saveAlert= function(requestConfig){
 	self.loadAjaxRequest(requestConfig);  
 }
 
-var alertSaveRequestConfig = new alertSaveRequestDef() ; //jQuery.extend(new alertSaveRequestDef(),failedResponse) ;
+var alertSaveRequestConfig = new alertSaveRequestDef() ; 
 
 jQuery(document).ready(function(){
 	
 	jQuery(document).on('submit','#alert-form',function(event){	
+		jQuery(this).find('button').attr('disabled',true);//
 		event.preventDefault();			
 		alertSaveRequestConfig.rData = jQuery(this).serialize();
 		
