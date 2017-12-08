@@ -33,6 +33,8 @@ Joomla.sbutton = function(pk)
 }
 
 Joomla.formToken = '<?php echo JSession::getFormToken() ;?>';	
+
+var noResults = "<?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_NORESULTS'); ?>";
 //-->
 </script>
 
