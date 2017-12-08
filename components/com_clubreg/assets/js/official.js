@@ -23,38 +23,7 @@ window.addEvent('domready', function () {
 		
 	}
 	
-	if($('profileActivity')){
-			
-		$('profileActivity').addClass('dashboard-div');		
-		
-		var json_data = JSON.decode($('profileActivity').get('rel'));
-		
-		var durl = "index.php";	
-		var params = "option=com_clubreg&view=ajax&layout=activity&tmpl=component";		
-		if(json_data && json_data["Itemid"]){
-			params = params + "&Itemid="+json_data["Itemid"];
-		}
-		var req = new Request.HTML({
-			method: 'get',
-			url: durl,			
-			//onRequest: function() { alert('Request made. Please wait...'); },
-			update: $('profileActivity'),
-			onComplete: function(response) { $('profileActivity').removeClass('loading1'); 	}
-		}).send(params);
-		
-		
-		var container = $('profileActivity');
-		
-		container.addEvent("click:relay($(this))", function(event){	
-			//event.stop();				
-			var var_class = $(this).get('class');
-			
-			if(var_class != null &&  var_class.test('activity-item')){			
-				renderActivity($(this));
-			}
-		});
-		
-	}
+
 	
 	if($('profileBirthday')){
 		
@@ -79,67 +48,86 @@ window.addEvent('domready', function () {
 	}
 	
 	
-	if($('profileMembers')){
-			
-			$('profileMembers').addClass('dashboard-div');	
-			
-			var json_data = JSON.decode($('profileMembers').get('rel'));
-			
-			var durl = "index.php";	
-			
-			var params = "option=com_clubreg&view=ajax&layout=members&tmpl=component&format=raw";
-			
-			if(json_data && json_data["Itemid"]){
-				params = params + "&Itemid="+json_data["Itemid"];
-			}
-			var a = new Request.HTML({ 
-				url : durl, 
-				method: 'get',	
-				update: $('profileMembers'),
-				onSuccess: function(responseText){ $('profileMembers').removeClass('loading1');	}
-				}).send(params);
-			
-		}
+
 });
 
-function renderActivity(dObject){
-	
-	var json_data = JSON.decode(dObject.get('rel'));		
-	var params = "option=com_clubreg&view=ajax&layout=anactivity&tmpl=component&format=raw";		
-	var durl = "index.php?"+params;	
-	
-	var a = new Request.HTML({
-		url : durl, 
-		method: 'post',	
-		data : json_data,
-		update: dObject,
-		onRequest : function(){dObject.empty();dObject.addClass('loading-small');},
-		onSuccess: function(responseText){ dObject.removeClass('loading-small'); dObject.removeClass('activity-item');}
-		}).send();	
-	
-}
+
 
 jQuery( document ).ready(function() {
 	
-	jQuery("#profileActivity").on('click',".img_hidden",function(event){		
+	
+	if(jQuery('#profileMembers')){	
 		
-		var post_data = JSON.decode(jQuery(this).attr("rel"));	
 		
-		var contentHere = jQuery(this).parents(".content-here");
+		jQuery('#profileMembers').addClass('dashboard-div');	
 		
-		var params = "option=com_clubreg&view=ajax&layout=anactivity&tmpl=component&format=raw";		
-		var durl = "index.php?"+params;	
+		var json_data = JSON.decode(jQuery('#profileMembers').attr('rel'));
 		
-		contentHere.addClass('loading-small');
-		jQuery.post(durl,post_data,function(data){			
-			contentHere.removeClass('loading-small');			
-			contentHere.html(data);		
+		var durl = "index.php?";	
+		
+		var params = "option=com_clubreg&view=ajax&layout=members&tmpl=component&format=raw";
+		
+		if(json_data && json_data["Itemid"]){
+			params = params + "&Itemid="+json_data["Itemid"];
+		}
+		
+		jQuery.post(durl+params,{},function(data){			
+			jQuery('#profileMembers').removeClass('loading1');			
+			jQuery('#profileMembers').html(data);		
+			
+		},'html').fail(function(){
+			jQuery('#profileMembers').removeClass('loading1');	
+			jQuery('#profileMembers').html("<div class=\"alert alert-error\"><h2>"+noResults+"</h2></div>");
+		});
+		
+		
+	}
+	
+	
+	
+	
+	
+	if(jQuery('#profileActivity')){
+		
+		jQuery('#profileActivity').addClass('dashboard-div');		
+		
+		var json_data = JSON.decode(jQuery('#profileActivity').attr('rel'));
+		
+		var durl = "index.php?";	
+		var params = "option=com_clubreg&view=ajax&layout=activity&tmpl=component";		
+		if(json_data && json_data["Itemid"]){
+			params = params + "&Itemid="+json_data["Itemid"];
+		}	
+		
+		jQuery.post(durl+params,{},function(data){			
+			jQuery('#profileActivity').removeClass('loading-small');			
+			jQuery('#profileActivity').html(data);		
 			
 		},'html').fail(function(){
 			alert("Unable to process request!");
 		});
-	
-	});
+		
+		
+		jQuery("#profileActivity").on('click',".img_hidden",function(event){		
+			
+			var post_data = JSON.decode(jQuery(this).attr("rel"));	
+			
+			var contentHere = jQuery(this).parents(".content-here");
+			
+			var params = "option=com_clubreg&view=ajax&layout=anactivity&tmpl=component&format=raw";		
+			var durl = "index.php?"+params;	
+			
+			contentHere.addClass('loading-small');
+			jQuery.post(durl,post_data,function(data){			
+				contentHere.removeClass('loading-small');			
+				contentHere.html(data);		
+				
+			},'html').fail(function(){
+				alert("Unable to process request!");
+			});
+		
+		});
+	}
 	
 	if(jQuery('#breakdownTab')){
 
