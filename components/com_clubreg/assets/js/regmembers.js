@@ -37,8 +37,32 @@ window.addEvent('domready', function () {
 	
 });
 
-jQuery(document).ready(function() {
+/**
+ * Config for saving notes
+ */
+function deleteRequestDef(){	
 	
+	self = this;
+	self.rUrl  =  "index.php";
+	self.rMethod  = "post";
+	self.rData  = {}	;	
+	
+	self.rBefore = beforeAction;
+	self.creator = {};
+};
+
+deleteRequestDef.prototype.useResults = function(response){
+	
+	Joomla.removeMessages();
+
+	self.creator.parents('div.cgroup-div').fadeOut();
+	//jQuery("#find-player-list").removeClass('loading1');
+	//jQuery("#find-player-list").html(response);	
+}
+
+var deleteRequestConfig = jQuery.extend( new deleteRequestDef(),failedResponse) ;
+
+jQuery(document).ready(function() {	
 	
 	jQuery('#all_filters').slideUp();	
 	jQuery('#all_batch_filters').slideUp();	
@@ -61,8 +85,6 @@ jQuery(document).ready(function() {
 	jQuery(".hide-batch-filters").on('click', function(event){			
 		jQuery('#all_batch_filters').slideToggle();
 	});
-	
-	
 	
 	jQuery(document).on('click',".btn-batch-update",function(event){		
 			
@@ -101,6 +123,31 @@ jQuery(document).ready(function() {
 			
 			Joomla.submitbutton('regmembers.batchUpdate');
 			
-		});		
+		});	
+	
+	jQuery('#find-player-list').on('click','[rel=delete-member]',function(){	
+		
+		var deleteme = confirm("Are you sure you want to delete this item?");
+		
+		if(deleteme){		
+				
+			var json_data = {};
+			json_data[token]=1; 
+			json_data["member_key"]= jQuery(this).data('memberkey');		
+			json_data["option"]= "com_clubreg";
+			json_data["task"]= "regmembers.deletemembers";
+			
+			deleteRequestConfig.rData  = json_data; 
+			
+			deleteRequestConfig.creator = jQuery(this);
+			
+			ClubRegObject.loadAjaxRequest(deleteRequestConfig);
+			
+			//jQuery(this).parents('div.cgroup-div').fadeOut();
+		}
+	}); 
 	
 });
+
+
+

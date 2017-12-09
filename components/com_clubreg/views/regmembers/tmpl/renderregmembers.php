@@ -16,9 +16,6 @@ JHtml::_('behavior.framework',true);
 JHtml::_('behavior.keepalive');
 JHtml::_('jquery.framework');
 
-
-
-
 global $clubreg_Itemid;
 $in_type = "hidden";
 $listOrder	= $this->escape($this->state->get('list.ordering'));
@@ -136,7 +133,13 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 </form>
 <?php 
 $document = JFactory::getDocument();
+
+
+$document->addScript('https://use.fontawesome.com/9a293d9ea0.js');
+
+
 ClubregHelper::writeTabAssets($document, "common",array("css"));
+ClubregHelper::writeTabAssets($document, "clubreg",array("js"));
 ClubregHelper::writeTabAssets($document, "filters_logic",array("js"));
 ClubregHelper::writeTabAssets($document, "clubreggroups",array("js"));
 ClubregHelper::writeTabAssets($document, "regmembers",array("css","js"));

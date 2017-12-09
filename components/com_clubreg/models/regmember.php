@@ -392,6 +392,22 @@ class ClubregModelRegmember extends JModelForm
 		}
 	}
 	
+	public function deleteMember(){
+		
+		$db = JFactory::getDbo();
+			
+		$member_id = $this->getState('com_clubreg.regmember.member_id');
+		$member_key = $this->getState('com_clubreg.regmember.member_key');		
+		
+		$d_qry = sprintf("update %s set member_status = 'deleted' where (member_id in (%s) and member_key ='%s') or parent_id in (%s) ;",
+				CLUB_REGISTEREDMEMBERS_TABLE,$member_id,$member_key,$member_id);
+		$db->setQuery( $d_qry );
+		
+		//$db->query();		
+		return TRUE;
+		
+	}
+	
 	public function batchUpdate($propertyArray = array()){
 		
 		$current_table = $this->getTable();

@@ -41,7 +41,7 @@ class ClubRegRenderDivsRegMembersHelper extends ClubRegRenderTablesHelper
 		<table class="table table-bordered table-striped table-hover table-condensed">
 			<?php $this->renderHead($viewObject);?>
 		</table>
-		<div class="row-fluid">		 
+		<div class="row-fluid" id="find-player-list">		 
 			  <?php 
 			  if(count($viewObject->items) > 0){
 			  	foreach($viewObject->items as $an_item){ 
@@ -74,7 +74,7 @@ class ClubRegRenderDivsRegMembersHelper extends ClubRegRenderTablesHelper
 				    <div style="margin-top:5px;">				    	
 				    	<div class="thumbnail">
 				    		<?php echo ($profile_pix)?$profile_pix:$defaultImg; ?>		
-				    	</div>	   
+				    	</div>   
 				    	
 				    </div>		
 				  </div>
@@ -84,6 +84,7 @@ class ClubRegRenderDivsRegMembersHelper extends ClubRegRenderTablesHelper
 			  		</div>	
 				    <?php $this->rendererItems($an_item); ?>
 				    <div class="clearfix"></div>
+				    <a href="javascript:void(0);"  title="Delete" class="btn btn-mini pull-left" rel='delete-member' data-memberkey='<?php echo $fkey; ?>'><i class="fa fa-trash" aria-hidden="true"></i></a>
 				    <p class=" pull-right small"><?php echo JText::_('COM_CLUBREG_REGISTERED_LABEL');?> :<?php echo $an_item->t_created_by;?> on  <?php echo $an_item->t_created_date;?></p>
 			    	</div>  
 			    </div>		 	  

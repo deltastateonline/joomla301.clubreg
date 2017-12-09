@@ -1,60 +1,56 @@
-window.addEvent('domready', function () {	
-	
-	
-	if($('profileEoi')){
-				
-		$('profileEoi').addClass('dashboard-div');	
-		
-		var json_data = JSON.decode($('profileEoi').get('rel'));		
-		
-		var durl = "index.php";	
-		
-		var params = "option=com_clubreg&view=ajax&layout=eoi&tmpl=component";
-		
-		if(json_data && json_data["Itemid"]){
-			params = params + "&Itemid="+json_data["Itemid"];
-		}
-		var a = new Request.HTML({ 
-			url : durl, 
-			method: 'get',	
-			update: $('profileEoi'),
-			onSuccess: function(responseText){ $('profileEoi').removeClass('loading1');	}
-			}).send(params);
-		
-	}
-	
 
-	
-	if($('profileBirthday')){
-		
-		$('profileBirthday').addClass('dashboard-div');	
-		
-		var json_data = JSON.decode($('profileBirthday').get('rel'));
-		
-		var durl = "index.php";	
-		
-		var params = "option=com_clubreg&view=ajax&layout=bday&tmpl=component&format=raw";
-		
-		if(json_data && json_data["Itemid"]){
-			params = params + "&Itemid="+json_data["Itemid"];
-		}
-		var a = new Request.HTML({ 
-			url : durl, 
-			method: 'get',	
-			update: $('profileBirthday'),
-			onSuccess: function(responseText){ $('profileBirthday').removeClass('loading1');	}
-			}).send(params);
-		
-	}
-	
-	
-
-});
 
 
 
 jQuery( document ).ready(function() {
 	
+	
+	if(jQuery('#profileBirthday')){	
+		
+		jQuery('#profileBirthday').addClass('dashboard-div');	
+		
+		var json_data = JSON.decode(jQuery('#profileEoi').attr('rel'));
+		
+		var durl = "index.php?";
+		var params = "option=com_clubreg&view=ajax&layout=bday&tmpl=component&format=raw";
+		
+		if(json_data && json_data["Itemid"]){
+			params = params + "&Itemid="+json_data["Itemid"];
+		}
+		
+		jQuery.post(durl+params,{},function(data){			
+			jQuery('#profileBirthday').removeClass('loading1');			
+			jQuery('#profileBirthday').html(data);		
+			
+		},'html').fail(function(){
+			jQuery('#profileBirthday').removeClass('loading1');	
+			jQuery('#profileBirthday').html("<div class=\"alert alert-error\"><h2>"+noResults+"</h2></div>");
+		});		
+	}	
+	
+	if(jQuery('#profileEoi')){	
+		
+		jQuery('#profileEoi').addClass('dashboard-div');	
+		
+		var json_data = JSON.decode(jQuery('#profileEoi').attr('rel'));
+		
+		var durl = "index.php?";	
+		var params = "option=com_clubreg&view=ajax&layout=eoi&tmpl=component";
+		
+		if(json_data && json_data["Itemid"]){
+			params = params + "&Itemid="+json_data["Itemid"];
+		}
+		
+		jQuery.post(durl+params,{},function(data){			
+			jQuery('#profileEoi').removeClass('loading1');			
+			jQuery('#profileEoi').html(data);		
+			
+		},'html').fail(function(){
+			jQuery('#profileEoi').removeClass('loading1');	
+			jQuery('#profileEoi').html("<div class=\"alert alert-error\"><h2>"+noResults+"</h2></div>");
+		});
+		
+	}	
 	
 	if(jQuery('#profileMembers')){	
 		
@@ -78,14 +74,9 @@ jQuery( document ).ready(function() {
 		},'html').fail(function(){
 			jQuery('#profileMembers').removeClass('loading1');	
 			jQuery('#profileMembers').html("<div class=\"alert alert-error\"><h2>"+noResults+"</h2></div>");
-		});
+		});		
 		
-		
-	}
-	
-	
-	
-	
+	}	
 	
 	if(jQuery('#profileActivity')){
 		
