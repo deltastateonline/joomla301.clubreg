@@ -15,11 +15,15 @@ class ClubregControllerRegmembers extends JControllerLegacy
 	public function __construct($config = array())
 	{		
 		require_once JPATH_COMPONENT_ADMINISTRATOR.DS.'helpers'.DS.'clubreg.php';
+		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
 		parent::__construct($config);
 		
 		$this->registerTask('delete', 'delete');
+		$this->registerTask('deletemembers', 'deletemembers');
 		$this->registerTask('resetMemberKey', 'resetMemberKey');
 		$this->registerTask('batchUpdate', 'batchUpdate');	
+		
+		$this->uKeyObject = new ClubRegUniqueKeysHelper(10);
 	}	
 	
 
@@ -180,5 +184,44 @@ class ClubregControllerRegmembers extends JControllerLegacy
 		
 		return parent::display();
 	
+	}
+	
+	function deletemembers(){
+		
+		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		$app    = JFactory::getApplication();
+		$user		= JFactory::getUser();
+		$key_data = new stdClass();
+		
+		$return_array = array();
+		
+		$return_array["proceed"] = TRUE;
+		
+		if($user->get('id') > 0 ){
+			$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
+			$current_model->setState('joomla_id',$user->get('id'));			
+	
+			if($current_model->getPermissions('deletereg') && LIVE_SITE){
+				
+				$key_data = new stdClass();
+				$key_data->full_key = $this->input->post->get('member_key', "", 'string');	
+				$this->uKeyObject->deconstructKey($key_data);				
+				
+				$current_model = JModelLegacy::getInstance('regmember', 'ClubregModel', array('ignore_request' => false));
+				$current_model->setState("com_clubreg.regmember.member_id",$key_data->pk_id);
+				$current_model->setState("com_clubreg.regmember.member_key",$key_data->string_key);
+				
+				$proceed = $current_model->deleteMember();
+				$return_array["message"][] =  "Member Deleted";				
+				
+			}else{
+				$return_array["proceed"] = FALSE;
+				$return_array["errors"] = array(JText::_('CLUBREG_NOTAUTH'));
+				$return_array["message"][] =  JText::_('CLUBREG_NOTAUTH');
+			}		
+		}
+		
+		echo json_encode($return_array);
+		$app->close();
 	}
 }

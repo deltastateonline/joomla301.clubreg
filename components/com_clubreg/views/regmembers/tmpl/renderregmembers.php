@@ -15,9 +15,11 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 JHtml::_('behavior.framework',true);
 jimport('joomla.html.html.bootstrap');
 JHtml::_('behavior.keepalive');
+
 JHtml::_('behavior.formvalidator');
 JHTML::_('behavior.calendar');
 JHtml::_('behavior.tooltip');
+
 
 global $clubreg_Itemid;
 $in_type = "hidden";
@@ -144,7 +146,6 @@ echo $this->pagination->getListFooter();
 
 
 $document = JFactory::getDocument();
-
 $document->addScript('https://use.fontawesome.com/9a293d9ea0.js');
 
 ClubregHelper::writeTabAssets($document, "common",array("css"));
