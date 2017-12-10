@@ -38,6 +38,7 @@ window.addEvent('domready', function () {
 });
 
 /**
+
  * Definition for creating alerts
  */
 function alertsRequestDef(){
@@ -74,7 +75,7 @@ function deleteRequestDef(){
 deleteRequestDef.prototype.useResults = function(response){
 	self = this;
 	Joomla.removeMessages();	
-	self.creator.parents('div.cgroup-div').fadeOut();		
+	self.creator.parents('div.cgroup-div').fadeOut();
 }
 deleteRequestDef.prototype.useFailedResults = function(response){	
 	self.creator.parents('div.cgroup-div').removeClass("loading1");
@@ -82,7 +83,6 @@ deleteRequestDef.prototype.useFailedResults = function(response){
 };
 
 var deleteRequestConfig =  new deleteRequestDef() ;
-
 
 jQuery(document).ready(function() {
 	
@@ -199,8 +199,8 @@ jQuery(document).ready(function() {
 		
 		var deleteme = confirm("Are you sure you want to delete this item?");
 		
-		if(deleteme){
-			
+		if(deleteme){		
+
 			jQuery(this).parents('div.cgroup-div').addClass("loading1");
 			var json_data = {};
 			json_data[token]=1; 
@@ -213,7 +213,5 @@ jQuery(document).ready(function() {
 			ClubRegObject.loadAjaxRequest(deleteRequestConfig);
 		}
 	});
-	
-	
 	
 });
