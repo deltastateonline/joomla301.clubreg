@@ -38,7 +38,7 @@ window.addEvent('domready', function () {
 });
 
 /**
- * create an empty object, which we can set values later on
+ * Definition for creating alerts
  */
 function alertsRequestDef(){
 	self = this;
@@ -46,17 +46,43 @@ function alertsRequestDef(){
 	self.rMethod  = "post";
 	self.rData  = {}	;	
 };
-
-alertsRequestDef.prototype.useResults = function(response){
-	
+alertsRequestDef.prototype.useResults = function(response){	
 	self = this;	
-	
 	jQuery(self.whereTo).removeClass("loading1");	
 	jQuery(self.whereTo).html(response);
 }
 
-
 var alertRequestConfig = new alertsRequestDef();
+
+/**
+ * Definition for deleting
+ */
+function deleteRequestDef(){	
+	
+	self = this;
+	self.rUrl  =  "index.php";
+	self.rMethod  = "post";
+	self.rData  = {}	;	
+	
+	self.creator = {};
+	self.rBefore = function(args){		
+		return ;
+	};
+	
+};
+
+deleteRequestDef.prototype.useResults = function(response){
+	self = this;
+	Joomla.removeMessages();	
+	self.creator.parents('div.cgroup-div').fadeOut();		
+}
+deleteRequestDef.prototype.useFailedResults = function(response){	
+	self.creator.parents('div.cgroup-div').removeClass("loading1");
+	Joomla.renderMessages({error:response.errors});	
+};
+
+var deleteRequestConfig =  new deleteRequestDef() ;
+
 
 jQuery(document).ready(function() {
 	
@@ -168,5 +194,26 @@ jQuery(document).ready(function() {
 		});
 		
 	});
+	
+	jQuery('#find-player-list').on('click','[rel=delete-member]',function(){	
+		
+		var deleteme = confirm("Are you sure you want to delete this item?");
+		
+		if(deleteme){
+			
+			jQuery(this).parents('div.cgroup-div').addClass("loading1");
+			var json_data = {};
+			json_data[token]=1; 
+			json_data["member_key"]= jQuery(this).data('memberkey');		
+			json_data["option"]= "com_clubreg";
+			json_data["task"]= "regmembers.deletemembers";
+			
+			deleteRequestConfig.rData  = json_data; 			
+			deleteRequestConfig.creator = jQuery(this);			
+			ClubRegObject.loadAjaxRequest(deleteRequestConfig);
+		}
+	});
+	
+	
 	
 });

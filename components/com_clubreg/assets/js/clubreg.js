@@ -3,8 +3,7 @@ function ClubregObjectDefinition(){
 	self = this;
 }
 
-ClubregObjectDefinition.prototype.loadAjaxRequest = function(reqConfig){
-	
+ClubregObjectDefinition.prototype.loadAjaxRequest = function(reqConfig){	
 	
 	jQuery.ajax({
 		url: reqConfig.rUrl,
