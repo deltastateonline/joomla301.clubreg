@@ -84,7 +84,9 @@ class ClubRegRenderDivsRegMembersHelper extends ClubRegRenderTablesHelper
 			  		</div>	
 				    <?php $this->rendererItems($an_item); ?>
 				    <div class="clearfix"></div>
+				    <?php if(LIVE_SITE){?>
 				    <a href="javascript:void(0);"  title="Delete" class="btn btn-mini pull-left" rel='delete-member' data-memberkey='<?php echo $fkey; ?>'><i class="fa fa-trash" aria-hidden="true"></i></a>
+				   	<?php } ?>
 				    <p class=" pull-right small"><?php echo JText::_('COM_CLUBREG_REGISTERED_LABEL');?> :<?php echo $an_item->t_created_by;?> on  <?php echo $an_item->t_created_date;?></p>
 			    	</div>  
 			    </div>		 	  

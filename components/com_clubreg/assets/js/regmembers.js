@@ -38,7 +38,7 @@ window.addEvent('domready', function () {
 });
 
 /**
- * Config for saving notes
+ * Config for deleting team members
  */
 function deleteRequestDef(){	
 	
@@ -52,15 +52,15 @@ function deleteRequestDef(){
 };
 
 deleteRequestDef.prototype.useResults = function(response){
-	
-	Joomla.removeMessages();
-
-	self.creator.parents('div.cgroup-div').fadeOut();
-	//jQuery("#find-player-list").removeClass('loading1');
-	//jQuery("#find-player-list").html(response);	
+	self = this;
+	Joomla.removeMessages();	
+	self.creator.parents('div.cgroup-div').fadeOut();		
+}
+deleteRequestDef.prototype.useFailedResults = function(response){	
+	Joomla.renderMessages({error:response.errors});	
 }
 
-var deleteRequestConfig = jQuery.extend( new deleteRequestDef(),failedResponse) ;
+var deleteRequestConfig = jQuery.extend( new deleteRequestDef()) ;
 
 jQuery(document).ready(function() {	
 	
@@ -129,21 +129,17 @@ jQuery(document).ready(function() {
 		
 		var deleteme = confirm("Are you sure you want to delete this item?");
 		
-		if(deleteme){		
-				
+		if(deleteme){
+			
 			var json_data = {};
 			json_data[token]=1; 
 			json_data["member_key"]= jQuery(this).data('memberkey');		
 			json_data["option"]= "com_clubreg";
 			json_data["task"]= "regmembers.deletemembers";
 			
-			deleteRequestConfig.rData  = json_data; 
-			
-			deleteRequestConfig.creator = jQuery(this);
-			
+			deleteRequestConfig.rData  = json_data; 			
+			deleteRequestConfig.creator = jQuery(this);			
 			ClubRegObject.loadAjaxRequest(deleteRequestConfig);
-			
-			//jQuery(this).parents('div.cgroup-div').fadeOut();
 		}
 	}); 
 	

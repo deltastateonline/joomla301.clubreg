@@ -26,8 +26,7 @@ ClubregObjectDefinition.prototype.loadAjaxRequest = function(reqConfig){
 						Joomla.renderMessages(response.errors);					
 					}
 				}
-			} 				
-
+			}
 		},
 		error: function( XMLHttpRequest, textStatus, errorThrown ) {			
 			var fatalError = ['warning'];

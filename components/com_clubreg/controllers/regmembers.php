@@ -212,8 +212,7 @@ class ClubregControllerRegmembers extends JControllerLegacy
 				
 			}else{
 				$return_array["proceed"] = FALSE;
-				$return_array["errors"] = array(JText::_('CLUBREG_NOTAUTH'));
-				$return_array["message"][] =  JText::_('CLUBREG_NOTAUTH');
+				$return_array["errors"] = array(JText::_('CLUBREG_NOTAUTH'));				
 			}		
 		}
 		
