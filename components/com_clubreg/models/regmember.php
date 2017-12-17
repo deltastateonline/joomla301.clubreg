@@ -403,7 +403,11 @@ class ClubregModelRegmember extends JModelForm
 				CLUB_REGISTEREDMEMBERS_TABLE,$member_id,$member_key,$member_id);
 		$db->setQuery( $d_qry );
 		
-		//$db->query();		
+		$db->query();		
+		
+		$data = $this->getItem();		
+		$this->setState('com_clubreg.regmember.tmpData',$data);
+		
 		return TRUE;
 		
 	}

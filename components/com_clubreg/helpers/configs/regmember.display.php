@@ -29,7 +29,7 @@ class ClubRegRegmembersDisplayConfig extends JObject
 			$headings = array(); // will have to use some form of ordering
 				
 			$headingConfig = $this->$method($headings);					
-			$headings[$headingConfig[lastIndex]]["t_created_date"] = array("label"=>JText::_('COM_CLUBREG_REGISTERED_LABEL'),'csvonly'=>TRUE);	
+			$headings[$headingConfig['lastIndex']]["t_created_date"] = array("label"=>JText::_('COM_CLUBREG_REGISTERED_LABEL'),'csvonly'=>TRUE);	
 			
 			$filterConfig["headings"] = $headings;					
 		}		

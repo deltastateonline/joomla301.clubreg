@@ -16,6 +16,7 @@ class ClubregControllerRegmembers extends JControllerLegacy
 	{		
 		require_once JPATH_COMPONENT_ADMINISTRATOR.DS.'helpers'.DS.'clubreg.php';
 		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
+		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.mail.php';
 		parent::__construct($config);
 		
 		$this->registerTask('delete', 'delete');
@@ -194,6 +195,7 @@ class ClubregControllerRegmembers extends JControllerLegacy
 		$key_data = new stdClass();
 		
 		$return_array = array();
+		$emailer = FALSE;
 		
 		$return_array["proceed"] = TRUE;
 		
@@ -209,10 +211,23 @@ class ClubregControllerRegmembers extends JControllerLegacy
 				
 				$current_model = JModelLegacy::getInstance('regmember', 'ClubregModel', array('ignore_request' => false));
 				$current_model->setState("com_clubreg.regmember.member_id",$key_data->pk_id);
-				$current_model->setState("com_clubreg.regmember.member_key",$key_data->string_key);
+				$current_model->setState("com_clubreg.regmember.member_key",$key_data->string_key);				
 				
 				$proceed = $current_model->deleteMember();
-				$return_array["message"][] =  "Member Deleted";				
+				
+				$deletedMember = $current_model->getState('com_clubreg.regmember.tmpData');		
+				
+				$message = sprintf("Attempting to delete.<br />%s %s",$deletedMember['surname'],$deletedMember['givenname']);
+				$emailer = ClubRegMailHelper::sendDeleteEmail($message);
+				
+				$return_array["message"][] =  "Member Deleted";		
+				$return_array["message"][] = $emailer;				
+				
+				$current_model->setState('com_clubreg.regmember.tmpData',NULL);
+				
+				unset($deletedMember);
+				unset($current_model);
+				
 				
 			}else{
 				$return_array["proceed"] = FALSE;

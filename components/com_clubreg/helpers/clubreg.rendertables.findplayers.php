@@ -112,7 +112,7 @@ class ClubRegRenderDivsFindplayersHelper extends ClubRegRenderTablesHelper
 						<div class="<?php echo $eachSpan?>" >							
 							<div class="text-info pull-left reg-label"><?php echo $aHead["label"]?></div>
 							<div class="pull-left reg-colon"> : </div>
-							<div class="pull-left reg-value-div"><?php echo $this->itemRenderer->render($an_item->$akey,$aHead); ?></div>						
+							<div class="pull-left reg-value-div"><?php echo $this->itemRenderer->render(@$an_item->$akey,$aHead); ?></div>						
 						</div>
 			<?php 	} ?>
 				</div>
