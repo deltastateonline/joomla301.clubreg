@@ -141,4 +141,27 @@ jQuery( document ).ready(function() {
 			alert("Unable to process request! Generating Breakdown Charts.");
 		});
 	}
+	
+	if(jQuery('#profileAlerts')){	
+		
+		jQuery('#profileAlerts').addClass('dashboard-div');	
+		
+		var json_data = JSON.decode(jQuery('#profileAlerts').attr('rel'));
+		
+		var durl = "index.php?";
+		var params = "option=com_clubreg&view=ajax&layout=alerts&tmpl=component&format=raw";
+		
+		if(json_data && json_data["Itemid"]){
+			params = params + "&Itemid="+json_data["Itemid"];
+		}
+		
+		jQuery.post(durl+params,{},function(data){			
+			jQuery('#profileAlerts').removeClass('loading1');			
+			jQuery('#profileAlerts').html(data);		
+			
+		},'html').fail(function(){
+			jQuery('#profileAlerts').removeClass('loading1');	
+			jQuery('#profileAlerts').html("<div class=\"alert alert-error\"><h2>"+noResults+"</h2></div>");
+		});		
+	}	
 });

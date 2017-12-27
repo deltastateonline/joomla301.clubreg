@@ -272,5 +272,39 @@ class ClubRegViewAjax extends JViewLegacy
 		return $proceed;
 	}
 	
+	/**
+	 * Render all members who have a birthday in the next 7 days
+	 * @return boolean
+	 */
+	private function alerts(){
+	
+		$proceed = FALSE;
+	
+		$user		= JFactory::getUser();
+	
+		$params = JComponentHelper::getParams('com_clubreg');	
+		$this->setLayout("alerts.profile");
+	
+		if($user->get('id') > 0){
+				
+			$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
+			$current_model->setState('joomla_id',$user->get('id'));
+	
+			if($current_model->getPermissions('showbday') ){
+				unset($current_model);
+					
+				require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
+				$this->uKeyObject = new ClubRegUniqueKeysHelper();
+				$current_model = JModelLegacy::getInstance('activity', 'ClubregModel', array('ignore_request' => true));
+				$this->alerts = $current_model->getAlerts();
+				$proceed = TRUE;			
+	
+				unset($current_model);
+			}
+		}
+	
+		return $proceed;
+	}
+	
 	
 }
