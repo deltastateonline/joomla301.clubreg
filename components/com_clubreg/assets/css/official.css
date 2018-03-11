@@ -199,3 +199,7 @@ div.eoi-counts-div{
     width:75%;
 }
 
+#tabDashboard:hover{	
+	cursor: pointer
+}
+

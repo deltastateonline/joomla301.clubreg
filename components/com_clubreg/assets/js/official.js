@@ -140,4 +140,13 @@ jQuery( document ).ready(function() {
 			jQuery('#profileAlerts').html("<div class=\"alert alert-error\"><h2>"+noResults+"</h2></div>");
 		});		
 	}	
+	
+	jQuery('#tabDashboard').on('click','.section-head',function(){
+		
+		var section = "#"+jQuery(this).data('section');
+		jQuery(section).slideToggle();
+		
+		
+	});
+	
 });
