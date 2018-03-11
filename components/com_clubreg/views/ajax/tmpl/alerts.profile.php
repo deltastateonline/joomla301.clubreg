@@ -37,7 +37,7 @@ if(count($this->alerts)> 0){ $i=1; ?>
 			<div class="profile-text">
 				<span><a href="javascript:void(0);" onclick="Joomla.sbutton('<?php echo $fkey;?>')"><?php echo ucwords(strtolower($a_bday->givenname." ".$a_bday->surname)) ;?></a></span><br />
 				
-				<small class='text-info'><?php echo $a_bday->config_name; ?> | <?php echo $a_bday->alertDate; ?></small>
+				<small class='text-info'><?php echo $a_bday->config_name; ?><br /><?php echo $a_bday->alertDate; ?></small>
 			</div>
 		</div>
 		<?php 

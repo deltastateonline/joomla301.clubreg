@@ -261,8 +261,8 @@ if($this->canedit){
 					</div>		
 				<?php } 									
 				if($render_sections["showbday"]){ ?>
-				<div class="alert alert-info"><img alt="" src="components/com_clubreg/assets/images/groups.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_BDAY'); ?></strong></div>
-				<div class="loading1" id="profileBirthday" rel=<?php echo json_encode($rel_string)?>></div>
+				<div class="alert alert-info"><img alt="" src="components/com_clubreg/assets/images/groups.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_BDAY'); ?></strong> / <strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_ALERTS'); ?></strong>  </div>
+				<!-- <div class="loading1" id="profileBirthday" rel=<?php echo json_encode($rel_string)?>></div> -->
 				<div class="loading1" id="profileAlerts" rel=<?php echo json_encode($rel_string)?>></div>			
 				<?php } ?>
 				
