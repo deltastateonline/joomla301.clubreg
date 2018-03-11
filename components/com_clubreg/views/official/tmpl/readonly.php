@@ -245,15 +245,15 @@ if($this->canedit){
 		if($renderTab["dashboard"]){  
 			$render_sections = $this->render_sections; ?>
 			<div class="tab-pane active" id="tabDashboard">				
-				<div class="alert alert-info"><img alt="" src="components/com_clubreg/assets/images/groups.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_MEMBERS'); ?></strong></div>
+				<div class="alert alert-info section-head" data-section='profileMembers'><img alt="" src="components/com_clubreg/assets/images/groups.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_MEMBERS'); ?></strong></div>
 				<div class="loading1" id="profileMembers" rel=<?php echo json_encode($rel_string)?>></div>	
 							
 				<?php if($render_sections["showeoi"]) { ?>
-				<div class="alert alert-info"><img alt="" src="components/com_clubreg/assets/images/groups.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_EOI'); ?></strong></div>
+				<div class="alert alert-info section-head" data-section='profileEoi'><img alt="" src="components/com_clubreg/assets/images/groups.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_EOI'); ?></strong></div>
 				<div class="loading1" id="profileEoi" rel=<?php echo json_encode($rel_string)?>></div>				
 				<?php } ?>
 				<?php if($render_sections["breakdown"]) { ?>
-				<div class="alert alert-info"><img alt="" src="components/com_clubreg/assets/images/stats.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_BREAKDOWN'); ?></strong> </div>				
+				<div class="alert alert-info section-head" data-section='breakdownTab'><img alt="" src="components/com_clubreg/assets/images/stats.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_BREAKDOWN'); ?></strong> </div>				
 					<div class="dashboard-div loading1" id="breakdownTab">				
 						<div id="chart_div"></div>				
 						<div id="chart_div_sub"></div>	
@@ -261,12 +261,12 @@ if($this->canedit){
 					</div>		
 				<?php } 									
 				if($render_sections["showbday"]){ ?>
-				<div class="alert alert-info"><img alt="" src="components/com_clubreg/assets/images/groups.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_BDAY'); ?></strong></div>
-				<div class="loading1" id="profileBirthday" rel=<?php echo json_encode($rel_string)?>></div>
+				<div class="alert alert-info section-head" data-section='profileAlerts'><img alt="" src="components/com_clubreg/assets/images/groups.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_BDAY'); ?></strong> / <strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_ALERTS'); ?></strong>  </div>
+				
 				<div class="loading1" id="profileAlerts" rel=<?php echo json_encode($rel_string)?>></div>			
 				<?php } ?>
 				
-				<div class="alert alert-info"><img alt="" src="components/com_clubreg/assets/images/groups.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_ACTIVITY'); ?></strong></div>
+				<div class="alert alert-info section-head" data-section='profileActivity'><img alt="" src="components/com_clubreg/assets/images/groups.png" align=middle hspace=3 width=24><strong><?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_ACTIVITY'); ?></strong></div>
 				<div class="loading1" id="profileActivity" rel=<?php echo json_encode($rel_string)?>></div>
 				
 			</div>

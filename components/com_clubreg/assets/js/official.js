@@ -4,30 +4,6 @@
 
 jQuery( document ).ready(function() {
 	
-	
-	if(jQuery('#profileBirthday')){	
-		
-		jQuery('#profileBirthday').addClass('dashboard-div');	
-		
-		var json_data = JSON.decode(jQuery('#profileEoi').attr('rel'));
-		
-		var durl = "index.php?";
-		var params = "option=com_clubreg&view=ajax&layout=bday&tmpl=component&format=raw";
-		
-		if(json_data && json_data["Itemid"]){
-			params = params + "&Itemid="+json_data["Itemid"];
-		}
-		
-		jQuery.post(durl+params,{},function(data){			
-			jQuery('#profileBirthday').removeClass('loading1');			
-			jQuery('#profileBirthday').html(data);		
-			
-		},'html').fail(function(){
-			jQuery('#profileBirthday').removeClass('loading1');	
-			jQuery('#profileBirthday').html("<div class=\"alert alert-error\"><h2>"+noResults+"</h2></div>");
-		});		
-	}	
-	
 	if(jQuery('#profileEoi')){	
 		
 		jQuery('#profileEoi').addClass('dashboard-div');	
@@ -164,4 +140,10 @@ jQuery( document ).ready(function() {
 			jQuery('#profileAlerts').html("<div class=\"alert alert-error\"><h2>"+noResults+"</h2></div>");
 		});		
 	}	
+	
+	jQuery('#tabDashboard').on('click','.section-head',function(){		
+		var section = "#"+jQuery(this).data('section');
+		jQuery(section).slideToggle();		
+	});
+	
 });

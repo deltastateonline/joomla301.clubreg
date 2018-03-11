@@ -175,6 +175,8 @@ class ClubRegViewAjax extends JViewLegacy
 				$this->uKeyObject = new ClubRegUniqueKeysHelper();
 				$current_model = JModelLegacy::getInstance('activity', 'ClubregModel', array('ignore_request' => true));
 				$this->birthdays = $current_model->getBirthdays();
+				
+				
 				$proceed = TRUE;
 				
 				unset($current_model);
@@ -297,8 +299,11 @@ class ClubRegViewAjax extends JViewLegacy
 				$this->uKeyObject = new ClubRegUniqueKeysHelper();
 				$current_model = JModelLegacy::getInstance('activity', 'ClubregModel', array('ignore_request' => true));
 				$this->alerts = $current_model->getAlerts();
+				$this->birthdays = $current_model->getBirthdays();
 				$proceed = TRUE;			
 	
+				$this->alerts = array_merge($this->alerts,$this->birthdays );			
+				
 				unset($current_model);
 			}
 		}

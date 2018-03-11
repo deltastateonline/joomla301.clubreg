@@ -28,7 +28,7 @@ $i = 1;
 			<tr>
 				<td><?php echo $i++ ;?></td>
 				<td><?php echo $atable["comtable"] ;?></td>
-				<td><?php echo !(empty($atable["tablestatus"]))?"<span class=\"icon-publish\"></span>":"<span class=\"icon-unpublish\"></span>";?></td>
+				<td><?php echo !(empty($atable["tablestatus"]))?"<span class=\"icon-publish\"></span>":"<span class=\"icon-unpublish\" title='Table doesnt exist, check sql script'></span>";?></td>
 			</tr>
 		
 		<?php } ?>
