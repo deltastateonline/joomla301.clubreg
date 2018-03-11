@@ -40,6 +40,7 @@ class ClubregViewClubreg extends JViewLegacy
 	public function validateapp($tpl = null){	
 		
 		$this->componentTables = array(
+				array("comtable"=>"`#__clubreg_alerts`"),
 				array("comtable"=>"`#__clubreg_attachments`"),
 				array("comtable"=>"`#__clubreg_configs`"),
 				array("comtable"=>"`#__clubreg_contact_details`"),
