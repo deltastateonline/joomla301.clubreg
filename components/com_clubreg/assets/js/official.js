@@ -141,12 +141,9 @@ jQuery( document ).ready(function() {
 		});		
 	}	
 	
-	jQuery('#tabDashboard').on('click','.section-head',function(){
-		
+	jQuery('#tabDashboard').on('click','.section-head',function(){		
 		var section = "#"+jQuery(this).data('section');
-		jQuery(section).slideToggle();
-		
-		
+		jQuery(section).slideToggle();		
 	});
 	
 });
