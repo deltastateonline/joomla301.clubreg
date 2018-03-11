@@ -197,13 +197,13 @@ class ClubregControllerRegmembers extends JControllerLegacy
 		$return_array = array();
 		$emailer = FALSE;
 		
-		$return_array["proceed"] = TRUE;
+		$return_array["proceed"] = TRUE;		
 		
 		if($user->get('id') > 0 ){
 			$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
 			$current_model->setState('joomla_id',$user->get('id'));			
 	
-			if($current_model->getPermissions('deletereg') && LIVE_SITE){
+		 	if($current_model->getPermissions('deletereg') && LIVE_SITE){
 				
 				$key_data = new stdClass();
 				$key_data->full_key = $this->input->post->get('member_key', "", 'string');	
@@ -217,8 +217,10 @@ class ClubregControllerRegmembers extends JControllerLegacy
 				
 				$deletedMember = $current_model->getState('com_clubreg.regmember.tmpData');		
 				
-				$message = sprintf("Attempting to delete.<br />%s %s",$deletedMember['surname'],$deletedMember['givenname']);
-				$emailer = ClubRegMailHelper::sendDeleteEmail($message);
+				if(LIVE_SITE){
+					$message = sprintf("Attempting to delete.<br />%s %s",$deletedMember['surname'],$deletedMember['givenname']);
+					$emailer = ClubRegMailHelper::sendDeleteEmail($message);
+				}
 				
 				$return_array["message"][] =  "Member Deleted";		
 				$return_array["message"][] = $emailer;				
@@ -232,7 +234,7 @@ class ClubregControllerRegmembers extends JControllerLegacy
 			}else{
 				$return_array["proceed"] = FALSE;
 				$return_array["errors"] = array(JText::_('CLUBREG_NOTAUTH'));				
-			}		
+			}	 	
 		}
 		
 		echo json_encode($return_array);
