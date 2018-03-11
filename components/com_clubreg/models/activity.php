@@ -183,4 +183,41 @@ class ClubRegModelActivity extends JModelLegacy
 		return $db->loadObjectList();
 		
 	}
+	
+	/**
+	 * Get a list of players who have a birthday in the next 7 days
+	 * @return mixed
+	 */
+	public function getAlerts(){
+	
+		$db		= JFactory::getDbo();
+		$query	= $db->getQuery(true);
+	
+		$activity = $where_ = array();		
+		
+		$where_[] = "date_format(alert_date,'%m-%d') >= date_format(CURDATE(),'%m-%d')";
+		$where_[] = "date_format(alert_date,'%m-%d') <= date_format(DATE_ADD(CURDATE(), INTERVAL 7 DAY), '%m-%d')";
+		$where_[] = "a.alert_interval = 'yearly'";
+	
+		$where_str = "where ".implode(" and ", $where_);	
+		
+		$all_string[] = " b.member_id, member_key, date_format(a.alert_date,'%a %D %M') as alertDate, b.surname, b.givenname ";
+		$all_string[] = "c.config_name  ";		
+		
+		$d_var =implode(",", $all_string);
+		$query->select($d_var);
+		$query->from($db->quoteName(CLUB_ALERTS_TABLE).' AS a');
+		$query->join('LEFT', $db->quoteName(CLUB_REGISTEREDMEMBERS_TABLE).' AS b ON a.member_id = b.member_id');
+		$query->join('LEFT', $db->quoteName(CLUB_CONFIG_TABLE).' AS c ON a.alert_type = c.config_short');
+		
+		foreach($where_ as $a_where){
+			$query->where($a_where);
+		}
+	
+		$query->order("date_format(alert_date,'%m %d') asc");
+	
+		$db->setQuery($query);
+		return $db->loadObjectList();
+	
+	}
 }

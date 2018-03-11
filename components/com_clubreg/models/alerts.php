@@ -45,7 +45,7 @@ class ClubregModelAlerts extends JModelList
 		
 	
 		
-		$all_string[] = " member_id, member_key, date_format(alert_date,'%a %D %M') as alertDate, surname, givenname ";
+		$all_string[] = " b.member_id, member_key, date_format(alert_date,'%a %D %M') as alertDate, surname, givenname ";
 		$all_string[] = "c.config_name ";		
 		
 		$d_var =implode(",", $all_string);
