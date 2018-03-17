@@ -77,6 +77,8 @@ class ClubregModelAlerts extends JModelList
 		if(isset($member_id) && intval($member_id) > 0){
 			$where_[] = sprintf(" a.member_id = %d",$member_id) ;
 		}
+		
+		$where_[] = sprintf(" a.alert_status = 0") ;
 	
 		$data_["alert_id"] = intval($this->getState("com_clubreg.payments.alert_id"));
 		$data_["alert_key"] = trim(strval($this->getState("com_clubreg.payments.alert_key")));

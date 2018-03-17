@@ -199,6 +199,7 @@ class ClubRegModelActivity extends JModelLegacy
 		$where_[] = "date_format(alert_date,'%m-%d') >= date_format(CURDATE(),'%m-%d')";
 		$where_[] = "date_format(alert_date,'%m-%d') <= date_format(DATE_ADD(CURDATE(), INTERVAL 7 DAY), '%m-%d')";
 		$where_[] = "a.alert_interval = 'yearly'";
+		$where_[] = sprintf(" a.alert_status = 0") ;
 	
 		$where_str = "where ".implode(" and ", $where_);	
 		

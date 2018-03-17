@@ -17,11 +17,12 @@ function alertSaveRequestDef(){
 function alertDeleteRequestDef(){	
 	
 	self = this;
-	self.rUrl  =  "index.php";
+	self.rUrl  =  "index.php?option=com_clubreg&task=alert.delete&tmpl=component";
 	self.rMethod  = "post";
 	self.rData  = {}	;	
 	
 	self.rBefore = beforeAction;
+	self.requestcreator = {};
 };
 
 alertSaveRequestDef.prototype.useResults = function(response){	
@@ -33,7 +34,20 @@ alertSaveRequestDef.prototype.useResults = function(response){
 		jQuery('#regdata_'+memberId).fadeIn();		
 	});
 	
+}
+
+alertDeleteRequestDef.prototype.useResults = function(response){
+
+	Joomla.renderMessages({message:response.message});
+	self = this;	
+	self.requestcreator[response.alert_key].fadeOut();
 	
+}
+
+alertDeleteRequestDef.prototype.useFailedResults = function(response){	
+	if(response.error){		
+		Joomla.renderMessages({error:response.error});					
+	}
 }
 
 alertSaveRequestDef.prototype.useFailedResults = function(response){	
@@ -75,14 +89,14 @@ jQuery(document).ready(function(){
 		
 		if(deleteme){		
 			
+			var aObject = jQuery(this).data('alertinfo');	
 			event.preventDefault();			
-			alertDeleteRequestConfig.rData = jQuery(this).data('alertinfo');
+			alertDeleteRequestConfig.rData = aObject;
 			
-			
+			// save the creator object so that it can be used later		
+			alertDeleteRequestConfig.requestcreator[aObject.alert_key] = jQuery(this).closest('div.row-fluid');			
 			ClubRegObject.deleteAlert(alertDeleteRequestConfig);	
 
-			//console.log(jQuery(this).data('alertinfo'));			
-			//jQuery(this).closest('div.row-fluid').fadeOut();
 		}
 	})
 });

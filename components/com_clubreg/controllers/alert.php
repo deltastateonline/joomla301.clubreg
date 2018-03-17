@@ -20,6 +20,7 @@ class ClubregControllerAlert extends JControllerLegacy
 		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
 		parent::__construct($config);
 		$this->registerTask('save', 'savealert');	
+		$this->registerTask('delete', 'deletealert');
 
 		$this->uKeyObject = new ClubRegUniqueKeysHelper(10);	
 
@@ -86,5 +87,50 @@ class ClubregControllerAlert extends JControllerLegacy
 		echo json_encode($return_array);
 		
 		$app->close();
+	}
+	
+	function deletealert(){
+		
+		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		$app    = JFactory::getApplication();
+		$user		= JFactory::getUser();
+		
+		$proceed = FALSE;
+		
+		$data = array();
+		$data['alert_key'] = $this->input->post->get('alert_key', "", 'string');
+		
+		$key_data = new stdClass();
+		$key_data->full_key = $data['alert_key'];
+		$this->uKeyObject->deconstructKey($key_data);
+		
+		$isNew = FALSE;		
+		
+		
+		if($key_data->pk_id > 0 && strlen($key_data->string_key) > 0){
+			$current_model = JModelLegacy::getInstance('alert', 'ClubregModel', array('ignore_request' => true));		
+			
+			
+			$current_model->setState('com_clubreg.alert.alert_key',$key_data->string_key);
+			$current_model->setState('com_clubreg.alert.alert_id',$key_data->pk_id);
+			$n_status = 99;
+			$return_array["proceed"] = $current_model->delete($n_status);
+			$return_array["message"][] = JText::_('COM_CLUBREG_ALERT_DETAILS_DELETED');
+			
+		}else{
+			$return_array["proceed"] = FALSE;
+		}	
+		
+		if($return_array["proceed"]){
+			$return_array["alert_key"] = $data['alert_key'];
+		}else{
+			$return_array["msg"] = JText::_('COM_CLUBREG_NOUPDATE');			
+			$return_array["error"] = array_merge( ClubRegErrorHelper::error_from_model($current_model),[JText::_('COM_CLUBREG_NOUPDATE')]);
+		}
+		
+		echo json_encode($return_array);
+		
+		$app->close();
+		
 	}
 }

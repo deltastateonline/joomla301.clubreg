@@ -97,6 +97,7 @@ class ClubregModelAlert extends JModelForm
 			if($isNew){
 				$created_when = date('Y-m-d H:i:s');
 				$alertTable->created = $created_when;
+				$alertTable->alert_status = '0';
 			}			
 			 if(!$alertTable->store()){
 				$proceed =  FALSE;
@@ -108,5 +109,38 @@ class ClubregModelAlert extends JModelForm
 		}
 		
 		return $proceed;
+	}
+	
+	
+	public function delete($status = 99){
+	
+		$db = JFactory::getDbo();
+		$error_ = 0;
+	
+		$alert_id = $this->getState("com_clubreg.alert.alert_id");
+		$alert_key = $this->getState("com_clubreg.alert.alert_key");	
+		
+		$d_qry = sprintf("update %s set alert_status = %d where alert_id = %d and alert_key = %s limit 1;",
+				$db->quoteName(CLUB_ALERTS_TABLE),intval($status), intval($alert_id),$db->quote($alert_key));
+		
+	
+		$db->setQuery($d_qry);
+	
+		try
+		{
+			$db->query();
+		}
+		catch (RuntimeException $e)
+		{
+			$this->setError($e->getMessage());
+			$error_++;
+		}
+	
+		if($error_ > 0){
+			return FALSE;
+		}else{
+			return TRUE;
+		}
+	
 	}
 }
