@@ -222,8 +222,8 @@ class ClubregControllerRegmembers extends JControllerLegacy
 					$emailer = ClubRegMailHelper::sendDeleteEmail($message);
 				}
 				
-				$return_array["message"][] =  "Member Deleted";		
-				$return_array["message"][] = $emailer;				
+				$return_array["message"][] =  sprintf("%s %s Deleted",$deletedMember['surname'],$deletedMember['givenname']);		
+				$return_array["message"][] = empty($emailer)?"Notification not emailed":"Notification email sent";				
 				
 				$current_model->setState('com_clubreg.regmember.tmpData',NULL);
 				

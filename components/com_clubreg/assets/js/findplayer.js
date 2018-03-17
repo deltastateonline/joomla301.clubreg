@@ -50,7 +50,8 @@ function deleteRequestDef(){
 deleteRequestDef.prototype.useResults = function(response){
 	self = this;
 	Joomla.removeMessages();	
-	self.creator.parents('div.cgroup-div').fadeOut();		
+	self.creator.parents('div.cgroup-div').fadeOut();	
+	Joomla.renderMessages({message:response.message});		
 }
 deleteRequestDef.prototype.useFailedResults = function(response){	
 	self.creator.parents('div.cgroup-div').removeClass("loading1");
