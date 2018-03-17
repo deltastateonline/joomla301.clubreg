@@ -65,3 +65,20 @@ $in_type = "hidden";?>
 			<button type="button" class="btn toggle-alerts-div" data-memberid='<?php echo $this->member_id; ?>'><?php echo JText::_('JCANCEL'); ?></button>				
 		</div>			
 </form>
+<?php  if(count($this->alerts) > 0){ ?>
+	<div class="frame-div span10" style="padding-bottom:10px;">
+		<div class="h21"><?php echo JText::_('Current Alerts'); ?> : </div>
+				<?php 
+					foreach($this->alerts as $alert){	
+						$fkey = $this->uKeyObject->constructKey($alert->alert_id,$alert->alert_key);
+						$rel_string = json_encode(array("Itemid"=>$clubreg_Itemid,"member_key"=>$this->member_key,JSession::getFormToken()=>1,'alert_key'=>$fkey,'action'=>'delete'));
+									?>
+					<div class="row-fluid" style="border-bottom:1px solid #EEEFEF">
+						<div class="pull-left profile-label1"><?php echo $alert->alert_type_name?></div>
+						<div class="pull-left" style='padding:0px 5px;'> | </div>
+						<div class="pull-left profile-value"> <?php echo $alert->alert_date; ?> | <?php echo ucwords($alert->alert_interval); echo !empty($alert->alert_notes)?" | <span> {$alert->alert_notes} </span>":NULL ;?></div>
+						<div class="pull-right"><a class="btn btn-mini" data-alertinfo=<?php echo $rel_string; ?> ><i class="fa fa-trash"></i></a></div>
+					</div>
+				<?php }?>		
+	</div>
+<?php } ?>

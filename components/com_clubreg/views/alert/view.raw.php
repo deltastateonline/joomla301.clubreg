@@ -43,6 +43,8 @@ class ClubRegViewAlert extends ClubRegViews
 			$uKeyObject->deconstructKey($key_data);
 			$this->member_id = $key_data->pk_id;
 			
+			$this->uKeyObject = $uKeyObject;
+			
 			
 			unset($currentModel);
 			$currentModel = JModelLegacy::getInstance('alert', 'ClubregModel', array('ignore_request' => false));
@@ -63,7 +65,15 @@ class ClubRegViewAlert extends ClubRegViews
 			
 			$currentModel->setState('com_clubreg.alert.form_type',$formType); // use the key in the model		
 					
-			$this->alertForm = $currentModel->getForm();			
+			$this->alertForm = $currentModel->getForm();	
+
+			
+		 	unset($currentModel);
+			$currentModel = JModelLegacy::getInstance('alerts', 'ClubregModel', array('ignore_request' => false));
+			$this->alerts = $currentModel->getAlerts(1,$this->member_id ); 
+				
+			
+			
 		}
 		
 		return $proceed;

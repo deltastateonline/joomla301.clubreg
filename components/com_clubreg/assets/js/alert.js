@@ -14,6 +14,16 @@ function alertSaveRequestDef(){
 	self.rBefore = beforeAction;
 };
 
+function alertDeleteRequestDef(){	
+	
+	self = this;
+	self.rUrl  =  "index.php";
+	self.rMethod  = "post";
+	self.rData  = {}	;	
+	
+	self.rBefore = beforeAction;
+};
+
 alertSaveRequestDef.prototype.useResults = function(response){	
 
 	Joomla.renderMessages({message:response.message});	
@@ -37,7 +47,15 @@ ClubregObjectDefinition.prototype.saveAlert= function(requestConfig){
 	self.loadAjaxRequest(requestConfig);  
 }
 
+ClubregObjectDefinition.prototype.deleteAlert= function(requestConfig){	
+	self = this;	
+	self.loadAjaxRequest(requestConfig);  
+}
+
+
+
 var alertSaveRequestConfig = new alertSaveRequestDef() ; 
+var alertDeleteRequestConfig = new alertDeleteRequestDef() ; 
 
 jQuery(document).ready(function(){
 	
@@ -49,4 +67,22 @@ jQuery(document).ready(function(){
 		ClubRegObject.saveAlert(alertSaveRequestConfig);		
 		
 	});
+	
+	
+	jQuery(document).on('click',"a[data-alertinfo]",function(event){	
+		
+		var deleteme = confirm("Are you sure you want to delete this item?");
+		
+		if(deleteme){		
+			
+			event.preventDefault();			
+			alertDeleteRequestConfig.rData = jQuery(this).data('alertinfo');
+			
+			
+			ClubRegObject.deleteAlert(alertDeleteRequestConfig);	
+
+			//console.log(jQuery(this).data('alertinfo'));			
+			//jQuery(this).closest('div.row-fluid').fadeOut();
+		}
+	})
 });
