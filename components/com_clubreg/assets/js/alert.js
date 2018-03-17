@@ -66,8 +66,6 @@ ClubregObjectDefinition.prototype.deleteAlert= function(requestConfig){
 	self.loadAjaxRequest(requestConfig);  
 }
 
-
-
 var alertSaveRequestConfig = new alertSaveRequestDef() ; 
 var alertDeleteRequestConfig = new alertDeleteRequestDef() ; 
 

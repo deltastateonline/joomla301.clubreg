@@ -204,7 +204,7 @@ class ClubRegModelActivity extends JModelLegacy
 		$where_str = "where ".implode(" and ", $where_);	
 		
 		$all_string[] = " b.member_id, member_key, date_format(a.alert_date,'%a %D %M') as alertDate, b.surname, b.givenname ";
-		$all_string[] = "c.config_name, 1 as isAlert  ";		
+		$all_string[] = "c.config_name, 1 as isAlert, alert_notes as notes";		
 		
 		$d_var =implode(",", $all_string);
 		$query->select($d_var);

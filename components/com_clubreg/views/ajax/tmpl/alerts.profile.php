@@ -34,7 +34,7 @@ if(count($this->alerts)> 0){ $i=1; ?>
 		
 			<div class="thumbnail">			
 				<?php echo ($profile_pix)?$profile_pix:$defaultImg; ?>
-				<?php if(!empty($a_bday->isAlert)){ ?><div class="after">Delete Alert</div>	<?php } ?>								
+				<?php if(!empty($a_bday->isAlert)){ ?><div class="after"><?php echo !empty($a_bday->notes)?$a_bday->notes:"No Notes"; ?></div>	<?php } ?>								
 			</div>					
 			<div class="profile-text">
 				<span><a href="javascript:void(0);" onclick="Joomla.sbutton('<?php echo $fkey;?>')"><?php echo ucwords(strtolower($a_bday->givenname." ".$a_bday->surname)) ;?></a></span><br />

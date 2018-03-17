@@ -65,14 +65,11 @@ class ClubRegViewAlert extends ClubRegViews
 			
 			$currentModel->setState('com_clubreg.alert.form_type',$formType); // use the key in the model		
 					
-			$this->alertForm = $currentModel->getForm();	
-
+			$this->alertForm = $currentModel->getForm();
 			
 		 	unset($currentModel);
 			$currentModel = JModelLegacy::getInstance('alerts', 'ClubregModel', array('ignore_request' => false));
 			$this->alerts = $currentModel->getAlerts(1,$this->member_id ); 
-				
-			
 			
 		}
 		

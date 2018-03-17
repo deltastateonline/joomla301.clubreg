@@ -104,13 +104,11 @@ class ClubregControllerAlert extends JControllerLegacy
 		$key_data->full_key = $data['alert_key'];
 		$this->uKeyObject->deconstructKey($key_data);
 		
-		$isNew = FALSE;		
+		$isNew = FALSE;	
 		
-		
-		if($key_data->pk_id > 0 && strlen($key_data->string_key) > 0){
+		if($key_data->pk_id > 0 && strlen($key_data->string_key) > 0 && LIVE_SITE){
 			$current_model = JModelLegacy::getInstance('alert', 'ClubregModel', array('ignore_request' => true));		
-			
-			
+						
 			$current_model->setState('com_clubreg.alert.alert_key',$key_data->string_key);
 			$current_model->setState('com_clubreg.alert.alert_id',$key_data->pk_id);
 			$n_status = 99;
@@ -128,9 +126,7 @@ class ClubregControllerAlert extends JControllerLegacy
 			$return_array["error"] = array_merge( ClubRegErrorHelper::error_from_model($current_model),[JText::_('COM_CLUBREG_NOUPDATE')]);
 		}
 		
-		echo json_encode($return_array);
-		
-		$app->close();
-		
+		echo json_encode($return_array);		
+		$app->close();		
 	}
 }
