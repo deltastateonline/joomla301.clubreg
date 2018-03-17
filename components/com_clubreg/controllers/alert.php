@@ -105,9 +105,9 @@ class ClubregControllerAlert extends JControllerLegacy
 		$this->uKeyObject->deconstructKey($key_data);
 		
 		$isNew = FALSE;	
-		
+		$current_model = JModelLegacy::getInstance('alert', 'ClubregModel', array('ignore_request' => true));
 		if($key_data->pk_id > 0 && strlen($key_data->string_key) > 0 && LIVE_SITE){
-			$current_model = JModelLegacy::getInstance('alert', 'ClubregModel', array('ignore_request' => true));		
+				
 						
 			$current_model->setState('com_clubreg.alert.alert_key',$key_data->string_key);
 			$current_model->setState('com_clubreg.alert.alert_id',$key_data->pk_id);
