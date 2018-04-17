@@ -56,10 +56,11 @@ class ClubRegRenderTablesStatsReportingHelper extends ClubRegRenderTablesHelper
 					<th width="100"></th>					
 					<th width="100" ></th>					
 					<?php 
+					$thCount = 3;
 						$startTime = strtotime($this->stats_date); 
 						$endTime = strtotime($this->end_date); $format = "%".str_replace("-", "-%", JText::_('DATE_FORMAT_LC4'));
 						$date_array = array();
-						for ( $i = $startTime; $i <= $endTime; $i = $i + 86400 ) { 
+						for ( $i = $startTime; $i <= $endTime; $i = $i + 86400 ) { $thCount++;
 							$a_date = strftime($format, $i);
 							$date_array[] = $a_date;							
 							$a_date_obj = new JDate($i); ?>
@@ -98,11 +99,16 @@ class ClubRegRenderTablesStatsReportingHelper extends ClubRegRenderTablesHelper
 			  		<?php } ?>			  				  				  	    	
 			    </tr>		 	  
 			  <?php $id++; } ?>
-			  </tbody>	 
-			  </table>
+			 	  
 			 <?php } else {?>			  			  		
-			  		<div class="alert alert-error"><h3>No Results</h3></div>			  
-			  <?php } ?>		  	
+			 		<tr>
+			 			<td colspan="<?php echo $thCount;?>">
+			  		<div class="alert alert-error"><h3>No Results</h3></div>
+			  		</td>
+			  		</tr>		  
+			  <?php } ?>
+			   </tbody>	 
+			  </table>			  	
 		<?php
 	}	
 	
