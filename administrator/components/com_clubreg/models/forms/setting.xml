@@ -104,7 +104,8 @@
 				<option value="">Field Type</option>	
 				<option value="checkboxes">Checkboxes</option>			
 				<option value="date">Date Control</option>
-				<option value="list">Drop Down List</option>			
+				<option value="list">Drop Down List</option>	
+				<option value="mlist">Multiple Select List</option>			
 				<option value="email">Email</option>
 				<option value="monthyear">Month Year</option>
 				<option value="textarea">Text Area</option>

@@ -116,6 +116,11 @@ class ClubregModelOther extends JModelForm
 				if(preg_match($monthyear_keys, $a_key)){ // ignore month year
 					continue ;
 				}else{
+					// it is in a array, so simple json encode to string and save.
+					if(is_array($a_data)){
+						$a_data = json_encode($a_data);
+					}					
+					
 					$d_qry = sprintf("insert into %s set `member_id` = %d ,`contact_detail` = %s ,`contact_type`='ED', `contact_value` = %s on duplicate key update
 							contact_value = values(contact_value);
 							",CLUB_CONTACT_TABLE,$member_id,$db->Quote($a_key),$db->Quote($a_data));	

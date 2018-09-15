@@ -44,6 +44,7 @@ class ClubRegControlsHelper extends JObject
 		$controlId = sprintf("control_%d",$this->configData->config_id);
 		$this->fieldXml->addAttribute('id',$controlId );
 		
+		
 		if(isset($this->params["control_class"]) && strlen($this->params["control_class"])> 3){
 			$this->fieldXml->addAttribute('class',trim($this->params["control_class"]) );			
 		}
@@ -134,6 +135,7 @@ class ClubRegControlsHelper extends JObject
 		JFormHelper::loadFieldClass("calendar");
 		return  new JFormFieldCalendar();	
 	}
+	
 	private function renderList(){
 		JFormHelper::loadFieldClass("list");
 		
@@ -150,6 +152,28 @@ class ClubRegControlsHelper extends JObject
 		
 		return  new JFormFieldList();
 	}
+	
+	
+	private function renderMlist(){
+		JFormHelper::loadFieldClass("list");
+	
+		$possibleOptions = explode("\r\n",trim($this->configData->config_text));		
+		
+		$this->fieldXml->addAttribute('multiple',TRUE );
+	
+		$optionXml = $this->fieldXml->addChild('option',trim('-Select '.$this->configData->config_name.'-')) ;
+		$optionXml->addAttribute('value','none' );
+		foreach($possibleOptions as $anOption){
+				
+			$optionXml = $this->fieldXml->addChild('option') ;
+			$optionXml->addAttribute('value',trim($anOption) );
+				
+		}
+	
+		return  new JFormFieldList();
+	}
+	
+	
 	private function renderEmail(){
 		JFormHelper::loadFieldClass("email");
 		return  new JFormFieldEmail();
@@ -171,6 +195,4 @@ class ClubRegControlsHelper extends JObject
 	private function renderFile(){
 	
 	}
-	
-	
 }
