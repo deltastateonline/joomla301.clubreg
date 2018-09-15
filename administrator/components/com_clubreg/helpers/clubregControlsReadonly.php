@@ -87,7 +87,7 @@ class ClubRegControlsReadonlyHelper extends JObject
 	 * the control value has been json encoded and should be decoded
 	 * @return string
 	 */
-	private function renderMlist(){		
-		return   implode("<br />",json_decode($this->controlValue));	
+	private function renderMlist(){			
+		 return  (!empty($this->controlValue))? implode("<br />",json_decode($this->controlValue)):"";	
 	}
 }
