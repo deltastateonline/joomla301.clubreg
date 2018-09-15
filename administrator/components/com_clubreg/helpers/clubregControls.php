@@ -53,10 +53,14 @@ class ClubRegControlsHelper extends JObject
 			$this->defaultValue = $this->params["default_value"];		
 		}else{
 			$this->defaultValue = "";
-		}
+		}		
 		
 		$this->controlValue = isset($this->memberDetails)?$this->memberDetails->member_value:null;
 		
+		
+		if($this->control_type == "mlist" && !empty($this->controlValue)){
+			$this->controlValue = json_decode($this->controlValue);
+		}
 		
 	}		
 	
