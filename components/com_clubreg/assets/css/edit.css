@@ -20,3 +20,18 @@ div.tab-divs{
     border-color:#DDEDED;
     padding:1px;
 }
+.section-title{
+	
+	font-size:1.4em;	
+	color: #1e8fc6;	
+	padding-bottom:5px;	
+	padding-top:5px;
+	
+	margin-bottom:5px;
+	text-align:center;
+	
+	border-bottom:1px solid #3E3E3E;
+	background-color:#DDEDED;;
+	
+	
+}

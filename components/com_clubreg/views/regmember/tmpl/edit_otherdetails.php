@@ -13,14 +13,22 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 $current_sets = "extradetails";
 $playertype = $this->regmemberForm->getField("playertype")->value;
 $fieldSets = $this->regmemberForm->getFieldsets();
+
+$numOfCols = 2;
+$rowCount = 0;
+$bootstrapColWidth = 12 / $numOfCols;
+$colClass = "span5";
+
+$rowClass = "row-fluid";
+
 if(isset($fieldSets[$current_sets]->showonly) && preg_match("/$playertype/", $fieldSets[$current_sets]->showonly) ){
 		
-		ClubRegHelper::writeFieldText($fieldSets[$current_sets]->description);
-		?><div style="padding-left:10px;">
+		ClubRegHelper::writeFieldTextCenter($fieldSets[$current_sets]->description);?>
+		<div class="<?php echo $rowClass; ?>">
 		<?php $extraDetails = $this->otherValues;
 		foreach($this->extradetails as $d_key => $d_value){
 		$mtyr = "/monthyear/"?>
-				<div class="control-group">						
+				<div class="control-group <?php echo $colClass; ?>">						
 					<div class="control-label">
 						<label><?php echo $d_value->config_name; ?></label>
 					</div>						
@@ -41,9 +49,9 @@ if(isset($fieldSets[$current_sets]->showonly) && preg_match("/$playertype/", $fi
 						?>
 					</div>
 				</div>
-		<?php 						
+		<?php
+				$rowCount++; if($rowCount % $numOfCols == 0) echo '</div><div class="'.$rowClass.'">';		
 			}	
 		?>
-
 	</div>
 <?php  } ?>

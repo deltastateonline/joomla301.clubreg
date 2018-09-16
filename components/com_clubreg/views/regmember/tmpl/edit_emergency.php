@@ -13,19 +13,28 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 $current_sets = "emergency";
 $playertype = $this->regmemberForm->getField("playertype")->value;
 $fieldSets = $this->regmemberForm->getFieldsets();
-if(isset($fieldSets[$current_sets]->showonly) && preg_match("/$playertype/", $fieldSets[$current_sets]->showonly) ){
-		
-		ClubRegHelper::writeFieldText($fieldSets[$current_sets]->description);
-		?><div style="padding-left:10px;"><?php
-	 foreach($this->emergencyForm->getFieldset('nextofkin') as $field): ?>
-		<div class="control-group "> 				
-				<div class="control-label">
-					<?php echo $field->label; ?>
-				</div>				
-				<div class="controls">
-					<?php echo str_replace("jform[em_", "jform[emergency][em_", $field->input); ?>
-				</div>
-		</div>
-	<?php endforeach; ?>
+
+$numOfCols = 2;
+$rowCount = 0;
+$bootstrapColWidth = 12 / $numOfCols;
+$colClass = "span5";
+
+$rowClass = "row-fluid";
+
+
+if(isset($fieldSets[$current_sets]->showonly) && preg_match("/$playertype/", $fieldSets[$current_sets]->showonly) ){		
+		ClubRegHelper::writeFieldTextCenter($fieldSets[$current_sets]->description);?>
+	<div class="<?php echo $rowClass; ?>"><?php
+		 foreach($this->emergencyForm->getFieldset('nextofkin') as $field): ?>
+			<div class="control-group <?php echo $colClass; ?>"> 				
+					<div class="control-label">
+						<?php echo $field->label; ?>
+					</div>				
+					<div class="controls">
+						<?php echo str_replace("jform[em_", "jform[emergency][em_", $field->input); ?>
+					</div>
+			</div>
+		<?php $rowCount++; if($rowCount % $numOfCols == 0) echo '</div><div class="'.$rowClass.'">'; 
+		endforeach; ?>
 	</div>
 <?php } ?>

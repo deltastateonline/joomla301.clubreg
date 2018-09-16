@@ -38,10 +38,11 @@ $back_url = $session->get("com_clubreg.back_url");// save the back url
 </script>
 <div class="clugreg-div">
 	<form action="<?php echo JRoute::_($this->formbaction)?> " method="post" name="adminForm_" id="edit-form" class="form-validate">	
+		
 		<div class="row-fluid <?php echo $div_class?>">	
 			<div class="row-fluid">
 			<?php			
-				$fieldSets = $this->regmemberForm->getFieldsets();	
+				$this->fieldSets = $this->regmemberForm->getFieldsets();	
 				$current_sets = "playerDetails";				
 				ClubRegHelper::writeFieldText($fieldSets[$current_sets]->description,'first-fikkeld-div');		
 				$emergencyAlreadyShown = TRUE;	
@@ -56,77 +57,16 @@ $back_url = $session->get("com_clubreg.back_url");// save the back url
 						</div>
 					</div>				
 			<?php endforeach; ?>
-			</div>
-			<hr class='profile-hr'/>			
-			<div class="row-fluid">
-			<?php $current_sets = "contactDetails"; 
-				if(isset($fieldSets[$current_sets]->showonly) && preg_match("/$playertype/", $fieldSets[$current_sets]->showonly) ){ ?>
-				<div class="span5">					
-			<?php ClubRegHelper::writeFieldText($fieldSets[$current_sets]->description);?>
-			<div style="padding-left:10px;"><?php 
-				foreach($this->regmemberForm->getFieldset($current_sets) as $field): ?>
-					<div class="control-group"> 				
-							<div class="control-label">
-								<?php echo $field->label; ?>
-							</div>				
-							<div class="controls">
-								<?php echo $field->input; ?>
-							</div>
-					</div>
-				<?php endforeach; ?>
-			</div>
-			<div><?php if($this->loademergecy){echo $this->loadTemplate("emergency");} ?></div>
-			<div><?php if($this->loademergecy){echo $this->loadTemplate("otherdetails");} ?></div>
-			</div>	
-			
-			<?php $emergencyAlreadyShown = FALSE; } 
-			
-			$current_sets = "divisionDetails";
-			if(isset($fieldSets[$current_sets]->showonly) && preg_match("/$playertype/", $fieldSets[$current_sets]->showonly) ){			
-			?>		
-			<div class="span5">
-			<?php ClubRegHelper::writeFieldText($fieldSets[$current_sets]->description); ?>
-			<div style="padding-left:10px;"><?php
-			foreach($this->regmemberForm->getFieldset($current_sets) as $field): ?>
-				<div class="control-group"> 				
-						<div class="control-label">
-							<?php echo $field->label; ?>
-						</div>				
-						<div class="controls">
-							<?php echo $field->input; ?>
-						</div>
-				</div>
-			<?php endforeach; ?>		
-						
+			</div>			
+			<?php echo $this->loadTemplate($playertype); ?>	
+			<?php if($this->loademergecy){?>	
+			<div style="padding-left:10px;">			
+				<?php echo $this->loadTemplate("emergency"); ?>				
+				<?php echo $this->loadTemplate("otherdetails"); ?>
 			</div><?php 
 			}
-			
-			if($playertype == "junior"){
-				?></div><div class="span5"><?php 
-			}			 
-			
-			$current_sets = "personalDetails";
-			if(isset($fieldSets[$current_sets]->showonly) && preg_match("/$playertype/", $fieldSets[$current_sets]->showonly) ){
-			
-				ClubRegHelper::writeFieldText($fieldSets[$current_sets]->description);
-			?><div style="padding-left:10px;"><?php
-				 foreach($this->regmemberForm->getFieldset($current_sets) as $field): ?>
-					<div class="control-group "> 				
-							<div class="control-label">
-								<?php echo $field->label; ?>
-							</div>				
-							<div class="controls">
-								<?php echo $field->input; ?>
-							</div>
-					</div>
-				<?php endforeach; ?>
-				</div>
-			<div><?php if($emergencyAlreadyShown){ if($this->loademergecy){ echo $this->loadTemplate("emergency");} }?></div>			
-			<div><?php if($emergencyAlreadyShown){ if($this->loademergecy){echo $this->loadTemplate("otherdetails");} } ?> </div>
-			</div>
-		<?php } ?>	
-			
-		</div>		
+			?>									
+		</div>			
 		<hr  class='profile-hr'/>	
 		<?php 
 			foreach($this->regmemberForm->getFieldset('hiddenControls') as $field){
@@ -155,8 +95,9 @@ $back_url = $session->get("com_clubreg.back_url");// save the back url
 				<button type="button" class="btn" id="toggle-children-div"><?php echo JText::_('JCANCEL'); ?></button>	
 			<?php } ?>
 		</div>
-		</div>
+		
 	</form>
+
 	<?php if($this->tmpl == "html"){?>
 	<form action="<?php echo JRoute::_($this->formbaction)?>" method="post" name="adminForm_back" id="adminForm_back">		
 		<input type="<?php echo $in_type; ?>" name="layout" value="viewonly" />
