@@ -22,16 +22,17 @@ div.tab-divs{
 }
 .section-title{
 	
-	font-size:1.4em;	
-	color: #1e8fc6;	
+	font-size:1.3em;
+	font-weight:bold;	
+	
 	padding-bottom:5px;	
 	padding-top:5px;
 	
 	margin-bottom:5px;
 	text-align:center;
 	
-	border-bottom:1px solid #3E3E3E;
-	background-color:#DDEDED;;
+	border-bottom:1px solid #DDDDDD;
+	background-color:#cce6f3;;
 	
 	
 }

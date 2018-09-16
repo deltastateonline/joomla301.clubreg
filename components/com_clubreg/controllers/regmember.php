@@ -111,9 +111,11 @@ class ClubregControllerRegmember extends JControllerLegacy
 						
 						$current_ed_model = JModelLegacy::getInstance('other', 'ClubregModel', array('ignore_request' => true));
 						$current_ed_model->setState('com_clubreg.other.member_id',$current_model->get("member_id"));
+						
 						 $proceedDetails = $current_ed_model->save($extraDetails,$monthyears);
 
 						if($proceedDetails){
+							
 						}else{
 							$return_array["msg"][] =  $current_ed_model->getError();
 						}

@@ -168,6 +168,7 @@ class ClubRegViewregmember extends JViewLegacy
 			
 			$params = JComponentHelper::getParams('com_clubreg');
 			$this->loademergecy = $params->get("emergency");
+			$this->loadotherdetails = $params->get("otherdetails");
 			
 			if($this->loademergecy){
 				unset($currentModel);
@@ -176,17 +177,28 @@ class ClubRegViewregmember extends JViewLegacy
 				$currentModel->setState('com_clubreg.emergency.member_key',$key_data->full_key); // use the key in the model
 				
 				$this->emergencyForm = $currentModel->getForm();				
-				
+			}	
+
+			if($this->loadotherdetails){			
+				// load the other details here as well
+				// get the model and then use it
+				unset($currentModel);
+				$currentModel = JModelLegacy::getInstance('other', 'ClubregModel', array('ignore_request' => false));
+				$currentModel->setState('com_clubreg.other.member_id',$key_data->pk_id); // use the key in the model
+				$currentModel->setState('com_clubreg.other.member_key',$key_data->full_key); // use the key in the model
+			
 				require_once CLUBREG_ADMINPATH.'/helpers/clubregcontrols.php';
 				JForm::addFieldPath(CLUBREG_ADMINPATH.'/models/fields');
 				$this->extradetails = ClubRegControlsHelper::configOptions(CLUB_PLAYER_DETAILS); // controls
-				
+			
 				$this->otherForm = $currentModel->getForm();
-				$this->otherValues = $currentModel->get('otherValues');				
+				$this->otherValues = $currentModel->get('otherValues');
+			
 			}
 			
 			
-		
+			
+			
 		}
 		
 		return $proceed;

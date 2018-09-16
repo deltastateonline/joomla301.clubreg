@@ -60,12 +60,11 @@ $back_url = $session->get("com_clubreg.back_url");// save the back url
 			</div>			
 			<?php echo $this->loadTemplate($playertype); ?>	
 			<?php if($this->loademergecy){?>	
-			<div style="padding-left:10px;">			
-				<?php echo $this->loadTemplate("emergency"); ?>				
-				<?php echo $this->loadTemplate("otherdetails"); ?>
-			</div><?php 
-			}
-			?>									
+				<div style="padding-left:10px;"><?php echo $this->loadTemplate("emergency"); ?></div>
+			<?php } ?>				
+			<?php if($this->loadotherdetails){?>	
+				<div style="padding-left:10px;"><?php echo $this->loadTemplate("otherdetails"); ?></div>
+			<?php } ?>						
 		</div>			
 		<hr  class='profile-hr'/>	
 		<?php 
