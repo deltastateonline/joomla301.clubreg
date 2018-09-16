@@ -50,6 +50,10 @@ class ClubregControllerRegmember extends JControllerLegacy
 			$data = $this->input->post->get('jform', array(), 'array');
 			$key_data = new stdClass();
 			
+			// try saving the other details seperately
+			$extraDetails = $this->input->post->get('extraDetails', array(), 'array');
+			$monthyears = $this->input->post->get('monthyear', array(), 'array');
+			
 			$key_data->full_key = $this->input->post->get('pk', NULL, 'string');
 			$this->uKeyObject->deconstructKey($key_data);			
 			

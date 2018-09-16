@@ -76,6 +76,7 @@ $back_url = $session->get("com_clubreg.back_url");// save the back url
 				<?php endforeach; ?>
 			</div>
 			<div><?php if($this->loademergecy){echo $this->loadTemplate("emergency");} ?></div>
+			<div><?php if($this->loademergecy){echo $this->loadTemplate("otherdetails");} ?></div>
 			</div>	
 			
 			<?php $emergencyAlreadyShown = FALSE; } 
@@ -120,7 +121,8 @@ $back_url = $session->get("com_clubreg.back_url");// save the back url
 					</div>
 				<?php endforeach; ?>
 				</div>
-			<div><?php if($emergencyAlreadyShown){ if($this->loademergecy){ echo $this->loadTemplate("emergency");} }?></div>
+			<div><?php if($emergencyAlreadyShown){ if($this->loademergecy){ echo $this->loadTemplate("emergency");} }?></div>			
+			<div><?php if($emergencyAlreadyShown){ if($this->loademergecy){echo $this->loadTemplate("otherdetails");} } ?> </div>
 			</div>
 		<?php } ?>	
 			

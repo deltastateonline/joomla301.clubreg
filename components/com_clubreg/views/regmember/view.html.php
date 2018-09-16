@@ -175,7 +175,14 @@ class ClubRegViewregmember extends JViewLegacy
 				$currentModel->setState('com_clubreg.emergency.member_id',$key_data->pk_id); // use the key in the model
 				$currentModel->setState('com_clubreg.emergency.member_key',$key_data->full_key); // use the key in the model
 				
-				$this->emergencyForm = $currentModel->getForm();
+				$this->emergencyForm = $currentModel->getForm();				
+				
+				require_once CLUBREG_ADMINPATH.'/helpers/clubregcontrols.php';
+				JForm::addFieldPath(CLUBREG_ADMINPATH.'/models/fields');
+				$this->extradetails = ClubRegControlsHelper::configOptions(CLUB_PLAYER_DETAILS); // controls
+				
+				$this->otherForm = $currentModel->getForm();
+				$this->otherValues = $currentModel->get('otherValues');				
 			}
 			
 			

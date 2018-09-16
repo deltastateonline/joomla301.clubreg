@@ -70,6 +70,11 @@
 						
 		</fieldset>	
 	</fields>
+		<fields name="extradetails">
+		<fieldset name="extradetails" description="COM_CLUBREG_OTHERDETAILS" showonly="junior-senior">				
+						
+		</fieldset>	
+	</fields>
 	
 		
 	<fieldset name="hiddenControls"	>			
