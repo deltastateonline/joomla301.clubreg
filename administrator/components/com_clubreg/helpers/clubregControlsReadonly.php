@@ -80,7 +80,14 @@ class ClubRegControlsReadonlyHelper extends JObject
 		foreach($possibleOptions as $anOption){			
 			$options[trim($anOption)] = ucwords(trim($anOption));				
 		}
-		return  @$options[trim($this->controlValue)];
-		
+		return  @$options[trim($this->controlValue)];		
+	}
+	
+	/**
+	 * the control value has been json encoded and should be decoded
+	 * @return string
+	 */
+	private function renderMlist(){			
+		 return  (!empty($this->controlValue))? implode("<br />",json_decode($this->controlValue)):"";	
 	}
 }

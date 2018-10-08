@@ -416,6 +416,10 @@ class ClubRegHelper
 		<div class="fieldSetDiv <?php echo $x_class?>"><?php echo JText::_($fieldText); ?></div>
 	<?php 		
 	}
+	static function writeFieldTextCenter($fieldText,$x_class=''){?>
+		<div class="section-title <?php echo $x_class?>" ><?php echo JText::_($fieldText); ?></div>
+	<?php 		
+	}
 	
 }
 require_once("clubreg.groups.php");

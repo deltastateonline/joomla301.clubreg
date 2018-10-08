@@ -48,7 +48,8 @@ class ClubregControllerRegmember extends JControllerLegacy
 			$return_array["canSave"]  = $isNew = FALSE;
 			
 			$data = $this->input->post->get('jform', array(), 'array');
-			$key_data = new stdClass();
+			$key_data = new stdClass();	
+		
 			
 			$key_data->full_key = $this->input->post->get('pk', NULL, 'string');
 			$this->uKeyObject->deconstructKey($key_data);			
@@ -99,6 +100,25 @@ class ClubregControllerRegmember extends JControllerLegacy
 						$current__em_model = JModelLegacy::getInstance('emergency', 'ClubregModel', array('ignore_request' => true));
 						$current__em_model->setState('com_clubreg.emergency.member_id',$current_model->get("member_id") );
 						$proceed = $current__em_model->save($emergencyData);
+					}
+					
+					
+					$extraDetails = $this->input->post->get('extraDetails', array(), 'array');
+					$monthyears = $this->input->post->get('monthyear', array(), 'array');
+					if($extraDetails){
+						unset($current_ed_model);
+						
+						
+						$current_ed_model = JModelLegacy::getInstance('other', 'ClubregModel', array('ignore_request' => true));
+						$current_ed_model->setState('com_clubreg.other.member_id',$current_model->get("member_id"));
+						
+						 $proceedDetails = $current_ed_model->save($extraDetails,$monthyears);
+
+						if($proceedDetails){
+							
+						}else{
+							$return_array["msg"][] =  $current_ed_model->getError();
+						}
 					}
 			
 				}else{

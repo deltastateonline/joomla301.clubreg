@@ -34,7 +34,7 @@ class ClubRegFiltersHelper extends JObject
 		$filter_heading["gpostcode"] = array("label"=>JText::_('COM_CLUBREG_POSTCODE'),"control"=>"text","other"=>"class='inputbox input-mini'","filter_col"=>"d.`postcode`");
 	
 		$filter_heading["emailaddress"] = array("label"=>JText::_('JGLOBAL_EMAIL'),"control"=>"text","other"=>"class='inputbox input-large'");
-		$filter_heading["memberlevel"] = array("label"=>PLAYER." Level","control"=>"select.genericlist","other"=>"class='inputbox input-large'");
+		$filter_heading["memberlevel"] = array("label"=>JText::_('COM_CLUBREG_SKILLLEVEL_LABEL'),"control"=>"select.genericlist","other"=>"class='inputbox input-large'");
 	
 		$filter_heading["playertype"] = array("label"=>JText::_('COM_CLUBREG_PT'),"control"=>"select.genericlist","other"=>"class='inputbox input-large'");
 			

@@ -121,6 +121,19 @@
 			<option
 				value="0">JNO</option>
 		</field>
+		
+		<field
+				name="otherdetails"
+				type="radio"
+			class="btn-group btn-group-yesno"
+			default="0"
+			label="COM_CLUBREG_OTHERDETAILSINPROFILE_LABEL"
+			description="COM_CLUBREG_OTHERDETAILSINPROFILE_DESC">
+			<option
+				value="1">JYES</option>
+			<option
+				value="0">JNO</option>
+		</field>
 
 	</fieldset>
 	<!--
