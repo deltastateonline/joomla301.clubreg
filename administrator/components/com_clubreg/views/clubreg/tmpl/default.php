@@ -47,7 +47,8 @@ line-height:24px;
 			<div class="row-fluid">ClubReg allows the club to take expression of interest from the public regarding joining the various groups or divisions within the club. These EOIs can then be converted into registered members or discarded.</div>
 			<br />
 			<?php 
-			echo JHtml::_('bootstrap.startAccordion', 'slide-updates', array('active' => 'version-3102'));	
+			echo JHtml::_('bootstrap.startAccordion', 'slide-updates', array('active' => 'version-3103'));	
+				echo $this->loadTemplate('3103');
 				echo $this->loadTemplate('3102');
 				echo $this->loadTemplate('3101');
 				echo $this->loadTemplate('3020');

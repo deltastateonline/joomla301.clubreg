@@ -60,6 +60,8 @@ DROP TABLE IF EXISTS `#__clubreg_templates`;
 DROP TABLE IF EXISTS `#__clubreg_saved_comms_groups`;
 
 DROP TABLE IF EXISTS `#__clubreg_contactlist`;
+
+DROP TABLE IF EXISTS `#__clubreg_alerts`;
 -- --------------------------------------------------------
 
 --
@@ -612,3 +614,33 @@ ALTER TABLE `#__clubreg_contactlist`
 --
 ALTER TABLE `#__clubreg_contactlist`
 MODIFY `contactlist_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
+
+
+-- --------------------------------------------------------
+-- Host:                         localhost
+-- Server version:               10.1.25-MariaDB - mariadb.org binary distribution
+-- Server OS:                    Win32
+-- HeidiSQL Version:             9.1.0.4867
+-- --------------------------------------------------------
+
+-- Dumping structure for table joomla_301.qjogz_clubreg_alerts
+CREATE TABLE IF NOT EXISTS `#__clubreg_alerts` (
+  `alert_id` int(11) NOT NULL AUTO_INCREMENT,
+  `alert_key` varchar(30) NOT NULL,
+  `member_id` int(11) DEFAULT NULL,
+  `alert_type` varchar(30) DEFAULT NULL,
+  `alert_date` date DEFAULT NULL,
+  `alert_interval` varchar(50) DEFAULT NULL,
+  `alert_notes` varchar(512) DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`alert_id`),
+  KEY `member_id` (`member_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+REPLACE INTO `#__clubreg_configs` (`config_name`, `config_short`, `config_text`, `config_type`, `which_config`, `config_comments`, `createdby`, `created`, `ordering`, `published`, `params`) VALUES ('ClubReg Alert', 'clubreg_alerts', '', '', 'TOPMOST', NULL, 7, NOW(), 33, 1, '{"assign_to":"both"}');
+REPLACE INTO `#__clubreg_configs` (`config_name`, `config_short`, `config_text`, `config_type`, `which_config`, `config_comments`, `createdby`, `created`, `ordering`, `published`, `params`) VALUES ('Birthday', 'birthday', '', '', 'clubreg_alerts', NULL, 7, NOW(), 1, 1, '{"assign_to":"both"}');
+REPLACE INTO `#__clubreg_configs` (`config_name`, `config_short`, `config_text`, `config_type`, `which_config`, `config_comments`, `createdby`, `created`, `ordering`, `published`, `params`) VALUES ('Marriage', 'marriage', '', '', 'clubreg_alerts', NULL, 7, NOW(), 2, 1, '{"assign_to":"both"}');
+REPLACE INTO `#__clubreg_configs` (`config_name`, `config_short`, `config_text`, `config_type`, `which_config`, `config_comments`, `createdby`, `created`, `ordering`, `published`, `params`) VALUES ('Remembrance', 'remembrance', '', '', 'clubreg_alerts', NULL, 7, NOW(), 3, 1, '{"assign_to":"both"}');
+REPLACE INTO `#__clubreg_configs` (`config_name`, `config_short`, `config_text`, `config_type`, `which_config`, `config_comments`, `createdby`, `created`, `ordering`, `published`, `params`) VALUES ('Others', 'others', '', '', 'clubreg_alerts', NULL, 7, NOW(), 4, 1, '{"assign_to":"both"}');
+
