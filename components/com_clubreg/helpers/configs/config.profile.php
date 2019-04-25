@@ -148,6 +148,8 @@ class ClubRegProfileConfig extends JObject
 		$tabs["attachments"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_ATTACHMENTS'),'img'=>array('fname'=>'attachments.png','attr'=>$attr), 'applies'=>array("senior","junior"));
 		$tabs["property"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_PROPERTYS'),'img'=>array('fname'=>'property.png','attr'=>$attr) , 'applies'=>array("senior","junior"));
 			
+		$tabs["relationships"] = array("label"=>JText::_('COM_CLUBREG_PROFILE_RELATIONS'),'img'=>array('fname'=>'relationships.png','attr'=>$attr) , 'applies'=>array("senior","junior"));
+		
 		return $tabs;		
 	}
 	private function configuredTabs($player_type = NULL, $all_tabs){

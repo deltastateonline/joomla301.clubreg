@@ -20,6 +20,9 @@ div.tab-divs{
     border-color:#DDEDED;
     padding:1px;
 }
+.each-control-set{
+	padding-left:25px;
+}
 .section-title{	
 	font-size:1.3em;
 	font-weight:bold;	

@@ -391,5 +391,57 @@ class ClubregModelRegmembers extends JModelList
 		unset($all_recipients);		
 		return $final_recipients;		
 	}
+		public function getAllPlayers(){
+	
+		$db		= $this->getDbo();
+		$query	= $db->getQuery(true);
+	
+	
+		// Add the list ordering clause.
+		$orderCol	= $this->state->get('list.ordering', 'a.surname');
+		$orderDirn	= $this->state->get('list.direction', 'ASC');
+	
+		$this->getState('com_clubreg.regmember.member_key');
+	
+		$member_id  = $this->getState('com_clubreg.regmembers.member_id');
+		
+		$start_value  = $this->getState('com_clubreg.relationships.start_value');
+		
+		
+		$search_value = sprintf('%%%s%%',$this->getState('com_clubreg.regmembers.search_value'));
+	
+		$where_ = array();
+	
+		$where_[] = sprintf("(a.surname like %s or a.givenname like %s ) ", $db->quote($search_value),$db->quote($search_value));
+		$where_[] = sprintf("a.playertype in ('junior','senior') ");  // Only Eoi Members	
+			
+	
+		$all_string[] = "a.*";
+		$all_string[] = "b.group_name";	
+		$all_string[] = "sg.group_name as `subgroup_name`";
+	
+		$d_var =implode(",", $all_string);
+	
+		$query->select($d_var);
+		$query->from($db->quoteName(CLUB_REGISTEREDMEMBERS_TABLE).' AS a');
+		$query->join('LEFT', CLUB_GROUPS_TABLE.' AS b ON a.group = b.group_id');		
+		$query->join('LEFT', CLUB_GROUPS_TABLE.' AS sg ON a.subgroup = sg.group_id');
+	
+		foreach($where_ as $a_where){
+			$query->where($a_where);
+		}
+	
+		$query->order($db->escape($orderCol.' '.$orderDirn));
+	
+		$db->setQuery($query, $start_value,30);
+		$all_data = $db->loadObjectList();
+		
+		$clonequery = clone $query;		
+		$clonequery->clear('select')->clear('order')->clear('limit')->clear('offset')->select('COUNT(*)');		
+		$db->setQuery($clonequery);
+		$something = $db->loadResult();	
+		
+		return 	$all_data;
+	}
 	
 }
