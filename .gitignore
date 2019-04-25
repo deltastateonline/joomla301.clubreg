@@ -135,13 +135,16 @@ com_jedchecker/
 com_contenthistory/
 components/com_ajax/
 com_postinstall/
+com_clubreg.ncaq/
 administrator/components/com_ajax/
 
 #Language files Front End
 
+en-GB.com_assoc*
 en-GB.com_contact.ini
 en-GB.com_content.ini
 en-GB.com_finder.ini
+en-GB.com_fields*
 en-GB.com_mailto.ini
 en-GB.com_media.ini
 en-GB.com_messages.ini
@@ -153,12 +156,9 @@ en-GB.com_wrapper.ini
 en-GB.files_joomla.sys.ini
 en-GB.finder_cli.ini
 en-GB.ini
-en-GB.lib_joomla.ini
-en-GB.lib_joomla.sys.ini
-en-GB.lib_phpmailer.sys.ini
-en-GB.lib_phputf8.sys.ini
-en-GB.lib_simplepie.sys.ini
+en-GB.lib_*
 en-GB.localise.php
+en-GB.mod_sampl*
 en-GB.mod_articles_archive.ini
 en-GB.mod_articles_archive.sys.ini
 en-GB.mod_articles_categories.ini
@@ -199,6 +199,7 @@ en-GB.mod_stats.ini
 en-GB.mod_stats.sys.ini
 en-GB.mod_syndicate.ini
 en-GB.mod_syndicate.sys.ini
+en-GB.mod_tag*
 en-GB.mod_users_latest.ini
 en-GB.mod_users_latest.sys.ini
 en-GB.mod_weblinks.ini
