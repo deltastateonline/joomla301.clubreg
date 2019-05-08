@@ -49,8 +49,7 @@ if(count($this->items)>0){
 	
 		?>
 		<div class="profile-new-div">
-		<div class="profile-sub-head-div">
-			<input type="button" value="+"  class="btn btn-mini re-assign-guardian" title="<?php echo JText::_('COM_CLUBREG_SETGUARDIAN')?>" rel=<?php echo json_encode($rel_string_edit);?> /> 
+		<div class="profile-sub-head-div">			 
 			<span><?php echo $an_item->surname, " ",$an_item->givenname;?></span>			
 			<?php ClubRegHelper::writeImage($imageData); ?>
 		</div>

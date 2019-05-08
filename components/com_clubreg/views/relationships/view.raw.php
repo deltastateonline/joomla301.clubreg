@@ -75,7 +75,7 @@ class ClubRegViewRelationships extends ClubRegViews
 	 * Searching for a club member
 	 * @return boolean
 	 */
-	protected function profiles_relationships(){
+	protected function search_relationships(){
 		
 		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
 		
@@ -107,7 +107,7 @@ class ClubRegViewRelationships extends ClubRegViews
 			$current_model->setState('com_clubreg.relationships.start_value',$start_value);
 			$this->items = $current_model->getSearchPlayers();
 				
-			$proceed = TRUE;
+			$proceed = TRUE; 
 		}
 		
 		return $proceed;

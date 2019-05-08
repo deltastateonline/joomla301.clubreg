@@ -86,7 +86,7 @@ class ClubregModelRelationships extends JModelList
 		$query->order($db->escape($orderCol.' '.$orderDirn));
 	
 		$db->setQuery($query, $start_value,30);
-		$all_data = $db->loadObjectList();
+		$all_data = $db->loadObjectList();		
 	
 		$clonequery = clone $query;
 		$clonequery->clear('select')->clear('order')->clear('limit')->clear('offset')->select('COUNT(*)');
