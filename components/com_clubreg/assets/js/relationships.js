@@ -17,9 +17,8 @@ jQuery( document ).ready(function() {
 	
 	if(jQuery('#relationshipsFormDiv')){
 		
-		jQuery( document ).on('click','#search-relationships-btn',function(event){		
-			console.log("here");
-			jQuery('#relationships-list').addClass('loading1');
+		jQuery( document ).on('click','#search-relationships-btn',function(event){			
+			
 			ClubRegObject.searchRelationships(relationshipSearchRequestConfig);			
 		});		
 	}
@@ -32,10 +31,10 @@ jQuery( document ).ready(function() {
 		ClubRegObject.listRelationships(relationshipListRequestConfig);	
 	}	
 	
-	jQuery( document ).on('click','.profile-realtionships-button',function(event){		
+	jQuery( document ).on('click','.profile-realtionships-save',function(event){		
 		//addRelationships(jQuery(this));
 		//relationshipsTabDivs.toggle_div();			
-		
+		ClubRegObject.saveRelationships(relationshipSaveRequestConfig,jQuery(this));	
 	});
 	
 
@@ -47,6 +46,14 @@ function relationshipListRequestDef(){
 	
 	self = this;
 	self.rUrl  =  "index.php?option=com_clubreg&view=relationships&layout=profiles&tmpl=component&format=raw";
+	self.rMethod  = "post";
+	self.rData  = {}	;	
+};
+
+function relationshipSaveRequestDef(){	
+	
+	self = this;
+	self.rUrl  =  "index.php?option=com_clubreg&task=relationships.saverelationships&tmpl=component";
 	self.rMethod  = "post";
 	self.rData  = {}	;	
 };
@@ -70,6 +77,7 @@ relationshipSearchRequestDef.prototype.useResults = function(response){
 
 var relationshipListRequestConfig = new relationshipListRequestDef();
 var relationshipSearchRequestConfig = new relationshipSearchRequestDef();
+var relationshipSaveRequestConfig = new relationshipSaveRequestDef();
 
 ClubregObjectDefinition.prototype.listRelationships = function(requestConfig){
 	
@@ -111,10 +119,37 @@ ClubregObjectDefinition.prototype.searchRelationships = function(requestConfig){
 	self = this;
 	
 	requestConfig.rData = JSON.decode(jQuery("#search-relationships-btn").attr('rel'));	
-	requestConfig.rData["search_value"] = jQuery('#search-relationships-text').val();
-	console.log(requestConfig);
-	self.loadAjaxRequestHTML(requestConfig);  
+	var searchValue =  jQuery('#search-relationships-text').val();
 	
+	searchValue = jQuery.trim(searchValue);
+	if(searchValue){
+		jQuery('#relationships-list').addClass('loading1');
+		jQuery('#relationshipsFormDiv').find('.control-group').removeClass('error');
+		requestConfig.rData["search_value"] = searchValue;		
+		self.loadAjaxRequestHTML(requestConfig);  
+	}else{
+		jQuery('#relationshipsFormDiv').find('.control-group').addClass('error');
+	}
+		
+	
+}
+
+ClubregObjectDefinition.prototype.saveRelationships = function(requestConfig,linkControl){
+	
+	self = this;
+	var parentDiv = linkControl.parents('div.profile-new-div');
+	var control = parentDiv.find('select[name="relationship_value"]');
+	var controlGroup = parentDiv.find('.control-group');
+	var cValue = control.val()||undefined;  //trim();	
+	if(cValue){
+		requestConfig.rData = JSON.decode(linkControl.attr('rel'));	
+		requestConfig.rData["relationship_value"] = cValue;		
+		console.log(requestConfig);
+		self.loadAjaxRequest(requestConfig);  
+	}else{		
+		controlGroup.addClass('error');
+	}
+
 	
 }
 
