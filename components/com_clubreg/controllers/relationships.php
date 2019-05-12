@@ -17,23 +17,7 @@ class ClubregControllerRelationships extends JControllerLegacy
 		require_once JPATH_COMPONENT_ADMINISTRATOR.DS.'helpers'.DS.'clubreg.php';
 		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';
 		parent::__construct($config);
-		/* $this->registerTask('deletenote', 'processnote');		
-		$this->registerTask('locknote', 'processnote');
-		$this->registerTask('savenote', 'savenote');
-		
-		$this->registerTask('savepayment', 'savepayment');
-		$this->registerTask('saveemergency', 'saveemergency');
-		$this->registerTask('saveother', 'saveother');		
-		$this->registerTask('assignguardian', 'assignguardian');
-		
-		$this->registerTask('saveattachment', 'saveattachment');
-		$this->registerTask('deleteattachment', 'processattachment');
-		$this->registerTask('lockattachment', 'processattachment');	
-		
-		$this->registerTask('saveproperty', 'saveproperty');
-		
-		$this->registerTask('savecontactlist', 'savecontactlist');	
-		$this->registerTask('deletecontactlist', 'processcontactlist'); */
+	
 		
 		$this->uKeyObject = new ClubRegUniqueKeysHelper(10);
 		
@@ -85,70 +69,23 @@ class ClubregControllerRelationships extends JControllerLegacy
     		$current_model = JModelLegacy::getInstance('relationship', 'ClubregModel', array('ignore_request' => true));
     		$isNew = TRUE;
     		$current_model->setState('com_clubreg.relationship.isnew',$isNew);	
-    		$return_array["proceed"] = $current_model->save($data);
-    		
-    		$return_array = $data;
-    		
-    		$this->error_from_model($current_model);
-    		
-    		/* unset($current_model);
-    		$current_model = JModelLegacy::getInstance('regmember', 'ClubregModel', array('ignore_request' => true));
-    		$key_data->full_key = $data['member_key'];
-    		$current_model->processKey($key_data);
-    		$data["primary_id"] = $key_data->member_id;		
-    		$data["note_key"] =  FALSE;
-    		$data["created_by"] = $user->get('id');
-    		if(!isset($data["note_status"])){
-    			$data["note_status"] = '0';
-    		}
-    		
-    		
-    		
-    		
-    		
-    		unset($current_model);
-    		$current_model = JModelLegacy::getInstance('note', 'ClubregModel', array('ignore_request' => true));
-    		$proceed = $current_model->save($data);
-    		if($proceed){
-    			$return_array["msg"] = "Notes Added."; 
-    		}else{
-    			$return_array["msg"] = $this->error_from_model($current_model);
-    		}
-    		 */
-    		
-    		$return_array["proceed"] = $proceed;
+    		$return_array["proceed"] = $current_model->save($data);    		
+    	
+    		if($return_array["proceed"]){
+    			$return_array["msg"][] = "Relationship Added.";
+    		}else{    			
+    			$return_array["error"] = array_merge( ClubRegErrorHelper::error_from_model($current_model),[JText::_('COM_CLUBREG_NOUPDATE')]);    			
+    		}    		
     		
 		} catch (Exception $e) {
 		    
 		    $return_array["proceed"] =   FALSE;
-		    $return_array["msg"][] = JText::_($e->getMessage());
-		}
-    		
+		    $return_array["error"][] = JText::_($e->getMessage());
+		} 		
 		
 		echo json_encode($return_array); 
 		
 		$app->close();
 		
-	}
-	
-	
-	
-	function error_from_model(&$d_model){
-		
-		$errors	= $d_model->getErrors();
-		
-		$error_str = array();
-		for ($i = 0, $n = count($errors); $i < $n; $i++)
-		{
-			if ($errors[$i] instanceof Exception)
-			{
-				$error_str[] = $errors[$i]->getMessage();
-			} else {
-				$error_str[] = $errors[$i];
-			}
-		}
-		
-		return $error_str;
-	}
-	
+	}	
 }

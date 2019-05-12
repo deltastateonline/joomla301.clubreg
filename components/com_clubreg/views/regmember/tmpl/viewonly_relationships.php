@@ -11,7 +11,6 @@
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-$in_type = "hidden";
 global $clubreg_Itemid;
 $rel_string_list = array("Itemid"=>$clubreg_Itemid,"member_key"=>$this->member_key,JSession::getFormToken()=>1);
 $rel_string_edit = array("Itemid"=>$clubreg_Itemid,"member_key"=>$this->member_key,JSession::getFormToken()=>1,'relationships_key'=>'0');
@@ -22,9 +21,9 @@ $rel_string_edit = array("Itemid"=>$clubreg_Itemid,"member_key"=>$this->member_k
 		<div class="row-fluid control-group">
 			<div class="span5"><input type="text" class="inputbox input-large" required value="" id="search-relationships-text" placeholder="Enter name"/></div>
 			<div class="span3"><button class="btn btn-small btn-primary" type="button" id="search-relationships-btn" rel=<?php echo json_encode($rel_string_edit)?>><?php echo JText::_('CLUBREG_FILTER');?></button></div>
+			<div class="span3"><a class="btn profile-realtionships-back btn-mini btn-warning pull-right" href="javascript:void(0)">Back</a></div>
 		</div>		
-			<div id="relationships-list"></div>		
-		<button class="hide" id="relationship-loadmore">Load More</button>
+			<div id="relationships-list"></div>			
 	</div>	
-		<div class="clugreg-div loading1" id="profile-relationships" rel=<?php echo json_encode($rel_string_list)?>><h2>List Div</h2></div>	
+		<div class="clugreg-div loading1" id="profile-relationships" rel=<?php echo json_encode($rel_string_list)?>></div>	
 </div>

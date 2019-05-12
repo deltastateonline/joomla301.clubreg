@@ -33,13 +33,44 @@ class ClubregModelRelationships extends JModelList
 	}
 	public function getRelationships($user_id,$member_id = null){
 		
+			
 		$db		= $this->getDbo();
+		$query	= $db->getQuery(true);
+		
+		// Add the list ordering clause.
+		$orderCol	= $this->state->get('list.ordering', 'b.surname');
+		$orderDirn	= $this->state->get('list.direction', 'ASC');
+		$start_value = 0;
 		
 		
-		$paymentList = array();
+		$items = array();
 		
-		if(count($paymentList) > 0){
-			return $paymentList;
+		$all_string[] = "b.*";
+		$all_string[] = "a.relationship_tag";
+		$all_string[] = "date_format(a.created, '%d/%m/%Y %H:%i:%s') as created, user_reg.name ";
+		
+		$d_var =implode(",", $all_string);
+		
+		
+		$query->select($d_var);
+		$query->from($db->quoteName(CLUB_RELATIONSHIPS_TABLE).' AS a');
+		$query->join('LEFT', $db->quoteName(CLUB_REGISTEREDMEMBERS_TABLE).' AS b ON a.member2_id = b.member_id');
+		$query->join('LEFT', '#__users AS user_reg ON a.created_by = user_reg.id');
+		
+		$where_[] = sprintf("a.member_id = %s  ", $db->quote($member_id));
+		//$where_[] = sprintf("a.playertype in ('junior','senior') ");  // Only junior and senior Members
+		
+		foreach($where_ as $a_where){
+			$query->where($a_where);
+		}
+		
+		$query->order($db->escape($orderCol.' '.$orderDirn));
+		
+		$db->setQuery($query, $start_value,30);
+		$items = $db->loadObjectList();
+
+		if(count($items) > 0){
+			return $items;
 		}else 
 			return array();
 		

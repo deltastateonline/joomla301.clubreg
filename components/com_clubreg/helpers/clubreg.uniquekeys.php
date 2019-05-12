@@ -105,3 +105,40 @@ class ClubRegErrorHelper extends JObject
 		return $error_str;
 	}
 }
+
+class ClubRegRenderHelper extends JObject{
+	
+	
+	static function reformatObject(&$an_item){
+		
+		$isEmpty = array("0","-1");
+		
+		$an_item->t_address = "";$t_phone =  array();
+		
+		$an_item->address = str_replace("-1", "",$an_item->address);
+		$an_item->postcode = str_replace("-1", "",$an_item->postcode);
+		$an_item->emailaddress = str_replace("-1", "N/A",$an_item->emailaddress);
+		
+		if($an_item->address){
+			$an_item->t_address = ucwords($an_item->address)."<br />";
+		}
+		$an_item->suburb = str_replace("-1", "",$an_item->suburb);
+		
+		if($an_item->suburb || $an_item->postcode){
+			$an_item->t_address = $an_item->t_address.ucwords($an_item->suburb)." ";
+		}
+		if($an_item->postcode){
+			$an_item->t_address = $an_item->t_address.$an_item->postcode;
+		}
+		if($an_item->phoneno && !in_array($an_item->phoneno,$isEmpty)){
+			$t_phone[] = $an_item->phoneno;
+		}
+		if($an_item->mobile && !in_array($an_item->mobile,$isEmpty)){
+			$t_phone[] = $an_item->mobile;
+		}
+		$an_item->t_phone = $t_phone ;
+		
+		
+		return $an_item;
+	} 
+}

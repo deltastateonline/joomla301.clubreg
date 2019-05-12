@@ -141,6 +141,7 @@ $hasClubProfile = isset($this->profileConfigs["headings"]['club'])?TRUE:FALSE;
 <p>&nbsp;</p>
 <?php 
 $document = JFactory::getDocument();
+$document->addScript('https://use.fontawesome.com/9a293d9ea0.js');
 ClubregHelper::writeTabAssets($document, "common");
 ClubregHelper::writeTabAssets($document, "clubreg",array("js"));
 ClubregHelper::writeTabAssets($document, "profile");

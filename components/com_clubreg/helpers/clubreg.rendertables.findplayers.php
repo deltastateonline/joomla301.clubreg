@@ -39,25 +39,7 @@ class ClubRegRenderDivsFindplayersHelper extends ClubRegRenderTablesHelper
 		<div class="row-fluid">		 
 			  <?php	$isEmpty = array("0","-1");	  		  
 			  	foreach($viewObject->items as $an_item){ 
-			  		$an_item->t_address = "";$t_phone =  array();
-			  	if($an_item->address){
-			  		$an_item->t_address = ucwords($an_item->address)."<br />";
-			  	}
-			  	$an_item->suburb = str_replace("-1", "",$an_item->suburb);
-			  	
-			  	if($an_item->suburb || $an_item->postcode){
-			  		$an_item->t_address = $an_item->t_address.ucwords($an_item->suburb)." ";
-			  	}
-			  	if($an_item->postcode){
-			  		$an_item->t_address = $an_item->t_address.$an_item->postcode;
-			  	}
-			  	if($an_item->phoneno && !in_array($an_item->phoneno,$isEmpty)){
-			  		$t_phone[] = $an_item->phoneno;
-			  	}
-			  	if($an_item->mobile && !in_array($an_item->mobile,$isEmpty)){
-			  		$t_phone[] = $an_item->mobile;
-			  	}
-			  	$an_item->t_phone = $t_phone ;			  	
+			  	$an_item = ClubRegRenderHelper::reformatObject($an_item);
 			  	$fkey = $viewObject->uKeyObject->constructKey($an_item->member_id,$an_item->member_key);	
 
 			  	$profile_pix = $thumbrenderer->renderMemberThumb($an_item->member_id,FALSE,FALSE);

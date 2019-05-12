@@ -7,13 +7,23 @@ jQuery( document ).ready(function() {
 		jQuery('#relationshipsFormDiv').fadeToggle();
 		jQuery('#profile-relationships').fadeToggle();
 		jQuery("a.profile-realtionships-button").fadeToggle();
+		
+		jQuery("#relationships-list").html("<div class='alert alert-info'>Use the search box to find and relate members</div>"); // result from search are rendered
 	
 				
 	});	
-
-
 	
-	//relationshipsListDiv.params = "option=com_clubreg&view=relationships&layout=list&tmpl=component&format=raw";
+	jQuery(document).on('click','a.profile-realtionships-back',function(event){	
+		
+		jQuery('#relationshipsFormDiv').fadeToggle();
+		jQuery('#profile-relationships').fadeToggle();
+		jQuery("a.profile-realtionships-button").fadeToggle();
+		
+		jQuery("#profile-relationships").addClass("loading1");	
+		ClubRegObject.listRelationships(relationshipListRequestConfig);	
+	
+				
+	});	
 	
 	if(jQuery('#relationshipsFormDiv')){
 		
@@ -24,31 +34,34 @@ jQuery( document ).ready(function() {
 	}
 	if(jQuery('#profile-relationships')){	
 		
-		/*relationshipsTabDivs.setObjects(jQuery('#profile-relationships'),2);
-		relationshipsTabDivs.setArray2(jQuery('#profile-relationships').css('margin-left'),profilediverightedge);		
-		
-		relationshipsListDiv.setDivObject(jQuery('#profile-relationships'));*/
 		ClubRegObject.listRelationships(relationshipListRequestConfig);	
 	}	
 	
 	jQuery( document ).on('click','.profile-realtionships-save',function(event){		
-		//addRelationships(jQuery(this));
-		//relationshipsTabDivs.toggle_div();			
 		ClubRegObject.saveRelationships(relationshipSaveRequestConfig,jQuery(this));	
 	});
-	
-
-	
 
 });
 
 function relationshipListRequestDef(){	
 	
 	self = this;
-	self.rUrl  =  "index.php?option=com_clubreg&view=relationships&layout=profiles&tmpl=component&format=raw";
+	self.rUrl  =  "index.php?option=com_clubreg&view=relationships&layout=list&tmpl=component&format=raw";
 	self.rMethod  = "post";
 	self.rData  = {}	;	
 };
+
+relationshipListRequestDef.prototype.useResults = function(response){
+
+	jQuery("#profile-relationships").removeClass("loading1");	
+	jQuery("#profile-relationships").html(response);	
+
+}
+relationshipListRequestDef.prototype.rBefore = function(){
+	
+	jQuery("#profile-relationships").html("");	
+	//jQuery("#profile-relationships").addClass("loading1");	
+}
 
 function relationshipSaveRequestDef(){	
 	
@@ -57,6 +70,19 @@ function relationshipSaveRequestDef(){
 	self.rMethod  = "post";
 	self.rData  = {}	;	
 };
+
+relationshipSaveRequestDef.prototype.useResults = function(response){
+
+	Joomla.renderMessages({message:response.msg});					
+
+}
+relationshipSaveRequestDef.prototype.useFailedResults = function(response){
+	
+	if(response.error){			
+		Joomla.renderMessages({error:response.error});					
+	}
+}
+
 
 function relationshipSearchRequestDef(){	
 	
@@ -70,7 +96,12 @@ relationshipSearchRequestDef.prototype.useResults = function(response){
 	
 	Joomla.removeMessages();	
 	jQuery("#relationships-list").removeClass('loading1');
+	jQuery('#relationships-list').removeClass('loading-small');
 	jQuery("#relationships-list").html(response);	
+}
+
+relationshipSearchRequestDef.prototype.rBefore = function(){
+	jQuery('#relationships-list').addClass('loading-small');
 }
 
 
@@ -79,42 +110,15 @@ var relationshipListRequestConfig = new relationshipListRequestDef();
 var relationshipSearchRequestConfig = new relationshipSearchRequestDef();
 var relationshipSaveRequestConfig = new relationshipSaveRequestDef();
 
-ClubregObjectDefinition.prototype.listRelationships = function(requestConfig){
+ClubregObjectDefinition.prototype.listRelationships = function(requestConfig){	
 	
-	
-	self = this;
-	console.log(requestConfig);
-	/*
-	
-	
-	var json_data = JSON.decode(dObject.attr('rel'));		
-	var params = "option=com_clubreg&view=relationships&layout=profiles&tmpl=component&format=raw";		
-	var durl = "index.php?"+params;	
-	json_data["search_value"] = search_value;
-	
-	
-	var jqxhr = jQuery.ajax({
-		url:durl,
-		method:'POST',
-		data:json_data
-		
-		})
-	  .done(function(responseText) {	    
-		  jQuery('#relationships-list').removeClass('loading1');   
-		  jQuery('#relationships-list').html(responseText);	   
-	    
-	  })
-	  .fail(function(serverResponse) {
-		  profileFailureJQ(serverResponse);
-	  })
-	  .always(function() {
-		  jQuery('#loading-div').removeClass('loading-small');
-	  });
-	*/
+	self = this;	
+	requestConfig.rData = JSON.decode(jQuery("#profile-relationships").attr('rel'));	
+	self.loadAjaxRequestHTML(requestConfig);  	
+
 }
 
 ClubregObjectDefinition.prototype.searchRelationships = function(requestConfig){
-	
 	
 	self = this;
 	
@@ -140,11 +144,10 @@ ClubregObjectDefinition.prototype.saveRelationships = function(requestConfig,lin
 	var parentDiv = linkControl.parents('div.profile-new-div');
 	var control = parentDiv.find('select[name="relationship_value"]');
 	var controlGroup = parentDiv.find('.control-group');
-	var cValue = control.val()||undefined;  //trim();	
+	var cValue = control.val()||undefined;  	
 	if(cValue){
 		requestConfig.rData = JSON.decode(linkControl.attr('rel'));	
-		requestConfig.rData["relationship_value"] = cValue;		
-		console.log(requestConfig);
+		requestConfig.rData["relationship_value"] = cValue;			
 		self.loadAjaxRequest(requestConfig);  
 	}else{		
 		controlGroup.addClass('error');

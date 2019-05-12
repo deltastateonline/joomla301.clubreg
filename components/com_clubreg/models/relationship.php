@@ -36,30 +36,47 @@ class ClubregModelRelationship extends JModelForm
 	
 	public function save($data){		
 		
-		$isNew = $this->getState("com_clubreg.relationship.isnew");	
-		$update_me = FALSE;
+		$error_ = 0;
+		$proceed = FALSE;
 		
-		if(!$isNew){			
-			$update_me = TRUE;		
+		$db	= $this->getDbo();			
+		$created_when = date('Y-m-d H:i:s');			
+		
+		$d_qry = sprintf("insert into %s set `member_id` = %s ,`member2_id` = %s ,`relationship_tag`=%s, `created_by` = %s , created = %s on duplicate key update
+				relationship_tag = values(relationship_tag) ;
+				",CLUB_RELATIONSHIPS_TABLE,$db->Quote($data['member_id']),$db->Quote($data['member2_id']),$db->Quote($data['relationship_tag'])
+				,$db->Quote($data['created_by']),$db->Quote($created_when));		
+		
+		$db->setQuery($d_qry);
+		
+		try{
+			$db->query();
+		}catch (RuntimeException $e){
+			
+			$this->setError($e->getMessage());
+			$error_++;
 		}
 		
-		$proceed = FALSE;
-		if($isNew || $update_me){
-			$relationshipTable = $this->getTable();
+		 $relation_ = array("child"=>"parent","spouse"=>"spouse","parent"=>"child");
 		
-			$relationshipTable->bind($data);
-			if($isNew){
-				$created_when = date('Y-m-d H:i:s');
-				$relationshipTable->created = $created_when;
-			}			
-			
-			if(!$relationshipTable->store()){
-				$proceed =  FALSE;
-				$this->setError($relationshipTable->getError());
-			}else{
-				$proceed =  TRUE;				
-				$this->set("relationship_id", $relationshipTable->relationship_id);
-			}	
+		
+		$d_qry = sprintf("insert into %s set `member_id` = %s ,`member2_id` = %s ,`relationship_tag`=%s, `created_by` = %s , created = %s on duplicate key update
+				relationship_tag = values(relationship_tag) ;
+				",CLUB_RELATIONSHIPS_TABLE,$db->Quote($data['member2_id']),$db->Quote($data['member_id']),$db->Quote($relation_[$data['relationship_tag']])
+				,$db->Quote($data['created_by']),$db->Quote($created_when));
+		
+		$db->setQuery($d_qry);
+		
+		try{
+			$db->query();
+		}catch (RuntimeException $e){				
+			$this->setError($e->getMessage());
+			$error_++;
+		}
+		
+
+		if($error_ == 0){
+			$proceed = TRUE;
 		}
 		
 		return $proceed;

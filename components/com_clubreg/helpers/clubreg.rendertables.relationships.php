@@ -11,7 +11,7 @@
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.rendertables.php';
-class ClubRegRenderTablesPaymentsHelper extends ClubRegRenderTablesHelper
+class ClubRegRenderTablesRelationshipHelper extends ClubRegRenderTablesHelper
 {
 	protected $headings = array();	
 	
@@ -26,18 +26,21 @@ class ClubRegRenderTablesPaymentsHelper extends ClubRegRenderTablesHelper
 		<div>
 			  <?php 
 			  if(count($viewObject->items) > 0){
-			  	foreach($viewObject->items as $an_item){ 			  		
-			  		$fkey = $viewObject->uKeyObject->constructKey($an_item->payment_id,$an_item->payment_key);
-			  		$rel_string = json_encode(array("Itemid"=>$clubreg_Itemid,"member_key"=>$viewObject->member_key,JSession::getFormToken()=>1,'payment_key'=>$fkey,'action'=>'update'));
+			  	foreach($viewObject->items as $an_item){ 	
+
+			  		$an_item = ClubRegRenderHelper::reformatObject($an_item);			  		
+			  		
+			  		$fkey = $viewObject->uKeyObject->constructKey($an_item->member_id,$an_item->member_key);
+			  		$rel_string = json_encode(array("Itemid"=>$clubreg_Itemid,"member_key"=>$viewObject->member_key,JSession::getFormToken()=>1,'relationship_key'=>$fkey,'action'=>'update'));
 			  	?>			  
-			    <div class="profile-new-div" id='paymentdata_<?php echo $an_item->payment_id; ?>' rel=<?php echo $rel_string ?>>
+			    <div class="profile-new-div"  rel=<?php echo $rel_string ?>>
 			    	<div class='profile-sub-head-div'>
-			    	<div class="pull-left"><a href="javascript:void(0);"  rel=<?php echo $rel_string ?> class='profile-payment-button' title=<?php echo JText::_('COM_CLUBREG_PAYMENT_EDIT');?>><?php echo JText::_('COM_CLUBREG_PAYMENT_DESCRIPTION'),' - ', $an_item->payment_desc; ?></a></div>	
+			    	<div class="pull-left"><?php echo JText::_('COM_CLUBREG_PROFILE_RELATIONS_DETAILS') ?> - <?php echo $an_item->surname;?> <?php echo $an_item->givenname;?></div>	
 			    	<div class="pull-right" style='font-size:0.8em;padding-left:15px;'><?php echo $an_item->name;?> on  <?php echo $an_item->created;?></div>		    	
 				    <div class="clearfix"></div>
 				    </div>
 				    <?php $this->rendererItems($an_item); ?>
-				    <div class="clearfix"></div>				    
+				    <div class="clearfix"></div>				    			    
 			    </div>			  
 			  <?php  }?>
 			 </div>
@@ -59,6 +62,10 @@ class ClubRegRenderTablesPaymentsHelper extends ClubRegRenderTablesHelper
 						<div class="pull-left reg-value"><?php echo $this->itemRenderer->render($an_item->$akey,$aheading); ?>&nbsp;</div>				
 				<?php	if(isset($aheading["clearfix"]) && $aheading["clearfix"] ){?><div class="clearfix"></div> <?php }				
 				}  ?>
+				
+				<?php if(LIVE_SITE){?>
+			    	<a href="javascript:void(0);"  title="Delete" class="btn btn-mini pull-right" rel='delete-relationship' ><i class="fa fa-trash" aria-hidden="true"></i></a>
+			   	<?php } ?>
 				</div>			
 				<?php
 	}
