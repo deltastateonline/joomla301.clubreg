@@ -35,7 +35,7 @@ class ClubRegRenderTablesRelationshipHelper extends ClubRegRenderTablesHelper
 			  	?>			  
 			    <div class="profile-new-div"  rel=<?php echo $rel_string ?>>
 			    	<div class='profile-sub-head-div'>
-			    	<div class="pull-left"><?php echo JText::_('COM_CLUBREG_PROFILE_RELATIONS_DETAILS') ?> - <?php echo $an_item->surname;?> <?php echo $an_item->givenname;?></div>	
+			    	<div class="pull-left"><?php echo JText::_('COM_CLUBREG_PROFILE_RELATIONS_DETAILS') ?> - <a href="javascript:void(0);" onclick="Joomla.sbutton('<?php echo $fkey;?>')"><?php echo $an_item->surname;?> <?php echo $an_item->givenname;?></a></div>	
 			    	<div class="pull-right" style='font-size:0.8em;padding-left:15px;'><?php echo $an_item->name;?> on  <?php echo $an_item->created;?></div>		    	
 				    <div class="clearfix"></div>
 				    </div>

@@ -52,7 +52,7 @@ if(count($this->items)>0){
 		<div class="profile-sub-head-div">			 
 			<span><?php echo $an_item->surname, " ",$an_item->givenname;?></span>
 			<span class="pull-right"><?php echo $an_item->group_name," - ",$an_item->subgroup_name ;?></span>			
-			<?php ClubRegHelper::writeImage($imageData); ?>
+			<?php //ClubRegHelper::writeImage($imageData); ?>
 		</div>
 			<div class="profile-reg-well">
 			<?php if($an_item->playertype != "junior"){ ?>
