@@ -127,7 +127,7 @@ class ClubRegHelper
 			$query->where('published = 1');
 			
 			if(isset($parent_data)){
-				$tordering = trim($parent_data->params["sort_list_by"]);	
+				$tordering = trim(@$parent_data->params["sort_list_by"]);	
 				if(!is_null($tordering) && strlen($tordering) > 0){
 					$ordering = $tordering." ASC ";
 				}			

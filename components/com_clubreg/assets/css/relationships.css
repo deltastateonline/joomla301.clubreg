@@ -1,0 +1,14 @@
+@CHARSET "ISO-8859-1";
+
+#relationshipsFormDiv {	
+	/* overflow:auto;	*/	
+}
+#profile-relationships{		
+	/* margin-left:10px; */	
+	overflow1:auto;
+}
+#relationships-list{
+	overflow:auto;
+	height:400px;
+	margin-right:10px;
+}

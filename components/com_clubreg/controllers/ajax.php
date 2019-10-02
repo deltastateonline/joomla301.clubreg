@@ -282,13 +282,15 @@ class ClubregControllerAjax extends JControllerLegacy
 		if (!ClubRegMediaHelper::canUpload($attachment, $err))
 		{
 			$return_array["msg"][] = JText::_($err);
-			$return_array["upload_error"] = TRUE;
+			$return_array["upload_error"] = TRUE;		
 		}
 		
 		require_once CLUBREG_ADMINPATH.'/helpers/clubreg.php';
 		
 		ClubRegHelper::setIndex("value"); // force the array to be indexed by the value
 		$document_type = ClubRegHelper::configOptions(CLUB_DOCUMENTS_WHICH); // controls
+		
+		
 		
 		if(!strlen(trim($data["document_type"]))> 0 && count($document_type)> 0 && !in_array($data["document_type"], array_keys($document_type))){
 			$return_array["msg"][] = JText::_('COM_CLUBREG_MSG_DOCTYPENOT_SET');
@@ -298,9 +300,13 @@ class ClubregControllerAjax extends JControllerLegacy
 		$params = JComponentHelper::getParams('com_clubreg');
 		//$config		= JFactory::getConfig();
 		
-		$media_params = JComponentHelper::getParams('com_media');		
+		$media_params = JComponentHelper::getParams('com_media');
 		
 		$folder_path = $params->get("attachment_folder");
+		
+		$return_array["fp"] = $folder_path;
+		
+		
 		if(!isset($folder_path) || is_null($folder_path)){			
 			$return_array["msg"][] = JText::_('COM_CLUBREG_MSG_FOLDERNOT_SET');
 			$return_array["upload_error"] = TRUE;			

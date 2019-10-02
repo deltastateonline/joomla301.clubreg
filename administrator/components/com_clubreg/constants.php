@@ -48,6 +48,7 @@ define('CLUB_PROPERTY_TABLE','#__clubreg_property_sheet'); // Property sheet  ta
 define('CLUB_CONTACTLIST_TABLE','#__clubreg_contactlist'); // Contact List  table
 
 define('CLUB_ALERTS_TABLE','#__clubreg_alerts'); // Alert List  table
+define('CLUB_RELATIONSHIPS_TABLE','#__clubreg_relationships'); // Relationships details
 
 
 define('GROUP','Division'); 

@@ -32,7 +32,7 @@ class ClubRegViews extends JViewLegacy
 		$options['format'] = '{DATE}\t{TIME}\t{LEVEL}\t{CODE}\t{MESSAGE}';
 		$options["text_file"] = "clubreg.{$this->getName()}.error.php";
 		JLog::addLogger($options);
-				
+
 		if(method_exists($this, $renderer)){			
 			$proceed =  $this->$renderer();			
 		}		
