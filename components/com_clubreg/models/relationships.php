@@ -98,6 +98,7 @@ class ClubregModelRelationships extends JModelList
 	
 		$where_[] = sprintf("(a.surname like %s or a.givenname like %s ) ", $db->quote($search_value),$db->quote($search_value));
 		$where_[] = sprintf("a.playertype in ('junior','senior') ");  // Only junior and senior Members
+		$where_[] = sprintf("a.member_status = 'registered' ");  // Only junior and senior Members
 			
 	
 		$all_string[] = "a.*";

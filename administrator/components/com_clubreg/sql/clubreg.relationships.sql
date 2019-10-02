@@ -26,6 +26,8 @@ CREATE TABLE IF NOT EXISTS `#__clubreg_relationships` (
   KEY `member_id` (`member_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8;
 
+INSERT INTO `#__clubreg_configs` (`config_name`, `config_short`, `config_text`, `config_type`, `which_config`, `config_comments`, `createdby`, `created`, `ordering`, `published`, `params`) VALUES ('Club Relationships', 'club_relationships', '', '', 'TOPMOST', NULL, 7, '2015-09-10 07:19:47', 31, 1, '{"assign_to":"both"}');
+
 -- Data exporting was unselected.
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

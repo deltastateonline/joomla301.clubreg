@@ -90,3 +90,7 @@ INSERT INTO `#__clubreg_configs` (`config_id`, `config_name`, `config_short`, `c
 (45, 'New Template', 'new_template', '', '', 'template_status', '', 62, '2011-12-17 21:21:04', 1, 1, ''),
 (46, 'Active Template', 'active_template', '', '', 'template_status', '', 62, '2011-12-17 21:21:04', 2, 1, ''),
 (47, 'Deleted Template', 'deleted_template', '', '', 'template_status', '', 62, '2011-12-17 21:21:04', 3, 1, '');
+
+
+INSERT INTO `#__clubreg_configs` (`config_name`, `config_short`, `config_text`, `config_type`, `which_config`, `config_comments`, `createdby`, `created`, `ordering`, `published`, `params`) VALUES ('Club Relationships', 'club_relationships', '', '', 'TOPMOST', NULL, 7, '2015-09-10 07:19:47', 31, 1, '{"assign_to":"both"}');
+

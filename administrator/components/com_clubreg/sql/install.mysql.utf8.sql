@@ -207,6 +207,10 @@ INSERT INTO `#__clubreg_configs` (`config_id`, `config_name`, `config_short`, `c
 (160, 'Desktop', 'desktop', '', '', 'clubreg_asset_type', NULL, 7, '2013-09-11 10:57:53', 1, 1, '{"assign_to":"both"}'),
 (161, 'Asset Type', 'clubreg_asset_type', '', '', 'TOPMOST', NULL, 7, '2013-09-11 10:57:02', 28, 1, '{"config_type":"list","sort_list_by":""}');
 
+
+INSERT INTO `#__clubreg_configs` (`config_name`, `config_short`, `config_text`, `config_type`, `which_config`, `config_comments`, `createdby`, `created`, `ordering`, `published`, `params`) VALUES ('Club Relationships', 'club_relationships', '', '', 'TOPMOST', NULL, 7, '2015-09-10 07:19:47', 31, 1, '{"assign_to":"both"}');
+
+
 -- --------------------------------------------------------
 
 --
