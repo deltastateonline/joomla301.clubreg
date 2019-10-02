@@ -62,6 +62,8 @@ DROP TABLE IF EXISTS `#__clubreg_saved_comms_groups`;
 DROP TABLE IF EXISTS `#__clubreg_contactlist`;
 
 DROP TABLE IF EXISTS `#__clubreg_alerts`;
+
+DROP TABLE IF EXISTS `#__clubreg_relationships`;
 -- --------------------------------------------------------
 
 --
@@ -643,4 +645,19 @@ REPLACE INTO `#__clubreg_configs` (`config_name`, `config_short`, `config_text`,
 REPLACE INTO `#__clubreg_configs` (`config_name`, `config_short`, `config_text`, `config_type`, `which_config`, `config_comments`, `createdby`, `created`, `ordering`, `published`, `params`) VALUES ('Marriage', 'marriage', '', '', 'clubreg_alerts', NULL, 7, NOW(), 2, 1, '{"assign_to":"both"}');
 REPLACE INTO `#__clubreg_configs` (`config_name`, `config_short`, `config_text`, `config_type`, `which_config`, `config_comments`, `createdby`, `created`, `ordering`, `published`, `params`) VALUES ('Remembrance', 'remembrance', '', '', 'clubreg_alerts', NULL, 7, NOW(), 3, 1, '{"assign_to":"both"}');
 REPLACE INTO `#__clubreg_configs` (`config_name`, `config_short`, `config_text`, `config_type`, `which_config`, `config_comments`, `createdby`, `created`, `ordering`, `published`, `params`) VALUES ('Others', 'others', '', '', 'clubreg_alerts', NULL, 7, NOW(), 4, 1, '{"assign_to":"both"}');
+
+-- Dumping structure for table joomla_301.#__clubreg_relationships
+CREATE TABLE IF NOT EXISTS `#__clubreg_relationships` (
+  `relationship_id` int(11) NOT NULL AUTO_INCREMENT,
+  `member_id` int(11) DEFAULT NULL,
+  `member2_id` int(11) NOT NULL,
+  `relationship_tag` varchar(12) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `retired` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`relationship_id`),
+  UNIQUE KEY `member_id_member2_id` (`member_id`,`member2_id`),
+  KEY `member_id` (`member_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8;
+
 

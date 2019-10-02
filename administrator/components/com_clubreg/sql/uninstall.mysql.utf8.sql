@@ -41,3 +41,5 @@ DROP TABLE IF EXISTS `#__clubreg_saved_comms_groups`;
 DROP TABLE IF EXISTS `#__clubreg_contactlist`;
 
 DROP TABLE IF EXISTS  `#__clubreg_alerts`;
+
+DROP TABLE IF EXISTS `#__clubreg_relationships`;
