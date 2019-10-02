@@ -58,6 +58,7 @@ class ClubregModelRelationships extends JModelList
 		$query->join('LEFT', '#__users AS user_reg ON a.created_by = user_reg.id');
 		
 		$where_[] = sprintf("a.member_id = %s  ", $db->quote($member_id));
+		$where_[] = sprintf("a.retired = 0  ");
 		//$where_[] = sprintf("a.playertype in ('junior','senior') ");  // Only junior and senior Members
 		
 		foreach($where_ as $a_where){

@@ -21,11 +21,13 @@ class ClubRegRenderTablesRelationshipHelper extends ClubRegRenderTablesHelper
 
 	public function render($viewObject){	
 		global $clubreg_Itemid;	
-		$i = 0;		
+		$i = 0;	
 		$this->headings =  $viewObject->entity_filters["headings"];	?>		
 		<div>
 			  <?php 
 			  if(count($viewObject->items) > 0){
+			  	$url_ = array("option=com_clubreg","layout=viewonly","view=regmember","Itemid={$clubreg_Itemid}");
+			  	
 			  	foreach($viewObject->items as $an_item){ 	
 
 			  		$an_item = ClubRegRenderHelper::reformatObject($an_item);			  		
@@ -35,7 +37,7 @@ class ClubRegRenderTablesRelationshipHelper extends ClubRegRenderTablesHelper
 			  	?>			  
 			    <div class="profile-new-div"  rel=<?php echo $rel_string ?>>
 			    	<div class='profile-sub-head-div'>
-			    	<div class="pull-left"><?php echo JText::_('COM_CLUBREG_PROFILE_RELATIONS_DETAILS') ?> - <a href="javascript:void(0);" onclick="Joomla.sbutton('<?php echo $fkey;?>')"><?php echo $an_item->surname;?> <?php echo $an_item->givenname;?></a></div>	
+			    	<div class="pull-left"><?php echo JText::_('COM_CLUBREG_PROFILE_RELATIONS_DETAILS') ?> - <a href="index.php?<?php echo implode("&",$url_)."&pk={$fkey}"?>" target="_blank"><?php echo $an_item->surname;?> <?php echo $an_item->givenname;?></a></div>	
 			    	<div class="pull-right" style='font-size:0.8em;padding-left:15px;'><?php echo $an_item->name;?> on  <?php echo $an_item->created;?></div>		    	
 				    <div class="clearfix"></div>
 				    </div>
@@ -64,7 +66,7 @@ class ClubRegRenderTablesRelationshipHelper extends ClubRegRenderTablesHelper
 				}  ?>
 				
 				<?php if(LIVE_SITE){?>
-			    	<a href="javascript:void(0);"  title="Delete" class="btn btn-mini pull-right" rel='delete-relationship' ><i class="fa fa-trash" aria-hidden="true"></i></a>
+			    	<a href="javascript:void(0);"  title="Delete" class="btn btn-mini pull-right" data-relationship='delete' ><i class="fa fa-trash" aria-hidden="true"></i></a>
 			   	<?php } ?>
 				</div>			
 				<?php

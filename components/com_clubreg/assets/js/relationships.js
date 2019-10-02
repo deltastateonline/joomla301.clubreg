@@ -40,6 +40,18 @@ jQuery( document ).ready(function() {
 	jQuery( document ).on('click','.profile-realtionships-save',function(event){		
 		ClubRegObject.saveRelationships(relationshipSaveRequestConfig,jQuery(this));	
 	});
+	
+	
+	
+	jQuery(document).on('click',"a[data-relationship]",function(event){	
+		
+		var deleteme = confirm("Are you sure you want to delete this item?");
+		
+		if(deleteme){
+			ClubRegObject.deleteRelationships(relationshipDeleteRequestConfig,jQuery(this));
+		}
+	});
+	
 
 });
 
@@ -103,12 +115,37 @@ relationshipSearchRequestDef.prototype.useResults = function(response){
 relationshipSearchRequestDef.prototype.rBefore = function(){
 	jQuery('#relationships-list').addClass('loading-small');
 }
+relationshipSearchRequestDef.prototype.useFailedResults = function(response){
+	
+	if(response.error){			
+		Joomla.renderMessages({error:response.error});					
+	}
+}
 
+function relationshipDeleteRequestDef(){	
+	
+	self = this;
+	self.rUrl  =  "index.php?option=com_clubreg&task=relationships.deleterelationships&tmpl=component";
+	self.rMethod  = "post";
+	self.rData  = {}	;	
+	
+	self.rBefore = beforeAction;
+	self.requestcreator = {};
+};
 
+relationshipDeleteRequestDef.prototype.useResults = function(response){
+	
+	self = this;	
+	Joomla.removeMessages();	
+	afterAction();
+	self.requestcreator[response.relationship_key].fadeOut();
+		
+}
 
 var relationshipListRequestConfig = new relationshipListRequestDef();
 var relationshipSearchRequestConfig = new relationshipSearchRequestDef();
 var relationshipSaveRequestConfig = new relationshipSaveRequestDef();
+var relationshipDeleteRequestConfig = new relationshipDeleteRequestDef();
 
 ClubregObjectDefinition.prototype.listRelationships = function(requestConfig){	
 	
@@ -134,8 +171,6 @@ ClubregObjectDefinition.prototype.searchRelationships = function(requestConfig){
 	}else{
 		jQuery('#relationshipsFormDiv').find('.control-group').addClass('error');
 	}
-		
-	
 }
 
 ClubregObjectDefinition.prototype.saveRelationships = function(requestConfig,linkControl){
@@ -155,6 +190,16 @@ ClubregObjectDefinition.prototype.saveRelationships = function(requestConfig,lin
 
 	
 }
+
+ClubregObjectDefinition.prototype.deleteRelationships = function(requestConfig,linkControl){
+	
+	var parentDiv = linkControl.parents('div.profile-new-div');	
+	self = this;	
+	requestConfig.rData = JSON.decode(parentDiv.attr('rel'));	
+	requestConfig.requestcreator[requestConfig.rData['relationship_key']] = parentDiv;	
+	self.loadAjaxRequest(requestConfig); 	
+}
+
 
 function addRelationships(dObject){
 	

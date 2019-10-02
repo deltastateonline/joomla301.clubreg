@@ -59,6 +59,8 @@ class ClubRegUniqueKeysHelper extends JObject
 	
 		@$key_data->pk_id = intval(substr($part1, 0,$part2)); // member_id is x char long
 		@$key_data->string_key = trim(substr($part1, $part2)); // member_key is
+		
+		return $key_data;
 	}
 	
 	public function get_uuid(){

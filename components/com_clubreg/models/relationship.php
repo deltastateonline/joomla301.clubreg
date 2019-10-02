@@ -42,8 +42,8 @@ class ClubregModelRelationship extends JModelForm
 		$db	= $this->getDbo();			
 		$created_when = date('Y-m-d H:i:s');			
 		
-		$d_qry = sprintf("insert into %s set `member_id` = %s ,`member2_id` = %s ,`relationship_tag`=%s, `created_by` = %s , created = %s on duplicate key update
-				relationship_tag = values(relationship_tag) ;
+		$d_qry = sprintf("insert into %s set `member_id` = %s ,`member2_id` = %s ,`relationship_tag`=%s, `created_by` = %s , created = %s, retired=0 on duplicate key update
+				relationship_tag = values(relationship_tag), retired= values(retired) ;
 				",CLUB_RELATIONSHIPS_TABLE,$db->Quote($data['member_id']),$db->Quote($data['member2_id']),$db->Quote($data['relationship_tag'])
 				,$db->Quote($data['created_by']),$db->Quote($created_when));		
 		
@@ -60,8 +60,8 @@ class ClubregModelRelationship extends JModelForm
 		 $relation_ = array("child"=>"parent","spouse"=>"spouse","parent"=>"child");
 		
 		
-		$d_qry = sprintf("insert into %s set `member_id` = %s ,`member2_id` = %s ,`relationship_tag`=%s, `created_by` = %s , created = %s on duplicate key update
-				relationship_tag = values(relationship_tag) ;
+		$d_qry = sprintf("insert into %s set `member_id` = %s ,`member2_id` = %s ,`relationship_tag`=%s, `created_by` = %s , created = %s, retired=0 on duplicate key update
+				relationship_tag = values(relationship_tag) , retired= values(retired);
 				",CLUB_RELATIONSHIPS_TABLE,$db->Quote($data['member2_id']),$db->Quote($data['member_id']),$db->Quote($relation_[$data['relationship_tag']])
 				,$db->Quote($data['created_by']),$db->Quote($created_when));
 		
@@ -80,5 +80,38 @@ class ClubregModelRelationship extends JModelForm
 		}
 		
 		return $proceed;
+	}
+	
+	public function delete($status = 99){
+	
+		$db = JFactory::getDbo();
+		$error_ = 0;
+	
+		$member_id = $this->getState("com_clubreg.relationship.member_id");
+		$member2_id = $this->getState("com_clubreg.relationship.member2_id");
+	
+		$d_qry = sprintf("update %s set retired = %d where (member_id = %d and member2_id = %s) or (member_id = %d and member2_id = %s) limit 2;",
+				$db->quoteName(CLUB_RELATIONSHIPS_TABLE),intval($status), intval($member_id),intval($member2_id)
+				, intval($member2_id),intval($member_id));
+	
+	
+		$db->setQuery($d_qry);
+	
+		try
+		{
+			$db->query();
+		}
+		catch (RuntimeException $e)
+		{
+			$this->setError($e->getMessage());
+			$error_++;
+		}
+	
+		if($error_ > 0){
+			return FALSE;
+		}else{
+			return TRUE;
+		}
+	
 	}
 }
