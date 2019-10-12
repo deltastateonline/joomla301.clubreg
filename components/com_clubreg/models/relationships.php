@@ -77,7 +77,7 @@ class ClubregModelRelationships extends JModelList
 		
 	}
 	
-	public function getSearchPlayers(){
+	public function getSearchPlayers($member_id){
 	
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);
@@ -89,8 +89,6 @@ class ClubregModelRelationships extends JModelList
 	
 		$this->getState('com_clubreg.regmember.member_key');
 	
-		$member_id  = $this->getState('com_clubreg.regmembers.member_id');
-	
 		$start_value  = $this->getState('com_clubreg.relationships.start_value');	
 		$search_value = sprintf('%%%s%%',$this->getState('com_clubreg.relationships.search_value'));
 	
@@ -99,7 +97,10 @@ class ClubregModelRelationships extends JModelList
 		$where_[] = sprintf("(a.surname like %s or a.givenname like %s ) ", $db->quote($search_value),$db->quote($search_value));
 		$where_[] = sprintf("a.playertype in ('junior','senior') ");  // Only junior and senior Members
 		$where_[] = sprintf("a.member_status = 'registered' ");  // Only junior and senior Members
-			
+		
+		$where_[] = sprintf("a.member_id != %d ", (int)$member_id);
+		
+		$where_[] = sprintf("a.member_id not in (select member2_id from %s where member_id = %d and retired = 0)",CLUB_RELATIONSHIPS_TABLE,(int)$member_id );			
 	
 		$all_string[] = "a.*";
 		$all_string[] = "b.group_name";
@@ -120,6 +121,9 @@ class ClubregModelRelationships extends JModelList
 	
 		$db->setQuery($query, $start_value,30);
 		$all_data = $db->loadObjectList();		
+		
+	/*	write_debug($query->__toString());		
+		write_debug($all_data);*/
 	
 		$clonequery = clone $query;
 		$clonequery->clear('select')->clear('order')->clear('limit')->clear('offset')->select('COUNT(*)');
