@@ -46,7 +46,7 @@ $back_url = $session->get("com_clubreg.comms.back_url");// save the back url
 		</div>
 		<div class="control-group sendto-hide-groups">				
 			<div class="control-label">
-				<span style="font-size: 1.1em;font-weight:bold" class="hasTooltip" data-original-title="<strong><?php echo JText::_('COM_CLUBREG_COMM_SENDTO_GROUP')?></strong><br /><?php echo JText::_('COM_CLUBREG_COMM_SENDTO_GROUP_DESC')?>">My Groups</span></div>
+				<span style="font-size: 1.1em;font-weight:bold" class="hasTooltip" data-original-title="<?php echo JText::_('COM_CLUBREG_COMM_SENDTO_GROUP')?><?php echo JText::_('COM_CLUBREG_COMM_SENDTO_GROUP_DESC')?>">My Groups</span></div>
 			<div style="margin-bottom:3px;" class="sendto-groupbtns">&nbsp;
 			<?php foreach($this->allowedGroups["group_leader"] as $a_group){
 					if(!in_array($a_group->group_id, $this->selectedGroups)){?>

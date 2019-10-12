@@ -59,12 +59,22 @@ class ClubRegViewregmember extends JViewLegacy
 		
 		
 		$this->member_key = $app->input->getString('pk', null);
+		
+		if(empty($this->member_key)){
+			return FALSE;
+		}	
+		
 		$key_data = new stdClass();
 		unset($current_model);
 		$currentModel = $this->getModel();
 		$currentModel->setState('com_clubreg.regmember.member_key',$this->member_key); // use the key in the model
 		$key_data->full_key = $this->member_key;
 		$currentModel->processKey($key_data);
+		
+		
+		if(empty($key_data->member_key)){
+			return FALSE;
+		}
 		
 		
 		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.renderItem.php';

@@ -33,7 +33,8 @@ class ClubRegViewRelationships extends ClubRegViews
 		$Itemid			= $app->input->post->get('Itemid');
 	
 		$proceed = FALSE;
-		if($user->get('id') > 0){
+		if($user->get('id') > 0){	
+			
 			$proceed = TRUE;
 			$key_data = new stdClass();
 			unset($current_model);
@@ -100,12 +101,14 @@ class ClubRegViewRelationships extends ClubRegViews
 				
 			$search_value = $app->input->post->getString('search_value', null);
 			$start_value = $app->input->post->getString('startList', 0);
+			
+			JLog::add("Relationship - {$search_value}", JLog::INFO);
 				
 			$current_model = JModelLegacy::getInstance('relationships', 'ClubregModel', array('ignore_request' => true));
 			
 			$current_model->setState('com_clubreg.relationships.search_value',$search_value);
 			$current_model->setState('com_clubreg.relationships.start_value',$start_value);
-			$this->items = $current_model->getSearchPlayers();
+			$this->items = $current_model->getSearchPlayers($key_data->pk_id);
 				
 			$proceed = TRUE; 
 		}
