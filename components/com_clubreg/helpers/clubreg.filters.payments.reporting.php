@@ -56,10 +56,10 @@ class ClubRegFiltersPaymentsReportingHelper extends ClubRegFiltersHelper{
 						<div class="row-fluid ">							
 						<?php 
 							foreach($page_filters["headings"] as $headingRow){								
-								$howmany = 12 / count($headingRow);							
+								$howmany = 12 / count($headingRow);	
 								?>
 									<div class="row-fluid">
-										<?php foreach($headingRow as $fkey => $aHeading){ $control_type = $all_filters[$fkey]["control"];   ?>
+										<?php foreach($headingRow as $fkey => $aHeading){ $control_type = $all_filters[$fkey]["control"];  ?>
 										<div class="control-group span<?php echo $howmany;?>">
 											<?php if($fkey == "hide"){ continue ; }?>
 											<div class="control-label"><strong><?php echo $aHeading["label"]?></strong></div>																					

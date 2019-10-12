@@ -60,11 +60,13 @@ class ClubRegPaymentsConfig extends JObject
 		$entity_filters["payment_status"] = array("filter_col"=>"pt.`payment_status`","control"=>"select.genericlist");
 		
 		
-		$entity_filters["payment_transact_no"] = array("filter_col"=>"pt.`payment_transact_no`","control"=>"text");		
-		$entity_filters["payment_amount"] = array("filter_col"=>"pt.`payment_amount`","control"=>"text");	
+		$entity_filters["payment_transact_no"] = array("filter_col"=>"pt.`payment_transact_no`","control"=>"text", 'label'=>JText::_('COM_CLUBREG_PAYMENT_TRANSACT'));		
+		$entity_filters["payment_amount"] = array("filter_col"=>"pt.`payment_amount`","control"=>"text", 'label'=>JText::_('COM_CLUBREG_PAYMENT_AMOUNT'));	
 		$entity_filters["payment_date"] = array("filter_col"=>"pt.`payment_date`","control"=>"date");
 		$entity_filters["payment_season"] = array("filter_col"=>"pt.`payment_season`","control"=>"select.genericlist");		
-		$entity_filters["payment_notes"] = array("filter_col"=>"pt.`payment_notes`","control"=>"text");
+		$entity_filters["payment_notes"] = array("filter_col"=>"pt.`payment_notes`","control"=>"text", 'label'=>JText::_('COM_CLUBREG_PAYMENT_NOTES'));
+		
+		$entity_filters["hide"] = array("filter_col"=>"","control"=>"hidden");
 				
 		
 		require_once CLUBREG_ADMINPATH.'/helpers/clubreg.php';

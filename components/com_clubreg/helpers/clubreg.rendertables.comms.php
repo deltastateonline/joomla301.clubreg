@@ -56,7 +56,7 @@ class ClubRegRenderTablesCommsHelper extends ClubRegRenderTablesHelper
 		?>
 		<div class="comms-div" data-comm_id="<?php echo $an_item->comm_id; ?>" id="comm_item_div<?php echo $an_item->comm_id; ?>">
 		<div class="h21 pull-left">
-		<?php if(in_array($an_item->comm_status,$this->otherconfigs["allowedstatus"]) ||  in_array($an_item->commtype,$this->otherconfigs["checkboxes"])){ ?>
+		<?php if(in_array(@$an_item->comm_status,$this->otherconfigs["allowedstatus"]) ||  in_array(@$an_item->commtype,$this->otherconfigs["checkboxes"])){ ?>
 			<?php echo JHtml::_('grid.id', $an_item->idx, $an_item->comm_id);  } ?>		
 			<a href="<?php echo $d_url ?>" ><?php echo (!empty($an_item->comm_subject))?ucwords($an_item->comm_subject):"Click to Edit"; ?></a>
 			<?php echo ($an_item->template_name)?"&nbsp;<span class='small label label-info'>".$an_item->template_name."</span>":"";?>

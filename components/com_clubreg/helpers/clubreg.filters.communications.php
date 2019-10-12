@@ -187,7 +187,10 @@ class ClubRegFiltersCommunicationsHelper extends ClubRegFiltersHelper
 		?>
 				<fieldset class="eoi" >
 				
-				<div class="well well-small" style="margin-bottom:5px;"><div class="pull-left"><strong><?php echo $all_filters["comm_type"]["label"]?> : </strong> <?php echo JHtml::_('select.genericlist', $all_filters["comm_type"]["values"],"comm_type", trim($attr), 'value','text',$inValue);?></div
+				<div class="well well-small" style="margin-bottom:5px;">
+					<div class="pull-left">
+						<strong><?php echo $all_filters["comm_type"]["label"]?> : </strong><?php echo JHtml::_('select.genericlist', $all_filters["comm_type"]["values"],"comm_type", trim($attr), 'value','text',$inValue);?>
+					</div>
 				
 					<div class="comms-order">
 						<?php $this->getButtons($filters["currentTemplates"],$filters["editAction"]); ?>												

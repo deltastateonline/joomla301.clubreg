@@ -56,7 +56,7 @@ class ClubRegCommsConfig extends JObject
 		$class_ = "span3";
 		//$entity_filters["group"] = array("filter_col"=>"a.`group`","control"=>"select.genericlist", "class"=>$class_);
 		//$entity_filters["subgroup"] = array("filter_col"=>"a.`subgroup`","control"=>"select.genericlist", "class"=>$class_);
-		if($this->allowed_groups){
+		if(@$this->allowed_groups){
 			$group_where["groups"] = $this->allowed_groups;
 		}
 		if(isset($this->allowed_subgroups)){
