@@ -52,6 +52,7 @@ class ClubregViewClubreg extends JViewLegacy
 				array("comtable"=>"`#__clubreg_payments_setup`"),
 				array("comtable"=>"`#__clubreg_property_sheet`"),
 				array("comtable"=>"`#__clubreg_registeredmembers`"),
+				array("comtable"=>"`#__clubreg_relationships`"),
 				array("comtable"=>"`#__clubreg_saved_comms`"),
 				array("comtable"=>"`#__clubreg_stats_details`"),
 				array("comtable"=>"`#__clubreg_tags`"),
