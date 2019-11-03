@@ -154,5 +154,6 @@ ClubregHelper::writeTabAssets($document, "filters_logic",array("js"));
 ClubregHelper::writeTabAssets($document, "clubreggroups",array("js"));
 ClubregHelper::writeTabAssets($document, "regmembers",array("css","js"));
 ClubregHelper::writeTabAssets($document, "alert",array("js"));
+ClubregHelper::writeTabAssets($document, "payment.front",array("js"));
 ClubregHelper::write_footer();
 ?>
