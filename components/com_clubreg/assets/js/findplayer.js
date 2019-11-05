@@ -167,27 +167,6 @@ jQuery(document).ready(function(){
 		
 	});
 	
-	jQuery('#find-player-list').on('click','[rel=payment]',function(){
-		
-		var memberId = jQuery(this).data('memberid');
-		jQuery('#regdiv_'+memberId).addClass("loading1");
-		jQuery('#regdata_'+memberId).fadeOut('slow',function(){ //
-			jQuery('#regdiv_'+memberId).fadeIn(); //
-		});
-		
-		var data = jQuery(this).data('paymentdata');
-		
-		data[token] = 1;
-		
-		var params = "option=com_clubreg&view=payment&layout=edit&tmpl=component&format=raw";		
-		paymentRequestConfig.rUrl =  "index.php?"+params;	
-		paymentRequestConfig.rData = data;
-		paymentRequestConfig.whereTo = '#regdiv_'+memberId;		
-		ClubRegObject.loadAjaxRequestHTML(paymentRequestConfig);
-		
-	});
-	
-	
 	jQuery('#find-player-list').on('click','.toggle-alerts-div',function(){
 		
 		var memberId = jQuery(this).data('memberid');
@@ -216,6 +195,37 @@ jQuery(document).ready(function(){
 		}
 	});
 	
+	
+	
+	jQuery('#find-player-list').on('click','[rel=payment]',function(){
+		
+		var memberId = jQuery(this).data('memberid');
+		jQuery('#regdiv_'+memberId).addClass("loading1");
+		jQuery('#regdata_'+memberId).fadeOut('slow',function(){ //
+			jQuery('#regdiv_'+memberId).fadeIn(); //
+		});
+		
+		var data = jQuery(this).data('paymentdata');
+		
+		data[token] = 1;
+		data["source"] = "findplayers";
+		
+		var params = "option=com_clubreg&view=payment&layout=edit&tmpl=component&format=raw";		
+		paymentRequestConfig.rUrl =  "index.php?"+params;	
+		paymentRequestConfig.rData = data;
+		paymentRequestConfig.whereTo = '#regdiv_'+memberId;		
+		ClubRegObject.loadAjaxRequestHTML(paymentRequestConfig);
+		
+	});	
+	
+	jQuery('#find-player-list').on('click','#toggle-payments-div',function(){
+		
+		var memberId = jQuery(this).data('memberid');
+		jQuery('#regdiv_'+memberId).fadeOut('slow', function(){
+			jQuery('#regdata_'+memberId).fadeIn();		
+		});
+		
+	});
 	
 	
 });

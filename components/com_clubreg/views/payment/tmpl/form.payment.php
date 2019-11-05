@@ -60,6 +60,24 @@ $in_type = "hidden";?>
 	<div class="clearfix" ></div>	
 		<div class="form-actions">			 
 			<button type="submit" class="btn btn-primary validate"><span><?php echo JText::_('JSUBMIT'); ?></span></button>	
-			<button type="button" class="btn" id="toggle-payments-div"><?php echo JText::_('JCANCEL'); ?></button>				
+			<button type="button" class="btn" id="toggle-payments-div" data-memberid='<?php echo $this->member_id; ?>'><?php echo JText::_('JCANCEL'); ?></button>				
 		</div>			
 </form>
+
+<?php if(!empty($this->source) && is_array($this->payments)){ ?>
+	<div class="frame-div" style="padding-bottom:10px;">
+		<div class="h21"><?php echo JText::_('COM_CLUBREG_PROFILE_PAYMENTS'); ?> : </div>
+				<?php 
+					foreach($this->payments as $adata){	
+						$fkey = $this->uKeyObject->constructKey($adata->payment_id,$adata->payment_key);
+						$rel_string = json_encode(array("Itemid"=>$clubreg_Itemid,"member_key"=>$this->member_key,JSession::getFormToken()=>1,'alert_key'=>$fkey,'action'=>'delete'));
+									?>
+					<div class="row-fluid" style="border-bottom:1px solid #EEEFEF" tooltip="tooltip" title="Description, transaction, date, season, amount, method, status">
+						<div class="pull-left profile-label1"><?php echo $adata->payment_desc?></div>
+						<div class="pull-left" style='padding:0px 5px;'>| </div>
+						<div class="pull-left profile-value"> <?php echo $adata->payment_transact_no; ?> | <?php echo ucwords($adata->payment_date);?>|<?php echo $adata->payment_season ;?>|<?php echo applyFactor($adata->payment_amount) ?>| <?php echo $adata->payment_method ?></div>
+						<div class="pull-right"><a class="btn btn-mini" data-alertinfo=<?php echo $rel_string; ?> ><i class="fa fa-edit"></i></a></div>
+					</div>
+				<?php }?>		
+	</div>
+<?php } ?>
