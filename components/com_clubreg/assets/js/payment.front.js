@@ -14,16 +14,27 @@ function paymentSaveRequestDef(){
 	self.rBefore = beforeAction;
 };
 
-
+/**
+ * After the request has been saved then 
+ * {
+ * 	isNew: false,
+ * 	member_id : "Integer" , 
+ * 	msg = [String,String], 
+ * 	payment_id: Integer, 
+ * 	proceed:true
+ * }
+ */
 paymentSaveRequestDef.prototype.useResults = function(response){	
 
 	Joomla.renderMessages({message:response.msg});	
 	
-	var memberId = response.member_id;
-	jQuery('#regdiv_'+memberId).fadeOut('slow', function(){
-		jQuery('#regdata_'+memberId).fadeIn();		
-	});
+	var memberId = response.member_id;	
+	// just find and reload the div
+	var found = jQuery("[rel=payment]" ).filter("a.btn-mini").filter("[data-memberid="+memberId+"]").first();
 	
+	if(found != undefined){	
+		jQuery(found).trigger( "click" );	
+	}
 }
 
 
@@ -33,25 +44,26 @@ paymentSaveRequestDef.prototype.useFailedResults = function(response){
 	}
 }
 
+/** send the request **/
+ClubregObjectDefinition.prototype.savePayments= function(requestConfig){	
+	self = this;	
+	self.loadAjaxRequest(requestConfig); 
+}
 
 
 var paymentSaveRequestConfig = new paymentSaveRequestDef() ;
 
 
-jQuery(document).ready(function(){
+	jQuery(document).ready(function(){
 	
 	jQuery(document).on('submit','#payment-form',function(event){	
 		jQuery(this).find('button').attr('disabled',true);//
 		event.preventDefault();			
 		paymentSaveRequestConfig.rData = jQuery(this).serialize();
 		
-		ClubRegObject.saveAlert(paymentSaveRequestConfig);		
+		ClubRegObject.savePayments(paymentSaveRequestConfig);	// request sent	
 		
 	});
-	
-	
-	
-	
 	
 	
 });

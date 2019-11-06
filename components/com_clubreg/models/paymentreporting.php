@@ -103,6 +103,12 @@ class ClubregModelPaymentReporting extends JModelList
 			
 		}		
 		
+		if($cfilter == "guardian"){
+			//$all_string["howmany"] = " count( c.member_id )  as `howmany`";
+			$all_string["my_children"] = " \"\"  as `my_children`";
+			
+		}
+		
 		if($cfilter){
 			$where_[] = sprintf(" a.playertype = '%s' ",$cfilter);  // Only Eoi Members
 		}

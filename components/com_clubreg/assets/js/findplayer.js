@@ -39,7 +39,6 @@ function paymentsRequestDef(){
 };
 
 paymentsRequestDef.prototype.useResults = function(response){
-	
 	self = this;	
 	jQuery(self.whereTo).removeClass("loading1");	
 	jQuery(self.whereTo).html(response);
@@ -205,11 +204,12 @@ jQuery(document).ready(function(){
 			jQuery('#regdiv_'+memberId).fadeIn(); //
 		});
 		
-		var data = jQuery(this).data('paymentdata');
+		var data = jQuery(this).data('paymentdata'); console.log(data);
 		
 		data[token] = 1;
 		data["source"] = "findplayers";
-		
+		// perform the request then add the response to the container specified in the whereTo
+		// required data to show include {member_key , token_value , payment_key 
 		var params = "option=com_clubreg&view=payment&layout=edit&tmpl=component&format=raw";		
 		paymentRequestConfig.rUrl =  "index.php?"+params;	
 		paymentRequestConfig.rData = data;

@@ -141,14 +141,11 @@ class ClubRegViewPayment extends ClubRegViews
 	
 		$user		= JFactory::getUser();
 		$app			= JFactory::getApplication();
-		$Itemid			= $app->input->post->get('Itemid');
+		$this->Itemid			= $app->input->post->get('Itemid');
 	
 		$proceed = FALSE;
 		
-		
-		
 		if($user->get('id') > 0){
-			
 			
 			$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
 			$current_model->setState('joomla_id',$user->get('id'));
@@ -192,9 +189,16 @@ class ClubRegViewPayment extends ClubRegViews
 			$this->payments = array();
 			if(!empty($this->source)){
 				require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.renderItem.php';
+				require_once CLUBREG_CONFIGS.'config.payments.php';
 				$payments_model = JModelLegacy::getInstance('payments', 'ClubregModel', array('ignore_request' => true));
 				$this->payments = $payments_model->getPayments($user->get('id'),$this->member_id);
-				//echo "<pre>";print_r($this->payments); echo "</pre>";
+				
+				$configObj = new ClubRegPaymentsConfig();
+				$paymentsConfigs =  $configObj->getConfig("payments"); // return headings and filters		
+				
+				$tmp_filters["headings"] = $paymentsConfigs["headings"];
+				
+				$this->entity_filters = $tmp_filters;
 			}
 			
 		}

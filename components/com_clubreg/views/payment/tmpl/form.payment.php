@@ -64,20 +64,42 @@ $in_type = "hidden";?>
 		</div>			
 </form>
 
-<?php if(!empty($this->source) && is_array($this->payments)){ ?>
+<?php if(!empty($this->source) && count($this->payments)> 0){ $headings = $this->entity_filters["headings"]; ?>
 	<div class="frame-div" style="padding-bottom:10px;">
 		<div class="h21"><?php echo JText::_('COM_CLUBREG_PROFILE_PAYMENTS'); ?> : </div>
-				<?php 
+		<table class="table table-bordered table-condensed table-striped" style="font-size:xx-small;">		
+			<thead>
+				<tr>
+					
+					<th><?php echo JText::_('COM_CLUBREG_PAYMENT_DESCRIPTION'); ?></th>
+					<th><?php echo $headings["payment_transact_no"]["label"]; ?></th>
+					<th><?php echo $headings["payment_date"]["label"]; ?></th>
+					<th><?php echo $headings["payment_season"]["label"]; ?></th>
+					<th><?php echo $headings["payment_method"]["label"]; ?></th>
+					<th><?php echo $headings["payment_amount"]["label"]; ?></th>
+					<th><?php echo $headings["payment_status"]["label"]; ?></th>
+				</tr>
+			</thead>
+				<?php 					
 					foreach($this->payments as $adata){	
 						$fkey = $this->uKeyObject->constructKey($adata->payment_id,$adata->payment_key);
-						$rel_string = json_encode(array("Itemid"=>$clubreg_Itemid,"member_key"=>$this->member_key,JSession::getFormToken()=>1,'alert_key'=>$fkey,'action'=>'delete'));
+						$rel_string = json_encode(array("Itemid"=>$this->Itemid,"member_key"=>$this->member_key,JSession::getFormToken()=>1,'payment_key'=>$fkey,'action'=>'update'));
 									?>
-					<div class="row-fluid" style="border-bottom:1px solid #EEEFEF" tooltip="tooltip" title="Description, transaction, date, season, amount, method, status">
-						<div class="pull-left profile-label1"><?php echo $adata->payment_desc?></div>
-						<div class="pull-left" style='padding:0px 5px;'>| </div>
-						<div class="pull-left profile-value"> <?php echo $adata->payment_transact_no; ?> | <?php echo ucwords($adata->payment_date);?>|<?php echo $adata->payment_season ;?>|<?php echo applyFactor($adata->payment_amount) ?>| <?php echo $adata->payment_method ?></div>
-						<div class="pull-right"><a class="btn btn-mini" data-alertinfo=<?php echo $rel_string; ?> ><i class="fa fa-edit"></i></a></div>
-					</div>
-				<?php }?>		
+					<tr title="<?php echo "Created On : ",$adata->created;?>">
+						<td><a  href="javascript:void(0);" rel="payment" class="profile-payment-button" data-paymentdata=<?php echo $rel_string; ?> data-memberid=<?php echo $this->member_id?>></i>
+						<?php echo $adata->payment_desc?></a></td>
+						<td ><?php echo $adata->payment_transact_no?></td>
+						<td ><?php echo $adata->payment_date?></td>
+						<td ><?php echo $adata->payment_season?></td>
+						<td ><?php echo $adata->payment_method?></td>
+						<td ><?php echo applyFactor($adata->payment_amount);?></td>
+						<td ><?php echo $adata->payment_status?></td>
+						
+			
+					</tr>
+				<?php }?>
+				
+		</table>		
+						
 	</div>
 <?php } ?>

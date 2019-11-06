@@ -44,7 +44,7 @@ class ClubRegRenderDivsFindplayersHelper extends ClubRegRenderTablesHelper
 
 			  	$profile_pix = $thumbrenderer->renderMemberThumb($an_item->member_id,FALSE,FALSE);
 			  	
-			  	$alertdata = json_encode(array("member_key"=>$fkey));
+			  	$alertdata = json_encode(array("member_key"=>$fkey, "Itemid"=>$this->get("Itemid")));
 			  	?>			 
 			    <div class="row cgroup-div" style="margin:7px 5px 7px 10px;">		    
 			     <div class="pull-left">			     	

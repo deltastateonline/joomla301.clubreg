@@ -44,6 +44,7 @@ class ClubRegPaymentsDisplayConfig extends JObject
 					 
 	private function getGuardian(&$headings = array()){
 			
+		$i= 0;
 		$headings["emailaddress"] = array("label"=>JText::_('JGLOBAL_EMAIL'), "clearfix"=>true);
 		$headings["t_phone"] = array("label"=>JText::_('COM_CLUBREG_MOBILE'),"sep"=>"/", "clearfix"=>true);
 		

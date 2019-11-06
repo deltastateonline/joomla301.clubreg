@@ -102,7 +102,7 @@ class ClubRegViewregmembers extends JViewLegacy
 		
 		$user		= JFactory::getUser();
 		$app			= JFactory::getApplication();
-		$Itemid			= $app->input->post->get('Itemid');			
+		$this->Itemid			= $app->input->post->get('Itemid');			
 		
 		$group_breakdown = array();
 		
