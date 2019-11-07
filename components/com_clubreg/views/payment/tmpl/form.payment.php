@@ -27,11 +27,11 @@ $in_type = "hidden";?>
     jQuery(document).ready(function($) {
         Calendar.setup({
         // Id of the input field
-        inputField: 'jform_payment_date',
+        inputField: 'jform_payment_date_<?php echo $this->member_key; ?>',
         // Format of the input field
         ifFormat: '%Y-%m-%d',
         // Trigger for the calendar (button ID)
-        button: 'jform_payment_date_btn',
+        button: 'jform_payment_date_btn_<?php echo $this->member_key; ?>',
         // Alignment (defaults to "Bl")
         align: 'Tl',
         singleClick: true,
@@ -43,9 +43,18 @@ $in_type = "hidden";?>
 <form action="index.php" method="post" name="PaymentForm" id="payment-form" class="form-validate form-horizontal form-clubreg">	
 		<div class="fieldSetDiv"><?php echo JText::_('COM_CLUBREG_PAYMENT_DETAILS');?></div>
 		<?php foreach($this->paymentForm->getFieldset('paymentDetails') as $field){ ?>
-			<div class="control-group">					
+			<div class="control-group">	
+				<?php if(strpos($field->id, "clubregPlaceholder")){	
+					ob_start() ; ?>
+					<div class="control-label"><?php echo $field->label; ?></div>		
+					<div class="controls"><?php echo $field->input; ?></div>				
+				<?php 	$dInput  = ob_get_contents(); 
+						ob_end_clean();
+						echo str_replace("clubregPlaceholder", $this->member_key, $dInput);						
+					 }else{?>
 				<div class="control-label"><?php echo $field->label; ?></div>
-				<div class="controls"><?php echo $field->input; ?></div>						
+				<div class="controls"><?php echo $field->input; ?></div>	
+				<?php } ?>					
 			</div>		
 		<?php 		 				
 		 }		

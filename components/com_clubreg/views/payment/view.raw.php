@@ -182,8 +182,7 @@ class ClubRegViewPayment extends ClubRegViews
 			$currentModel->setState('com_clubreg.payment.payment_key',$key_data->string_key); // use the key in the model
 			$currentModel->setState('com_clubreg.payment.payment_id',$key_data->pk_id); // use the key in the model
 	
-			$this->paymentForm = $currentModel->getForm();
-			
+			$this->paymentForm = $currentModel->getForm();			
 			
 			$this->source = $app->input->post->getString('source', null);
 			$this->payments = array();
