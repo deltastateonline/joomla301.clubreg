@@ -22,7 +22,7 @@
 			label="COM_CLUBREG_PAYMENT_STATUS" description="COM_CLUBREG_PAYMENT_STATUS_DESC"
 			class="inputbox input-large"  />
 			
-			<field name="payment_date" type="calendar" 
+			<field name="payment_date_clubregPlaceholder" type="calendar" 
 			label="COM_CLUBREG_PAYMENT_DATE" description="COM_CLUBREG_PAYMENT_DATE_DESC"
 			class="inputbox input-small"   size="10" format="%Y-%m-%d" />
 			

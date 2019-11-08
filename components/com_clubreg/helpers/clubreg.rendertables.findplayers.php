@@ -44,7 +44,7 @@ class ClubRegRenderDivsFindplayersHelper extends ClubRegRenderTablesHelper
 
 			  	$profile_pix = $thumbrenderer->renderMemberThumb($an_item->member_id,FALSE,FALSE);
 			  	
-			  	$alertdata = json_encode(array("member_key"=>$fkey));
+			  	$alertdata = json_encode(array("member_key"=>$fkey, "Itemid"=>$this->get("Itemid")));
 			  	?>			 
 			    <div class="row cgroup-div" style="margin:7px 5px 7px 10px;">		    
 			     <div class="pull-left">			     	
@@ -59,7 +59,11 @@ class ClubRegRenderDivsFindplayersHelper extends ClubRegRenderTablesHelper
 				  	<div class="pull-left h21" style="border:0px;">
 			  			<a href="javascript:void(0);" onclick="Joomla.sbutton('<?php echo $fkey;?>')"><?php echo ucwords($an_item->surname); ?></a>
 			  		</div>
-			  		<div class="pull-right"><a href="javascript:void(0);"  title="Add Anniversary" class="btn btn-mini" rel='anniversary' data-alertdata='<?php echo $alertdata ;?>' data-memberid='<?php echo $an_item->member_id; ?>'><i class="fa fa-bell" aria-hidden="true"></i></a></div>
+			  		<div class="pull-right">
+			  			<a href="javascript:void(0);"  title="Add Anniversary" class="btn btn-mini" rel='anniversary' data-alertdata='<?php echo $alertdata ;?>' data-memberid='<?php echo $an_item->member_id; ?>'><i class="fa fa-bell" aria-hidden="true"></i></a>
+			  			<a href="javascript:void(0);"  title="Add Payment" class="btn btn-mini" rel='payment' data-paymentdata='<?php echo $alertdata ;?>' data-memberid='<?php echo $an_item->member_id; ?>'><i class="fa fa-dollar" aria-hidden="true"></i></a>
+			  		</div>
+				    
 				    <?php $this->rendererItems($an_item); ?>
 				    <div class="clearfix"></div>
 				    <?php if(LIVE_SITE){?>

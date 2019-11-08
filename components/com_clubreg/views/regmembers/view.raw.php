@@ -102,7 +102,7 @@ class ClubRegViewregmembers extends JViewLegacy
 		
 		$user		= JFactory::getUser();
 		$app			= JFactory::getApplication();
-		$Itemid			= $app->input->post->get('Itemid');			
+		$this->Itemid			= $app->input->post->get('Itemid');			
 		
 		$group_breakdown = array();
 		
@@ -110,7 +110,13 @@ class ClubRegViewregmembers extends JViewLegacy
 		
 		$proceed = FALSE;
 		if($user->get('id') > 0){
-			$proceed = TRUE;
+			$proceed = TRUE;			
+			
+			$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
+			$current_model->setState('joomla_id',$user->get('id'));
+			if(!$current_model->getPermissions('manageusers')){
+				return FALSE;
+			}
 			
 			require_once CLUBREG_CONFIGS.'regmember.display.php';
 			require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.uniquekeys.php';	

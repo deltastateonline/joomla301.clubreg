@@ -41,9 +41,19 @@ class ClubregModelPayment extends JModelForm
 		if (empty($data)) {
 			$data = $this->getItem();			
 		}
-		$data["payment_amount"] /= FACTOR;
+		if(!empty($data["payment_amount"])){
+			$data["payment_amount"] /= FACTOR;
+		}else{
+			$data["payment_amount"] = 0.0;
+		}
+		
+		
 		$data["member_key"] = $this->getState("com_clubreg.payment.member_key");	
 		$data["payment_key"] = $this->getState("com_clubreg.payment.full_key");	
+		
+		if(isset($data["payment_date"])){
+			$data["payment_date_clubregPlaceholder"] = $data["payment_date"];
+		}
 		
 		return $data;
 	}

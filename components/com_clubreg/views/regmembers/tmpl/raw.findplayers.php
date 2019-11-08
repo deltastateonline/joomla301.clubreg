@@ -15,6 +15,7 @@ global $clubreg_Itemid;
 if(count($this->items)> 0){		
 
 	$tableRender = new ClubRegRenderDivsFindplayersHelper();
+	$tableRender->set("Itemid",$this->Itemid);
 	$tableRender->render($this);
 	
 }else{	

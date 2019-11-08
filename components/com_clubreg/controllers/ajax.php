@@ -21,7 +21,7 @@ class ClubregControllerAjax extends JControllerLegacy
 		$this->registerTask('locknote', 'processnote');
 		$this->registerTask('savenote', 'savenote');
 		
-		$this->registerTask('savepayment', 'savepayment');
+		
 		$this->registerTask('saveemergency', 'saveemergency');
 		$this->registerTask('saveother', 'saveother');		
 		$this->registerTask('assignguardian', 'assignguardian');
@@ -76,66 +76,7 @@ class ClubregControllerAjax extends JControllerLegacy
 		
 	}
 	
-	public function savepayment(){
-		
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));		
-		
 	
-		$app    = JFactory::getApplication();
-		$user		= JFactory::getUser();
-		
-		$proceed = FALSE;
-		$data = $this->input->post->get('jform', array(), 'array');		
-		
-		unset($current_model);
-		$key_data = new stdClass();
-		$current_model = JModelLegacy::getInstance('regmember', 'ClubregModel', array('ignore_request' => true));
-		$key_data->full_key = $data['member_key'];
-		$current_model->processKey($key_data);
-		$data["member_id"] = $key_data->member_id;		
-		$data["created_by"] = $user->get('id');		
-		
-		unset($current_model);unset($key_data);
-		$key_data = new stdClass();
-		$current_model = JModelLegacy::getInstance('payment', 'ClubregModel', array('ignore_request' => true));
-		$key_data->full_key = $data['payment_key'];
-		$this->uKeyObject->deconstructKey($key_data);	
-		
-		$isNew = FALSE;
-		$data["payment_key"] = $key_data->string_key;
-		$data["payment_id"] = $key_data->pk_id;
-		
-		if($key_data->pk_id > 0 && strlen($key_data->string_key) == 0){
-			$data["payment_key"] =  $this->uKeyObject->getUniqueKey();
-		}else if($key_data->pk_id == 0){
-			$data["payment_key"] =  $this->uKeyObject->getUniqueKey();
-			$data["payment_id"] = NULL;
-			$isNew = TRUE;						
-		}
-		
-		$data["payment_amount"] *= FACTOR; 
-		$current_model->setState('com_clubreg.payment.isnew',$isNew);		
-		$proceed = $current_model->save($data);
-		
-		$return_array = array();
-		$return_array["proceed"] = $proceed;
-		$return_array["isNew"] = $isNew;
-		
-		if($proceed){
-			$return_array["payment_id"] =$current_model->get("payment_id");
-			$return_array["msg"][] = JText::_('COM_CLUBREG_DETAILS_UPDATE');
-		}else{
-			$return_array["msg"] =  $current_model->getError();
-			
-		}
-		
-		
-		unset($current_model);unset($key_data);
-		echo json_encode($return_array);
-		
-		$app->close();
-		
-	}
 	public function saveemergency(){
 		
 		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));

@@ -95,5 +95,6 @@ ClubregHelper::writeTabAssets($document, "clubreg",array("js"));
 ClubregHelper::writeTabAssets($document, "findplayer",array("js","css"));
 ClubregHelper::writeTabAssets($document, "alert",array("js"));
 ClubregHelper::writeTabAssets($document, "common",array("css"));
+ClubregHelper::writeTabAssets($document, "payment.front",array("js"));
 ClubregHelper::write_footer(); 
 ?>
