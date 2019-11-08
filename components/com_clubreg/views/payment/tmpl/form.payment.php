@@ -64,7 +64,8 @@ $in_type = "hidden";?>
 		 ?>
 	<input type="<?php echo $in_type;?>" name="Itemid" value="<?php echo $clubreg_Itemid; ?>" />
 	<input type="<?php echo $in_type;?>" name="option" value="com_clubreg" />
-	<input type="<?php echo $in_type;?>" name="task" value="ajax.savepayment" />
+	<input type="<?php echo $in_type;?>" name="task" value="payment.save" />
+	<input type="<?php echo $in_type;?>" name="source" value="<?php echo $this->source; ?>" />
 	<?php echo JHtml::_('form.token'); ?>		
 	<div class="clearfix" ></div>	
 		<div class="form-actions">			 

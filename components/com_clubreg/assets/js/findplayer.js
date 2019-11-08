@@ -204,7 +204,7 @@ jQuery(document).ready(function(){
 			jQuery('#regdiv_'+memberId).fadeIn(); //
 		});
 		
-		var data = jQuery(this).data('paymentdata'); console.log(data);
+		var data = jQuery(this).data('paymentdata'); 
 		
 		data[token] = 1;
 		data["source"] = "findplayers";

@@ -198,6 +198,8 @@ class ClubRegViewPayment extends ClubRegViews
 				$tmp_filters["headings"] = $paymentsConfigs["headings"];
 				
 				$this->entity_filters = $tmp_filters;
+				
+				JLog::add($this->source, 'INFO' );
 			}
 			
 		}
