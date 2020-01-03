@@ -53,7 +53,7 @@ alertsRequestDef.prototype.useResults = function(response){
 	jQuery(self.whereTo).html(response);
 }
 
-var alertRequestConfig = new alertsRequestDef();
+
 
 /**
  * Definition for deleting
@@ -82,6 +82,21 @@ deleteRequestDef.prototype.useFailedResults = function(response){
 	Joomla.renderMessages({error:response.errors});	
 };
 
+function paymentsRequestDef(){
+	self = this;
+	self.rUrl  =  "";
+	self.rMethod  = "post";
+	self.rData  = {}	;	
+};
+
+paymentsRequestDef.prototype.useResults = function(response){
+	self = this;	
+	jQuery(self.whereTo).removeClass("loading1");	
+	jQuery(self.whereTo).html(response);
+}
+
+var alertRequestConfig = new alertsRequestDef();
+var paymentRequestConfig = new paymentsRequestDef();
 var deleteRequestConfig =  new deleteRequestDef() ;
 
 jQuery(document).ready(function() {
@@ -212,6 +227,37 @@ jQuery(document).ready(function() {
 			deleteRequestConfig.creator = jQuery(this);			
 			ClubRegObject.loadAjaxRequest(deleteRequestConfig);
 		}
+	});
+	
+	jQuery('#find-player-list').on('click','[rel=payment]',function(){
+		
+		var memberId = jQuery(this).data('memberid');
+		jQuery('#regdiv_'+memberId).addClass("loading1");
+		jQuery('#regdata_'+memberId).fadeOut('slow',function(){ //
+			jQuery('#regdiv_'+memberId).fadeIn(); //
+		});
+		
+		var data = jQuery(this).data('paymentdata'); 
+		
+		data[token] = 1;
+		data["source"] = "regmembers";
+		// perform the request then add the response to the container specified in the whereTo
+		// required data to show include {member_key , token_value , payment_key 
+		var params = "option=com_clubreg&view=payment&layout=edit&tmpl=component&format=raw";		
+		paymentRequestConfig.rUrl =  "index.php?"+params;	
+		paymentRequestConfig.rData = data;
+		paymentRequestConfig.whereTo = '#regdiv_'+memberId;		
+		ClubRegObject.loadAjaxRequestHTML(paymentRequestConfig);
+		
+	});	
+	
+	jQuery('#find-player-list').on('click','#toggle-payments-div',function(){
+		
+		var memberId = jQuery(this).data('memberid');
+		jQuery('#regdiv_'+memberId).fadeOut('slow', function(){
+			jQuery('#regdata_'+memberId).fadeIn();		
+		});
+		
 	});
 	
 });
