@@ -137,6 +137,7 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 	<input type="<?php echo $in_type; ?>" name="boxchecked" value="0" />
 	<input type="<?php echo $in_type; ?>" name="filter_order" id="filter_order" value="<?php echo $this->escape($this->state->get('list.ordering'));; ?>" />
 	<input type="<?php echo $in_type; ?>" name="filter_order_Dir" id="filter_order_Dir" value="<?php echo $this->escape($this->state->get('list.direction')); ?>" />
+	<input type="<?php echo $in_type; ?>" name="limitstart" value="0" />
 	<?php echo JHTML::_( 'form.token' ); ?>
 </form>
 <?php 

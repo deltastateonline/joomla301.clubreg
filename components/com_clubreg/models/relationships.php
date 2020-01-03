@@ -121,9 +121,6 @@ class ClubregModelRelationships extends JModelList
 	
 		$db->setQuery($query, $start_value,30);
 		$all_data = $db->loadObjectList();		
-		
-	/*	write_debug($query->__toString());		
-		write_debug($all_data);*/
 	
 		$clonequery = clone $query;
 		$clonequery->clear('select')->clear('order')->clear('limit')->clear('offset')->select('COUNT(*)');
