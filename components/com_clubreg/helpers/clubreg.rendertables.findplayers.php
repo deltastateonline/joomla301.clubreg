@@ -37,7 +37,9 @@ class ClubRegRenderDivsFindplayersHelper extends ClubRegRenderTablesHelper
 		$this->headings =  $viewObject->headingsConfig;
 		?>		
 		<div class="row-fluid">		 
-			  <?php	$isEmpty = array("0","-1");	  		  
+			  <?php	
+			  
+			  if(count($viewObject->items) > 0){ 		  
 			  	foreach($viewObject->items as $an_item){ 
 			  	$an_item = ClubRegRenderHelper::reformatObject($an_item);
 			  	$fkey = $viewObject->uKeyObject->constructKey($an_item->member_id,$an_item->member_key);	
@@ -62,8 +64,7 @@ class ClubRegRenderDivsFindplayersHelper extends ClubRegRenderTablesHelper
 			  		<div class="pull-right">
 			  			<a href="javascript:void(0);"  title="Add Anniversary" class="btn btn-mini" rel='anniversary' data-alertdata='<?php echo $alertdata ;?>' data-memberid='<?php echo $an_item->member_id; ?>'><i class="fa fa-bell" aria-hidden="true"></i></a>
 			  			<a href="javascript:void(0);"  title="Add Payment" class="btn btn-mini" rel='payment' data-paymentdata='<?php echo $alertdata ;?>' data-memberid='<?php echo $an_item->member_id; ?>'><i class="fa fa-dollar" aria-hidden="true"></i></a>
-			  		</div>
-				    
+			  		</div>				    
 				    <?php $this->rendererItems($an_item); ?>
 				    <div class="clearfix"></div>
 				    <?php if(LIVE_SITE){?>
@@ -73,6 +74,9 @@ class ClubRegRenderDivsFindplayersHelper extends ClubRegRenderTablesHelper
 			    	</div>  
 			    </div>		 	  
 			  <?php $i++; }
+			}else {?>	  		
+			  	<div class="alert alert-error"><h3>No Results</h3></div>
+			<?php }
 		?></div><?php 	 
 	}	
 	/**
