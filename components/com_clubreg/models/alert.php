@@ -115,7 +115,7 @@ class ClubregModelAlert extends JModelForm
 	public function delete($status = 99){
 	
 		$db = JFactory::getDbo();
-		$error_ = 0;
+		
 	
 		$alert_id = $this->getState("com_clubreg.alert.alert_id");
 		$alert_key = $this->getState("com_clubreg.alert.alert_key");	
@@ -126,21 +126,13 @@ class ClubregModelAlert extends JModelForm
 	
 		$db->setQuery($d_qry);
 	
-		try
-		{
+		try	{
 			$db->query();
-		}
-		catch (RuntimeException $e)
-		{
-			$this->setError($e->getMessage());
-			$error_++;
-		}
-	
-		if($error_ > 0){
-			return FALSE;
-		}else{
 			return TRUE;
-		}
+		} catch (RuntimeException $e) {
+			$this->setError($e->getMessage());
+		}	
+		return FALSE;
 	
 	}
 }
