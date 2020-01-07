@@ -42,9 +42,9 @@ $back_url = $session->get("com_clubreg.back_url");// save the back url
 		<div class="row-fluid <?php echo $div_class?>">	
 			<div class="row-fluid">
 			<?php			
-				$this->fieldSets = $this->regmemberForm->getFieldsets();	
+				$this->fieldSets = $this->regmemberForm->getFieldsets();
 				$current_sets = "playerDetails";				
-				ClubRegHelper::writeFieldText($fieldSets[$current_sets]->description,'first-fikkeld-div');		
+				ClubRegHelper::writeFieldText($this->fieldSets[$current_sets]->description,'first-fikkeld-div');		
 				$emergencyAlreadyShown = TRUE;	
 			?>
 			<?php foreach($this->regmemberForm->getFieldset($current_sets) as $field): ?>				
