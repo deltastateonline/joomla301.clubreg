@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 
 $current_sets = "personalDetails";
 
-
+$playertype = $this->regmemberForm->getField("playertype")->value;
 $numOfCols = 2;
 $rowCount = 0;
 $bootstrapColWidth = 12 / $numOfCols;
