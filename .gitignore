@@ -140,6 +140,8 @@ com_postinstall/
 com_clubreg.ncaq/
 administrator/components/com_ajax/
 
+components/com_clubreg/assets/js/min/*.js
+
 #Language files Front End
 
 en-GB.com_assoc*
