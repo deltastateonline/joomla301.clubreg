@@ -2,6 +2,7 @@
 ## Eclipse
 #################
 
+vendor/
 *.pydevproject
 .project
 .metadata
