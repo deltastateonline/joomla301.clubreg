@@ -48,8 +48,8 @@ class ClubregControllerRegmember extends JControllerLegacy
 			$return_array["canSave"]  = $isNew = FALSE;
 			
 			$data = $this->input->post->get('jform', array(), 'array');
-			$key_data = new stdClass();	
-		
+			$key_data = new stdClass();		
+			
 			
 			$key_data->full_key = $this->input->post->get('pk', NULL, 'string');
 			$this->uKeyObject->deconstructKey($key_data);			

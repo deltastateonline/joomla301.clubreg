@@ -364,7 +364,11 @@ class ClubregModelRegmember extends JModelForm
 			return FALSE;
 		}
 	
-		$memberTable = $this->getTable();	
+		$memberTable = $this->getTable();		
+		
+		$tags = isset($data["tags"])?json_encode($data["tags"]):'[]'; // when it is set json encode or set to empty array
+		unset($data["tags"]);
+		$data["tags"] = $tags;		
 	
 		$memberTable->bind($data);
 		
