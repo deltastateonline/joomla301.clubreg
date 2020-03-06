@@ -400,16 +400,18 @@ class ClubRegHelper
 	?>
 		<div class="row-fluid" style='margin-bottom:3px;'><h2 style="border-bottom:1px solid #A5A5A5;padding-bottom:2px"><?php echo $pageTitle; ?></h2></div>
 	<?php }
-	static function writeImage($imagedata){
-		?><img src='<?php echo JURI::base().CLUBREG_ASSETS?>/images/<?php echo $imagedata["fname"]; ?>' <?php echo isset($imagedata["attr"])?$imagedata["attr"]:"";?> title='<?php echo $imagedata["title"] ?>'/><?php 	
-	}
-	
+	static function writeImage($imagedata){ ob_start();
+	?><img src='<?php echo JURI::base().CLUBREG_ASSETS?>/images/<?php echo $imagedata["fname"]; ?>' <?php echo isset($imagedata["attr"])?$imagedata["attr"]:"";?> title='<?php echo $imagedata["title"] ?>'/><?php
+			$img = ob_get_contents();
+			ob_end_clean();
+			return $img; 	
+		}
 	static function writeTabAssets($document,$whichTab, $assets = array("css","js")){		
 		if(in_array("css", $assets)){
-			$document->addStyleSheet(CLUBREG_ASSETS.'/css/'.$whichTab.'.css?'.time());
+			$document->addStyleSheet(CLUBREG_ASSETS.'/css/'.$whichTab.'.css');
 		}
 		if(in_array("js", $assets)){
-			$document->addScript(CLUBREG_ASSETS.'/js/'.$whichTab.'.js?'.time());
+			$document->addScript(CLUBREG_ASSETS.'/js/'.$whichTab.'.js');
 		}
 	}
 	static function writeFieldText($fieldText,$x_class=''){?>	

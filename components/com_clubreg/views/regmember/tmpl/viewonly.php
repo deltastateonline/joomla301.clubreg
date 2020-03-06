@@ -110,10 +110,10 @@ $hasClubProfile = isset($this->profileConfigs["headings"]['club'])?TRUE:FALSE;
 	<div class="tabbable tabs-<?php echo $this->profile_tabposition; ?>">
 		<ul class="nav nav-tabs">
 			<?php if($hasClubProfile){ $i++; ?>	
-			<li class='active'><a href="#tabProfile" data-toggle="tab"><?php $profile_["fname"] = "profile.png"; $profile_['attr'] = " width='16' hspace='1' border='0'"; ClubRegHelper::writeImage($profile_) ?>Profile</a></li>
+			<li class='active'><a href="#tabProfile" data-toggle="tab"><?php $profile_["fname"] = "profile.png"; $profile_['attr'] = " width='16' hspace='1' border='0'"; echo ClubRegHelper::writeImage($profile_) ?>Profile</a></li>
 			<?php } ?>
 		<?php ; foreach($headingConfigs["tab"] as $akey => $tvalue) { $tvalue["img"]['title'] = $tvalue["label"];  ?>
-			<li <?php echo ($i == 0)?"class='active'":""; ?>><a href="#tab<?php echo ucwords($akey); ?>" data-toggle="tab"><?php isset($tvalue["img"])?ClubRegHelper::writeImage($tvalue["img"]):""?><?php  if($this->profile_icons){ echo $tvalue["label"]; } ?></a></li>
+			<li <?php echo ($i == 0)?"class='active'":""; ?>><a href="#tab<?php echo ucwords($akey); ?>" data-toggle="tab"><?php echo isset($tvalue["img"])?ClubRegHelper::writeImage($tvalue["img"]):""?><?php  if($this->profile_icons){ echo $tvalue["label"]; } ?></a></li>
 			<?php $i++; } ?>					
 		</ul>
 		
