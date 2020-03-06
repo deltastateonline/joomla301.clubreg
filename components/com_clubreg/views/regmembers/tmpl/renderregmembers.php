@@ -141,7 +141,7 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 	<?php echo JHTML::_( 'form.token' ); ?>
 </form>
 <?php 
-
+$tableRender->set("searchTags",$this->searchTags);
 $tableRender->render($this);
 echo $this->pagination->getListFooter();
 

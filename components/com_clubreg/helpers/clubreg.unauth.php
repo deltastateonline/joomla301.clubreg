@@ -52,3 +52,18 @@ class ClubRegAuditHelper extends JObject{
 	
 	}
 }
+class TagsIndexed extends JObject{
+	
+	static $searchTags = array();
+	
+	static function getTags(){		
+		$filter = array('like'=>'clubreg');
+		$tmp = JHelperTags::searchTags();
+	
+		foreach($tmp as $tag){
+			self::$searchTags[$tag->value] = ucwords($tag->text);
+		}	
+		
+		return self::$searchTags;
+	}
+}

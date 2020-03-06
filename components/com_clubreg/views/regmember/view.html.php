@@ -36,9 +36,8 @@ class ClubRegViewregmember extends JViewLegacy
 		$proceed = TRUE;	
 		
 		$app			= JFactory::getApplication();
-		$user			= JFactory::getUser();		
-		
-		
+		$user			= JFactory::getUser();				
+			
 		$params = JComponentHelper::getParams('com_clubreg');
 		$this->profile_divrightedge =  $params->get("profile_divrightedge");	
 		$this->profile_tabposition =   $params->get("profile_tabposition");	
@@ -55,8 +54,6 @@ class ClubRegViewregmember extends JViewLegacy
 		$active	= $app->getMenu()->getActive(); // if logged in
 		
 		if($current_model->getPermissions('uploadfiles') && $current_model->getPermissions('uploadfiles') == "yes"){$this->uploadfiles = TRUE; }
-		
-		
 		
 		$this->member_key = $app->input->getString('pk', null);
 		
@@ -79,7 +76,11 @@ class ClubRegViewregmember extends JViewLegacy
 		
 		require_once JPATH_COMPONENT.DS.'helpers'.DS.'clubreg.renderItem.php';
 		require_once CLUBREG_CONFIGS.'config.profile.php';
-		$this->all_data = $this->get("MemberDetails"); // this might be wrong
+		
+		// get the details from the model
+		$this->all_data = $this->get("MemberDetails"); // this might be wrong 		
+		
+		$this->searchTags = TagsIndexed::getTags();		
 		
 		$this->formbackaction = 'index.php?option=com_clubreg&view=regmembers';
 		$this->formeditaction = 'index.php?option=com_clubreg&view=regmember';

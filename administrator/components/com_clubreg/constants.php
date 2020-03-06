@@ -38,6 +38,7 @@ define('CLUB_SACCOUNTS_ITEMS_TABLE','#__clubreg_saccounts_items'); // account it
 
 define('CLUB_TAG_TABLE','#__clubreg_tags'); // tag table
 define('CLUB_TAGPLAYER_TABLE','#__clubreg_tags_players'); // player tag link
+define('CLUB_TAGMEMBERS_TABLE','#__clubreg_tags_members'); // player tag link
 
 define('CLUB_SAVEDCOMMS_TABLE','#__clubreg_saved_comms'); // communication table
 define('CLUB_SAVEDCOMMS_GROUP_TABLE','#__clubreg_saved_comms_groups');

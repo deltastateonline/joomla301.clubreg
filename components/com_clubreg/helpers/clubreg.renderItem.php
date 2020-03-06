@@ -17,12 +17,13 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
  */
 class ClubRegRenderItemHelper extends JObject
 {
+	public $params = array();
 	/**
 	 *  render an item based on config settings
 	 * @param mixed $value
 	 * @param array $config
 	 */
-	public function render($value,$config){
+	public function render($value,$config){ 
 		if( is_array($value)) {
 			$config["sep"] = isset($config["sep"])?$config["sep"]:"<br />";
 			return  implode($config["sep"],$value);
@@ -36,8 +37,19 @@ class ClubRegRenderItemHelper extends JObject
 					$value = call_user_func($config["transform"],$value);
 				}
 			}
+			if(isset($config["transformMethod"])){
+				
+				$value = $this->{$config["transformMethod"]}($value);
+			}
 			return $value;
 		}
+	}
+	
+	private function processTags($value){		
+		$value_ = array();
+		$tags = isset($value)?json_decode($value):array();		
+		foreach($tags as $atag){  $value_[] =  sprintf("<span class='label label-success'>%s</span> &nbsp;",$this->params[$atag]); }		
+		return implode("",$value_);		
 	}
 }
 
@@ -58,4 +70,7 @@ function clubregdate($value){
 }
 function removeUnderscore($value){	
 	return str_replace(array("_","-") ," ", $value);
+}
+function processtags($value){
+	return 1;
 }

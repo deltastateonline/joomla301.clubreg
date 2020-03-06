@@ -366,9 +366,19 @@ class ClubregModelRegmember extends JModelForm
 	
 		$memberTable = $this->getTable();		
 		
-		$tags = isset($data["tags"])?json_encode($data["tags"]):'[]'; // when it is set json encode or set to empty array
+		$tagsArray = array();
+		$tagString = "";
+		
+		if(isset($data["tags"])){
+			$tagsArray = $data["tags"];
+			$tagString = json_encode($data["tags"]);
+		}else{
+			$tagsArray = array();
+			$tagString = "[]";
+		}	
+		
 		unset($data["tags"]);
-		$data["tags"] = $tags;		
+		$data["tags"] = $tagString;		
 	
 		$memberTable->bind($data);
 		
@@ -378,6 +388,22 @@ class ClubregModelRegmember extends JModelForm
 		}else{
 			$this->set("member_id",$memberTable->get("member_id"));
 			$this->set("member_key",$memberTable->get("member_key"));
+			
+			
+			$d_qry[] = sprintf("update %s set retired = 1 where member_id = %d;",CLUB_TAGMEMBERS_TABLE,$memberTable->get("member_id") );
+			
+			if(count($tagsArray) > 0){
+				
+				foreach($tagsArray as $tag_id){
+				
+				$d_qry[] = sprintf("insert into  %s set tag_id = '%d', member_id = '%d', member_key= '%s' , retired = '0'
+						on duplicate key update retired = values(retired) ; ",
+						CLUB_TAGMEMBERS_TABLE,$tag_id , $memberTable->get("member_id"), $memberTable->get("member_key"));
+				}
+			}
+			$db	= $this->getDbo();
+			$this->batchQuery($d_qry, $db);			
+			
 			return TRUE;
 		}
 	}
@@ -433,5 +459,16 @@ class ClubregModelRegmember extends JModelForm
 			return TRUE;
 		}
 		
+	}
+	
+	private function batchQuery($d_qry,$db){
+	
+		if(count($d_qry) > 0){
+			foreach ($d_qry as $a_qry){
+				$db->setQuery($a_qry);
+				$db->execute();
+			}
+		}
+	
 	}
 }

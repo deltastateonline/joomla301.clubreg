@@ -35,6 +35,7 @@ class ClubRegRenderDivsRegMembersHelper extends ClubRegRenderTablesHelper
 		
 		$i = 0;		
 		
+		$this->itemRenderer->set("params", $this->get("searchTags"));
 		
 		$this->headings =  $viewObject->entity_filters["headingsConfig"];	
 		$this->otherconfigs = $viewObject->entity_filters["otherconfigs"];?>

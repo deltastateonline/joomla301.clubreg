@@ -137,6 +137,8 @@ class ClubRegViewregmembers extends JViewLegacy
 			$headingConfigs["guardian"] =  $configObj->getConfig("guardian"); // return headings and filters
 			unset($configObj);
 			
+			$this->searchTags = TagsIndexed::getTags();
+			
 			
 			$key_data = new stdClass();
 			

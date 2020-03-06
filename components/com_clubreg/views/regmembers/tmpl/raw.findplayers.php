@@ -16,6 +16,7 @@ if(count($this->items)> 0){
 
 	$tableRender = new ClubRegRenderDivsFindplayersHelper();
 	$tableRender->set("Itemid",$this->Itemid);
+	$tableRender->set("searchTags",$this->searchTags);
 	$tableRender->render($this);
 	
 }else{	
