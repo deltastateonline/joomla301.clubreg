@@ -106,7 +106,7 @@ $hasClubProfile = isset($this->profileConfigs["headings"]['club'])?TRUE:FALSE;
 </div> <?php  // row-fluid ?>
 <div id='loading-div'></div>
 <div class="clearfix">&nbsp;</div>
-<?php if(count($headingConfigs["tab"]) > 0 ) { $i=0; ?>
+<?php if(count($headingConfigs["tab"]) > 0 && $this->useTabs ) { $i=0; ?>
 	<div class="tabbable tabs-<?php echo $this->profile_tabposition; ?>">
 		<ul class="nav nav-tabs">
 			<?php if($hasClubProfile){ $i++; ?>	
@@ -137,6 +137,28 @@ $hasClubProfile = isset($this->profileConfigs["headings"]['club'])?TRUE:FALSE;
 		</div>
 </div>
 <?php } ?>
+
+
+<?php if(count($headingConfigs["tab"]) > 0 && !$this->useTabs) { $i=0; 
+echo JHtml::_('bootstrap.startAccordion', 'slide-updates', array('active' => 'tabProfile','toggle'=>false));	
+			if($hasClubProfile){ 
+					$profile_["fname"] = "profile.png"; $profile_['attr'] = " width='16' hspace='1' border='0'"; ;
+					echo JHtml::_('bootstrap.addSlide', 'slide-updates', sprintf("%s %s",ClubRegHelper::writeImage($profile_),JText::_('Profile')), 'tabProfile'); 
+					echo $this->loadTemplate('profile');
+					echo JHtml::_('bootstrap.endSlide'); 
+				 $i++;
+			} 
+					 
+			foreach($headingConfigs["tab"] as $akey => $tvalue){
+				$t = isset($tvalue["img"])?ClubRegHelper::writeImage($tvalue["img"]):"";
+				echo JHtml::_('bootstrap.addSlide', 'slide-updates', sprintf("%s %s",$t,JText::_($tvalue["label"])), ucwords($akey));
+				echo $this->loadTemplate($akey);
+				echo JHtml::_('bootstrap.endSlide');
+			}
+
+echo JHtml::_('bootstrap.endAccordion');
+}
+?>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <?php 
