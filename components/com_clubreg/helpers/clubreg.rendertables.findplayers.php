@@ -33,6 +33,9 @@ class ClubRegRenderDivsFindplayersHelper extends ClubRegRenderTablesHelper
 		
 		$defaultImg = "<img src='".JURI::base().CLUBREG_ASSETS."/images/clublogo32.png' >";
 		
+		$this->itemRenderer->set("params", $this->get("searchTags"));
+		
+		
 		$i = 0;		
 		$this->headings =  $viewObject->headingsConfig;
 		?>		

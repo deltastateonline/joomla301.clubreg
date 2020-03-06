@@ -110,7 +110,10 @@ class ClubRegViewregmembers extends JViewLegacy
 			$tmp_filters["batch_update"] = $batchConfigs;
 			$this->entity_filters = $tmp_filters;
 			
-			$this->uKeyObject = new ClubRegUniqueKeysHelper();			
+			$this->uKeyObject = new ClubRegUniqueKeysHelper();		
+
+			$filter = array('like'=>'clubreg');			
+			$this->searchTags = TagsIndexed::getTags();
 		
 			unset($tmp_filters);
 			unset($headingConfigs);

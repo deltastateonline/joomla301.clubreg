@@ -50,6 +50,8 @@ class ClubRegRegmembersDisplayConfig extends JObject
 		$headings[$i]["send_news"] = array("label"=>JText::_('COM_CLUBREG_SENDNEWS'), "clearfix"=>true, "transform"=>"sendnews"); 
 		$headings[$i]["member_status"] = array("label"=>JText::_('COM_CLUBREG_MEMBERSTATUS_LABEL'),'transform'=>"ucfirst");
 		$i++;
+		$headings[$i]["tags"] = array("label"=>JText::_('JTAG'),'transformMethod'=>"processTags");
+		$i++;
 		return array("lastIndex"=>$i);
 	}
 	
@@ -76,6 +78,8 @@ class ClubRegRegmembersDisplayConfig extends JObject
 		$headings[$i]["send_news"] = array("label"=>JText::_('COM_CLUBREG_SENDNEWS'), "transform"=>"sendnews");		
 		$headings[$i]["member_status"] = array("label"=>JText::_('COM_CLUBREG_MEMBERSTATUS_LABEL'),'transform'=>"ucfirst");
 		$i++;
+		$headings[$i]["tags"] = array("label"=>JText::_('JTAG'),'transformMethod'=>"processTags");
+		$i++;
 		return array("lastIndex"=>$i);
 	}
 	private function getJunior(&$headings = array()){
@@ -97,7 +101,8 @@ class ClubRegRegmembersDisplayConfig extends JObject
 		$headings[$i]["dob"] = array("label"=>JText::_('COM_CLUBREG_DOB_LABEL'), "clearfix"=>true); // two per line		
 		$headings[$i]["member_status"] = array("label"=>JText::_('COM_CLUBREG_MEMBERSTATUS_LABEL'),'transform'=>"ucfirst");
 		$i++;
-		
+		$headings[$i]["tags"] = array("label"=>JText::_('JTAG'),'transformMethod'=>"processTags");
+		$i++;
 		return array("lastIndex"=>$i);
 	}
 	

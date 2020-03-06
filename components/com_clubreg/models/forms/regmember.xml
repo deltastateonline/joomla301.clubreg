@@ -5,7 +5,16 @@
 			description="COM_CLUBREG_SURNAME_LABEL" class="inputbox input-large" size="30" required="true"/>
 			
 			<field name="givenname" type="text" label="COM_CLUBREG_GIVENNAME_LABEL"
-					description="COM_CLUBREG_GIVENNAME_LABEL" class="inputbox input-large" size="30" required="true"/>					
+					description="COM_CLUBREG_GIVENNAME_LABEL" class="inputbox input-large" size="30" required="true"/>		
+					
+			<field 
+			name="tags"
+			type="tag"
+			label="JTAG"
+			description="JTAG_DESC"
+			class="span12"
+			multiple="true"
+		/>	
 	</fieldset>
 
 	<fieldset name="contactDetails"	addfieldpath="/administrator/components/com_clubreg/models/fields" description="COM_CLUBREG_CONTACTDETAILS" showonly="senior-guardian">			
