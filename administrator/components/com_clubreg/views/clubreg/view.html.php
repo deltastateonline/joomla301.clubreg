@@ -62,7 +62,8 @@ class ClubregViewClubreg extends JViewLegacy
 				array("comtable"=>"`#__clubreg_teammembers_groups`"),
 				array("comtable"=>"`#__clubreg_templates`"),
 				array("comtable"=>"`#__clubreg_saved_comms_groups`"),
-				array("comtable"=>"`#__clubreg_contactlist`")				
+				array("comtable"=>"`#__clubreg_contactlist`")	,
+				array("comtable"=>"`#__clubreg_tags_members`")
 		);	
 		
 		usort($this->componentTables, function($a,$b){
