@@ -79,9 +79,6 @@ class ClubRegProfileConfig extends JObject
 		$headings["bio"]["t_address"] = array("label"=>JText::_('COM_CLUBREG_ADDRESS'), "clearfix"=>true);
 		$headings["bio"]["send_news"] = array("label"=>JText::_('COM_CLUBREG_SENDNEWS'), "clearfix"=>true, 'transform'=>"sendnews"); // use array
 		
-		//$headings["bio"]["tags"] = array("label"=>JText::_('JTAG'), "clearfix"=>true, 'transform'=>"processtags"); // use array
-	
-		
 		$headings["club"]["member_status"] = array("label"=>JText::_('COM_CLUBREG_MEMBERSTATUS_LABEL'),'transform'=>"ucfirst");
 		$headings["club"]["joining_date"] = array("label"=>JText::_('COM_CLUBREG_JOINING_LABEL'),'transform'=>"clubregdate");
 		$headings["club"]["memberid"] = array("label"=>JText::_('COM_CLUBREG_MEMBERNO'));
