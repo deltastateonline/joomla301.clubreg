@@ -106,7 +106,7 @@ $hasClubProfile = isset($this->profileConfigs["headings"]['club'])?TRUE:FALSE;
 </div> <?php  // row-fluid ?>
 <div id='loading-div'></div>
 <div class="clearfix">&nbsp;</div>
-<?php if(count($headingConfigs["tab"]) > 0 && $this->useTabs ) { $i=0; ?>
+<?php if(count($headingConfigs["tab"]) > 0 && $this->useTabs =="tabs" ) { $i=0; ?>
 	<div class="tabbable tabs-<?php echo $this->profile_tabposition; ?>">
 		<ul class="nav nav-tabs">
 			<?php if($hasClubProfile){ $i++; ?>	
@@ -139,7 +139,7 @@ $hasClubProfile = isset($this->profileConfigs["headings"]['club'])?TRUE:FALSE;
 <?php } ?>
 
 
-<?php if(count($headingConfigs["tab"]) > 0 && !$this->useTabs) { $i=0; 
+<?php if(count($headingConfigs["tab"]) > 0 && $this->useTabs == "panels") { $i=0; 
 echo JHtml::_('bootstrap.startAccordion', 'slide-updates', array('active' => 'tabProfile','toggle'=>false));	
 			if($hasClubProfile){ 
 					$profile_["fname"] = "profile.png"; $profile_['attr'] = " width='16' hspace='1' border='0'"; ;

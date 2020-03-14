@@ -110,6 +110,19 @@
 		</field>
 		
 		<field
+				name="profile_tabs"
+				type="list"
+			class="inputbox input-xlarge"
+			default="members.list"
+			label="Render Details Using"
+			description="Rendering Details using panels or tabs">
+			<option
+				value="tabs">Tabs</option>
+			<option
+				value="panels">Sliding Panels</option>
+		</field>
+		
+		<field
 				name="emergency"
 				type="radio"
 			class="btn-group btn-group-yesno"
@@ -134,6 +147,8 @@
 			<option
 				value="0">JNO</option>
 		</field>
+		
+		
 
 	</fieldset>
 	<!--
