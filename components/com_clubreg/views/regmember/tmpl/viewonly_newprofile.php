@@ -13,7 +13,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 $headingConfigs = $this->profileConfigs["headings"]; 
 	  $itemRenderer = $this->itemRenderer;	  
 	  $member_data = $this->all_data["member_data"];	
-	  $tags =   isset($member_data->tags)?json_decode($member_data->tags):array();
+	  $tags =   !empty($member_data->tags)?json_decode($member_data->tags):array();
 	 
 ?>
 	<div class="row-fluid" style="max-width:97%;">
