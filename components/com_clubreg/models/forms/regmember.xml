@@ -79,7 +79,7 @@
 						
 		</fieldset>	
 	</fields>
-		<fields name="extradetails">
+	<fields name="extradetails">
 		<fieldset name="extradetails" description="COM_CLUBREG_OTHERDETAILS" showonly="junior-senior">				
 						
 		</fieldset>	

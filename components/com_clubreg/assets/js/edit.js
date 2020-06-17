@@ -1,68 +1,103 @@
-window.addEvent('domready', function () {	
+function editSaveRequestDef(){	
 	
-	if($('jformgroup')){
+	self = this;
+	self.rUrl  =  "index.php";
+	self.rMethod  = "post";
+	self.rData  = {}	;	
+	
+	self.rBefore = beforeAction;
+};
+
+
+/**
+ * After the request has been saved then 
+ * {
+ * 	isNew: false,
+ * 	member_id : "Integer" , 
+ * 	msg = [String,String], 
+ * 	payment_id: Integer, 
+ * 	proceed:true
+ * }
+ */
+editSaveRequestDef.prototype.useResults = function(response){
+	
+	if(!response["proceed"]){            	
+ 	   render_msg(response["msg"]);
+	} else{
 		
+		   if(response["isnew"]){
+			  
+			  if(response["member_key"]){
+				  jQuery('#jform_member_key').val(response["member_key"]);
+			  }
+			  
+			  if(response["member_id"]){
+				 jQuery('#jform_member_id').val(response["member_id"]);  
+				 jQuery('#back-to-profile').show();
+				 jQuery('#back-to-list').hide();
+			  }
+			  
+			  if(response["pk"]){            			
+				 var allpks =  jQuery('input[name=pk]');            			
+				 allpks.each(function(a_pk){ 
+					 jQuery(allpks[a_pk]).val(response["pk"]); 
+				 });
+			  }
+		  }            	   
+		   s_or_f = 1;
+		   render_msg(response["msg"]);                  
+	}
+	
+	
+}
+
+
+editSaveRequestDef.prototype.useFailedResults = function(response){	
+	if(response.error){		
+		Joomla.renderMessages({error:response.error});					
+	}
+}
+
+/** send the request **/
+ClubregObjectDefinition.prototype.saveEdit= function(requestConfig){	
+	self = this;	
+	self.loadAjaxRequest(requestConfig); 
+}
+
+
+var editSaveRequestConfig = new editSaveRequestDef() ;
+
+
+jQuery(document).ready(function(){	
+	
+	if(jQuery('#jformgroup')){		
 		
-		group_onload($('jformgroup'),$('jformgroup').value,$('jform_playertype').value)
+		group_onloadj(jQuery('#jformgroup'),jQuery('#jformgroup').val(),jQuery('#jform_playertype').val());	
 		
-		$('jformgroup').addEvent('change', function (){			
-			group_onchange(this,$("jformsubgroup"),-1);
+		jQuery('#jformgroup').change( function (){			
+			group_onchangej(jQuery(this),jQuery("#jformsubgroup"),-1);
 		});
 	}
 	
-	if($('back-to-profile')){
-		if($('jform_member_id').value == 0){
-			$('back-to-profile').hide();
+	
+	if(jQuery('#back-to-profile')){
+		if(jQuery('#jform_member_id').val() == 0){
+			jQuery('#back-to-profile').hide();
 		}
 	}
-	if($('back-to-list')){
-		if($('jform_member_id').value > 0){
-			$('back-to-list').hide();
+	if(jQuery('#back-to-list')){
+		if(jQuery('#jform_member_id').val() > 0){
+			jQuery('#back-to-list').hide();
 		}
 		
 	}
 	
-	
-	$('edit-form').addEvent('submit', function(event){
+	jQuery(document).on('submit','#edit-form',function(event){		
 		
-		event.stop();
-		$('loading-div').addClass('loading-small');		
+		var allButtons = jQuery(this).find('button');		
+		event.preventDefault();			
+		editSaveRequestConfig.rData = jQuery(this).serialize();		
+		ClubRegObject.saveEdit(editSaveRequestConfig);	// request sent	
 		
-		new Request({
-            url: this.get("action"),
-            data: this,
-            onComplete: function() {
-              
-               var json_data = JSON.decode(this.response.text);	
-               if(!json_data["proceed"]){            	
-            	   render_msg(json_data["msg"]);
-               } else{
-            	  if(json_data["isnew"]){
-            		  
-            		  if(json_data["member_key"]){
-            			  $('jform_member_key').value = json_data["member_key"];
-            		  }
-            		  
-            		  if(json_data["member_id"]){
-            			  $('jform_member_id').value = json_data["member_id"];  
-            			  $('back-to-profile').show();
-            			  $('back-to-list').hide();
-            		  }
-            		  
-            		  if(json_data["pk"]){            			
-            			 var allpks =  $(document).getElements('input[name=pk]');            			
-            			 allpks.each(function(a_pk){ a_pk.value = json_data["pk"]; });
-            		  }
-            	  }
-            	  s_or_f = 1;
-            	  render_msg(json_data["msg"]);
-               }              
-               $('loading-div').removeClass('loading-small');
-            },
-            onFailure:function(){ profileFailure(this); },
-            onError:function(){ return true}
-            
-        }).send();
-		
-	})
+	});
 });
