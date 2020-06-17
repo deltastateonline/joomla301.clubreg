@@ -123,9 +123,10 @@ $back_url = $session->get("com_clubreg.back_url");// save the back url
 <?php 
 if($this->tmpl == "html"){
 $document = JFactory::getDocument();
+ClubregHelper::writeTabAssets($document, "clubreg",array("js"));
 ClubregHelper::writeTabAssets($document, "common",array("css","js"));
 ClubregHelper::writeTabAssets($document, "clubreggroups",array("js"));
-ClubregHelper::writeTabAssets($document, "edit",array("css","js"));
+ClubregHelper::writeTabAssets($document, "edit",array("js","css"));
 
 ClubregHelper::write_footer(); 
 } ?>
