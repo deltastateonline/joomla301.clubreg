@@ -24,7 +24,6 @@ $member_data = $this->all_data["member_data"];
 $this->pageTitle .= " : ". ucwords($member_data->surname);
 ClubregHelper::writePageHeader($this->pageTitle);
 
-
 	/** some preprocessing*/
 	$member_data->t_address = "";$t_phone =  array();
 	if($member_data->address){
@@ -69,18 +68,16 @@ $hasClubProfile = isset($this->profileConfigs["headings"]['club'])?TRUE:FALSE;
 <style>
 <!--
 .form-div{
-	margin-left:-<?php echo $this->profile_divrightedge ;?>px;	
-}
+	margin-left:-<?php echo $this->profile_divrightedge ;?>px;	}
 -->
 </style>
-
-<div class="row-fluid" >
-	
+<div class="row-fluid" >	
 	<div class="row-fluid" style="padding-top:3px;">
 		<div class="btn-group pull-left">
 			<button class="btn btn-small btn-primary" type="button" onclick="return adminForm_back.submit();"><?php echo JText::_('COM_CLUBREG_BACK_LIST'); ?></button>
 			<button class="btn btn-small" type="button" onclick="return adminForm_edit.submit();">Edit</button>
-		</div>	
+			<button class="btn btn-small btn-primary" type="button" id="zapier" data-pk='<?php echo $this->member_key;?>'><?php echo JText::_('Send To Zapier');?></button>
+		</div>			
 		<div class="text-info pull-right small"><?php echo JText::_('COM_CLUBREG_REGISTERED_LABEL'), ' :', $member_data->reg_created_by , ' on ', $member_data->reg_created_date ;?></div>
 		<form action="<?php echo JRoute::_($this->formbackaction); ?>" method="post" name="adminForm_back" id="adminForm_back">			
 			<?php if(count($back_url) > 0){
@@ -167,6 +164,7 @@ $document->addScript('https://use.fontawesome.com/9a293d9ea0.js');
 ClubregHelper::writeTabAssets($document, "common");
 ClubregHelper::writeTabAssets($document, "clubreg",array("js"));
 ClubregHelper::writeTabAssets($document, "profile");
+ClubregHelper::writeTabAssets($document, "zapier",array("js"));
 
 foreach($headingConfigs["tab"] as $a_key =>$an_asset){
 	ClubregHelper::writeTabAssets($document,$a_key);
