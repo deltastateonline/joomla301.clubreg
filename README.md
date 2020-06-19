@@ -20,3 +20,18 @@ All descriptions constants for the joomla configuaration are stored in en-GB.com
 
 * To use ajax, you must execute app->close() before the display is called
 ```
+
+##Working with Tags
+```
+Options for tags can be loaded from : libraries/cms/html/tag.php
+The field is constructed and rendered by this : libraries/src/Form/field/Tagfield.php
+```
+
+###
+Form data can be accessed from
+```
+libraries/src/Form/Form.php
+$this->emergencyForm = $currentModel->getForm();			
+$dataRegistry = $this->emergencyForm->getData();
+libraries/vendor/joomla/registry/src/Registry.php
+```
