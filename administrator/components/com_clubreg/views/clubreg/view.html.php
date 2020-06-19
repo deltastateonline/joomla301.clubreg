@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
 
 class ClubregViewClubreg extends JViewLegacy
 {
-	public function display(){
+	public function display($tpl=null){
 		
 		$this->layout  =$nLayout = $this->getLayout();
 		$proceed = FALSE;
