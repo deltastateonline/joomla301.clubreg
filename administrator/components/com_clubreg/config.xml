@@ -149,6 +149,12 @@
 		</field>
 		
 		
+		<field name="zapierurl"
+			type="text"
+			size="30"
+			label="COM_CLUBREG_ZAPIERURL_LABEL"
+			description="COM_CLUBREG_ZAPIERURL_DESC" class="inputbox input-large"/>
+		
 
 	</fieldset>
 	<!--
