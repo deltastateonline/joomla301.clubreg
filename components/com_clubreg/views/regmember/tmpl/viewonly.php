@@ -63,6 +63,7 @@ $hasClubProfile = isset($this->profileConfigs["headings"]['club'])?TRUE:FALSE;
 	var token = '<?php echo JSession::getFormToken() ;?>';
 
 	var profilediverightedge = <?php echo $this->profile_divrightedge;?>;
+	var zapierUrl = '<?php echo $this->zapierurl?>';
 	
 </script>
 <style>
@@ -76,7 +77,9 @@ $hasClubProfile = isset($this->profileConfigs["headings"]['club'])?TRUE:FALSE;
 		<div class="btn-group pull-left">
 			<button class="btn btn-small btn-primary" type="button" onclick="return adminForm_back.submit();"><?php echo JText::_('COM_CLUBREG_BACK_LIST'); ?></button>
 			<button class="btn btn-small" type="button" onclick="return adminForm_edit.submit();">Edit</button>
+			<?php if(!empty($this->zapierurl)) {?>
 			<button class="btn btn-small btn-primary" type="button" id="zapier" data-pk='<?php echo $this->member_key;?>'><?php echo JText::_('Send To Zapier');?></button>
+			<?php } ?>
 		</div>			
 		<div class="text-info pull-right small"><?php echo JText::_('COM_CLUBREG_REGISTERED_LABEL'), ' :', $member_data->reg_created_by , ' on ', $member_data->reg_created_date ;?></div>
 		<form action="<?php echo JRoute::_($this->formbackaction); ?>" method="post" name="adminForm_back" id="adminForm_back">			

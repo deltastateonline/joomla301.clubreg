@@ -78,8 +78,16 @@ class ClubRegViewZapier extends ClubRegViews
 				$current_model = JModelLegacy::getInstance('contactlists', 'ClubregModel', array('ignore_request' => true));
 				$this->pagedata['contacts'] = Contacts::mapping($current_model->getContactlists($user->get('id'),$this->member_id));
 				unset($current_model);
-			}			
+			}
+
+			unset($currentModel);
+			$currentModel = JModelLegacy::getInstance('emergency', 'ClubregModel', array('ignore_request' => false));
+			$currentModel->setState('com_clubreg.emergency.member_id',$key_data->pk_id); // use the key in the model
+			$currentModel->setState('com_clubreg.emergency.member_key',$key_data->full_key); // use the key in the model
 			
+			$this->emergencyForm = $currentModel->getForm();			
+			$dataRegistry = $this->emergencyForm->getData()->toObject();			
+			$this->pagedata['emergencyContacts'] = Emergency::mapped($dataRegistry);			
 		}
 		
 		return $proceed;

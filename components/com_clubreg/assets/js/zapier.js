@@ -9,19 +9,41 @@ function zapierViewRequestDef(){
 			"layout":"view",
 			"tmpl":"component",
 			"format":"json",			
-	}	;	
-	
-	//https://joomla301.local/index.php?option=com_clubreg&view=zapier&layout=view&tmpl=component&format=json
-	
-	
+	};	
 	var params = "option=com_clubreg&view=payment&layout=edit&tmpl=component&format=raw";		
 	//self.rBefore = beforeAction;
 };
 
 
 zapierViewRequestDef.prototype.useResults = function(response){	
-
-	console.log(response)
+	
+	var data = {'data':response.data};
+	
+	jQuery.ajax({
+		url: zapierUrl,
+		type: 'POST',
+		dataType: 'json',
+		cache: false,
+		data: JSON.stringify(data),		
+		success: function( response, textStatus, XMLHttpRequest ) {
+			if(response.status == "success"){
+				s_or_f = 1;
+				render_msg("Integration Sent!")
+			}
+				
+		},
+		error: function( XMLHttpRequest, textStatus, errorThrown ) {			
+			
+			
+		},
+		complete:function(XMLHttpRequest, textStatus){		
+			// where requestObject is a string, which is used as the trigger
+			// tabName can be a string or an object
+			
+		}
+	});
+	
+	
 	
 }
 
@@ -35,10 +57,7 @@ ClubregObjectDefinition.prototype.viewZapier= function(requestConfig){
 jQuery(document).ready(function(){		
 	
 	jQuery(document).on('click','#zapier',function(event){	
-		console.log("here");
-		
-		
-		
+				
 		zapierViewRequestConfig.rData['member_key'] = jQuery(this).data('pk');
 		zapierViewRequestConfig.rData[token] = 1;
 		
