@@ -48,7 +48,7 @@ class ClubRegRenderItemHelper extends JObject
 	private function processTags($value){		
 		$value_ = array();
 		$tags = isset($value)?json_decode($value):array();		
-		foreach($tags as $atag){  $value_[] =  sprintf("<span class='label label-success'>%s</span> &nbsp;",$this->params[$atag]); }		
+		if(count($tags)> 0){ foreach($tags as $atag){  $value_[] =  sprintf("<span class='label label-success'>%s</span> &nbsp;",$this->params[$atag]); }}		
 		return implode("",$value_);		
 	}
 }

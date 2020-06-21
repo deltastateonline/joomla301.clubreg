@@ -43,15 +43,10 @@ class ClubRegViewregmember extends JViewLegacy
 		$this->profile_tabposition =   $params->get("profile_tabposition");	
 		$this->profile_icons =   $params->get("profile_icons");
 		
-		$this->zapierurl =  $params->get("zapierurl");
-		
-		
-		
+		$this->zapierurl =  $params->get("zapierurl");		
 		
 		$this->useTabs =   $params->get("profile_tabs");		
-		$this->useTabs = isset($this->useTabs)?$this->useTabs:"panels";
-		
-		
+		$this->useTabs = isset($this->useTabs)?$this->useTabs:"panels";		
 		
 		if(!isset($this->profile_tabposition)){ $this->profile_tabposition = COM_CLUBREG_TABPOSITION; }
 		if(!isset($this->profile_divrightedge) || intval($this->profile_divrightedge) < 500){ $this->profile_divrightedge = COM_CLUBREG_DIVRIGHT; }
