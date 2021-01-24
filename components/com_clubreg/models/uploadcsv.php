@@ -86,5 +86,42 @@ class ClubregModelUploadcsv extends JModelForm
 
 	}
 	
+	public function duplicate_check($email = NULL , $phone = NULL){
+		
+		
+		$db		= $this->getDbo();
+		$query	= $db->getQuery(true);
+		
+		$all_string[] = "a.member_id, a.surname, a.givenname, a.emailaddress";
+		
+		$d_var =implode(",", $all_string);
+		
+		if($email){
+			$where_[] = sprintf("a.emailaddress = '%s'",$email);
+		}
+		
+		if($phone){
+			$where_[] = sprintf("a.mobile = '%s'",$phone);
+		}
+		
+		
+		$a_where = implode("OR ",$where_ );
+		
+		$query->from($db->quoteName(CLUB_REGISTEREDMEMBERS_TABLE).' AS a');
+		
+		$query->select($d_var);
+		
+		$query->where($a_where);
+		
+		$db->setQuery($query, 0,30);
+		$items = $db->loadObjectList();
+		
+		if(count($items) > 0){
+			return TRUE;
+		}else{
+			return FALSE;
+		}
+	}
+	
 	
 }

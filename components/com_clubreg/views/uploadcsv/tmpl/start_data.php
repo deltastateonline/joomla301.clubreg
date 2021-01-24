@@ -25,7 +25,7 @@ $uri = JURI::getInstance();
 $Itemid = $uri->getVar('Itemid');
 $in_type = "hidden";
 ?>
-	<div><button type="submit" class="btn btn-primary pull-right" id="btImportCsv"><span><?php echo JText::_('Import Records'); ?></span></button></div>
+	<div><button type="submit" class="btn btn-primary pull-right" id="btImportCsv" <?php echo ($return_data['hasDuplicates'])?"disabled":""?>><span><?php echo JText::_('Import Records'); ?></span></button></div>
 			<table class="table table-bordered table-striped csv-table">
 				<thead>
 				  <tr>
@@ -36,9 +36,9 @@ $in_type = "hidden";
 				  </tr>
 			  </thead>
 			  <?php $i=1;
-			  foreach($return_data["data"]["data"] as $aData){?>			  
-				  <tr>
-				    <td><?php echo $i++; ?></td>
+			  foreach($return_data["data"]["data"] as $aData){ $duplicate_style = ($aData['duplicates'])?"class='alert alert-danger' style='font-size:1.2em;font-weight:bold'":"";?>			  
+				  <tr <?php echo $duplicate_style; ?>>
+				    <td style="font-weight:bold"><?php echo $i++; ?></td>
 				     <?php foreach($return_data["data"]["heading"] as $aHeading){?>	
 				    	<td><?php echo $aData[$aHeading]; ?></td>
 				    <?php } ?>
