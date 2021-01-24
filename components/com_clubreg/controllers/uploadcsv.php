@@ -38,9 +38,7 @@ class ClubregControllerUploadcsv extends JControllerLegacy
 		
 		unset($current_model);
 		$current_model = JModelLegacy::getInstance('officialfrn', 'ClubregModel', array('ignore_request' => true));
-		$current_model->setState('joomla_id',$user->get('id'));
-		
-		
+		$current_model->setState('joomla_id',$user->get('id'));		
 	
 		$data = $this->input->post->get('jform', array(), 'array');	
 		$file_data =  $this->input->files->get('jform',array(),'array');
@@ -48,8 +46,7 @@ class ClubregControllerUploadcsv extends JControllerLegacy
 	
 		$return_array["msg"] = array();
 		
-		$return_array["proceed"] = TRUE;
-	
+		$return_array["proceed"] = TRUE;	
 		
 		try {
 			
@@ -57,12 +54,9 @@ class ClubregControllerUploadcsv extends JControllerLegacy
 				throw new Exception(JText::_('CLUBREG_NOTAUTH'));
 			}			
 			
-			if (!ClubRegMediaHelper::canUpload($attachment, $err))
-			{
-				throw new Exception(JText::_($err));			
-				
-			}else{
-					
+			if (!ClubRegMediaHelper::canUpload($attachment, $err)){
+				throw new Exception(JText::_($err));					
+			}else{					
 				$params = JComponentHelper::getParams('com_clubreg');
 				$media_params = JComponentHelper::getParams('com_media');
 					
@@ -70,15 +64,13 @@ class ClubregControllerUploadcsv extends JControllerLegacy
 				if(!isset($folder_path) || is_null($folder_path)){					
 					throw new Exception(JText::_('COM_CLUBREG_MSG_FOLDERNOT_SET'));				
 				}					
-			}
-			
+			}			
 			
 			$media_path = $media_params->get('file_path').DS.$folder_path.DS;
 			$attachment_data["attachment_location"] = $media_path = sprintf("%s%s%s",$media_path,"csv_upload",DS);
 			$media_path = JPATH_ROOT.DS.$media_path;
 				
-			$return_array["attachment_location"] = $media_path;
-			
+			$return_array["attachment_location"] = $media_path;			
 			
 				// Build the appropriate paths
 				$file_name = 	"upload.csv";
@@ -89,17 +81,24 @@ class ClubregControllerUploadcsv extends JControllerLegacy
 				jimport('joomla.filesystem.file');
 				$return_array["proceed"] = JFile::upload($tmp_src, $final_dest);
 			
-				if($return_array["proceed"]){
+				if($return_array["proceed"]){					
+					
+					$current_model = JModelLegacy::getInstance('uploadcsv', 'ClubregModel', array('ignore_request' => true));					
+					
 					$success_string = JText::_('COM_CLUBREG_MSG_UPLOAD_DOCUMENT');
 					$return_array["msg"][] =  $success_string;
 			
 					require_once(JPATH_COMPONENT.DS."logic".DS."csvupload.php");
 					$csv_upload = new CsvUpload($final_dest);
+					
+					$csv_upload->setModel($current_model);
 					$return_array["proceed"] = $csv_upload->process();
 			
 					$return_array["data"] = $csv_upload->get_array();
 					$return_array["msg"] =  array_merge($return_array["msg"],$csv_upload->get_message());
 					$return_array["show_importform"] = TRUE;
+					$return_array["hasDuplicates"] = $csv_upload->get_hasDuplicates();
+					
 				}else{
 					throw new Exception(JText::sprintf('JLIB_FILESYSTEM_ERROR_UPLOAD',$attachment['name']));					
 				}			
@@ -108,9 +107,7 @@ class ClubregControllerUploadcsv extends JControllerLegacy
 			
 			$return_array["proceed"] = $return_array["show_importform"] =  FALSE;
 			$return_array["msg"][] = JText::_($e->getMessage());			
-		}
-		
-		
+		}		
 		
 		$uploadCsvView = $this->getView("uploadcsv","html");
 		$uploadCsvView->setLayout("start");
@@ -179,9 +176,6 @@ class ClubregControllerUploadcsv extends JControllerLegacy
 		$uploadCsvView->setLayout("start");
 		$uploadCsvView->set('return_array', $return_array);	
 		
-		return parent::display();	
-		
-	}
-	
-	
+		return parent::display();			
+	}	
 }

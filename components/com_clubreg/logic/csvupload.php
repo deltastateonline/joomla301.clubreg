@@ -19,9 +19,17 @@ class CsvUpload extends JObject
 	private $required = array("surname","givenname","playertype");
 	private $messages = array();
 	
+	private $model = NULL;
+	
+	private $hasDuplicates = FALSE;
+	
 	public function __construct($fileName)
 	{
 		$this->fileName = $fileName;
+	}
+	
+	public function setModel($model){
+		$this->model = $model;
 	}
 	
 	
@@ -42,6 +50,8 @@ class CsvUpload extends JObject
 		
 		$finalArray = array(); 
 		$idx = 0;
+		
+		$hasDuplicate = FALSE;
 
 		while(! feof($file)) {
 			$currentRow = fgetcsv($file);
@@ -61,7 +71,12 @@ class CsvUpload extends JObject
 					$idx++;
 					continue;
 				}
-				$currentRow = array_combine($head, $currentRow);		
+				$currentRow = array_combine($head, $currentRow);	
+
+				$currentRow['duplicates'] = $this->model->duplicate_check($currentRow['emailaddress'], $currentRow['mobile']);
+				
+				$hasDuplicate = $currentRow['duplicates'] || $hasDuplicate;
+				
 				$finalArray[] = $currentRow;		
 				$idx++;
 				
@@ -70,8 +85,12 @@ class CsvUpload extends JObject
 		
 		$this->messages[] = "Csv file processed and enough headings found.";
 		$this->messages[] = "({$idx}) records processed.";
+		if($hasDuplicate){
+			$this->messages[] = "Delete the duplicate entries shown in red from the file to continue. ";
+		}
 		$this->headings = $head;
 		$this->finalArray = $finalArray;
+		$this->hasDuplicates = $hasDuplicate;
 		return TRUE;
 		
 	}
@@ -82,6 +101,10 @@ class CsvUpload extends JObject
 	
 	public function get_message(){		
 		return $this->messages;
+	}
+	
+	public function get_hasDuplicates(){
+		return $this->hasDuplicates;
 	}
 	
 	public function import($uploadcsv_model, $uKeyObject = FALSE){
