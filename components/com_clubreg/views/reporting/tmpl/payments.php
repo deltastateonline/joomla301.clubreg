@@ -25,16 +25,35 @@ $listOrder	= $this->escape($this->state->get('list.ordering'));
 <script type="text/javascript">
 	var token = '<?php echo JSession::getFormToken() ;?>';	
 
+
+	Joomla.submitbutton = function(pressbutton)
+	{
+		var form = document.getElementById('adminForm');
+		console.log(document.adminForm.layout.value);
+		if(document.adminForm.layout.value == "exportpayments"){
+			document.adminForm.target='_blank';
+			document.adminForm.action='<?php echo $this->formaction_comp ; ?>';
+		}else{
+			document.adminForm.action='<?php echo JRoute::_($this->formaction, false); ?>';
+
+			document.adminForm.target='';
+		}
+		form.submit();
+	}
+
+	// for editing
 	Joomla.sbutton = function(pk)
 	{
-		var form = document.getElementById('adminForm');	
-		document.adminForm.action='<?php echo JRoute::_($this->formaction_edit); ?>';		
-		document.adminForm.target='';
-		document.adminForm.playertype.value= '<?php echo $this->state->get('filter.playertype'); ?>';
-		document.adminForm.layout.value= 'viewonly';
-		
-		document.adminForm.pk.value = pk;
-		form.submit();
+			var form = document.getElementById('adminForm');
+			
+			document.adminForm.action='<?php echo JRoute::_($this->formaction_edit); ?>';		
+			document.adminForm.target='';
+			document.adminForm.playertype.value= '<?php echo $this->state->get('filter.playertype'); ?>';
+			document.adminForm.layout.value= 'viewonly';
+			
+			document.adminForm.pk.value = pk;
+	
+			form.submit();
 	}
 	Joomla.orderTable = function()
 	{

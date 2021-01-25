@@ -56,7 +56,8 @@ class ClubRegViewreporting extends ClubRegViews
 			$current_model = JModelLegacy::getInstance('paymentreporting', 'ClubregModel', array('ignore_request' => false));
 				
 			$this->formaction = 'index.php?option=com_clubreg&view=reporting';
-			$this->formaction_edit = 'index.php?option=com_clubreg&view=regmember&layout=viewonly';			
+			$this->formaction_edit = 'index.php?option=com_clubreg&view=regmember&layout=viewonly';	
+			$this->formaction_comp = 'index.php?option=com_clubreg&view=reporting&format=raw';// the csv file
 				
 			$this->state		= $current_model->getState();
 				
@@ -106,6 +107,8 @@ class ClubRegViewreporting extends ClubRegViews
 		
 		return $proceed;
 	} 	
+	
+	
 	
 	protected function stats_reporting (){
 	
@@ -172,6 +175,7 @@ class ClubRegViewreporting extends ClubRegViews
 	
 			$this->formaction = 'index.php?option=com_clubreg&view=reporting';
 			$this->formaction_edit = 'index.php?option=com_clubreg&view=regmember&layout=viewonly';
+			
 	
 			$this->state		= $current_model->getState();
 	

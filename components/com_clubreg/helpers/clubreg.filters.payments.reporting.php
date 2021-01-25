@@ -19,8 +19,9 @@ class ClubRegFiltersPaymentsReportingHelper extends ClubRegFiltersHelper{
 
 
 	protected function getButtons(){  $attribs = array("class"=>"inputbox input-small"); ?>
-		<div class="btn-group pull-right">		
-			<button class="btn btn-small btn-primary" type="button" onclick="return Joomla.submitbutton('filter');"><?php echo JText::_('CLUBREG_FILTER');?></button>
+		<div class="btn-group pull-right">
+			<button class="btn btn-small btn-success" type="button" onclick="document.adminForm.layout.value='exportpayments'; return Joomla.submitbutton('filter');"><?php echo JText::_('CLUBREG_EXPORT');?></button>		
+			<button class="btn btn-small btn-primary" type="button" onclick="document.adminForm.layout.value='payments';return Joomla.submitbutton('filter');"><?php echo JText::_('CLUBREG_FILTER');?></button>
   		</div>
 	  		<div class="clearfix"></div>
 	  		<div class="row-fluid">  		  		

@@ -35,3 +35,8 @@ $this->emergencyForm = $currentModel->getForm();
 $dataRegistry = $this->emergencyForm->getData();
 libraries/vendor/joomla/registry/src/Registry.php
 ```
+
+### Create views
+* if output is csv or raw output , create or add logic to view.raw.php
+* create a method as follows {layout}_{view}
+* create a new file in the tpl folder with filename {layout}.php
