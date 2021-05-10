@@ -42,15 +42,12 @@ var noResults = "<?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_NORESULTS'); ?>"
 	<script type="text/javascript">
 	<!--
 		//Load the Visualization API and the piechart package.
-		google.load('visualization', '1.0', {'packages':['corechart']});
+		//google.load('visualization', '1.0', {'packages':['corechart']});
+
+		google.charts.load('49',    {packages: ['corechart']});
 		
 		// Set a callback to run when the Google Visualization API is loaded.
-		//google.setOnLoadCallback(drawChart);
-		
-		// Callback that creates and populates a data table,
-		// instantiates the pie chart, passes in the data and
-		// draws it.
-		
+		// google.setOnLoadCallback(drawChart);
 	
 		ClubregObjectDefinition.prototype.drawChart  = function (ajaxData,configData) {
 	
@@ -87,6 +84,7 @@ var noResults = "<?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_NORESULTS'); ?>"
 	 		
 			  // Instantiate and draw our chart, passing in some options.
 			  if(configData.chartType == "bar-chart"){
+				  //new google.visualization.PieChart
 				  var chart = new google.visualization.BarChart(document.getElementById(configData.container));
 			  }else if(configData.chartType == "pie-chart"){
 				  var chart = new google.visualization.PieChart(document.getElementById(configData.container));
@@ -258,6 +256,8 @@ if($this->canedit){
 						<div id="chart_div"></div>				
 						<div id="chart_div_sub"></div>	
 						<div id="chart_div_player"></div>	
+
+						<div id="chart_div1"></div>
 					</div>		
 				<?php } 									
 				if($render_sections["showbday"]){ ?>
@@ -290,6 +290,7 @@ ClubregHelper::writeTabAssets($document, "common",array("css"));
 ClubregHelper::writeTabAssets($document, "clubreg",array("js"));
 ClubregHelper::writeTabAssets($document, "official");
 ClubregHelper::write_footer(); 
-$document->addScript('https://www.google.com/jsapi');
+//$document->addScript('https://www.google.com/jsapi');
+$document->addScript('https://www.gstatic.com/charts/loader.js');
 
 ?>

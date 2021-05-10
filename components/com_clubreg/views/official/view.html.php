@@ -108,10 +108,12 @@ class ClubRegViewOfficial extends JViewLegacy
 		
 		$app		= JFactory::getApplication();
 		$active	= $app->getMenu()->getActive(); // if logged in
+
 		
 		$session = JFactory::getSession();
 		$session->set("com_clubreg.cancel_profile", $active->link);// save the back url	
 		$this->formaction_edit = 'index.php?option=com_clubreg&view=regmember';
+		$this->pageclass_sfx = "";
 		return;
 	}
 	
