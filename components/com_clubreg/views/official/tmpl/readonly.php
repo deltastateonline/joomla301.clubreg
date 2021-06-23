@@ -44,10 +44,10 @@ var noResults = "<?php echo JText::_('CLUBREG_OFFICIALS_PROFILE_NORESULTS'); ?>"
 		//Load the Visualization API and the piechart package.
 		//google.load('visualization', '1.0', {'packages':['corechart']});
 
-		google.charts.load('49',    {packages: ['corechart']});
+		google.charts.load('current',    {packages: ['corechart']});
 		
 		// Set a callback to run when the Google Visualization API is loaded.
-		// google.setOnLoadCallback(drawChart);
+		//google.setOnLoadCallback(drawChartMain );
 	
 		ClubregObjectDefinition.prototype.drawChart  = function (ajaxData,configData) {
 	

@@ -105,9 +105,13 @@ jQuery( document ).ready(function() {
 			
 			if(data.proceed){	
 				jQuery('#breakdownTab').removeClass('loading1');
-				ClubRegObject.drawChart(data.bygroups,ClubRegObject.groupData);
-				ClubRegObject.drawChart(data.bysubgroups,ClubRegObject.subGroupData);
-				ClubRegObject.drawChart(data.byplayertype,ClubRegObject.playerTypeData);
+
+				google.setOnLoadCallback(function(){
+					ClubRegObject.drawChart(data.bygroups,ClubRegObject.groupData);
+					ClubRegObject.drawChart(data.bysubgroups,ClubRegObject.subGroupData);
+					ClubRegObject.drawChart(data.byplayertype,ClubRegObject.playerTypeData);
+
+				} );
 			}else{
 				jQuery('#breakdownTab').removeClass('loading1');
 				jQuery('#breakdownTab').html(data.msg_content);		
